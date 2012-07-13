@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.emftext.sdk"
+      label="EMFText SDK"
+      version="0.0.0"
+      provider-name="Software Technology Group - TU Dresden">
+
+   <description url="http://emftext.org">
+      EMFText: a grammar-based text syntax definition tool for Ecore metamodels.
+   </description>
+
+   <copyright>
+Copyright (c) 2006-2012 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+   </copyright>
+
+   <license>
+Eclipse Public License v1.0
+
+Copyright (c) 2006-2012
+Software Technology Group, Dresden University of Technology
+DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+
+All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+  Software Technology Group - TU Dresden, Germany;
+  DevBoost GmbH - Berlin, Germany
+     - initial API and implementation
+ 
+ANTLR3 (www.antlr.org) and STRINGTEMPLATE 4 (www.stringtemplate.org) 
+are redistributed with this tool. 
+Copyright (c) 2003-2011, Terence Parr. All rights reserved.
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.platform"/>
+      <import feature="org.eclipse.sdk" />
+      <import feature="org.eclipse.emf"/>
+      <import feature="org.eclipse.emf.workspace"/>
+      <import feature="org.emftext.access"/>
+   </requires>
+
+   <plugin
+         id="org.emftext.sdk"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.antlr3_4_0"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.sdk.automaton"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.sdk.codegen"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.codegen.antlr"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.codegen.newproject"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.codegen.resource"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.codegen.resource.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.concretesyntax"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.sdk.concretesyntax.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.concretesyntax.resource.cs"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.sdk.concretesyntax.resource.cs.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.emftext.sdk.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.sdk.ant"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="org.emftext.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+
+</feature>

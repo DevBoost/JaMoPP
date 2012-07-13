@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Test" default="mavenize" xmlns:fuin="http://fuin.org/tasks">
+
+	<record name="build.log" loglevel="verbose" append="false" />
+
+	<taskdef name="mavenize" classname="org.fuin.meb.MavenizeJarTask" uri="http://fuin.org/tasks" />
+	<typedef name="pom" classname="org.apache.maven.artifact.ant.Pom" uri="http://fuin.org/tasks" />
+
+	<target name="init">
+		<property file="build.properties" />
+	</target>
+
+	<target name="mavenize" depends="init">
+
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+			
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.language.java_1.4.0.v201206020146.jar">
+				<path source="src" target="" />
+				<path source="src-gen" target="" />
+			</srcJar>
+
+			<binJar file="${basedir}/eclipse-libs/org.emftext.language.java_1.4.0.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+
+			<fuin:pom groupId="org.emftext.language" artifactId="org.emftext.language.java" version="1.4.0" name="JaMoPP (Java Model Parser and Printer) Metamodel ">
+				<organization name="Software Technology Group - TU Dresden Germany" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+				<dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+				<dependency groupId="org.emftext.commons" artifactId="org.emftext.commons.layout" version="1.4.1" />
+			</fuin:pom>
+
+		</fuin:mavenize>
+
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource_1.4.0.v201206020146.jar">
+			   <path source="src" target="" />
+			   <path source="src-gen" target="" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource_1.4.0.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+
+			<fuin:pom groupId="org.emftext.language" artifactId="org.emftext.language.java.resource" version="1.4.0" name="JaMoPP (Java Model Parser and Printer) Integrated Source and Class File Support ">
+				<organization name="Software Technology Group - TU Dresden Germany" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+			    <dependency groupId="org.emftext.language" artifactId="org.emftext.language.java" version="1.4.0" />
+			    <dependency groupId="org.emftext.language" artifactId="org.emftext.language.java.resource.java" version="1.4.0" />
+			    <dependency groupId="org.emftext.language" artifactId="org.emftext.language.java.resource.bcel" version="1.4.0" />
+			</fuin:pom>
+
+		</fuin:mavenize>
+
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource.java_1.4.0.v201206020146.jar">
+			   <path source="src" target="" />
+			   <path source="src-gen" target="" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource.java_1.4.0.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+
+			<fuin:pom groupId="org.emftext.language" artifactId="org.emftext.language.java.resource.java" version="1.4.0" name="JaMoPP (Java Model Parser and Printer) Source File Support ">
+				<organization name="Software Technology Group - TU Dresden Germany" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore.change" version="2.7.1" />
+			    <dependency groupId="org.emftext.commons" artifactId="org.emftext.commons.antlr3_4_0" version="3.4.0" />
+			    <dependency groupId="org.emftext.language" artifactId="org.emftext.language.java" version="1.4.0" />
+			    <dependency groupId="org.emftext.commons" artifactId="org.emftext.commons.layout" version="1.4.1" />
+			</fuin:pom>
+
+		</fuin:mavenize>
+
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.commons.layout_1.4.1.v201206020146.jar">
+			   <path source="src" target="" />
+			   <path source="src-gen" target="" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.emftext.commons.layout_1.4.1.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+
+			<fuin:pom groupId="org.emftext.commons" artifactId="org.emftext.commons.layout" version="1.4.1" name="EMFText Layout Model ">
+				<organization name="Software Technology Group - TU Dresden Germany" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+			</fuin:pom>
+
+		</fuin:mavenize>
+		
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+		
+			<srcJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore.change.source_2.7.1.v20120127-1122.jar">
+				 <path source="org" target="org" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore.change_2.7.1.v20120127-1122.jar">
+				<path source="org" target="org" />
+			</binJar>
+			
+			<fuin:pom groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore.change" version="2.7.1" name="EMF Change Model">
+				<organization name="Eclipse Modeling Project" url="http://www.eclipse.org/emf" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+			</fuin:pom>
+			
+		</fuin:mavenize>
+		
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+		
+			<srcJar file="${basedir}/eclipse-libs/org.eclipse.emf.common.source_2.7.0.v20120127-1122.jar">
+				 <path source="org" target="org" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.eclipse.emf.common_2.7.0.v20120127-1122.jar">
+				<path source="org" target="org" />
+			</binJar>
+			
+			<fuin:pom groupId="org.eclipse.emf" artifactId="org.eclipse.emf.common" version="2.7.0" name="EMF Common">
+				<organization name="Eclipse Modeling Project" url="http://www.eclipse.org/emf" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			</fuin:pom>
+
+		</fuin:mavenize>
+			
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+		
+			<srcJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore.source_2.7.0.v20120127-1122.jar">
+				 <path source="org" target="org" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore_2.7.0.v20120127-1122.jar">
+				<path source="org" target="org" />
+			</binJar>
+			
+			<fuin:pom groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" name="EMF Ecore">
+				<organization name="Eclipse Modeling Project" url="http://www.eclipse.org/emf" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.common" version="2.7.0" />
+			</fuin:pom>
+
+		</fuin:mavenize>				
+			
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+		
+			<srcJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore.xmi.source_2.7.0.v20120127-1122.jar">
+				 <path source="org" target="org" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.eclipse.emf.ecore.xmi_2.7.0.v20120127-1122.jar">
+				<path source="org" target="org" />
+			</binJar>
+			
+			<fuin:pom groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore.xmi" version="2.7.0" name="EMF XML/XMI Persistence">
+				<organization name="Eclipse Modeling Project" url="http://www.eclipse.org/emf" />
+				<license name="Eclipse Public License - v 1.0" url="http://www.eclipse.org/org/documents/epl-v10.html" />
+			    <dependency groupId="org.eclipse.emf" artifactId="org.eclipse.emf.ecore" version="2.7.0" />
+			</fuin:pom>
+			
+		</fuin:mavenize>
+
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.commons.antlr3_4_0_3.4.0.v201206020146.jar">
+				 <path source="src" target="" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.emftext.commons.antlr3_4_0_3.4.0.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+						
+			<fuin:pom groupId="org.emftext.commons" artifactId="org.emftext.commons.antlr3_4_0" version="3.4.0" name="EMFText Shared ANTLR 3.4.0 Runtime ">
+				<organization name="Terence Parr + Sam Harwell" url="http://www.antlr.org" />
+				<license name="The BSD License" url="http://www.antlr.org/license.html" />
+			</fuin:pom>
+			
+		</fuin:mavenize>
+
+		
+		<fuin:mavenize destDir="${baseDir}/target" mvnCommand="${mvnCommand}" mvnBinDir="${mvnBinDir}" mvnInstall="true">
+
+			<srcJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource.bcel_1.4.0.v201206020146.jar">
+				 <path source="src-bcel" target="" />
+			</srcJar>
+			
+			<binJar file="${basedir}/eclipse-libs/org.emftext.language.java.resource.bcel_1.4.0.v201206020146.jar">
+				<path source="org" target="org" />
+			</binJar>
+
+			<fuin:pom groupId="org.emftext.language" artifactId="org.emftext.language.java.resource.bcel" version="1.4.0" name="JaMoPP (Java Model Parser and Printer) BCEL as base for Class File Support ">
+				<organization name="The Apache Software Foundation" url="http://www.apache.org/" />
+				<license name="Apache License, Version 2.0" url="http://www.apache.org/licenses/" />
+			</fuin:pom>
+			
+		</fuin:mavenize>
+			
+	</target>
+	
+</project>

@@ -1,0 +1,3 @@
+version = 1.4.0
+site/vendor = DevBoost GmbH
+site/uploadPath = www.devboost.de:/home/jenkins/jamopp/update_trunk
