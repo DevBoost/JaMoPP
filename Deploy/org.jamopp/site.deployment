@@ -1,3 +1,14 @@
-site/version = 1.4.0
+site/snapshot = false
+
 site/vendor = DevBoost GmbH
 site/uploadPath = www.devboost.de:/home/jenkins/jamopp/update_trunk
+
+feature/org.emftext.sdk/version = 1.4.1
+feature/org.emftext.access/version = 1.4.1
+feature/org.emftext.commons.jdt/version = 1.4.1
+feature/org.emftext.commons.layout/version = 1.4.1
+
+feature/org.emftext.commons.antlr3_4_0/version = 3.4.0
+
+feature/org.emftext.language.java/version = 1.4.0
+feature/org.emftext.language.java.jdt/version = 1.4.0
