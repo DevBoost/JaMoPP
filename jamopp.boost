@@ -16,7 +16,7 @@ http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftex
 http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-core
 http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-linux
 
-svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Tests
+http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Tests
 
 
 
@@ -28,4 +28,4 @@ http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftex
 http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.bcel
 http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.jdt
 
-svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.test
+http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.test
