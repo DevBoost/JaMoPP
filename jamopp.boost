@@ -1,31 +1,35 @@
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.commons.antlr3_4_0
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource.text
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource.text.ui
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.commons.antlr3_4_0
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer.resource.customer
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer.resource.customer.ui
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource.text
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.ecore.resource.text.ui
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.primitivetypes
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.primitivetypes.edit
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer.resource.customer
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.customer.resource.customer.ui
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-core
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-linux
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.primitivetypes
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.primitivetypes.edit
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Tests
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-core
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/Target Platforms/Eclipse/eclipse-SDK-3.7.2-linux
+
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Tests
 
 
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.edit
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.java
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.java.ui
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.bcel
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.jdt
 
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.edit
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.java
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.java.ui
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.bcel
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.resource.jdt
-
-http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.test
+svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText Languages/org.emftext.language.java.test
