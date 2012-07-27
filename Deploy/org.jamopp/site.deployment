@@ -1,7 +1,7 @@
 site/snapshot = false
 
 site/vendor = DevBoost GmbH
-site/uploadPath = www.devboost.de:/home/jenkins/jamopp/update_trunk
+site/uploadPath = lars.inf.tu-dresden.de:/srv/www/reuseware_wiki/update_trunk/test/jamopp/update
 
 feature/org.emftext.sdk/version = 1.4.1
 feature/org.emftext.access/version = 1.4.1
