@@ -1,7 +1,7 @@
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMF/
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
+git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 
 svn:http://svn-st.inf.tu-dresden.de/svn/reuseware/trunk/EMFText
 
