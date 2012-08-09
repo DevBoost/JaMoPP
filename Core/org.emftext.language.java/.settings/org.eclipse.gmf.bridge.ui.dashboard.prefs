@@ -1,0 +1,8 @@
+#Thu Jan 08 17:44:37 CET 2009
+eclipse.preferences.version=1
+gmf_dashboard/domainGenerationModel=platform\:/resource/org.emftext.language.java/metamodel/java.genmodel
+gmf_dashboard/domainModel=platform\:/resource/org.emftext.language.java/metamodel/java.ecore
+gmf_dashboard/generationModel=platform\:/resource/org.emftext.language.java/metamodel/java.gmfgen
+gmf_dashboard/graphicalDefinitionModel=platform\:/resource/org.emftext.language.java/metamodel/java.gmfgraph
+gmf_dashboard/mappingModel=platform\:/resource/org.emftext.language.java/metamodel/java.gmfmap
+gmf_dashboard/toolingDefinitionModel=platform\:/resource/org.emftext.language.java/metamodel/java.gmftool

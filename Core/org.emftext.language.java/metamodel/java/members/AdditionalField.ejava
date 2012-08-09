@@ -1,0 +1,12 @@
+epackage java.members;
+
+import java.parameters.VariableLengthParameter;
+
+eclass AdditionalField {
+
+	getArrayDimension() {
+		long size = this.getArrayDimensionsBefore().size() + this.getArrayDimensionsAfter().size();
+		return size;
+	}
+	
+}

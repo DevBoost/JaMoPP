@@ -1,0 +1,102 @@
+epackage java.types;
+
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Interface;
+import java.references.MethodCall;
+import java.references.ElementReference;
+import java.generics.TypeParameter;
+import java.arrays.ArrayTypeable;
+import java.references.ReferenceableElement;
+
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+
+
+eclass TypeReference {
+
+	/**
+	 * Returns the type referenced by this <code>TypeReference</code>
+	 * considering all concrete subclasses of <code>TypeReference</code> used
+	 * by the Java metamodel. 
+	 * 
+	 * @param _this 
+	 * @return the type
+	 */
+	getTarget() {
+		return getBoundTarget(null);
+	}
+	
+	/**
+	 * Returns the type referenced by this <code>TypeReference</code>
+	 * considering all concrete subclasses of <code>TypeReference</code> used
+	 * by the Java metamodel. If type parameters are bound in the given reference,
+	 * the bound type will be returned instead of the parameter.
+	 * 
+	 * @return the type
+	 */
+	getBoundTarget() {
+		
+		Type type = null;
+		if (this instanceof ClassifierReference || 
+				this instanceof NamespaceClassifierReference) {
+			ClassifierReference classifierRef = getPureClassifierReference();
+			if (classifierRef != null) {
+				type = classifierRef.getTarget();
+			}
+			
+			if (reference instanceof MethodCall) {
+				MethodCall potentialCloneCall = (MethodCall) reference;
+				//clone returns the type of the cloned in the case of arrays
+				ReferenceableElement potentialCloneCallTarget = potentialCloneCall.getTarget();
+				if (potentialCloneCallTarget != null && 
+						!potentialCloneCallTarget.eIsProxy() && 
+						"clone".equals(potentialCloneCallTarget.getName()))  {
+					if (potentialCloneCall.getPrevious() instanceof ElementReference) {
+						ElementReference prevRef = (ElementReference) potentialCloneCall.getPrevious();
+						if (prevRef.getTarget() instanceof ArrayTypeable && 
+								((ArrayTypeable)prevRef.getTarget()).getArrayDimension() > 0) {
+							type = prevRef.getReferencedType();
+						}
+					}
+				}
+			}
+		}
+
+		else if(this instanceof PrimitiveType) {
+			return (PrimitiveType) this;
+		}
+		
+		//resolve parameter to real type
+		if (type instanceof TypeParameter) {
+			type = ((TypeParameter) type).getBoundType(this, reference);
+		}
+
+		if (type != null && type.eIsProxy()) {
+			//this may happen, when e.g. a super type is resolved. It is ok.
+			return null;
+		}
+		
+		return type;
+	}
+	
+	/**
+	 * Extracts the (possibly nested) classifier reference (if any) 
+	 * from this type references.
+	 * 
+	 * @return
+	 */
+	getPureClassifierReference() {
+		ClassifierReference classifierReference = null;
+		if (this instanceof ClassifierReference) {
+			classifierReference = (ClassifierReference) this;
+		}
+		if (this instanceof NamespaceClassifierReference) {
+			NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) this;
+			if (!nsClassifierReference.getClassifierReferences().isEmpty()) {
+				int lastIndex = nsClassifierReference.getClassifierReferences().size() - 1;
+				classifierReference = nsClassifierReference.getClassifierReferences().get(lastIndex);
+			}
+		}
+		return classifierReference;
+	}
+}

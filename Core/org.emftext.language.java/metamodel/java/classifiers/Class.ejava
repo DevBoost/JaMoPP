@@ -1,0 +1,107 @@
+epackage java.classifiers;
+
+//import plain Java types
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+
+//import types from other EPackages
+import java.types.*;
+
+eclass Class {
+	
+	/**
+	 * Recursively collects all super types (extended classes and implemented interfaces)
+	 * of the given class.
+	 * 
+	 * @param classifierList the list for the result
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = 
+			new UniqueEList<ConcreteClassifier>();
+					
+		//collects all superclasses first
+		Class superClass = this;
+		while (superClass != null && !superClass.eIsProxy() && 
+				!superClass.equals(getObjectClass())) {
+			superClass = superClass.getSuperClass();
+			if (superClass != null) {
+				result.add(superClass);
+			}
+		}
+		
+		//collect all implemented interfaces
+		for (TypeReference typeArg : this.getImplements()) {
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		
+		//collect all implemented interfaces of super classes
+		superClass = this.getSuperClass();	
+		if (superClass != null && !superClass.eIsProxy() && 
+				!superClass.equals(getObjectClass())) {
+			result.addAll(superClass.getAllSuperClassifiers());
+		}	
+
+		return result;
+	}
+	
+	/**
+	 * @param this
+	 * @return the direct super class
+	 */
+	getSuperClass() {
+		TypeReference superClassReference = this.getExtends();
+		if (superClassReference == null) {
+			superClassReference = this.getDefaultExtends();
+		}
+		if (superClassReference == null) {
+			return null;
+		}
+		Type result = superClassReference.getTarget();
+		if (result instanceof Class) {
+			return (Class) result;
+		}
+		return null;
+	}
+	
+	/**
+	 * @param this
+	 * @return primitive type, if the class can be wrapped
+	 */
+	unWrapPrimitiveType() {	
+		if (getLibClass("Boolean").equals(this)) {
+			return #Boolean;
+		}
+		if (getLibClass("Byte").equals(this)) {
+			return #Byte;
+		}
+		if (getLibClass("Character").equals(this)) {
+			return #Char;
+		}
+		if (getLibClass("Float").equals(this)) {
+			return #Float;
+		}
+		if (getLibClass("Double").equals(this)) {
+			return #Double;
+		}
+		if (getLibClass("Integer").equals(this)) {
+			return #Int;
+		}
+		if (getLibClass("Long").equals(this)) {
+			return #Long;
+		}
+		if (getLibClass("Short").equals(this)) {
+			return #Short;
+		}
+		if (getLibClass("Void").equals(this)) {
+			return #Void;
+		}
+		return null;
+	}
+
+}

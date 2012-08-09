@@ -1,0 +1,12 @@
+epackage java.variables;
+
+import java.parameters.VariableLengthParameter;
+
+eclass AdditionalLocalVariable {
+
+	getArrayDimension() {
+		long size = this.getArrayDimensionsBefore().size() + this.getArrayDimensionsAfter().size();
+		return size;
+	}
+	
+}

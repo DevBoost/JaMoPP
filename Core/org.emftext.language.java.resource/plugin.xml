@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            class="org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl"
+            type="class">
+      </parser>
+   </extension>
+
+   <extension
+         point="org.emftext.language.java.resource.java.additional_extension_parser">
+      <parser
+            class="org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl">
+      </parser>
+   </extension>
+</plugin>

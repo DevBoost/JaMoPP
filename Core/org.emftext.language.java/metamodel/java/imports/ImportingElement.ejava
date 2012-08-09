@@ -1,0 +1,23 @@
+epackage java.imports;
+
+//ecore
+import java.classifiers.ConcreteClassifier;
+
+//java
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.emftext.language.java.JavaClasspath;
+
+
+eclass ImportingElement {
+
+	getDefaultImports() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		for(EObject classifier : JavaClasspath.get(this).getDefaultImports()) {
+			result.add((ConcreteClassifier)classifier);
+		}
+		return result;
+	}
+
+}

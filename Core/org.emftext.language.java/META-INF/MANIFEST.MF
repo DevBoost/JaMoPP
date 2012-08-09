@@ -1,0 +1,49 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-141 (Apple Inc.)
+Bundle-ManifestVersion: 2
+Bundle-Name: JaMoPP (Java Model Parser and Printer) Metamodel
+Bundle-SymbolicName: org.emftext.language.java; singleton:=true
+Bundle-Version: 1.1.0.v200911130906
+Bundle-ClassPath: .
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.language.java,org.emftext.language.java.an
+ notations,org.emftext.language.java.annotations.impl,org.emftext.lang
+ uage.java.annotations.util,org.emftext.language.java.arrays,org.emfte
+ xt.language.java.arrays.impl,org.emftext.language.java.arrays.util,or
+ g.emftext.language.java.classifiers,org.emftext.language.java.classif
+ iers.impl,org.emftext.language.java.classifiers.util,org.emftext.lang
+ uage.java.commons,org.emftext.language.java.commons.impl,org.emftext.
+ language.java.commons.util,org.emftext.language.java.containers,org.e
+ mftext.language.java.containers.impl,org.emftext.language.java.contai
+ ners.util,org.emftext.language.java.expressions,org.emftext.language.
+ java.expressions.impl,org.emftext.language.java.expressions.util,org.
+ emftext.language.java.generics,org.emftext.language.java.generics.imp
+ l,org.emftext.language.java.generics.util,org.emftext.language.java.i
+ mpl,org.emftext.language.java.imports,org.emftext.language.java.impor
+ ts.impl,org.emftext.language.java.imports.util,org.emftext.language.j
+ ava.instantiations,org.emftext.language.java.instantiations.impl,org.
+ emftext.language.java.instantiations.util,org.emftext.language.java.l
+ iterals,org.emftext.language.java.literals.impl,org.emftext.language.
+ java.literals.util,org.emftext.language.java.members,org.emftext.lang
+ uage.java.members.impl,org.emftext.language.java.members.util,org.emf
+ text.language.java.modifiers,org.emftext.language.java.modifiers.impl
+ ,org.emftext.language.java.modifiers.util,org.emftext.language.java.o
+ perators,org.emftext.language.java.operators.impl,org.emftext.languag
+ e.java.operators.util,org.emftext.language.java.parameters,org.emftex
+ t.language.java.parameters.impl,org.emftext.language.java.parameters.
+ util,org.emftext.language.java.references,org.emftext.language.java.r
+ eferences.impl,org.emftext.language.java.references.util,org.emftext.
+ language.java.statements,org.emftext.language.java.statements.impl,or
+ g.emftext.language.java.statements.util,org.emftext.language.java.typ
+ es,org.emftext.language.java.types.impl,org.emftext.language.java.typ
+ es.util,org.emftext.language.java.util,org.emftext.language.java.vari
+ ables,org.emftext.language.java.variables.impl,org.emftext.language.j
+ ava.variables.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.emftext.commons.layout;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+

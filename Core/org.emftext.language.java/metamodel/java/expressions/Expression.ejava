@@ -1,0 +1,231 @@
+epackage java.expressions;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
+
+import java.arrays.ArrayInstantiationBySize;
+import java.arrays.ArrayTypeable;
+import java.classifiers.Class;
+import java.literals.Literal;
+import java.members.AdditionalField;
+import java.members.Field;
+import java.members.Method;
+import java.references.ElementReference;
+import java.references.Reference;
+import java.references.ReferenceableElement;
+import java.types.Type;
+import java.variables.AdditionalLocalVariable;
+import java.variables.LocalVariable;
+import java.parameters.VariableLengthParameter;
+
+eclass Expression {
+
+	/**
+	 * Returns the type of the expression considering all concrete
+	 * subtypes of Expression.
+	 * 
+	 * @return type of expression
+	 */
+	getType() {
+		return getOneType(false);
+	}
+	
+	getAlternativeType() {
+		return getOneType(true);
+	}
+	
+		
+	
+	getOneType() {
+		Class stringClass = getStringClass();
+		
+		Type type = null;
+
+		if (this instanceof Reference) {
+			Reference reference = (Reference) this;
+			//navigate down references
+			while(reference.getNext() != null) {
+				reference = reference.getNext();
+			}
+			type = reference.getReferencedType();
+		}
+		else if (this instanceof Literal) {
+			type = ((Literal) this).getType();
+		}
+		else if (this instanceof CastExpression) {
+			type = ((CastExpression)this).getTypeReference().getTarget();
+		}
+		else if (this instanceof AssignmentExpression) {
+			type = ((AssignmentExpression) this).getChild().getOneType(alternative);
+		}
+		else if (this instanceof ConditionalExpression &&
+				((ConditionalExpression)this).getExpressionIf() != null) {
+			if (alternative) {
+				type = ((ConditionalExpression)this).getExpressionElse().getOneType(alternative);
+			}
+			else {
+				type = ((ConditionalExpression)this).getExpressionIf().getOneType(alternative);
+			}
+			
+		}
+		else if (this instanceof EqualityExpression ||
+				this instanceof RelationExpression ||
+				this instanceof ConditionalOrExpression ||
+				this instanceof ConditionalAndExpression ||
+				this instanceof InstanceOfExpression ) {
+			type = getLibClass("Boolean");
+		}
+		else if (this instanceof AdditiveExpression ||
+				this instanceof MultiplicativeExpression ||
+				this instanceof InclusiveOrExpression ||
+				this instanceof ExclusiveOrExpression ||
+				this instanceof AndExpression ||
+				this instanceof ShiftExpression ) {
+			
+			if (this instanceof AdditiveExpression) {
+				AdditiveExpression additiveExpression = (AdditiveExpression) this;
+				for(Expression subExp : additiveExpression.getChildren()) {
+					if (stringClass.equals(subExp.getOneType(alternative))) {
+						//special case: string concatenation
+						return stringClass;
+					}
+				}
+			}
+			
+			@SuppressWarnings("unchecked")
+			Expression subExp = ((EList<Expression>) 
+					this.eGet(this.eClass().getEStructuralFeature("children"))).get(0);
+			
+			return subExp.getOneType(alternative);
+		}
+		else if (this instanceof UnaryExpression) {
+			Expression subExp = ((UnaryExpression)this).getChild();
+			
+			return subExp.getOneType(alternative);
+		}
+		else for(TreeIterator<EObject> i = this.eAllContents(); i.hasNext(); ) {
+			EObject next = i.next();
+			Type nextType = null;
+
+			if (next instanceof PrimaryExpression) {
+
+				if (next instanceof Reference) {
+					Reference ref = (Reference) next;
+					//navigate down references
+					while(ref.getNext() != null) {
+						ref = ref.getNext();
+					}
+					next = ref;
+				}
+				if (next instanceof Literal) {
+					nextType = ((Literal) next).getType();
+				}
+				else if (next instanceof CastExpression) {
+					nextType = ((CastExpression)next).getTypeReference().getTarget();
+				}
+				else {
+					nextType = ((Reference) next).getReferencedType();
+				}
+				i.prune();
+
+			}
+			if (nextType != null) {
+				type = nextType;
+				//in the special case that this is an expression with
+				//some string included, everything is converted to string
+				if (stringClass.equals(type)) {
+					break;
+				}
+			}
+		}
+		//type can be null in cases of unresolved/unresolvable proxies
+		return type;
+	}
+	
+	getArrayDimension() {
+		long size = 0;
+		ArrayTypeable arrayType = null;
+		if (this instanceof NestedExpression && 
+				((NestedExpression)this).getNext() == null) {
+			return ((NestedExpression) this).getExpression().getArrayDimension()
+				- ((NestedExpression)this).getArraySelectors().size();
+		}
+		if (this instanceof ConditionalExpression &&
+				((ConditionalExpression)this).getExpressionIf() != null) {		
+			return ((ConditionalExpression)this).getExpressionIf().getArrayDimension();
+		}
+		if (this instanceof AssignmentExpression) {
+			Expression value = ((AssignmentExpression) this).getValue();
+			if (value == null) {
+				return 0;
+			}
+			return value.getArrayDimension();
+		}
+		if (this instanceof InstanceOfExpression) {
+			return 0;
+		}
+		if (this instanceof Reference) {
+			Reference reference = (Reference) this;
+			while (reference.getNext() != null) {
+				reference = reference.getNext();
+			}
+			//an array clone? -> dimension defined by cloned array
+			if (reference instanceof ElementReference && 
+					reference.getPrevious() != null) {
+				ReferenceableElement target = ((ElementReference)reference).getTarget();
+				if (target instanceof Method) {
+					if("clone".equals(((Method)target).getName())) {
+						reference = (Reference) reference.eContainer();
+					}
+				}
+			}
+			
+			if (reference instanceof ElementReference) {
+				ElementReference elementReference = (ElementReference) reference;
+				if (elementReference.getTarget() instanceof ArrayTypeable) {
+					arrayType = (ArrayTypeable) elementReference.getTarget();
+				}
+				if (elementReference.getTarget() instanceof AdditionalLocalVariable) {
+					AdditionalLocalVariable additionalLocalVariable = (AdditionalLocalVariable) elementReference.getTarget();
+					arrayType = (LocalVariable) additionalLocalVariable.eContainer();
+					size += additionalLocalVariable.getArrayDimensionsAfter().size();
+					size -= arrayType.getArrayDimensionsAfter().size();
+				}
+				if (elementReference.getTarget() instanceof AdditionalField) {
+					AdditionalField additionalField = (AdditionalField) elementReference.getTarget();
+					arrayType = (Field) additionalField.eContainer();
+					size += additionalField.getArrayDimensionsAfter().size();
+					size -= arrayType.getArrayDimensionsAfter().size();
+				}
+			}
+			else if (this instanceof ArrayTypeable) {
+				size += ((ArrayTypeable)this).getArrayDimensionsBefore().size() + ((ArrayTypeable)this).getArrayDimensionsAfter().size();
+				if (this instanceof VariableLengthParameter) {
+					size++;
+				}
+			}
+			size -= reference.getArraySelectors().size();
+		}
+		else if (this instanceof ArrayTypeable) {
+			size += ((ArrayTypeable)this).getArrayDimensionsBefore().size() + ((ArrayTypeable)this).getArrayDimensionsAfter().size();
+			if (this instanceof VariableLengthParameter) {
+				size++;
+			}
+		}
+		
+		if(this instanceof ArrayInstantiationBySize) {
+			size += ((ArrayInstantiationBySize)this).getSizes().size();
+		}
+		
+		if(arrayType != null) {
+			size += arrayType.getArrayDimension();
+		}
+		
+		return size;
+	}
+	
+
+
+
+}

@@ -1,0 +1,409 @@
+epackage java.commons;
+
+//Java
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.ECollections;
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.BasicEList;
+import org.emftext.language.java.JavaClasspath;
+
+import java.util.Iterator;
+
+//ecore
+import java.classifiers.AnonymousClass;
+import java.classifiers.Class;
+import java.classifiers.Classifier;
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Interface;
+import java.containers.CompilationUnit;
+import java.annotations.AnnotationInstance;
+import java.modifiers.AnnotableAndModifiable;
+import java.modifiers.AnnotationInstanceOrModifier;
+import java.statements.Statement;
+import java.statements.StatementListContainer;
+
+import layout.LayoutInformation;
+
+eclass Commentable {
+
+	/**
+	 * Adds the given statement before the statement that contains this element.
+	 */
+	/* void */ addBeforeContainingStatement(/* Statement statementToAdd */) {
+		EObject container = this.eContainer();
+		EObject statement = this;
+		while (container != null) {
+			if (container instanceof StatementListContainer) {
+				break;
+			}
+			container = container.eContainer();
+			statement = statement.eContainer();
+		}
+		if (container == null) {
+			throw new IllegalArgumentException("Element " + this + " is not contained in a StatementListContainer.");
+		}
+		StatementListContainer statementListContainer = (StatementListContainer) container;
+		EList<Statement> statements = statementListContainer.getStatements();
+		int index = statements.indexOf(statement);
+		
+		statements.add(index, statementToAdd);
+	}
+
+	/**
+	 * Adds the given statement after the statement that contains this element.
+	 */
+	/* void */ addAfterContainingStatement(/* Statement statementToAdd */) {
+		EObject container = this.eContainer();
+		EObject statement = this;
+		while (container != null) {
+			if (container instanceof StatementListContainer) {
+				break;
+			}
+			container = container.eContainer();
+			statement = statement.eContainer();
+		}
+		if (container == null) {
+			throw new IllegalArgumentException("Element " + this + " is not contained in a StatementListContainer.");
+		}
+		StatementListContainer statementListContainer = (StatementListContainer) container;
+		EList<Statement> statements = statementListContainer.getStatements();
+		int index = statements.indexOf(statement);
+		
+		if (index == statements.size() - 1) {
+			// statement is the last one
+			statements.add(statementToAdd);
+		} else {
+			statements.add(index + 1, statementToAdd);
+		}
+	}
+
+	/**
+	 * Walks up the containment hierarchy and returns the first parent with the
+	 * given type. If no such parent is found, null is returned.
+	 */
+	getParentByEType() {
+		EObject container = this.eContainer();
+		while (container != null) {
+			if (type.isInstance(container)) {
+				return container;
+			}
+			container = container.eContainer();
+		}
+		return null;
+	}
+
+	/**
+	 * Walks up the containment hierarchy and returns the first parent with the
+	 * given type. If no such parent is found, null is returned.
+	 */
+	getParentByType() {
+		EObject container = this.eContainer();
+		while (container != null) {
+			if (type.isInstance(container)) {
+				return type.cast(container);
+			}
+			container = container.eContainer();
+		}
+		return null;
+	}
+
+	/**
+	 * Searches for the first child with the given type. If no such child is found, null is returned.
+	 */
+	getFirstChildByEType() {
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				return next;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Searches for the first child with the given type. If no such child is found, null is returned.
+	 */
+	getFirstChildByType() {
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				return type.cast(next);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns all children of the given type.
+	 */
+	getChildrenByEType() {
+		EList<EObject> children = new BasicEList<EObject>();
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				children.add(next);
+			}
+		}
+		return children;
+	}
+
+	/**
+	 * Returns all children of the given type.
+	 */
+	getChildrenByType() {
+		EList<T> children = new BasicEList<T>();
+		Iterator<EObject> it = this.eAllContents();
+		while (it.hasNext()) {
+			EObject next = it.next();
+			if (type.isInstance(next)) {
+				children.add(type.cast(next));
+			}
+		}
+		return children;
+	}
+
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
+	 * representing the class with the given classified name.
+	 * 
+     * @param name classified name of the ConcreteClassifier
+	 */
+	getConcreteClassifier() {
+		return (ConcreteClassifier) EcoreUtil.resolve(
+			JavaClasspath.get(this).getClassifier(name), this);
+	}
+	
+	/**
+	 * Finds all <code>org.emftext.language.java.classifiers.ConcreteClassifier</code>
+	 * representing the classes in the given package or a single class from that package.
+	 * 
+     * @param packageName name of the package
+     * @param classifierQuery * for all classifiers or name of a single classifier
+	 */
+	getConcreteClassifiers() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
+			result.add((ConcreteClassifier) EcoreUtil.resolve(classifier, this));
+		}
+		return result;
+	}
+	
+	getConcreteClassifierProxy() {
+		return (ConcreteClassifier) JavaClasspath.get(this).getClassifier(name);
+	}
+	
+	getConcreteClassifierProxies() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		for(EObject classifier : JavaClasspath.get(this).getClassifiers(packageName, classifierQuery)) {
+			result.add((ConcreteClassifier)classifier);
+		}
+		return result;
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing the class with the given name located in <code>java.lang</code>.
+	 * 
+     * @param name name of the Class
+	 * @return the Class
+	 */
+	getLibClass() {
+		Class classClass = (Class) getConcreteClassifierProxy(
+				"java.lang." + name);
+		EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classClass, this);
+		if (resolved instanceof Class) {
+			return (Class) resolved;
+		}
+		return null;
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Interface</code>
+	 * representing the interface with the given name located in <code>java.lang</code>.
+	 * 
+     * @param name name of the Interface
+	 * @return the Class
+	 */
+	getLibInterface() {
+		ConcreteClassifier interfaceClass = getConcreteClassifierProxy(
+				"java.lang." + name);
+		EObject resolved = EcoreUtil.resolve(interfaceClass, this);
+		if (resolved instanceof Interface) {
+			return (Interface) resolved;
+		}
+		return null;
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.Class</code>.
+	 * 
+	 * @return the Class
+	 */
+	getClassClass()  {
+		return getLibClass("Class");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.Object</code>.
+	 * 
+	 * @return the Class
+	 */
+	getObjectClass()  {
+		return getLibClass("Object");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Class</code>
+	 * representing <code>java.lang.String</code>.
+	 * 
+	 * @return the Class
+	 */
+	getStringClass() {
+		return getLibClass("String");
+	}
+	
+	/**
+	 * Finds the <code>org.emftext.language.java.classifiers.Interface</code>
+	 * representing <code>java.lang.annotation.Annotation</code>.
+	 * 
+	 * @return the Class
+	 */
+	getAnnotationInterface() {
+		Interface annotationClass = (Interface) EcoreUtil.resolve(
+				getConcreteClassifierProxy("java.lang.annotation.Annotation"), this);
+		EObject resolved = EcoreUtil.resolve(annotationClass, this);
+		if (resolved instanceof Interface) {
+			return (Interface) resolved;
+		}
+		return null;
+	}
+	
+	//===== Container look up =====
+	
+	/**
+	 * Finds the containing classifier for the given element.
+	 * 
+	 * @param value
+	 * @return containing classifier
+	 */
+	getContainingConcreteClassifier() {
+		EObject value = this;
+		while (!(value instanceof ConcreteClassifier) && value != null) {
+			value = value.eContainer();
+		}
+		return (ConcreteClassifier) value;
+	}
+	
+	/**
+	 * Finds the classifier that is the parent of this element. If 
+	 * this element is an inner classifier the parent classifier does
+	 * not necessarily contain this element, since it can reside in 
+	 * a different compilation unit when stored in byte code.
+	 * 
+	 * @param value
+	 * @return containing classifier
+	 */
+	getParentConcreteClassifier() {
+		ConcreteClassifier classifier = getContainingConcreteClassifier();
+		if(classifier == null) {
+			CompilationUnit cu = getContainingCompilationUnit();
+			//maybe the outer classifier is in an extra cu
+			if (cu != null && cu.getName() != null && cu.getName().contains("$")) {
+				classifier = (ConcreteClassifier) EcoreUtil.resolve(
+				getConcreteClassifierProxy(cu.getNamespacesAsString()), this);
+				if(classifier.eIsProxy())  {
+					classifier = null;
+				}
+			}
+		}
+		return classifier;
+	}
+	
+	/**
+	 * Finds the containing anonymous class for the given element.
+	 * 
+	 * @param value
+	 * @return containing anonymous class 
+	 */
+	getContainingAnonymousClass() {
+		EObject value = this;
+		while (!(value instanceof AnonymousClass) 
+				&& !(value instanceof ConcreteClassifier) //do not jump over other classifiers 
+				&& value != null) {
+			value = value.eContainer();
+		}
+		if (!(value instanceof AnonymousClass)) {
+			return null;
+		}
+		return (AnonymousClass) value;
+	}
+	
+	/**
+	 * Finds the containing compilation unit for the given element.
+	 * 
+	 * @param value
+	 * @return containing compilation unit
+	 */
+	getContainingCompilationUnit() {
+		EObject value = this;
+		while (!(value instanceof CompilationUnit) && value != null) {
+			value = value.eContainer();
+		}
+		return (CompilationUnit) value;
+	}
+
+	/** 
+	 * Finds the containing annotation instance for the given element.
+	 * 
+	 * @param value
+	 * @return containing annotation instance
+	 */
+	getContainingAnnotationInstance() {
+		EObject value = this;
+		while (!(value instanceof AnnotationInstance) && value != null) {
+			value = value.eContainer();
+		}
+		return (AnnotationInstance) value;
+	}
+	
+	getContainingPackageName() {
+		CompilationUnit cu = getContainingCompilationUnit();
+		if (cu == null) {
+			return null;
+		}
+		
+		int idx = cu.getNamespaces().size();
+		if(cu.getName() != null) {
+			char[] fullName = cu.getName().toCharArray();
+			for(int i = 0; i < fullName.length; i++) {
+				if (fullName[i] == '$') {
+					idx--;
+				}
+			}
+		}
+		return new BasicEList<String>(cu.getNamespaces().subList(0, idx));
+	}
+	
+	getComments() {
+		EList<String> comments = new BasicEList<String>();
+		if (this instanceof AnnotableAndModifiable) {
+			for (AnnotationInstanceOrModifier aom : ((AnnotableAndModifiable) this).getAnnotationsAndModifiers()) {
+				comments.addAll(aom.getComments());
+			}
+		}
+		for (LayoutInformation layoutInformation : getLayoutInformations()) {
+			String text = layoutInformation.getHiddenTokenText();
+			if (text.contains("/*") || text.contains("//")) {
+				comments.add(layoutInformation.getHiddenTokenText().trim());
+			}
+		}
+		return ECollections.unmodifiableEList(comments);
+	}
+}

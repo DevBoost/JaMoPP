@@ -1,0 +1,32 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Created-By: 1.5.0_20-141 (Apple Inc.)
+Bundle-ManifestVersion: 2
+Bundle-Name: JaMoPP (Java Model Parser and Printer) Metamodel Edit Sup
+ port
+Bundle-SymbolicName: org.emftext.language.java.edit; singleton:=true
+Bundle-Version: 1.1.0.v200911130906
+Bundle-ClassPath: .
+Bundle-Activator: org.emftext.language.java.annotations.provider.JavaE
+ ditPlugin$Implementation
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.language.java.annotations.provider,org.emf
+ text.language.java.arrays.provider,org.emftext.language.java.classifi
+ ers.provider,org.emftext.language.java.commons.provider,org.emftext.l
+ anguage.java.containers.provider,org.emftext.language.java.expression
+ s.provider,org.emftext.language.java.generics.provider,org.emftext.la
+ nguage.java.imports.provider,org.emftext.language.java.instantiations
+ .provider,org.emftext.language.java.literals.provider,org.emftext.lan
+ guage.java.members.provider,org.emftext.language.java.modifiers.provi
+ der,org.emftext.language.java.operators.provider,org.emftext.language
+ .java.parameters.provider,org.emftext.language.java.references.provid
+ er,org.emftext.language.java.statements.provider,org.emftext.language
+ .java.types.provider,org.emftext.language.java.variables.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.java;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.emftext.commons.layout.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+

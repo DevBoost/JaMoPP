@@ -1,0 +1,35 @@
+epackage java.containers;
+
+import java.classifiers.ConcreteClassifier;
+
+import java.util.Iterator;
+import org.eclipse.emf.common.util.EList;
+import org.emftext.language.java.util.*;
+import org.emftext.language.java.*;
+
+eclass Package {
+	
+	/**
+	 * @return all classes in the same package
+	 */
+	getClassifiersInSamePackage() {
+		EList<ConcreteClassifier> defaultImportList = new UniqueEList<ConcreteClassifier>();
+		
+		String packageName = getNamespacesAsString();
+		
+		defaultImportList.addAll(getConcreteClassifierProxies(
+				packageName + getName(), "*"));
+
+		return defaultImportList;
+	}
+	
+	getNamespacesAsString() {
+		String packageName = ""; 
+		for(Iterator<String> it = getNamespaces().iterator(); it.hasNext(); ) {
+			String namespaceFragment = it.next();
+			packageName = packageName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+		}
+		return packageName;
+	}
+
+}

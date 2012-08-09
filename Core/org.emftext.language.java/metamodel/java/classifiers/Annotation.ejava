@@ -1,0 +1,18 @@
+epackage java.classifiers;
+
+//java
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+
+eclass Annotation {
+	
+	/**
+	 * @return <code>java.lang.annotation.Annotation</code> 
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		result.add(getAnnotationInterface());
+		return result;
+	}
+		
+}

@@ -1,0 +1,123 @@
+epackage java.references;
+
+import java.classifiers.AnonymousClass;
+import java.classifiers.Class;
+import java.classifiers.Enumeration;
+import java.expressions.NestedExpression;
+import java.literals.Literal;
+import java.literals.Super;
+import java.members.AdditionalField;
+import java.members.EnumConstant;
+import java.types.Type;
+import java.types.TypeReference;
+import java.types.TypedElement;
+import java.variables.AdditionalLocalVariable;
+
+eclass Reference {
+
+	getPrevious() {
+		if (eContainer() instanceof Reference) { 
+			 Reference container = (Reference) eContainer( ) ; 
+			  if (this.equals(container.getNext())) {
+				 return container;
+			 }
+		}
+		return null;
+	}
+	
+	/**
+	 * Determines the <code>Type</code> of the reference. That is,
+	 * either the type to which the reference points directly, or the
+	 * type of the element to which the reference points.
+	 * 
+	 * @return the determined type
+	 */
+	getReferencedType() {
+		if (this instanceof Literal) {
+			return ((Literal) this).getType();
+		}
+
+		Type type = null;
+
+		//referenced element point to a type
+		if (this instanceof TypedElement) {
+			TypeReference typeRef = ((TypedElement) this).getTypeReference();
+			type = typeRef.getBoundTarget(this);
+		}
+		//element points to this or super
+		else if (this instanceof SelfReference) {
+			Type thisClass = null;
+			if (this.getPrevious() != null) {
+				thisClass = this.getPrevious().getReferencedType();
+			}
+			else {
+				AnonymousClass anonymousContainer = getContainingAnonymousClass();
+				if (anonymousContainer != null) {
+					thisClass = anonymousContainer;
+				}
+				else {
+					thisClass = getContainingConcreteClassifier();	
+				}
+			}
+			
+			//find super class if "self" is "super"
+			if (((SelfReference) this).getSelf() instanceof Super) {
+				if (thisClass instanceof Class) {
+					return ((Class)thisClass).getSuperClass();
+				}
+				if (thisClass instanceof AnonymousClass) {
+					return ((AnonymousClass)thisClass).getSuperClassifier();
+				}
+			}
+			
+			return thisClass;
+		}
+		//element points to the object's class object
+		else if(this instanceof ReflectiveClassReference) {
+			return getClassClass();
+		}
+		//referenced element points to an element with a type
+		else if (this instanceof ElementReference) {
+			ReferenceableElement target = 
+				(ReferenceableElement) ((ElementReference) this).getTarget();
+			if (target.eIsProxy()) {
+				type = null;
+			}
+			
+			//Navigate through AdditionalLocalVariable or Field
+			if(target instanceof AdditionalLocalVariable) {
+				target = (ReferenceableElement) target.eContainer();
+			}
+			if(target instanceof AdditionalField) {
+				target = (ReferenceableElement) target.eContainer();
+			}
+			if (target instanceof TypedElement) {
+				TypeReference typeRef = ((TypedElement) target).getTypeReference();
+				if (typeRef != null) {
+					type = typeRef.getBoundTarget(this);
+				}
+			}
+			else if (target instanceof Type /*e.g. Annotation*/ ) {
+				return (Type) target;
+			}
+			else if(target instanceof EnumConstant) {
+				type = (Enumeration)target.eContainer();
+			}	
+		}
+		//Strings may also appear as reference
+		else if (this instanceof StringReference) {
+			return getStringClass();
+		}
+		else if (this instanceof NestedExpression) {
+			type = ((NestedExpression) this).getExpression().getType();
+		}
+		else if (this instanceof PrimitiveTypeReference) {
+			type = ((PrimitiveTypeReference)this).getPrimitiveType();
+		}
+		else {
+			assert(false);
+		}
+		return type;
+	}
+
+}

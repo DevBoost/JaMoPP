@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== -->
+<project name="JaMoPPGuide" default="build-guide">
+
+	<macrodef name="makepdf">
+		<sequential>
+			<!-- PDF -->
+			<exec executable="${pdflatex}" dir="latex">
+				<arg value="-interaction=nonstopmode" />
+				<arg value="--src-specials" />
+				<arg value="../latex/JaMoPPGuide.tex" />
+				<env key="PATH" value="${path}" />
+			</exec>
+		</sequential>
+	</macrodef>
+	
+	<macrodef name="bibtex">
+		<sequential>
+			<!-- BibTeX -->
+			<exec executable="${bibtex}" dir="latex">
+				<arg value="../latex/JaMoPPGuide.aux" />
+				<env key="PATH" value="${path}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="htmltex">
+		<sequential>
+			<exec executable="${htlatex}" dir="latex">
+				<arg value="../latex/JaMoPPGuide.tex" />
+				<env key="PATH" value="${path}" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<target name="build-guide">
+		<property file="path.properties" />
+		<makepdf/>
+		<bibtex/>
+		<makepdf/>
+		<makepdf/>
+		<makepdf/>
+		
+		<!-- CLEAN UP -->
+		<copy file="latex/JaMoPPGuide.pdf" todir="pdf" />
+		<delete dir="latex/" includes="*.aux,*.log,*.out,*.lol,*.lof,*.toc,*.pdf" />
+
+		<htmltex/>
+		<htmltex/>
+		<htmltex/>
+		<!-- HTML -->
+		<move todir="html">
+			<fileset dir="latex">
+				<include name="*.html" />
+				<include name="JaMoPPGuide.css" />
+			</fileset>
+		</move>
+
+		<copy todir="html">
+			<fileset dir="latex">
+				<include name="figures/*.png" />
+			</fileset>
+		</copy>
+		
+		<!-- CLEAN UP -->
+		<delete dir="latex" includes="*.4ct,*.4tc,*.aux,*.bbl,*.blg,*.dvi,*.idv,*.lg,*.log,*.lol,*.tmp,*.xref,*.log" />
+
+	</target>
+
+</project>

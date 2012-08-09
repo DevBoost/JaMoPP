@@ -1,0 +1,70 @@
+<%
+org.eclipse.emf.ecore.EStructuralFeature eFeature = genFeature.getEcoreFeature();
+org.eclipse.emf.ecore.EAnnotation genModelAnnotation = eFeature.getEAnnotation("http://www.eclipse.org/emf/2002/GenModel");
+String featureName = null;
+String featureAccessor = null;
+String featureSetter = null;
+org.eclipse.emf.codegen.ecore.genmodel.GenClass boxClass = null;
+String boxAccessor = null;
+String boxSetter = null;
+
+if (genModelAnnotation != null) {
+	featureName = (String)genModelAnnotation.getDetails().get("derivedFromExtensibleFeature");
+	org.eclipse.emf.codegen.ecore.genmodel.GenFeature extensibleFeature = null;
+	for(org.eclipse.emf.codegen.ecore.genmodel.GenFeature cand : genFeature.getGenClass().getGenFeatures()) {
+		if (cand.getName().equals(featureName)) {
+			extensibleFeature = cand;
+			featureAccessor = cand.getGetAccessor();
+			featureSetter = "set" + cand.getAccessorName();
+		}
+	}
+	if (eFeature.getEType() instanceof org.eclipse.emf.ecore.EDataType) {
+		String boxClassName = genFeature.getGenClass().getName() + genFeature.getName().substring(0,1).toUpperCase() + genFeature.getName().substring(1);
+		for(org.eclipse.emf.codegen.ecore.genmodel.GenPackage pcand : genFeature.getGenClass().getGenPackage().getSubGenPackages()) {
+			if (pcand.getEcorePackage().getName().equals("ptypes")) {
+				for(org.eclipse.emf.codegen.ecore.genmodel.GenClass ccand : pcand.getGenClasses()) {
+					if (ccand.getName().equals(boxClassName)) {
+						boxClass = ccand;
+					}
+				}		
+			}
+		}
+		boxAccessor = featureAccessor;
+		boxSetter = featureSetter;
+		featureSetter = "setValue";		
+	}
+	else {
+		String boxClassName = genFeature.getGenClass().getName() + genFeature.getName().substring(0,1).toUpperCase() + genFeature.getName().substring(1);
+		for(org.eclipse.emf.codegen.ecore.genmodel.GenPackage pcand : genFeature.getGenClass().getGenPackage().getSubGenPackages()) {
+			if (pcand.getEcorePackage().getName().equals("rtypes")) {
+				for(org.eclipse.emf.codegen.ecore.genmodel.GenClass ccand : pcand.getGenClasses()) {
+					if (ccand.getName().equals(boxClassName)) {
+						boxClass = ccand;
+					}
+				}	
+			}
+		}
+		if (boxClass != null) {
+			boxAccessor = featureAccessor;
+			boxSetter = featureSetter;
+			featureSetter = "setValue";	
+		}
+	}
+}
+%>
+<% if (featureAccessor == null) { %>
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+<% } else if (boxAccessor != null && boxClass != null) { %>
+		Object value = <%=boxAccessor%>();
+		if (value == null) {
+			value = <%=boxClass.getGenPackage().getQualifiedFactoryInterfaceName()%>.eINSTANCE.create<%=boxClass.getName()%>();
+			<%=boxSetter%>((<%=boxClass.getQualifiedInterfaceName()%>)value);
+		}
+		if (value instanceof <%=boxClass.getQualifiedInterfaceName()%>) {
+			((<%=boxClass.getQualifiedInterfaceName()%>)value).<%=featureSetter%>(new<%=genFeature.getCapName()%>);
+		}
+<% } else { %>
+		<%=featureSetter%>((<%=genFeature.getTypeGenClass().getQualifiedInterfaceName()%>) new<%=genFeature.getCapName()%>);
+<% } %>

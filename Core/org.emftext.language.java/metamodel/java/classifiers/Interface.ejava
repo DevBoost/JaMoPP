@@ -1,0 +1,45 @@
+epackage java.classifiers;
+
+//ecore
+import java.types.TypeReference;
+
+//java
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+
+eclass Interface {
+	
+	/**
+	 * @return all interfaces extended by this interface. The type is 
+	 * ConcreteClassifier, because java.lang.Object is also extended although
+	 * it is a Class.
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		
+		for (TypeReference typeArg : this.getExtends()) {
+			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		
+		for (TypeReference typeArg : this.getDefaultExtends()) {
+			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		return result;
+	}
+		
+}

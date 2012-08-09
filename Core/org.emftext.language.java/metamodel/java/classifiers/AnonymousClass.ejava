@@ -1,0 +1,97 @@
+epackage java.classifiers;
+
+//ecore
+import java.classifiers.AnonymousClass;
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Enumeration;
+import java.instantiations.NewConstructorCall;
+import java.members.EnumConstant;
+import java.members.Member;
+import java.modifiers.AnnotableAndModifiable;
+
+
+//java
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+
+eclass AnonymousClass {
+	
+	/**
+	 * @param context to check protected visibility
+	 * @return a view on all members including super classifiers' members
+	 */
+	getAllMembers() {
+		EList<Member> memberList = new UniqueEList<Member>();
+		memberList.addAll(this.getMembers());
+		memberList.addAll(this.getDefaultMembers());
+		
+		NewConstructorCall ncCall = null;
+		if (this.eContainer() instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) this.eContainer();;
+		}
+		if (ncCall == null) {
+			return memberList;
+		}
+		else {
+			ConcreteClassifier classifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
+			if (classifier != null) {
+				EList<Member> superMemberList = classifier.getAllMembers(context);
+				for(Member superMember : superMemberList) {
+					//exclude private members
+					if(superMember instanceof AnnotableAndModifiable) {					
+						if (superMember.eIsProxy()) {
+							superMember = (Member) EcoreUtil.resolve(superMember, this);
+						}
+						AnnotableAndModifiable modifiable = (AnnotableAndModifiable) superMember;
+						if(!modifiable.isHidden(context)) {
+							memberList.add(superMember);
+						}
+					}
+					else {
+						memberList.add(superMember);
+					}
+				}
+			}
+			return memberList;
+		}
+	}
+	
+	/**
+	 * @return a view on all super classifiers
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> superClassifierList = new UniqueEList<ConcreteClassifier>();
+		
+		ConcreteClassifier superClassifier = getSuperClassifier();
+		
+		if (superClassifier != null) {
+			superClassifierList.add(superClassifier);
+			superClassifierList.addAll(superClassifier.getAllSuperClassifiers());
+		}
+		else {
+			superClassifierList.add(getObjectClass());
+		}
+		return superClassifierList;
+	}
+	
+	/**
+	 * @return the direct super classifier
+	 */
+	getSuperClassifier() {
+		NewConstructorCall ncCall = null;
+		if (this.eContainer() instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) this.eContainer();
+			ConcreteClassifier superClassifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
+			return superClassifier;
+		}
+		else if (this.eContainer() instanceof EnumConstant) {
+			if (this.eContainer().eContainer() instanceof Enumeration) {
+				return (Enumeration) this.eContainer().eContainer();
+			}
+		}
+		return null;
+	}
+}

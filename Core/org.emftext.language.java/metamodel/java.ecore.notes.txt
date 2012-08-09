@@ -1,0 +1,4 @@
+- Why does meta class ExplicitConstructorCall has a reference to Self? 
+- Should class Instantiation inherit from class Reference?
+- Should NamespaceClassifierReference better be called QualifiedClassifierReference?
+- EnumConstant subclass of Member?

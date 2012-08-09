@@ -1,0 +1,147 @@
+epackage java.classifiers;
+
+//ecore
+import java.containers.*;
+import java.members.*;
+import java.types.*;
+import java.modifiers.AnnotableAndModifiable;
+
+//java
+import org.eclipse.emf.ecore.*;
+import org.eclipse.emf.ecore.util.*;
+import org.eclipse.emf.common.util.EList;
+import org.emftext.language.java.JavaUniquePathConstructor;
+import org.emftext.language.java.util.UniqueEList;
+
+eclass ConcreteClassifier {
+	
+	getAllInnerClassifiers() {	
+		EList<ConcreteClassifier> innerClassifierList = new UniqueEList<ConcreteClassifier>();
+
+		innerClassifierList.addAll(getInnerClassifiers());
+
+		for (ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+			EList<ConcreteClassifier> superInnerList = superClassifier
+					.getInnerClassifiers();
+
+			for (ConcreteClassifier superInner : superInnerList) {
+				if (superInner.eIsProxy()) {
+					superInner = (ConcreteClassifier) EcoreUtil.resolve(
+							superInner, this);
+				}
+				if (!superInner.isHidden(this)) {
+					innerClassifierList.add(superInner);
+				}
+			}
+		}	
+		return innerClassifierList;
+	}
+	
+	getInnerClassifiers() {
+		if (this.eIsProxy()) {
+			 String uriString = ((InternalEObject)this).eProxyURI().trimFragment().toString();
+			 String fullName = uriString.substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), 
+					 uriString.length() - ".java".length()) + "$";
+			 return getConcreteClassifierProxies(fullName, "*");
+		}
+		else {
+			String suffix = "";
+			ConcreteClassifier containingClass = this;
+			while (containingClass.eContainer() instanceof ConcreteClassifier) {
+				containingClass = (ConcreteClassifier) containingClass.eContainer();
+				suffix = containingClass.getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + suffix;
+			}
+			if (containingClass.eContainer() instanceof CompilationUnit) {
+				CompilationUnit compilationUnit = (CompilationUnit) containingClass.eContainer();
+			    String fullName = compilationUnit.getNamespacesAsString() + suffix + 
+			    	getName() + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			    return getConcreteClassifierProxies(fullName, "*");
+			}
+		}
+
+		//for classes declared locally inside methods that are not registered in the class path
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		//can not call ClassifierUtil.getAllMembers, because it will try to call this method!
+		for(Member member : getMembers()) {
+			if(member instanceof ConcreteClassifier) {
+				result.add((ConcreteClassifier) member);
+			}
+		}
+		for(ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof ConcreteClassifier) {
+					result.add((ConcreteClassifier) member);
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	getSuperTypeReferences() {
+		EList<ClassifierReference> typeReferenceList = new UniqueEList<ClassifierReference>();
+		if(this == null) {
+			return typeReferenceList;
+		}
+
+		if (this instanceof Class) {
+			Class javaClass = (Class) this;
+			if (javaClass.getExtends() != null) {
+				ClassifierReference classifierReference = javaClass.getExtends().getPureClassifierReference();
+				typeReferenceList.add(classifierReference);
+				ConcreteClassifier target = (ConcreteClassifier) classifierReference.getTarget();
+				if (!target.equals(getObjectClass())) {
+					typeReferenceList.addAll(target.getSuperTypeReferences());
+				}
+			}	
+			for(TypeReference interfaceReference : javaClass.getImplements()) {
+				ClassifierReference classifierReference = interfaceReference.getPureClassifierReference();
+				typeReferenceList.add(classifierReference);
+				typeReferenceList.addAll(((ConcreteClassifier) classifierReference.getTarget()).getSuperTypeReferences());
+			}
+		} else if (this instanceof Interface) {
+			Interface javaInterface = (Interface) this;
+			for(TypeReference interfaceReference : javaInterface.getExtends()) {
+				ClassifierReference classifierReference = interfaceReference.getPureClassifierReference();
+				typeReferenceList.add(classifierReference);
+				typeReferenceList.addAll(((ConcreteClassifier) classifierReference.getTarget()).getSuperTypeReferences());
+			}
+		}
+		return typeReferenceList;
+	}
+	
+	/**
+	 * Returns all members of the given classifier including inner classes and 
+	 * all members of super types (extended classes and implemented interfaces).
+	 * 
+	 * @param context to check protected visibility
+	 * @return member list
+	 */
+	getAllMembers() {
+		EList<Member> memberList = new UniqueEList<Member>();
+
+		ConcreteClassifier concreteClassifier = (ConcreteClassifier) this;
+		memberList.addAll(concreteClassifier.getMembers());
+		memberList.addAll(concreteClassifier.getDefaultMembers());
+		//because inner classes are found in separate class files
+		memberList.addAll(concreteClassifier.getAllInnerClassifiers());
+		
+		for (ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+			for(Member member : superClassifier.getMembers()) {
+				if(member instanceof AnnotableAndModifiable) {					
+					AnnotableAndModifiable modifiable = (AnnotableAndModifiable) member;
+
+					if(!modifiable.isHidden(context)) {
+						memberList.add(member);
+					}
+				}
+				else {
+					memberList.add(member);
+				}
+			}
+			memberList.addAll(superClassifier.getDefaultMembers());
+		}
+		return memberList;
+	}
+	
+}

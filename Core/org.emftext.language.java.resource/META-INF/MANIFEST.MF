@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 1.5.0_16-133 (Apple Inc.)
+Bundle-ManifestVersion: 2
+Bundle-Name: JaMoPP (Java Model Parser and Printer) Integrated Source 
+ and Class File Support
+Bundle-SymbolicName: org.emftext.language.java.resource; singleton:=tr
+ ue
+Bundle-Version: 1.1.0.v200911130906
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.emftext.language.java,
+ org.emftext.language.java.resource.java,
+ org.emftext.language.java.resource.bcel
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.emftext.language.java.resource
+

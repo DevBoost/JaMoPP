@@ -1,0 +1,10 @@
+epackage java.classifiers;
+
+eclass Classifier {
+	
+	getAllSuperClassifiers() {
+		//method has to be specified in subclasses
+		throw new UnsupportedOperationException();
+	}
+	
+}

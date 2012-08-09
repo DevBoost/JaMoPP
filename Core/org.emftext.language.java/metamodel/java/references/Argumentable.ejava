@@ -1,0 +1,24 @@
+epackage java.references;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+import java.expressions.Expression;
+import java.types.Type;
+
+eclass Argumentable {
+	
+	/**
+	 * @return list of types of my arguments
+	 */
+	getArgumentTypes() {
+		EList<Type> resultList = new BasicEList<Type>();
+
+		for(Expression exp : getArguments()) {
+			Type type = exp.getType();
+			resultList.add(type);
+		}
+		return resultList;
+	}
+
+}

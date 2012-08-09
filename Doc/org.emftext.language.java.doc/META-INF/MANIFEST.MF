@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.0
+Created-By: 1.5.0_13-121 ("Apple Computer, Inc.")
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFText Documentation
+Bundle-SymbolicName: org.emftext.language.java.doc;singleton:=true
+Bundle-Version: 1.3.1.v201008081937
+Bundle-Vendor: Software Technology Group - TU Dresden Germany
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.emf.ecore,
+ org.eclipse.emf.codegen.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.emftext.language.java.ejava,
+ de.devboost.commenttemplate,
+ org.emftext.language.java.resource,
+ org.emftext.language.java.resource.bcel,
+ org.emftext.language.java.resource.java,
+ org.emftext.language.java.ejava.resource,
+ org.emftext.language.java.ejava.resource.ejava
+

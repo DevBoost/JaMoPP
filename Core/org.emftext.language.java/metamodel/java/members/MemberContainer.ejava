@@ -1,0 +1,142 @@
+epackage java.members;
+
+import java.classifiers.ConcreteClassifier;
+import java.members.Field;
+import java.members.Member;
+import java.members.MemberContainer;
+import java.members.Method;
+import java.types.ClassifierReference;
+
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * A utility class that provides methods that belong to class 
+ * MemberContainer, but can not go there, because MemberContainer 
+ * is generated.
+ */
+eclass MemberContainer {
+
+	getMethods() {
+		EList<Method> methodList = new BasicEList<Method>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Method) {
+				methodList.add((Method) member);
+			}
+		}	
+		return methodList;
+	}
+	
+	getFields() {
+		EList<Field> fieldList = new BasicEList<Field>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Field) {
+				fieldList.add((Field) member);
+			}
+		}	
+		return fieldList;
+	}
+	
+	getMembersByName() {
+		EList<Member> matchingMembers = new BasicEList<Member>();
+
+		for (Member member : getMembers()) {
+			if (name.equals(member.getName())) {
+				matchingMembers.add(member);
+			}
+		}	
+		return matchingMembers;
+	}
+	
+	removeMethods() {
+		EList<Method> methodsToRemove = new BasicEList<Method>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Method) {
+				if (name.equals(member.getName())) {
+					methodsToRemove.add((Method) member);
+				}
+			}
+		}
+		getMembers().removeAll(methodsToRemove);
+	}
+	
+	/**
+	 * @param name
+	 * @return classifier with the given name defined in this member container
+	 */
+	getContainedClassifier() {
+		for(Member member : getMembers()) {
+			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
+				return (ConcreteClassifier) member;
+			}
+ 		}
+		for(Member member : getDefaultMembers()) {
+			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
+				return (ConcreteClassifier) member;
+			}
+ 		}
+		return null;
+	}
+	
+	/**
+	 * @param name
+	 * @return field with the given name defined in this member container
+	 */
+	getContainedField() {
+		for(Member member : getMembers()) {
+			if (member instanceof Field && name.equals(member.getName())) {
+				return (Field) member;
+			}
+ 		}
+		for(Member member : getDefaultMembers()) {
+			if (member instanceof Field && name.equals(member.getName())) {
+				return (Field) member;
+			}
+ 		}
+		return null;
+	}
+
+	/**
+	 * @param name
+	 * @return method with the given name defined in this member container;
+	 *         null, if there is no such method 
+	 *         or if there are multiple methods with the same name
+	 */
+	getContainedMethod() {
+		Method found = null;
+		for(Member member : getMembers()) {
+			if (member instanceof Method && name.equals(member.getName())) {
+				if(found != null) {
+					return null;
+				}
+				else {
+					found = (Method) member;
+				}
+			}
+ 		}
+ 		for(Member member : getDefaultMembers()) {
+			if (member instanceof Method && name.equals(member.getName())) {
+				if(found != null) {
+					return null;
+				}
+				else {
+					found = (Method) member;
+				}
+			}
+ 		}
+		return found;
+	}
+	
+	createField() {
+		Field field = #Field;
+		field.setName(name);
+		ClassifierReference typeRef = #ClassifierReference;
+		typeRef.setTarget(getConcreteClassifier(qualifiedTypeName));
+		field.setTypeReference(typeRef);
+		getMembers().add(field);
+		return field;
+	}
+}

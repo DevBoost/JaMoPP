@@ -1,0 +1,72 @@
+epackage java.commons;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.emftext.language.java.*;
+import org.eclipse.emf.ecore.util.*;
+
+import java.classifiers.ConcreteClassifier;
+
+eclass NamespaceAwareElement {
+
+	/**
+	 * Converts the namespaces array of the given namespace aware element into
+	 * a String representation using package (.) and class ($) delimiters. The method
+	 * uses the classpath to determine for each element of the namespace if it 
+	 * identifies a package or a class.
+	 * 
+	 * @param naElement
+	 * @return single string representation of namespace
+	 */
+	getNamespacesAsString() {
+		String containerName = ""; 
+		for(Iterator<String> it = getNamespaces().iterator(); it.hasNext(); ) {
+			String namespaceFragment = it.next();
+			//does it point at a classifier or a package as container?
+			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
+			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
+			
+			if (it.hasNext()) {
+				if (JavaClasspath.get(this).existsPackage(assumedClassifierName)) {
+					containerName = assumedClassifierName;
+				}
+				else {
+					//assume package
+					containerName = assumedPackageName;
+				}
+			}
+			else {
+				if (JavaClasspath.get(this).existsPackage(assumedPackageName)) {
+					//a package is always available as key
+					containerName = assumedPackageName;
+				}
+				else {
+					//assume classifier that is not key, but value in the map
+					containerName = assumedClassifierName;
+				}
+			}
+		}
+		
+		return containerName;
+	}
+	
+	/**
+	 * Assuming the namespace
+	 * identifies a classifier, that classifier is returned.
+	 * 
+	 * @return classifier at namespace
+	 */
+	getClassifierAtNamespaces() {
+		String fullQualifiedName = getNamespacesAsString();
+		if (fullQualifiedName == null || fullQualifiedName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
+			return null;
+		}
+		//cut the trailing separator
+		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() - 1);
+		
+		return (ConcreteClassifier) EcoreUtil.resolve(
+				getConcreteClassifierProxy(fullQualifiedName), this);
+	}
+
+}

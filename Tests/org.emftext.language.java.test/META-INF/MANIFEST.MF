@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMFTextEdit Java Test Plugin
+Bundle-SymbolicName: org.emftext.language.java.test
+Bundle-Version: 0.0.1.qualifier
+Bundle-Vendor: TU Dresden
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.emftext.language.java.test.JavaParserTestPlugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4,
+ org.eclipse.jdt.core,
+ org.eclipse.text,
+ org.emftext.language.java,
+ org.emftext.language.java.resource,
+ org.emftext.language.java.resource.java,
+ org.emftext.language.java.resource.bcel,
+ org.emftext.commons.antlr3_4_0,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.core.resources,
+ org.eclipse.jface.text,
+ org.emftext.sdk,
+ org.emftext.test
+Export-Package: org.emftext.language.java.test,
+ org.emftext.language.java.test.util

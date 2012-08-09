@@ -1,0 +1,19 @@
+epackage java.statements;
+
+import java.variables.LocalVariable;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.common.util.EList;
+
+eclass StatementListContainer {
+
+	/*LocalVariable*/ getLocalVariable(/* String name */) {
+		EList<LocalVariable> localVariables = getChildrenByType(LocalVariable.class);
+		for (LocalVariable localVariable : localVariables) {
+			if (localVariable.getName().equals(name)) {
+				return localVariable;
+			}
+		}
+		return null;
+	}
+}

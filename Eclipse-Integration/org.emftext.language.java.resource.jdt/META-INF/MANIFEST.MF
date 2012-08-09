@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jdt
+Bundle-SymbolicName: org.emftext.language.java.resource.jdt;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.core.runtime,
+ org.emftext.language.java,
+ org.eclipse.emf.workspace,
+ org.eclipse.jdt.core,
+ org.emftext.commons.jdt
+Export-Package: org.emftext.language.java.resource.jdt
+Bundle-ActivationPolicy: lazy

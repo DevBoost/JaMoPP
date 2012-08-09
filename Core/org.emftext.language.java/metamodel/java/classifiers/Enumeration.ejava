@@ -1,0 +1,47 @@
+epackage java.classifiers;
+
+//ecore
+import java.types.TypeReference;
+import java.members.EnumConstant;
+
+//java
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.EList;
+
+eclass Enumeration {
+	
+	/**
+	 * @return all interfaces extended by this enumeration.
+	 */
+	getAllSuperClassifiers() {
+		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
+		
+		//enumerations inherit from java.lang.Enum
+		Class enumClass = getLibClass("Enum");
+		result.add(enumClass);
+		result.addAll(enumClass.getAllSuperClassifiers());
+		
+		//collect all implemented interfaces
+		for (TypeReference typeArg : this.getImplements()) {
+			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
+			if (superInterface != null) {
+				result.add(superInterface);
+				if (superInterface instanceof Interface) {
+					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	getContainedConstant() {
+		for(EnumConstant constant : getConstants()) {
+			if (name.equals(constant.getName())) {
+				return constant;
+			}
+ 		}
+		return null;
+	}
+		
+}

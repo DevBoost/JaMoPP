@@ -1,0 +1,141 @@
+\documentclass[smallheadings,headsepline,pointlessnumbers,11pt,a4paper]{scrbook}
+
+\usepackage[american]{babel} 
+\usepackage[colorlinks,linkcolor=black,citecolor=black,urlcolor=black,plainpages=false,pdfpagelabels]{hyperref} 
+\usepackage[nottoc,notlof]{tocbibind} %bib in toc
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily} 
+\lstset{backgroundcolor=\color{lightgray}}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{abbrevs}
+\usepackage{ifpdf}
+\input{Abbreviations}
+
+\newcommand{\todo}[1]{\color{red}\textbf{TODO #1}\color{black}}
+
+% For tables
+\usepackage{array}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+%some stuff to get the luximono font working as TT font
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage[scaled]{luximono}
+
+\newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+
+\newenvironment{myindentpar}[1]%
+{\begin{list}{}%
+         {\setlength{\leftmargin}{#1}}%
+         \item[]%
+}
+{\end{list}}
+
+\typearea{12}
+\clubpenalty = 10000
+\widowpenalty = 10000 
+
+\setlength{\parskip}{2pt}
+\evensidemargin 0in
+\oddsidemargin 0in
+\bibdata{}
+
+
+% Redefinition of \cleardoublepage. Even pages are left completely blank.
+\let\origdoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+  \clearpage{\pagestyle{empty}\origdoublepage}}
+  
+\title{JaMoPP Guide}
+
+\begin{document}
+
+% === TITLE
+\begin{titlepage}
+
+\hbox{}
+\vspace{4cm}
+
+\begin{center}
+
+\ifpdf
+	\includegraphics[width=0.9\textwidth]{figures/JaMoPPLogo.pdf}
+\else
+	\includegraphics[width=0.9\textwidth]{figures/JaMoPPLogo.png}
+\fi
+
+\vspace{3cm}
+{
+\fontsize{40}{40}
+\changefont{phv}{m}{n}{USER GUIDE}
+}
+\end{center}
+
+\vspace{7cm}
+\begin{flushright}
+\large
+\today
+\end{flushright}
+
+\end{titlepage}
+% ====
+
+% === ToC
+\cleardoublepage
+
+\tableofcontents
+
+\mainmatter
+% ===
+\input{Overview}
+\input{Setup}
+\input{XMI}
+
+\renewcommand{\listfigurename}{List of Figures}
+\listoffigures
+\cleardoublepage
+
+% Not used because listings with captions do not work in tex4ht
+%
+%\renewcommand{\lstlistlistingname}{List of Listings\vspace{3mm}}
+%\lstlistoflistings
+%\cleardoublepage
+
+%APPENDIX
+\renewcommand{\thesection}{A\arabic{section}}
+% redefine the command that creates the equation no.
+\setcounter{section}{0}  % reset counter 
+\renewcommand{\thechapter}{A}
+\chapter{Appendix}
+
+\begin{appendix}
+\section{Base API}
+\label{app:baseapi}
+
+The base API...
+%\input{generated/BaseAPI.tex}
+
+\section{Utility API}
+\label{app:utilapi}
+
+\section{Extended Navigation API}
+\label{app:navapi}
+
+The extended navigation API...
+
+\section{Extended Modification API}
+\label{app:modapi}
+
+The extended modification API...
+Builder pattern?
+
+
+\end{appendix}
+
+\bibliography{biblio} % specify the database files
+\bibliographystyle{alpha}
+
+\end{document} 

@@ -1,0 +1,71 @@
+epackage java.imports;
+
+import org.emftext.language.java.util.UniqueEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import java.classifiers.ConcreteClassifier;
+import java.classifiers.Enumeration;
+import java.commons.NamedElement;
+
+eclass Import {
+
+	/**
+	 * Returns the classifier with the given name 
+	 * located in the namespace defined by the import.
+	 * 
+	 * @param name the name of the classifier
+	 * @return imported classifier (proxy)
+	 */
+	getImportedClassifier() {
+		String containerName = getNamespacesAsString();
+		if (containerName == null) {
+			return null;
+		}
+		
+		String fullQualifiedName = containerName + name;
+		return getConcreteClassifierProxy(fullQualifiedName);
+	}
+
+	
+	/**
+	 * Returns all imported members assuming the import's namespace
+	 * identifies a classifier.
+	 * 
+	 * @param _this 
+	 * @return list of imported classifiers (proxies)
+	 */
+	getImportedMembers() {
+		ConcreteClassifier concreteClassifier = getClassifierAtNamespaces();
+		
+		if(concreteClassifier == null || concreteClassifier.eIsProxy()) {
+			return ECollections.emptyEList();
+		}
+		
+		EList<NamedElement> result = new UniqueEList<NamedElement>();
+		result.addAll(concreteClassifier.getAllMembers(this));
+		if (concreteClassifier instanceof Enumeration) {
+			result.addAll(((Enumeration)concreteClassifier).getConstants());
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * Returns a list of imported classifiers assuming the import's namespace
+	 * identifies a package.
+	 * 
+	 * @param _this 
+	 * @return imported classifier (proxy)
+	 */
+	getImportedClassifiers() {
+		String containerName = getNamespacesAsString();
+		if (containerName == null) {
+			return ECollections.emptyEList();
+		}
+		
+		return getConcreteClassifierProxies(containerName, "*");
+	}
+
+}
