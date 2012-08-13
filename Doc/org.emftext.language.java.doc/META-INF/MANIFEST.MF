@@ -10,11 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.codegen.ecore,
  org.eclipse.emf.ecore.xmi,
- org.emftext.language.java.ejava,
- de.devboost.commenttemplate,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.bcel,
- org.emftext.language.java.resource.java,
- org.emftext.language.java.ejava.resource,
- org.emftext.language.java.ejava.resource.ejava
+ org.emftext.language.java.resource.java
 

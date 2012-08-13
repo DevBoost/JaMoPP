@@ -36,10 +36,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.java.JavaClasspath;
-import org.emftext.language.java.ejava.EPackageWrapper;
-import org.emftext.language.java.ejava.resource.ejava.IEjavaOptions;
-import org.emftext.language.java.ejava.resource.ejava.mopp.EjavaMetaInformation;
-import org.emftext.language.java.ejava.resource.util.EJavaPostProcessor;
 import org.emftext.language.java.resource.JaMoPPUtil;
 
 /**
@@ -59,6 +55,7 @@ public class AppendixGenerator {
 	public void generateAppendix() {
 		setUp();
 		
+		//TODO do we really need this? Can't we get the information from the Ecore model?
 		List<File> files = findEJavaFiles(new File("../org.emftext.language.java/metamodel").getAbsoluteFile());
 		System.out.println("Found files: " + files.size());
 		
@@ -77,8 +74,7 @@ public class AppendixGenerator {
 			for (Diagnostic error : errors) {
 				System.out.println("Found error in " + uri.toString() + ": " + error);
 			}
-			EPackageWrapper packageWrapper = (EPackageWrapper) resource.getContents().get(0);
-			System.out.println(packageWrapper);
+			//EPackageWrapper packageWrapper = (EPackageWrapper) resource.getContents().get(0);
 		}
 	}
 	
@@ -90,7 +86,6 @@ public class AppendixGenerator {
 
 		//initialize JaMoPP to load normal java files
 		JaMoPPUtil.initialize();
-		new EjavaMetaInformation().registerResourceFactory();
 		// initialize packages
 		EcorePackage.eINSTANCE.getEClass();
 		GenModelPackage.eINSTANCE.getGenClass();
@@ -162,10 +157,6 @@ public class AppendixGenerator {
 		rs.getURIConverter().getURIMap().putAll(uriMap);
 		// create and configure resource set
 		List<Object> options = new ArrayList<Object>();
-		options.add(new EJavaPostProcessor());
-		options.add(new org.emftext.language.java.ejava.resource.EJavaPostProcessor());
-		
-		rs.getLoadOptions().put(IEjavaOptions.RESOURCE_POSTPROCESSOR_PROVIDER, options);
 
 		return rs;
 	}
