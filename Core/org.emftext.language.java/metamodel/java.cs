@@ -47,6 +47,7 @@ OPTIONS {
 	disableLaunchSupport = "true";
 	disableDebugSupport = "true";
 	ignoreTypeRestrictionsForPrinting = "true";
+	overrideResourcePostProcessor = "false";
 }
 
 TOKENS {

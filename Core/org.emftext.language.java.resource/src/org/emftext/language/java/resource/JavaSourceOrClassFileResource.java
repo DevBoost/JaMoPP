@@ -44,24 +44,17 @@ import org.emftext.language.java.containers.Package;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 import org.emftext.language.java.members.MembersPackage;
-import org.emftext.language.java.references.ElementReference;
-import org.emftext.language.java.references.IdentifierReference;
-import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragment;
 import org.emftext.language.java.resource.java.IJavaContextDependentURIFragmentFactory;
 import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider;
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch;
-import org.emftext.language.java.resource.java.IJavaResourcePostProcessor;
 import org.emftext.language.java.resource.java.IJavaTextPrinter;
-import org.emftext.language.java.resource.java.mopp.JavaContextDependentURIFragmentFactory;
 import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
-import org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.resource.java.util.JavaLayoutUtil;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.util.JavaModelCompletion;
-import org.emftext.language.java.util.JavaModelRepairer;
 
 /**
  * A resource that uses either the generated 
@@ -450,33 +443,5 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				cu.getNamespaces().add(fullName[i]);
 			}
 		}
-	}
-
-	@Override
-	protected void runPostProcessor(IJavaResourcePostProcessor postProcessor) {
-		//do the repair and complete at post processing time (after parsing, before validation)
-		repairAndComplete();
-	}
-	
-	protected void repairAndComplete() {
-		new JavaModelRepairer() {
-			protected void registerContextDependentProxy(
-					Resource resource,
-					IdentifierReference mainIdReference, EReference targetReference,
-					String id, EObject proxy) {
-				assert !targetReference.isMany();
-
-				((JavaResource)resource).registerContextDependentProxy(
-						new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(
-								new JavaReferenceResolverSwitch().getElementReferenceTargetReferenceResolver()),
-						mainIdReference,
-						targetReference,
-						id,
-						proxy,
-						-1);
-			}
-		}.repair(this);
-
-		JavaModelCompletion.complete(this);
 	}
 }

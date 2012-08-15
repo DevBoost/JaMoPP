@@ -4,11 +4,10 @@ Bundle-Name: EMFText Parser Plugin: java
 Bundle-SymbolicName: org.emftext.language.java.resource.java;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
-Require-Bundle: org.eclipse.core.runtime,
-  org.eclipse.emf,
+Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
   org.eclipse.emf.ecore,
   org.eclipse.emf.ecore.change,
-  org.eclipse.emf.validation,
+  org.eclipse.emf.validation;resolution:=optional,
   org.emftext.access;resolution:=optional,
   org.emftext.commons.antlr3_4_0,
   org.emftext.language.java,
