@@ -20,9 +20,7 @@ Contributors:
 
    <requires>
 	 <import feature="org.eclipse.platform"/>
-	 <import feature="org.eclipse.sdk"/>
 	 <import feature="org.eclipse.emf"/>
-	 <import feature="org.eclipse.emf.workspace"/> 
 	 <import feature="org.emftext.commons.antlr3_4_0"/>
 	 <import feature="org.emftext.commons.layout"/>
    </requires>
