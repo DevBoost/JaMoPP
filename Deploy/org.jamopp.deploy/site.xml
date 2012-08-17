@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitev associateSitesURL="http://www.jamopp.org/update_trunk/associateSites.xml">
+<site associateSitesURL="http://www.jamopp.org/update_trunk/associateSites.xml">
    <description>
       Update site for JaMoPP (Java Model Parser and Printer)
    </description>

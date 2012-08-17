@@ -2,6 +2,8 @@ site/snapshot = false
 
 site/vendor = DevBoost GmbH
 site/uploadPath = www.jamopp.org:/srv/www_jamopp.org/update_trunk
+site/usernameProperty = DROPSBOX_UPLOAD_USER
+site/passwordProperty = DROPSBOX_UPLOAD_PASS
 
 feature/org.emftext.language.java/version = 1.4.0
 feature/org.emftext.language.java.jdt/version = 1.4.0
