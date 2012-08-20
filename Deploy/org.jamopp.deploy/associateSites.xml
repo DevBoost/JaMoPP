@@ -6,4 +6,6 @@
 		url="http://download.eclipse.org/eclipse/updates/4.2"/>	
 	<associateSite label="EMFText"
 		url="http://www.emftext.org/update_trunk"/>
+	<associateSite label="DevBoost Open-Source Feedback"
+		url="http://www.devboost.de/eclipse-feedback/update_trunk"/>	
 </associateSites>
