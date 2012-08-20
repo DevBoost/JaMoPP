@@ -155,9 +155,6 @@ public class AppendixGenerator {
 		
 		// configure URI map
 		rs.getURIConverter().getURIMap().putAll(uriMap);
-		// create and configure resource set
-		List<Object> options = new ArrayList<Object>();
-
 		return rs;
 	}
 
