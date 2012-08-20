@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.emftext.commons.layout.LayoutPackage;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
@@ -198,6 +199,13 @@ public class JaMoPPC {
 				JavaPackage.eINSTANCE.getESubpackages());
 
 		javaEcoreResource.save(null);
+			
+		URI layoutEcoreURI = outUri.appendSegment("layout.ecore");
+		Resource layoutEcoreResource = rs.createResource(layoutEcoreURI);
+		layoutEcoreResource.getContents().add(
+				LayoutPackage.eINSTANCE);
+
+		layoutEcoreResource.save(null);
 	}
 
 	protected static void loadAllFilesInResourceSet(File startFolder,
