@@ -7,8 +7,7 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 git:https://github.com/DevBoost/EMFText.git!Core/Access/
 git:https://github.com/DevBoost/EMFText.git!Core/SDK/
 git:https://github.com/DevBoost/EMFText.git!Core/Commons/
-git:https://github.com/DevBoost/EMFText.git!Core/Doc/
-git:https://github.com/DevBoost/EMFText.git!Core/Features/
+git:https://github.com/DevBoost/EMFText.git!Core/CommonsFeatures/
 git:https://github.com/DevBoost/EMFText.git!Core/License/
 
 // Eclipse Platform
