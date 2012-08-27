@@ -5,6 +5,7 @@ Bundle-SymbolicName: org.emftext.language.java.resource.java;singleton:=true
 Bundle-Version: 1.0.0
 Bundle-Vendor: Software Technology Group - TU Dresden Germany
 Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
+  org.eclipse.core.resources;resolution:=optional,
   org.eclipse.emf.ecore,
   org.eclipse.emf.ecore.change,
   org.eclipse.emf.validation;resolution:=optional,
