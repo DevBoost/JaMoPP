@@ -1,0 +1,8 @@
+import de.tudresden.contact_management.*;
+
+public void print () { 
+    Person p = this;
+    String fullName = p.forename + " " + p.surname;
+	String msg  = "My name is " + fullName + ".";
+	System.out.println(msg);
+} 

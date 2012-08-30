@@ -1,0 +1,2 @@
+Public fields are not allowed.!-!context members::Field inv: self->annotationsAndModifiers->select(m | m.oclIsKindOf(modifiers::Public))->size() = 0
+Please implement hashCode().!-!context members::Method inv: if (self.name = 'equals') then (self.container->members->select(m | m.name = 'hashCode')->size() = 1) else true endif

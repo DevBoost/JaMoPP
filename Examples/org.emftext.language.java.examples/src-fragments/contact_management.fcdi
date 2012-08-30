@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:org.reuseware.coconut.compositionprogram="http://reuseware.org/coconut/compositionprogram" xmi:id="_JNGo8eMDEd2T-tjQm76Gfg" type="Compositionprogram" name="contact_management.fcdi" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_FzTlkPOsEd2T19aeU9fYSQ" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_FzWo4POsEd2T19aeU9fYSQ" type="5002"/>
+    <children xmi:type="notation:Node" xmi:id="_074gAPOsEd2TR66hmGXNSg" type="3001">
+      <children xmi:type="notation:Node" xmi:id="_075HEPOsEd2TR66hmGXNSg" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_075uIPOsEd2TR66hmGXNSg" x="-57"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_074gAfOsEd2TR66hmGXNSg" fontName="Lucida Grande"/>
+      <element xmi:type="org.reuseware.coconut.compositionprogram:PortInstance" href="contact_management.fc#//@fragmentInstances.0/@portInstances.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_074gAvOsEd2TR66hmGXNSg" x="151" y="18"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_FzTlkfOsEd2T19aeU9fYSQ" fontName="Lucida Grande"/>
+    <element xmi:type="org.reuseware.coconut.compositionprogram:FragmentInstance" href="contact_management.fc#//@fragmentInstances.0"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_FzTlkvOsEd2T19aeU9fYSQ" x="126" y="324" height="44"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_KFsAwPOsEd2T19aeU9fYSQ" type="2001">
+    <children xmi:type="notation:Node" xmi:id="_KFsn0POsEd2T19aeU9fYSQ" type="5002"/>
+    <children xmi:type="notation:Node" xmi:id="_ySKrwPOsEd2TR66hmGXNSg" type="3001">
+      <children xmi:type="notation:Node" xmi:id="_ySNvEPOsEd2TR66hmGXNSg" type="5001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ySNvEfOsEd2TR66hmGXNSg" x="24" y="4"/>
+      </children>
+      <styles xmi:type="notation:ShapeStyle" xmi:id="_ySKrwfOsEd2TR66hmGXNSg" fontName="Lucida Grande"/>
+      <element xmi:type="org.reuseware.coconut.compositionprogram:PortInstance" href="contact_management.fc#//@fragmentInstances.1/@portInstances.0"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ySKrwvOsEd2TR66hmGXNSg" x="-19" y="18"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_KFsAwfOsEd2T19aeU9fYSQ" fontName="Lucida Grande"/>
+    <element xmi:type="org.reuseware.coconut.compositionprogram:FragmentInstance" href="contact_management.fc#//@fragmentInstances.1"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KFsAwvOsEd2T19aeU9fYSQ" x="378" y="18" width="226" height="46"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_JNGo8uMDEd2T-tjQm76Gfg"/>
+  <element xmi:type="org.reuseware.coconut.compositionprogram:CompositionProgram" href="contact_management.fc#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_5CFWYPaLEd2Zdt-9tKHuUA" type="4001" source="_ySKrwPOsEd2TR66hmGXNSg" target="_074gAPOsEd2TR66hmGXNSg">
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5CFWYfaLEd2Zdt-9tKHuUA"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5CFWYvaLEd2Zdt-9tKHuUA" fontName="Lucida Grande"/>
+    <element xmi:type="org.reuseware.coconut.compositionprogram:CompositionLink" href="contact_management.fc#//@compositionLinks.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5CFWY_aLEd2Zdt-9tKHuUA" points="[-3, 12, 72, -299]$[-77, 321, -2, 10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5CHyoPaLEd2Zdt-9tKHuUA" id="(0.15,0.25)"/>
+  </edges>
+</notation:Diagram>

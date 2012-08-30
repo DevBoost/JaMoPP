@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="UML2JAVA" name="UML2JAVA">
+
+    <property name="input.umlsrc"    value="models/ClassDiagram.uml" />	
+    <property name="input.javalang"  value="lib/java/lang/package-info.java" />	
+    <property name="input.javautil"  value="lib/java/util/package-info.java" />	
+    	
+	<target name="UML2JAVA" depends="loadModels">
+		<am3.atl path="uml2java.atl" allowintermodelreferences="true">
+			<inmodel name="UML"  model="UML"/>
+			<inmodel name="JAVA" model="JAVA"/>
+
+			<inmodel name="IN"   model="IN"/>
+			<inmodel name="LANG" model="LANG"/>
+			<inmodel name="UTIL" model="UTIL"/>
+			
+			<outmodel name="OUT" model="OUT" metamodel="JAVA"/>
+		</am3.atl>
+		
+		<am3.saveModel model="OUT" path="../src-fragment/empty.java"/>	
+	</target>
+	
+	
+	<target name="loadModels"> 
+		<!-- metamodels -->
+		<am3.loadModel modelHandler="EMF" name="UML"  metamodel="%EMF" nsuri="http://www.eclipse.org/uml2/2.1.0/UML" />		
+		<am3.loadModel modelHandler="EMF" name="JAVA" metamodel="%EMF" nsuri="http://www.emftext.org/java" />	
+		
+		<!-- models -->
+		<am3.loadModel modelHandler="EMF" name="IN"   metamodel="UML"  path="../${input.umlsrc}"/>		
+		<am3.loadModel modelHandler="EMF" name="LANG" metamodel="JAVA" path="../${input.javalang}"/>	
+		<am3.loadModel modelHandler="EMF" name="UTIL" metamodel="JAVA" path="../${input.javautil}"/>
+	</target>
+	
+</project>

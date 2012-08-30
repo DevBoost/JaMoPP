@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.reuseware.coconut.compositionprogram:CompositionProgram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:org.reuseware.coconut.compositionprogram="http://reuseware.org/coconut/compositionprogram">
+  <compositionLinks source="//@fragmentInstances.1/@portInstances.0" target="//@fragmentInstances.0/@portInstances.0"/>
+  <fragmentInstances UFI="reuseware://src-fragments-gen/de/tudresden/contact_management/ContactList.reusejava" name="ContactList.reusejava" targetUFI="reuseware://src-fragments-gen/de/tudresden/contact_management_composed/ContactList.java" target="true">
+    <csFragmentRoles href="pathmap://REUSEWARE_COMPOSITION_SYSTEMS/ReuseJava.csys#//@fragmentRoles[name='StatementVP']"/>
+    <portInstances fragmentRoleName="StatementVP" portName="syncBody" targetLinks="//@compositionLinks.0"/>
+  </fragmentInstances>
+  <fragmentInstances UFI="reuseware://src-fragments/de/tudresden/fragments/SynchroniseContacts.reusejava" name="SynchroniseContacts.reusejava" targetUFI="reuseware://src-fragments/de/tudresden/fragments_composed/SynchroniseContacts.reusejava">
+    <csFragmentRoles href="pathmap://REUSEWARE_COMPOSITION_SYSTEMS/ReuseJava.csys#//@fragmentRoles[name='ReuseableStatement']"/>
+    <portInstances fragmentRoleName="ReuseableStatement" portName="SynchroniseContacts" sourceLinks="//@compositionLinks.0"/>
+  </fragmentInstances>
+</org.reuseware.coconut.compositionprogram:CompositionProgram>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.emftext.language.java.examples</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.reuseware.coconut.ui.eclipse.fragmentStoreBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.java.resource.java.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2m.atl.adt.builder.atlBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.emftext.language.java.javabehavior4uml.resource.javabehavior.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.m2m.atl.adt.builder.atlNature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.reuseware.coconut.ui.eclipse.reusewareNature</nature>
+		<nature>org.emftext.language.java.resource.java.nature</nature>
+		<nature>org.emftext.language.java.javabehavior4uml.resource.javabehavior.nature</nature>
+	</natures>
+</projectDescription>

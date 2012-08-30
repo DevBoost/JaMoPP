@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:classifiers="http://www.emftext.org/java/classifiers" xmlns:containers="http://www.emftext.org/java/containers" xmlns:members="http://www.emftext.org/java/members" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:types="http://www.emftext.org/java/types" xmi:id="_qkKR4OexEd24U7hLqu7DBw" type="Java" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_5B-mUOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5B-mVOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5B-mVeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mVuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mV-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5B-mWOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5CHwbOexEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5CHwcOexEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5CHwceexEd24U7hLqu7DBw" type="7013">
+          <children xmi:type="notation:Node" xmi:id="_5CHwdeexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5CHweOexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5CHweeexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5CRhQOexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5CRhQeexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Address.java#//@classifiers[name='Address']/@members[name='contact']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CRhQuexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5CHweuexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwe-exEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5CHwduexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Address.java#//@classifiers[name='Address']/@members[name='contact']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CHwd-exEd24U7hLqu7DBw" x="2" y="1" width="82" height="25"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5CHwcuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwc-exEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwdOexEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5CHwbeexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CHwbuexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Address.java#//@classifiers[name='Address']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CHwb-exEd24U7hLqu7DBw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5B-mWeexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mWuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mW-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5B-mUeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5B-mUuexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Address.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5B-mU-exEd24U7hLqu7DBw" x="190" y="250"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5B-mXOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5B-mYOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5B-mYeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mYuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mY-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5B-mZOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5CRhQ-exEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5CRhR-exEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5CRhSOexEd24U7hLqu7DBw" type="7013">
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5CRhSeexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5CRhSuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5CRhS-exEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5CRhROexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CRhReexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Company.java#//@classifiers[name='Company']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CRhRuexEd24U7hLqu7DBw" x="12" y="2" height="33"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5B-mZeexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mZuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mZ-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5B-mXeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5B-mXuexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Company.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5B-mX-exEd24U7hLqu7DBw" x="580" y="345" height="90"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5B-maOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5B-mbOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5B-mbeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mbuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mb-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5B-mcOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5CarMOexEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5CarNOexEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5CarNeexEd24U7hLqu7DBw" type="7013">
+          <children xmi:type="notation:Node" xmi:id="_5CarTuexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5CarUeexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5CarUuexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5CuNM-exEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5CuNNOexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='targetRelationships']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CuNNeexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5CarU-exEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5CarVOexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5CarT-exEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='targetRelationships']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CarUOexEd24U7hLqu7DBw" x="12" width="259" height="70"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5CarR-exEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5CarSuexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5CarS-exEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5CuNMOexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5CuNMeexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='srcRelationships']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CuNMuexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5CarTOexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5CarTeexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5CarSOexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='srcRelationships']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CarSeexEd24U7hLqu7DBw" x="11" y="21" height="21"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5CarQOexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5CarQ-exEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5CarROexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5CkcN-exEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5CkcOOexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='address']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CkcOeexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5CarReexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5CarRuexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5CarQeexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='address']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CarQuexEd24U7hLqu7DBw" x="12" y="41"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5CarVeexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5CkcMOexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5CkcMeexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5CuNNuexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5CuNN-exEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='group']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CuNOOexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5CkcMuexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5CkcM-exEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5CarVuexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='group']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CarV-exEd24U7hLqu7DBw" x="13" y="61" height="16"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5CarNuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5CarN-exEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5CarOOexEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5CarMeexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CarMuexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CarM-exEd24U7hLqu7DBw" y="3" width="167" height="130"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5B-mceexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5B-mcuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5B-mc-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5B-maeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5B-mauexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5B-ma-exEd24U7hLqu7DBw" x="375" y="250"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5B-mdOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5CHwQOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5CHwQeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwQuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwQ-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5CHwROexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5C3XIOexEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5C3XJOexEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5C3XJeexEd24U7hLqu7DBw" type="7013">
+          <children xmi:type="notation:Node" xmi:id="_5C3XMOexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5C3XM-exEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5C3XNOexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5DBIIOexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5DBIIeexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.ContactList.java#//@classifiers[name='ContactList']/@members[name='groups']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DBIIuexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5C3XNeexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5C3XNuexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5C3XMeexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.ContactList.java#//@classifiers[name='ContactList']/@members[name='groups']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5C3XMuexEd24U7hLqu7DBw" x="1" y="10" width="136" height="21"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5C3XJuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5C3XJ-exEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5C3XKOexEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5C3XIeexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5C3XIuexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.ContactList.java#//@classifiers[name='ContactList']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5C3XI-exEd24U7hLqu7DBw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5CHwReexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwRuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwR-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5B-mdeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5B-mduexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.ContactList.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5B-md-exEd24U7hLqu7DBw" x="190" y="110"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5CHwSOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5CHwTOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5CHwTeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwTuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwT-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5CHwUOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5DBII-exEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5DBIJ-exEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5DBIKOexEd24U7hLqu7DBw" type="7013">
+          <children xmi:type="notation:Node" xmi:id="_5DBILOexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5DBIL-exEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5DBIMOexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5DK5J-exEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5DK5KOexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='list']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DK5KeexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5DBIMeexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5DBIMuexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5DBILeexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='list']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DBILuexEd24U7hLqu7DBw" x="7" width="147"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5DK5IOexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5DK5I-exEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5DK5JOexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5DK5KuexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5DK5K-exEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='contacts']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DK5LOexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5DK5JeexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5DK5JuexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5DK5IeexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='contacts']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DK5IuexEd24U7hLqu7DBw" x="7" y="24" width="147" height="26"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5DBIKeexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5DBIKuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5DBIK-exEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5DBIJOexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5DBIJeexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DBIJuexEd24U7hLqu7DBw" x="2" y="4" height="95"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5CHwUeexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwUuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwU-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5CHwSeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CHwSuexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CHwS-exEd24U7hLqu7DBw" x="370" y="80" width="190" height="160"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5CHwVOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5CHwWOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5CHwWeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwWuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwW-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5CHwXOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5DUDEOexEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5DUDFOexEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5DUDFeexEd24U7hLqu7DBw" type="7013">
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5DUDFuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5DUDF-exEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5DUDGOexEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5DUDEeexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5DUDEuexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Person.java#//@classifiers[name='Person']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DUDE-exEd24U7hLqu7DBw" width="92" height="33"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5CHwXeexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwXuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwX-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5CHwVeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CHwVuexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Person.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CHwV-exEd24U7hLqu7DBw" x="700" y="345" height="90"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5CHwYOexEd24U7hLqu7DBw" type="2002">
+    <children xmi:type="notation:Node" xmi:id="_5CHwZOexEd24U7hLqu7DBw" type="5048"/>
+    <children xmi:type="notation:Node" xmi:id="_5CHwZeexEd24U7hLqu7DBw" type="7011">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwZuexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwZ-exEd24U7hLqu7DBw"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_5CHwaOexEd24U7hLqu7DBw" type="7012">
+      <children xmi:type="notation:Node" xmi:id="_5Dm-AOexEd24U7hLqu7DBw" type="3030">
+        <children xmi:type="notation:Node" xmi:id="_5Dm-BOexEd24U7hLqu7DBw" type="5041"/>
+        <children xmi:type="notation:Node" xmi:id="_5Dm-BeexEd24U7hLqu7DBw" type="7013">
+          <children xmi:type="notation:Node" xmi:id="_5Dm-CeexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5Dm-DOexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5Dm-DeexEd24U7hLqu7DBw" type="7025">
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5Dm-DuexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5Dm-D-exEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5Dm-CuexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='role']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Dm-C-exEd24U7hLqu7DBw"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5Dm-EOexEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5Dm-E-exEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5Dm-FOexEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5DwvAOexEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5DwvAeexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='source']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DwvAuexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5Dm-FeexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5Dm-FuexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5Dm-EeexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='source']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Dm-EuexEd24U7hLqu7DBw" x="-23" y="1" height="21"/>
+          </children>
+          <children xmi:type="notation:Node" xmi:id="_5Dm-F-exEd24U7hLqu7DBw" type="3035">
+            <children xmi:type="notation:Node" xmi:id="_5Dm-GuexEd24U7hLqu7DBw" type="5032"/>
+            <children xmi:type="notation:Node" xmi:id="_5Dm-G-exEd24U7hLqu7DBw" type="7025">
+              <children xmi:type="notation:Node" xmi:id="_5DwvA-exEd24U7hLqu7DBw" type="3049">
+                <styles xmi:type="notation:ShapeStyle" xmi:id="_5DwvBOexEd24U7hLqu7DBw"/>
+                <element xmi:type="types:TypeReferenceSequence" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='target']/@type"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5DwvBeexEd24U7hLqu7DBw"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_5Dm-HOexEd24U7hLqu7DBw"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_5Dm-HeexEd24U7hLqu7DBw"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_5Dm-GOexEd24U7hLqu7DBw"/>
+            <element xmi:type="members:Field" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='target']"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Dm-GeexEd24U7hLqu7DBw" x="-24" y="26" height="21"/>
+          </children>
+          <styles xmi:type="notation:DrawerStyle" xmi:id="_5Dm-BuexEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_5Dm-B-exEd24U7hLqu7DBw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_5Dm-COexEd24U7hLqu7DBw"/>
+        </children>
+        <styles xmi:type="notation:ShapeStyle" xmi:id="_5Dm-AeexEd24U7hLqu7DBw"/>
+        <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5Dm-AuexEd24U7hLqu7DBw"/>
+        <element xmi:type="classifiers:Class" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5Dm-A-exEd24U7hLqu7DBw" x="2" width="157" height="123"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5CHwaeexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5CHwauexEd24U7hLqu7DBw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5CHwa-exEd24U7hLqu7DBw"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5CHwYeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_5CHwYuexEd24U7hLqu7DBw"/>
+    <element xmi:type="containers:CompilationUnit" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#/"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5CHwY-exEd24U7hLqu7DBw" x="600" y="85"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_qkKR4eexEd24U7hLqu7DBw"/>
+  <element xmi:type="containers:Package" href="package-info.java#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_5D6gAOexEd24U7hLqu7DBw" type="4010" source="_5CRhQOexEd24U7hLqu7DBw" target="_5CarMOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5D6gBOexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5D6gBeexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5D6gBuexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5D6gAeexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5D6gAuexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Address.java#//@classifiers[name='Address']/@members[name='contact']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5D6gA-exEd24U7hLqu7DBw" points="[3, 0, -180, -29]$[87, 0, -96, -29]$[100, 4, -83, -25]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5D6gB-exEd24U7hLqu7DBw" type="4010" source="_5CkcN-exEd24U7hLqu7DBw" target="_5CHwbOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5D6gC-exEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5D6gDOexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5D6gDeexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5D6gCOexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5D6gCeexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='address']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5D6gCuexEd24U7hLqu7DBw" points="[0, -2, 193, 50]$[0, -10, 193, 42]$[-162, -10, 31, 42]$[-171, -22, 22, 30]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5D6gDuexEd24U7hLqu7DBw" type="4010" source="_5CuNMOexEd24U7hLqu7DBw" target="_5Dm-AOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5D6gEuexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5D6gE-exEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5D6gFOexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5D6gD-exEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5D6gEOexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='srcRelationships']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5D6gEeexEd24U7hLqu7DBw" points="[3, 0, -178, 166]$[57, 0, -124, 166]$[94, -82, -87, 84]$[117, -104, -64, 62]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5D6gFeexEd24U7hLqu7DBw" type="4010" source="_5CuNM-exEd24U7hLqu7DBw" target="_5Dm-AOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5D6gGeexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5D6gGuexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5D6gG-exEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5D6gFuexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5D6gF-exEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='targetRelationships']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5D6gGOexEd24U7hLqu7DBw" points="[3, 0, -158, 145]$[37, 0, -124, 145]$[67, -73, -94, 72]$[83, -85, -78, 60]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5EDp8OexEd24U7hLqu7DBw" type="4010" source="_5CuNNuexEd24U7hLqu7DBw" target="_5DBII-exEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5EDp9OexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5EDp9eexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5EDp9uexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5EDp8eexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5EDp8uexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Contact.java#//@classifiers[name='Contact']/@members[name='group']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5EDp8-exEd24U7hLqu7DBw" points="[3, 0, 1, 220]$[26, 0, 24, 220]$[26, -150, 24, 70]$[19, -172, 17, 48]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5EDp9-exEd24U7hLqu7DBw" type="4010" source="_5DBIIOexEd24U7hLqu7DBw" target="_5DBII-exEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5EDp--exEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5EDp_OexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5EDp_eexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5EDp-OexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5EDp-eexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.ContactList.java#//@classifiers[name='ContactList']/@members[name='groups']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5EDp-uexEd24U7hLqu7DBw" points="[3, 0, -185, 26]$[93, 0, -95, 26]$[106, -3, -82, 23]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5EDp_uexEd24U7hLqu7DBw" type="4010" source="_5DK5J-exEd24U7hLqu7DBw" target="_5C3XIOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5EDqAuexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5EDqA-exEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5EDqBOexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5EDp_-exEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5EDqAOexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='list']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5EDqAeexEd24U7hLqu7DBw" points="[-1, -2, 172, -21]$[-1, -11, 172, -30]$[-81, -11, 92, -30]$[-99, -5, 74, -24]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5ENa8OexEd24U7hLqu7DBw" type="4010" source="_5DK5KuexEd24U7hLqu7DBw" target="_5CarMOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5ENa9OexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5ENa9eexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5ENa9uexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5ENa8eexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5ENa8uexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Group.java#//@classifiers[name='Group']/@members[name='contacts']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5ENa8-exEd24U7hLqu7DBw" points="[3, 0, 10, -174]$[47, 0, 54, -174]$[47, 78, 54, -96]$[30, 109, 37, -65]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5ENa9-exEd24U7hLqu7DBw" type="4010" source="_5DwvAOexEd24U7hLqu7DBw" target="_5CarMOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5ENa--exEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5ENa_OexEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5ENa_eexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5ENa-OexEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5ENa-eexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='source']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5ENa-uexEd24U7hLqu7DBw" points="[0, 3, 222, -191]$[0, 14, 222, -180]$[-118, 14, 104, -180]$[-118, 99, 104, -95]$[-151, 129, 71, -65]"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_5ENa_uexEd24U7hLqu7DBw" type="4010" source="_5DwvA-exEd24U7hLqu7DBw" target="_5CarMOexEd24U7hLqu7DBw">
+    <children xmi:type="notation:Node" xmi:id="_5ENbAuexEd24U7hLqu7DBw" visible="false" type="6010">
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_5ENbA-exEd24U7hLqu7DBw"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5ENbBOexEd24U7hLqu7DBw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_5ENa_-exEd24U7hLqu7DBw"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5ENbAOexEd24U7hLqu7DBw"/>
+    <element xmi:type="types:ParameterizedPackageOrClassifierReference" href="pathmap://javaclass/de.tudresden.contact_management.Relationship.java#//@classifiers[name='Relationship']/@members[name='target']/@type/@parts.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5ENbAeexEd24U7hLqu7DBw" points="[0, 3, 219, -166]$[0, 19, 219, -150]$[-101, 19, 118, -150]$[-101, 83, 118, -86]$[-135, 108, 84, -61]"/>
+  </edges>
+</notation:Diagram>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="idModel" name="StateMachineModel">
+  <packagedElement xmi:type="uml:Package" xmi:id="idPackage" name="StateMachinePackage">
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="idStateMachine" name="StateMachineStateMachine">
+      <region xmi:id="idRegion" name="MainRegion">
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_kkP2gB0REd28c4O4qR84fQ" name="Pseudostate1"/>
+        <subvertex xmi:type="uml:State" xmi:id="_lGqnEB0REd28c4O4qR84fQ" name="Inititialise"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_oR7CIB0REd28c4O4qR84fQ" name="Pseudostate2" kind="fork"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_oyG-EB0REd28c4O4qR84fQ" name="Pseudostate3" kind="join"/>
+        <subvertex xmi:type="uml:State" xmi:id="_pcuBUh0REd28c4O4qR84fQ" name="Get GMail Contacts"/>
+        <subvertex xmi:type="uml:State" xmi:id="_t6-VUh0REd28c4O4qR84fQ" name="Get Highrise Contacts"/>
+        <subvertex xmi:type="uml:State" xmi:id="_6tMqoh0REd28c4O4qR84fQ" name="Get Phone Contacts"/>
+        <subvertex xmi:type="uml:FinalState" xmi:id="_Ja84gB0SEd28c4O4qR84fQ" name="FinalState1"/>
+        <subvertex xmi:type="uml:State" xmi:id="_kTlu4B0SEd28c4O4qR84fQ" name="Merge Contacts"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_kg4HgB0TEd28c4O4qR84fQ" name="Pseudostate4" kind="fork"/>
+        <subvertex xmi:type="uml:State" xmi:id="_lUIwcB0TEd28c4O4qR84fQ" name="Update GMail Contacts"/>
+        <subvertex xmi:type="uml:State" xmi:id="_rVyJ0B0TEd28c4O4qR84fQ" name="Update Highrise Contacts"/>
+        <subvertex xmi:type="uml:State" xmi:id="_wXphMh0TEd28c4O4qR84fQ" name="Update Phone Contacts"/>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_zwKVIh0TEd28c4O4qR84fQ" name="Pseudostate5" kind="join"/>
+        <transition xmi:id="_2D-x5R0TEd28c4O4qR84fQ" name="Transition1" target="_oR7CIB0REd28c4O4qR84fQ" source="_lGqnEB0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_2t21VB0TEd28c4O4qR84fQ" name="Transition2" target="_pcuBUh0REd28c4O4qR84fQ" source="_oR7CIB0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_3HL7VB0TEd28c4O4qR84fQ" name="Transition3" target="_t6-VUh0REd28c4O4qR84fQ" source="_oR7CIB0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_3UAPVB0TEd28c4O4qR84fQ" name="Transition4" target="_6tMqoh0REd28c4O4qR84fQ" source="_oR7CIB0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_3jy-1B0TEd28c4O4qR84fQ" name="Transition5" target="_oyG-EB0REd28c4O4qR84fQ" source="_pcuBUh0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_36JpUx0TEd28c4O4qR84fQ" name="Transition6" target="_oyG-EB0REd28c4O4qR84fQ" source="_t6-VUh0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_4IJpEx0TEd28c4O4qR84fQ" name="Transition7" target="_oyG-EB0REd28c4O4qR84fQ" source="_6tMqoh0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_4gl-RB0TEd28c4O4qR84fQ" name="Transition8" target="_kTlu4B0SEd28c4O4qR84fQ" source="_oyG-EB0REd28c4O4qR84fQ"/>
+        <transition xmi:id="_4t2-NB0TEd28c4O4qR84fQ" name="Transition9" target="_kg4HgB0TEd28c4O4qR84fQ" source="_kTlu4B0SEd28c4O4qR84fQ"/>
+        <transition xmi:id="_5DnLxB0TEd28c4O4qR84fQ" name="Transition10" target="_lUIwcB0TEd28c4O4qR84fQ" source="_kg4HgB0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_5jWbxB0TEd28c4O4qR84fQ" name="Transition11" target="_wXphMh0TEd28c4O4qR84fQ" source="_kg4HgB0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_6Ri-hR0TEd28c4O4qR84fQ" name="Transition12" target="_zwKVIh0TEd28c4O4qR84fQ" source="_rVyJ0B0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_63Pskx0TEd28c4O4qR84fQ" name="Transition13" target="_rVyJ0B0TEd28c4O4qR84fQ" source="_kg4HgB0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_7NvhAx0TEd28c4O4qR84fQ" name="Transition14" target="_zwKVIh0TEd28c4O4qR84fQ" source="_wXphMh0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_7y2ZMx0TEd28c4O4qR84fQ" name="Transition15" target="_zwKVIh0TEd28c4O4qR84fQ" source="_lUIwcB0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_8NE3Ex0TEd28c4O4qR84fQ" name="Transition16" target="_Ja84gB0SEd28c4O4qR84fQ" source="_zwKVIh0TEd28c4O4qR84fQ"/>
+        <transition xmi:id="_hMVtRB0WEd28c4O4qR84fQ" name="Transition17" target="_lGqnEB0REd28c4O4qR84fQ" source="_kkP2gB0REd28c4O4qR84fQ"/>
+      </region>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

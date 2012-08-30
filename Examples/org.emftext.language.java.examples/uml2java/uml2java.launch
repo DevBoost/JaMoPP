@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.m2m.atl.adt.launching.atlTransformation">
+<stringAttribute key="ATL File Name" value="/org.emftext.language.java.examples/uml2java/uml2java.atl"/>
+<stringAttribute key="ATL VM" value="EMF-specific VM"/>
+<stringAttribute key="ATL_COMPILER" value="atl2006"/>
+<booleanAttribute key="IS_REFINING" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="uml"/>
+</mapAttribute>
+<mapAttribute key="Libs"/>
+<mapAttribute key="Model Handler">
+<mapEntry key="java" value="EMF"/>
+<mapEntry key="uml" value="EMF"/>
+</mapAttribute>
+<mapAttribute key="ModelType">
+<mapEntry key="IN" value="MODELINPUT"/>
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+<mapEntry key="java" value="METAMODELOUTPUT"/>
+<mapEntry key="uml" value="METAMODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Options">
+<mapEntry key="OPTION_CLEAR" value="false"/>
+<mapEntry key="OPTION_CONTENT_TYPE" value="false"/>
+<mapEntry key="OPTION_DERIVED" value="true"/>
+<mapEntry key="allowInterModelReferences" value="true"/>
+<mapEntry key="printExecutionTime" value="false"/>
+<mapEntry key="step" value="false"/>
+<mapEntry key="supportUML2Stereotypes" value="false"/>
+</mapAttribute>
+<listAttribute key="OrderedInput">
+<listEntry value="IN"/>
+</listAttribute>
+<listAttribute key="OrderedOutput">
+<listEntry value="OUT"/>
+</listAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="java"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="IN" value="/org.emftext.language.java.examples/models/ClassDiagram.uml"/>
+<mapEntry key="OUT" value="/org.emftext.language.java.examples/src-gen.java"/>
+<mapEntry key="java" value="uri:http://www.emftext.org/java"/>
+<mapEntry key="uml" value="uri:http://www.eclipse.org/uml2/3.0.0/UML"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+</launchConfiguration>

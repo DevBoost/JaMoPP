@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_qb8akM37EdqwVrslYOdUDA">
+  <elementImport xmi:id="_Gns5ANzZEd2-PZRxoYrchA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="de.tudresden.contact_management">
+    <packagedElement xmi:type="uml:Class" xmi:id="_BqZNkFMwEdykj4A2mwi4Sg" name="Contact">
+      <ownedAttribute xmi:id="_D6ox4lMwEdykj4A2mwi4Sg" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GYmCEFMwEdykj4A2mwi4Sg" name="Address"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_JStCyFMwEdykj4A2mwi4Sg" name="Relationship">
+      <ownedAttribute xmi:id="_YwgwYlM3Edykj4A2mwi4Sg" name="role">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_e68SWFM3Edykj4A2mwi4Sg" name="Association2" memberEnd="_e68SWVM3Edykj4A2mwi4Sg _e68SXFM3Edykj4A2mwi4Sg" navigableOwnedEnd="_e68SXFM3Edykj4A2mwi4Sg">
+      <ownedEnd xmi:id="_e68SWVM3Edykj4A2mwi4Sg" name="contact" type="_BqZNkFMwEdykj4A2mwi4Sg" isUnique="false" association="_e68SWFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_e68SWlM3Edykj4A2mwi4Sg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e68SW1M3Edykj4A2mwi4Sg" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_e68SXFM3Edykj4A2mwi4Sg" name="address" type="_GYmCEFMwEdykj4A2mwi4Sg" isUnique="false" association="_e68SWFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_e68SXVM3Edykj4A2mwi4Sg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_e68SXlM3Edykj4A2mwi4Sg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_grvhlFM3Edykj4A2mwi4Sg" name="Person">
+      <generalization xmi:id="_ivxO01M3Edykj4A2mwi4Sg" general="_BqZNkFMwEdykj4A2mwi4Sg"/>
+      <ownedAttribute xmi:id="_arVB0lM4Edykj4A2mwi4Sg" name="forename">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_bbTtQlM4Edykj4A2mwi4Sg" name="surname">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_79t0UOLzEd2IsbGKj3PU2A" name="print"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_hcK4-FM3Edykj4A2mwi4Sg" name="Company">
+      <generalization xmi:id="_jGklRFM3Edykj4A2mwi4Sg" general="_BqZNkFMwEdykj4A2mwi4Sg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_uwE_CFM3Edykj4A2mwi4Sg" name="Association6" memberEnd="_uwE_CVM3Edykj4A2mwi4Sg _uwE_DFM3Edykj4A2mwi4Sg">
+      <ownedEnd xmi:id="_uwE_CVM3Edykj4A2mwi4Sg" name="srcRelationships" type="_JStCyFMwEdykj4A2mwi4Sg" isUnique="false" association="_uwE_CFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uwE_ClM3Edykj4A2mwi4Sg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uwE_C1M3Edykj4A2mwi4Sg"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_uwE_DFM3Edykj4A2mwi4Sg" name="source" type="_BqZNkFMwEdykj4A2mwi4Sg" association="_uwE_CFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uwE_DVM3Edykj4A2mwi4Sg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uwE_DlM3Edykj4A2mwi4Sg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_wm1sWFM3Edykj4A2mwi4Sg" name="Association7" memberEnd="_wm1sWVM3Edykj4A2mwi4Sg _wm1sXFM3Edykj4A2mwi4Sg">
+      <ownedEnd xmi:id="_wm1sWVM3Edykj4A2mwi4Sg" name="targetRelationships" type="_JStCyFMwEdykj4A2mwi4Sg" isUnique="false" association="_wm1sWFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wm1sWlM3Edykj4A2mwi4Sg" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wm1sW1M3Edykj4A2mwi4Sg"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wm1sXFM3Edykj4A2mwi4Sg" name="target" type="_BqZNkFMwEdykj4A2mwi4Sg" association="_wm1sWFM3Edykj4A2mwi4Sg">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wm1sXVM3Edykj4A2mwi4Sg" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wm1sXlM3Edykj4A2mwi4Sg" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BAU1UHBaEdyDkbwbUR2l3A" name="ContactList">
+      <ownedOperation xmi:id="_4Afz4ObwEd2xMudRjsOAOA" name="synchroniseContacts"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Yqc_AB0GEd2b2b_4Mrd7cw" name="Group"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_oeYx2R0GEd2b2b_4Mrd7cw" name="Association1" memberEnd="_oeYx2h0GEd2b2b_4Mrd7cw _oeYx3R0GEd2b2b_4Mrd7cw" navigableOwnedEnd="_oeYx3R0GEd2b2b_4Mrd7cw">
+      <ownedEnd xmi:id="_oeYx2h0GEd2b2b_4Mrd7cw" name="list" type="_BAU1UHBaEdyDkbwbUR2l3A" association="_oeYx2R0GEd2b2b_4Mrd7cw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oeYx2x0GEd2b2b_4Mrd7cw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oeYx3B0GEd2b2b_4Mrd7cw" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_oeYx3R0GEd2b2b_4Mrd7cw" name="groups" type="_Yqc_AB0GEd2b2b_4Mrd7cw" isUnique="false" association="_oeYx2R0GEd2b2b_4Mrd7cw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oeYx3h0GEd2b2b_4Mrd7cw" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oeYx3x0GEd2b2b_4Mrd7cw"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_c5dceB0OEd28c4O4qR84fQ" name="Association3" memberEnd="_c5dceR0OEd28c4O4qR84fQ _c5dcfB0OEd28c4O4qR84fQ">
+      <ownedEnd xmi:id="_c5dceR0OEd28c4O4qR84fQ" name="group" type="_Yqc_AB0GEd2b2b_4Mrd7cw" association="_c5dceB0OEd28c4O4qR84fQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_c5dceh0OEd28c4O4qR84fQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_c5dcex0OEd28c4O4qR84fQ" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_c5dcfB0OEd28c4O4qR84fQ" name="contacts" type="_BqZNkFMwEdykj4A2mwi4Sg" isUnique="false" association="_c5dceB0OEd28c4O4qR84fQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_c5dcfR0OEd28c4O4qR84fQ" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_c5dcfh0OEd28c4O4qR84fQ"/>
+      </ownedEnd>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>
