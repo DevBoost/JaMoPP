@@ -22,6 +22,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.core.IJavaProject;
 import org.emftext.commons.jdt.JDTJavaClassifier;
 import org.emftext.commons.jdt.resolve.JDTClassifierResolver;
@@ -45,20 +46,21 @@ public class JDTConnector implements JavaClasspath.Initializer {
 		if (resourceSet == null) {
 			return;
 		}
-		if (resourceSet.getURIConverter() == null) {
+		if (resourceURI == null) {
 			return;
 		}
-		if (!resourceSet.getURIConverter().normalize(resourceURI)
-				.isPlatformResource()) {
+		URIConverter uriConverter = resourceSet.getURIConverter();
+		if (uriConverter == null) {
 			return;
 		}
-
-		if (resourceURI != null) {
-			JDTClassifierResolver jdtClassResolver = new JDTClassifierResolver();
-			IJavaProject javaProject = jdtClassResolver.getJavaProject(resourceURI);
-			List<JDTJavaClassifier> classifiersInClassPath = jdtClassResolver.getAllClassifiersInClassPath(javaProject);
-			registerJavaProjectInClassPath(resourceSet, classifiersInClassPath);
+		URI normalizedURI = uriConverter.normalize(resourceURI);
+		if (!normalizedURI.isPlatformResource()) {
+			return;
 		}
+		JDTClassifierResolver jdtClassResolver = new JDTClassifierResolver();
+		IJavaProject javaProject = jdtClassResolver.getJavaProject(normalizedURI);
+		List<JDTJavaClassifier> classifiersInClassPath = jdtClassResolver.getAllClassifiersInClassPath(javaProject);
+		registerJavaProjectInClassPath(resourceSet, classifiersInClassPath);
 	}
 
 	private void registerJavaProjectInClassPath(ResourceSet resourceSet,
