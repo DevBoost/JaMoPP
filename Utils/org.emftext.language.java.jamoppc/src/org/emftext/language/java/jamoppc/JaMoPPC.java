@@ -18,6 +18,7 @@ package org.emftext.language.java.jamoppc;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -41,12 +42,18 @@ import org.emftext.commons.layout.LayoutPackage;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.JavaPackage;
 import org.emftext.language.java.resource.JavaSourceOrClassFileResourceFactoryImpl;
+import org.emftext.language.java.resource.java.IJavaOptions;
 
 public class JaMoPPC {
 
 	protected static final ResourceSet rs = new ResourceSetImpl();
 
 	public static void main(String[] args) throws IOException {
+		if ((args.length >= 1) && args[0].equals("--disable-layout")) {
+			rs.getLoadOptions().put(IJavaOptions.DISABLE_LAYOUT_INFORMATION_RECORDING, Boolean.TRUE);
+			args = Arrays.copyOfRange(args, 1, args.length);
+		}
+		
 		if (args.length < 2) {
 			printUsageAndExit();
 		}
@@ -166,21 +173,25 @@ public class JaMoPPC {
 						+ "parsed compilation unit in the target folder, use:");
 		System.out.println();
 		System.out
-				.println("  jamoppc <source folder path> <target folder path> <jar file paths>*");
+				.println("  jamoppc [--disable-layout] <source folder path> <target folder path> <jar file paths>*");
 		System.out.println();
 		System.out
 				.println("To parse all files in a source folder and produce one XMI file\n"
 						+ "with the complete syntax graph, use:");
 		System.out.println();
 		System.out
-				.println("  jamoppc <source folder path> <target XMI file> <jar file paths>*");
+				.println("  jamoppc [--disable-layout] <source folder path> <target XMI file> <jar file paths>*");
 		System.out.println();
 		System.out
 				.println("In the latter case, the second parameter has to end in \".xmi\".");
+		System.out.println();
+		System.out.println("The --disable-layout option disables the generation of layout information.");
+		System.out.println("If given, it must be the first argument given to JaMoPPC.");
 		System.exit(1);
 	}
 
 	protected static void setUp() {
+		rs.getLoadOptions().put(IJavaOptions.DISABLE_LOCATION_MAP, Boolean.TRUE);
 		EPackage.Registry.INSTANCE.put("http://www.emftext.org/java",
 				JavaPackage.eINSTANCE);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
