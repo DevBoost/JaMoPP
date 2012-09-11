@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_WosmsNz1Ed2bJ_pQViWxFg"
-    name="java" nsURI="http://www.emftext.org/java" nsPrefix="java">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="_WosmsNz1Ed2bJ_pQViWxFg" name="java" nsURI="http://www.emftext.org/java"
+    nsPrefix="java">
   <eSubpackages xmi:id="_Wosmsdz1Ed2bJ_pQViWxFg" name="annotations" nsURI="http://www.emftext.org/java/annotations"
       nsPrefix="annotations">
     <eClassifiers xsi:type="ecore:EClass" name="Annotable" abstract="true" eSuperTypes="#//commons/Commentable">
@@ -299,6 +298,12 @@
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
+      <eOperations name="getContainingClassifierNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.emftext.language.java.containers.CompilationUnit cu = getContainingCompilationUnit();&#xA;if (cu == null) {&#xA;&#x9;return null;&#xA;}&#xA;org.eclipse.emf.common.util.EList&lt; java.lang.String> result = new org.emftext.language.java.util.UniqueEList&lt; java.lang.String>();&#xA;&#xA;if(cu.getName() != null) {&#xA;&#x9;char[] fullName = cu.getName().toCharArray();&#xA;&#x9;for(int i = 0; i &lt; fullName.length; i++) {&#xA;&#x9;&#x9;if (fullName[i] == '$') {&#xA;&#x9;&#x9;&#x9;result.add(new java.lang.String( java.util.Arrays.copyOf(fullName, i)));&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return result;"/>
+          <details key="documentation" value=""/>
+        </eAnnotations>
+      </eOperations>
       <eOperations name="getParentConcreteClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="org.emftext.language.java.classifiers.ConcreteClassifier classifier = getContainingConcreteClassifier();&#xA;if(classifier == null) {&#xA;&#x9;org.emftext.language.java.containers.CompilationUnit cu = getContainingCompilationUnit();&#xA;&#x9;//maybe the outer classifier is in an extra cu&#xA;&#x9;if (cu != null &amp;&amp; cu.getName() != null &amp;&amp; cu.getName().contains(&quot;$&quot;)) {&#xA;&#x9;&#x9;classifier = ( org.emftext.language.java.classifiers.ConcreteClassifier) org.eclipse.emf.ecore.util.EcoreUtil.resolve(&#xA;&#x9;&#x9;getConcreteClassifierProxy(cu.getNamespacesAsString()), this);&#xA;&#x9;&#x9;if(classifier.eIsProxy())  {&#xA;&#x9;&#x9;&#x9;classifier = null;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return classifier;"/>
@@ -432,6 +437,30 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> defaultImportList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;java.lang.String packageName = getNamespacesAsString();&#xA;&#xA;//locally defined in this container&#xA;defaultImportList.addAll(getClassifiers());&#xA;&#xA;defaultImportList.addAll(getConcreteClassifierProxies(&#xA;&#x9;&#x9;packageName, &quot;*&quot;));&#xA;&#xA;return defaultImportList;"/>
           <details key="documentation" value="&#xA; @return all classes in the same package imports&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getContainedClass" eType="#//classifiers/Class">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Class) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Class) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
+          <details key="documentation" value="&#xA; @return the only class contained directly in the compilation unit (if one exists)&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getContainedInterface" eType="#//classifiers/Interface">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Interface) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
+          <details key="documentation" value="&#xA; @return the only interface contained directly in the compilation unit (if one exists)&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getContainedAnnotation" eType="#//classifiers/Annotation">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Annotation) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Annotation) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
+          <details key="documentation" value="&#xA; @return the only annotation contained directly in the compilation unit (if one exists)&#xA;"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getContainedEnumeration" eType="#//classifiers/Enumeration">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Enumeration) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Enumeration) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
+          <details key="documentation" value="&#xA; @return the only enumeration contained directly in the compilation unit (if one exists)&#xA;"/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" lowerBound="1"
@@ -1362,8 +1391,15 @@
       <eOperations name="getTarget" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="return getBoundTarget(null);"/>
-          <details key="documentation" value="&#xA; Returns the type referenced by this &lt;code>TypeReference&lt;/code>&#xA; considering all concrete subclasses of &lt;code>TypeReference&lt;/code> used&#xA; by the Java metamodel. &#xA; &#xA; @param _this &#xA; @return the type&#xA;"/>
+          <details key="documentation" value="&#xA; Returns the type referenced by this &lt;code>TypeReference&lt;/code>&#xA; considering all concrete subclasses of &lt;code>TypeReference&lt;/code> used&#xA; by the Java metamodel. &#xA; &#xA; @return the type&#xA;"/>
         </eAnnotations>
+      </eOperations>
+      <eOperations name="setTarget">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="if (type == null) {&#xA;&#x9;return;&#xA;}&#xA;&#xA;if (type.eIsProxy()) {&#xA;&#x9;return;&#xA;}&#xA;&#xA;if (this instanceof org.emftext.language.java.types.NamespaceClassifierReference) {&#xA;&#x9;org.emftext.language.java.types.NamespaceClassifierReference nsClassifierReference = ( org.emftext.language.java.types.NamespaceClassifierReference) this;&#xA;&#x9;nsClassifierReference.getClassifierReferences().clear();&#xA;&#x9;nsClassifierReference.getNamespaces().clear();&#xA;&#x9;nsClassifierReference.getNamespaces().addAll(type.getContainingPackageName());&#xA;&#x9;for ( java.lang.String containingClassifier : type.getContainingClassifierNames()) {&#xA;&#x9;&#x9;org.emftext.language.java.types.ClassifierReference classifierRef = org.emftext.language.java.types.TypesFactory.eINSTANCE.createClassifierReference();&#xA;&#x9;&#x9;classifierRef.setTarget(getConcreteClassifier(containingClassifier));&#xA;&#x9;&#x9;nsClassifierReference.getClassifierReferences().add(classifierRef);&#xA;&#x9;}&#xA;&#x9;org.emftext.language.java.types.ClassifierReference classifierRef = org.emftext.language.java.types.TypesFactory.eINSTANCE.createClassifierReference();&#xA;&#x9;classifierRef.setTarget(type);&#xA;&#x9;nsClassifierReference.getClassifierReferences().add(classifierRef);&#x9;&#x9;&#x9;&#xA;}"/>
+          <details key="documentation" value="&#xA; Sets the type targeted by this type reference&#xA; &#xA; @param type the type&#xA;"/>
+        </eAnnotations>
+        <eParameters name="type" eType="#//classifiers/Classifier"/>
       </eOperations>
       <eOperations name="getBoundTarget" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2006-2012&#xA;Software Technology Group, Dresden University of Technology&#xA;DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026&#xA;&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;  Software Technology Group - TU Dresden, Germany;&#xA;  DevBoost GmbH - Berlin, Germany&#xA;     - initial API and implementation&#xA; "
     modelDirectory="/org.emftext.language.java/src-gen" editDirectory="/org.emftext.language.java.edit/src-gen"
     modelPluginID="org.emftext.language.java" templateDirectory="" modelName="Java"
@@ -139,6 +138,7 @@
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingConcreteClassifier"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingCompilationUnit"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingPackageName"/>
+        <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingClassifierNames"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getParentConcreteClassifier"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getParentByEType">
           <genParameters ecoreParameter="java.ecore#//commons/Commentable/getParentByEType/type"/>
@@ -189,6 +189,10 @@
           <genParameters ecoreParameter="java.ecore#//containers/CompilationUnit/getContainedClassifier/name"/>
         </genOperations>
         <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getClassifiersInSamePackage"/>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedClass"/>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedInterface"/>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedAnnotation"/>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedEnumeration"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//containers/Package">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//containers/Package/compilationUnits"/>
@@ -697,6 +701,9 @@
       </genClasses>
       <genClasses image="false" ecoreClass="java.ecore#_Wo2ZPdz1Ed2bJ_pQViWxFg">
         <genOperations ecoreOperation="java.ecore#//types/TypeReference/getTarget"/>
+        <genOperations ecoreOperation="java.ecore#//types/TypeReference/setTarget">
+          <genParameters ecoreParameter="java.ecore#//types/TypeReference/setTarget/type"/>
+        </genOperations>
         <genOperations ecoreOperation="java.ecore#//types/TypeReference/getBoundTarget">
           <genParameters ecoreParameter="java.ecore#//types/TypeReference/getBoundTarget/reference"/>
         </genOperations>

@@ -1,6 +1,10 @@
 epackage java.containers;
 
 import java.classifiers.ConcreteClassifier;
+import java.classifiers.Class;
+import java.classifiers.Interface;
+import java.classifiers.Annotation;
+import java.classifiers.Enumeration;
 
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.util.UniqueEList;
@@ -39,5 +43,56 @@ eclass CompilationUnit {
 
 		return defaultImportList;
 	}
+	
+	/**
+	 * @return the only class contained directly in the compilation unit (if one exists)
+	 */
+	getContainedClass() {
+		if (getClassifiers().size() != 1) {
+			return null;
+		}
+		if (getClassifiers().get(0) instanceof Class) {
+			return (Class) getClassifiers().get(0);
+		}
+		return null;
+	}
+	
+	/**
+	 * @return the only interface contained directly in the compilation unit (if one exists)
+	 */
+	getContainedInterface() {
+		if (getClassifiers().size() != 1) {
+			return null;
+		}
+		if (getClassifiers().get(0) instanceof Interface) {
+			return (Interface) getClassifiers().get(0);
+		}
+		return null;
+	}
 
+	/**
+	 * @return the only annotation contained directly in the compilation unit (if one exists)
+	 */
+	getContainedAnnotation() {
+		if (getClassifiers().size() != 1) {
+			return null;
+		}
+		if (getClassifiers().get(0) instanceof Annotation) {
+			return (Annotation) getClassifiers().get(0);
+		}
+		return null;
+	}
+	
+	/**
+	 * @return the only enumeration contained directly in the compilation unit (if one exists)
+	 */
+	getContainedEnumeration() {
+		if (getClassifiers().size() != 1) {
+			return null;
+		}
+		if (getClassifiers().get(0) instanceof Enumeration) {
+			return (Enumeration) getClassifiers().get(0);
+		}
+		return null;
+	}
 }

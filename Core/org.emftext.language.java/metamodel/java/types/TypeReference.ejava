@@ -1,5 +1,6 @@
 epackage java.types;
 
+import java.commons.Commentable;
 import java.classifiers.ConcreteClassifier;
 import java.classifiers.Interface;
 import java.references.MethodCall;
@@ -19,11 +20,40 @@ eclass TypeReference {
 	 * considering all concrete subclasses of <code>TypeReference</code> used
 	 * by the Java metamodel. 
 	 * 
-	 * @param _this 
 	 * @return the type
 	 */
 	getTarget() {
 		return getBoundTarget(null);
+	}
+	
+	/**
+	 * Sets the type targeted by this type reference
+	 * 
+	 * @param type the type
+	 */
+	setTarget() {
+		if (type == null) {
+			return;
+		}
+		
+		if (type.eIsProxy()) {
+			return;
+		}
+		
+		if (this instanceof NamespaceClassifierReference) {
+			NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) this;
+			nsClassifierReference.getClassifierReferences().clear();
+			nsClassifierReference.getNamespaces().clear();
+			nsClassifierReference.getNamespaces().addAll(type.getContainingPackageName());
+			for (String containingClassifier : type.getContainingClassifierNames()) {
+				ClassifierReference classifierRef = #ClassifierReference;
+				classifierRef.setTarget(getConcreteClassifier(containingClassifier));
+				nsClassifierReference.getClassifierReferences().add(classifierRef);
+			}
+			ClassifierReference classifierRef = #ClassifierReference;
+			classifierRef.setTarget(type);
+			nsClassifierReference.getClassifierReferences().add(classifierRef);			
+		}
 	}
 	
 	/**
@@ -34,8 +64,7 @@ eclass TypeReference {
 	 * 
 	 * @return the type
 	 */
-	getBoundTarget() {
-		
+	getBoundTarget() {	
 		Type type = null;
 		if (this instanceof ClassifierReference || 
 				this instanceof NamespaceClassifierReference) {

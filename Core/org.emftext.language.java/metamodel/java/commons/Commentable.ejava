@@ -9,6 +9,7 @@ import org.emftext.language.java.util.UniqueEList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.emftext.language.java.JavaClasspath;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 //ecore
@@ -389,6 +390,24 @@ eclass Commentable {
 			}
 		}
 		return new BasicEList<String>(cu.getNamespaces().subList(0, idx));
+	}
+	
+	getContainingClassifierNames() {
+		CompilationUnit cu = getContainingCompilationUnit();
+		if (cu == null) {
+			return null;
+		}
+		EList<String> result = new UniqueEList<String>();
+		
+		if(cu.getName() != null) {
+			char[] fullName = cu.getName().toCharArray();
+			for(int i = 0; i < fullName.length; i++) {
+				if (fullName[i] == '$') {
+					result.add(new String(Arrays.copyOf(fullName, i)));
+				}
+			}
+		}
+		return result;
 	}
 	
 	getComments() {
