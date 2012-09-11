@@ -44,12 +44,7 @@ eclass TypeReference {
 			NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) this;
 			nsClassifierReference.getClassifierReferences().clear();
 			nsClassifierReference.getNamespaces().clear();
-			nsClassifierReference.getNamespaces().addAll(type.getContainingPackageName());
-			for (String containingClassifier : type.getContainingClassifierNames()) {
-				ClassifierReference classifierRef = #ClassifierReference;
-				classifierRef.setTarget(getConcreteClassifier(containingClassifier));
-				nsClassifierReference.getClassifierReferences().add(classifierRef);
-			}
+			nsClassifierReference.getNamespaces().addAll(type.getContainingContainerName());
 			ClassifierReference classifierRef = #ClassifierReference;
 			classifierRef.setTarget(type);
 			nsClassifierReference.getClassifierReferences().add(classifierRef);			

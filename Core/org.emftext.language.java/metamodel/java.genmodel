@@ -138,7 +138,7 @@
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingConcreteClassifier"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingCompilationUnit"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingPackageName"/>
-        <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingClassifierNames"/>
+        <genOperations ecoreOperation="java.ecore#//commons/Commentable/getContainingContainerName"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getParentConcreteClassifier"/>
         <genOperations ecoreOperation="java.ecore#//commons/Commentable/getParentByEType">
           <genParameters ecoreParameter="java.ecore#//commons/Commentable/getParentByEType/type"/>
