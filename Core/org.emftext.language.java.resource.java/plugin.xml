@@ -45,6 +45,20 @@
 		</super>
 	</extension>
 	
+	<extension id="org.emftext.language.java.resource.java.problem.batch_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.java.resource.java.problem">
+		</super>
+	</extension>
+	
+	<extension id="org.emftext.language.java.resource.java.problem.live_constraint_problem" name="EMFText Problem" point="org.eclipse.core.resources.markers">
+		<persistent value="true">
+		</persistent>
+		<super type="org.emftext.language.java.resource.java.problem">
+		</super>
+	</extension>
+	
 	<extension id="org.emftext.language.java.resource.java.problem.builder_error" name="EMFText Problem" point="org.eclipse.core.resources.markers">
 		<persistent value="true">
 		</persistent>
