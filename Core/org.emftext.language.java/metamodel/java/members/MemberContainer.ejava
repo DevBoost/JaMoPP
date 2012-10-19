@@ -8,6 +8,7 @@ import java.members.Method;
 import java.types.ClassifierReference;
 
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -37,6 +38,17 @@ eclass MemberContainer {
 			}
 		}	
 		return fieldList;
+	}
+	
+	getConstructors() {
+		EList<Constructor> constructorList = new BasicEList<Constructor>();
+
+		for (Member member : getMembers()) {
+			if (member instanceof Constructor) {
+				constructorList.add((Constructor) member);
+			}
+		}	
+		return ECollections.unmodifiableEList(constructorList);
 	}
 	
 	getMembersByName() {

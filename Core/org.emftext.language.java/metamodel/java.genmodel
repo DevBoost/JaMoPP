@@ -449,6 +449,7 @@
           <genParameters ecoreParameter="java.ecore#//members/MemberContainer/createField/qualifiedTypeName"/>
         </genOperations>
         <genOperations ecoreOperation="java.ecore#//members/MemberContainer/getFields"/>
+        <genOperations ecoreOperation="java.ecore#//members/MemberContainer/getConstructors"/>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//members/AdditionalField">
         <genOperations ecoreOperation="java.ecore#//members/AdditionalField/getArrayDimension"/>
