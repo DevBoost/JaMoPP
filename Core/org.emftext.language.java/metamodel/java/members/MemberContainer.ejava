@@ -26,7 +26,7 @@ eclass MemberContainer {
 				methodList.add((Method) member);
 			}
 		}	
-		return methodList;
+		return ECollections.unmodifiableEList(methodList);
 	}
 	
 	getFields() {
@@ -37,7 +37,7 @@ eclass MemberContainer {
 				fieldList.add((Field) member);
 			}
 		}	
-		return fieldList;
+		return ECollections.unmodifiableEList(fieldList);
 	}
 	
 	getConstructors() {
@@ -59,7 +59,7 @@ eclass MemberContainer {
 				matchingMembers.add(member);
 			}
 		}	
-		return matchingMembers;
+		return ECollections.unmodifiableEList(matchingMembers);
 	}
 	
 	removeMethods() {
