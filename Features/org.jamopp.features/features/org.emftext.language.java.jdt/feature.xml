@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><feature id="org.emftext.language.java.jdt" label="JaMoPP - Java Model Parser and Printer (Eclipse JDT Integration)" provider-name="Software Technology Group - TU Dresden" version="0.0.0">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><feature id="org.emftext.language.java.jdt" label="JaMoPP - Java Model Parser and Printer (Eclipse JDT Integration)" provider-name="Software Technology Group - TU Dresden" version="1.4.1">
 
-   <description url="http://jamopp.inf.tu-dresden.de">JaMoPP: Java Model Parser and Printer (EMFText-based Java support for EMF modelling tools). This feature enables JaMoPP to use the classpath configured in an Eclipse Java project.</description>
+   <description url="http://www.jamopp.org">JaMoPP: Java Model Parser and Printer (EMFText-based Java support for EMF modelling tools). This feature enables JaMoPP to use the classpath configured in an Eclipse Java project.</description>
 
-   <copyright>Copyright (c) 2006-2012 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.</copyright>
+   <copyright>Copyright (c) 2006-2013 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.</copyright>
 
    <license>Eclipse Public License v1.0
 
-Copyright (c) 2006-2012
+Copyright (c) 2006-2013
 Software Technology Group, Dresden University of Technology
 DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
 
