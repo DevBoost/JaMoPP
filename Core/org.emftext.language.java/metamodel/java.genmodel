@@ -507,7 +507,7 @@
         <genOperations ecoreOperation="java.ecore#//modifiers/AnnotableAndModifiable/addModifier">
           <genParameters ecoreParameter="java.ecore#//modifiers/AnnotableAndModifiable/addModifier/newModifier"/>
         </genOperations>
-        <genOperations ecoreOperation="java.ecore#//modifiers/AnnotableAndModifiable/getAnnotations"/>
+        <genOperations ecoreOperation="java.ecore#//modifiers/AnnotableAndModifiable/getAnnotationInstances"/>
       </genClasses>
       <genClasses image="false" ecoreClass="java.ecore#//modifiers/Modifiable">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//modifiers/Modifiable/modifiers"/>
