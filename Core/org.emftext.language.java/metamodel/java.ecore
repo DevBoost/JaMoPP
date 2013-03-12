@@ -1093,9 +1093,9 @@
         </eAnnotations>
         <eParameters name="newModifier" lowerBound="1" eType="#_Wo2Ys9z1Ed2bJ_pQViWxFg"/>
       </eOperations>
-      <eOperations name="getAnnotations" upperBound="-1" eType="#//classifiers/Annotation">
+      <eOperations name="getAnnotationInstances" upperBound="-1" eType="#_Wosms9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.Annotation> annotations = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.classifiers.Annotation>(); &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier next : elements) {&#xA;&#x9;if (next instanceof org.emftext.language.java.classifiers.Annotation) {&#xA;&#x9;&#x9;annotations.add(( org.emftext.language.java.classifiers.Annotation) next);&#xA;&#x9;}&#xA;}&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(annotations);"/>
+          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.annotations.AnnotationInstance> annotations = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.annotations.AnnotationInstance>(); &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier next : elements) {&#xA;&#x9;if (next instanceof org.emftext.language.java.annotations.AnnotationInstance) {&#xA;&#x9;&#x9;annotations.add(( org.emftext.language.java.annotations.AnnotationInstance) next);&#xA;&#x9;}&#xA;}&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(annotations);"/>
           <details key="documentation" value="&#xA; Returns an unmodifiable list of the annotations that apply to this element.&#xA;"/>
         </eAnnotations>
       </eOperations>

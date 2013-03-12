@@ -5,7 +5,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import java.classifiers.AnonymousClass;
 import java.classifiers.Classifier;
-import java.classifiers.Annotation;
+import java.annotations.AnnotationInstance;
 import java.classifiers.ConcreteClassifier;
 import java.classifiers.Interface;
 import java.commons.Commentable;
@@ -92,12 +92,12 @@ eclass AnnotableAndModifiable {
 	/**
 	 * Returns an unmodifiable list of the annotations that apply to this element.
 	 */
-	getAnnotations() {
+	getAnnotationInstances() {
 		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
-		EList<Annotation> annotations = new BasicEList<Annotation>(); 
+		EList<AnnotationInstance> annotations = new BasicEList<AnnotationInstance>(); 
 		for (AnnotationInstanceOrModifier next : elements) {
-			if (next instanceof Annotation) {
-				annotations.add((Annotation) next);
+			if (next instanceof AnnotationInstance) {
+				annotations.add((AnnotationInstance) next);
 			}
 		}
 		return ECollections.unmodifiableEList(annotations);
