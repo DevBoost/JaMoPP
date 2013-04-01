@@ -4,7 +4,7 @@
     modelDirectory="/org.emftext.language.java/src-gen" editDirectory="/org.emftext.language.java.edit/src-gen"
     modelPluginID="org.emftext.language.java" templateDirectory="" modelName="Java"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl" importerID="org.eclipse.emf.importer.ecore"
-    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" usedGenPackages="../../org.emftext.commons.layout/metamodel/layout.genmodel#//layout">
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false" usedGenPackages="platform:/plugin/org.emftext.commons.layout/metamodel/layout.genmodel#//layout">
   <foreignModel>java.ecore</foreignModel>
   <genPackages prefix="Java" basePackage="org.emftext.language" disposableProviderFactory="true"
       ecorePackage="java.ecore#_WosmsNz1Ed2bJ_pQViWxFg">

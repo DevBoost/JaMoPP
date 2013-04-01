@@ -391,7 +391,7 @@
         <eParameters name="statementToAdd" lowerBound="1" eType="#_Wo2YzNz1Ed2bJ_pQViWxFg"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="layoutInformations" upperBound="-1"
-          eType="ecore:EClass ../../org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"
+          eType="ecore:EClass platform:/plugin/org.emftext.commons.layout/metamodel/layout.ecore#//LayoutInformation"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//commons/Commentable">
