@@ -14,8 +14,11 @@ get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/eclipse/downloads/drops4/R-4.2-201206081400/org.eclipse.jdt-4.2.zip
 // EMF
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/emf/downloads/drops/2.8.0/R201206080554/emf-xsd-SDK-2.8.0.zip
-// EMF Validation (core API plugin only)
+// EMF Validation (core API plugin and feature)
 get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.4.0.v20100428-2315.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.3.0.v200901271722.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.v200901271722.jar
+get:http://ftp-stud.fht-esslingen.de/pub/Mirrors/eclipse/modeling/emf/validation/downloads/drops/1.6.0/R201206271200/emf-validation-runtime-1.6.0.zip!eclipse/features/org.eclipse.emf.validation_1.6.0.v20120328-0001-479-9oB56N5BBR6LCA6/feature.xml
 
 // Feedback
 git:https://github.com/DevBoost/Feedback.git!Core/
