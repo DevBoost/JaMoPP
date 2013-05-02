@@ -1,10 +1,28 @@
 epackage java.classifiers;
 
+import java.containers.*;
+import java.imports.*;
+
 eclass Classifier {
 	
 	getAllSuperClassifiers() {
 		//method has to be specified in subclasses
 		throw new UnsupportedOperationException();
 	}
+
+	/**
+	 * Adds an import of the given class to the compilation unit that contains this classifier.
+	 */
+	addImport() {
+		CompilationUnit compilationUnit = getParentByType(CompilationUnit.class);
+		compilationUnit.addImport(nameOfClassToImport);
+	}
 	
+	/**
+	 * Adds an import of the given package to this compilation unit that contains this classifier.
+	 */
+	addPackageImport() {
+		CompilationUnit compilationUnit = getParentByType(CompilationUnit.class);
+		addPackageImport(packageName);
+	}
 }

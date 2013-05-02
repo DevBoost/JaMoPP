@@ -5,6 +5,8 @@ import java.classifiers.Class;
 import java.classifiers.Interface;
 import java.classifiers.Annotation;
 import java.classifiers.Enumeration;
+import java.containers.*;
+import java.imports.*;
 
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.util.UniqueEList;
@@ -94,5 +96,28 @@ eclass CompilationUnit {
 			return (Enumeration) getClassifiers().get(0);
 		}
 		return null;
+	}
+
+	
+	/**
+	 * Adds an import of the given class to this compilation unit.
+	 */
+	addImport() {
+		ClassifierImport import_ = #ClassifierImport;
+		ConcreteClassifier classToImport = getConcreteClassifier(nameOfClassToImport);
+		import_.setClassifier(classToImport);
+		import_.getNamespaces().addAll(classToImport.getContainingCompilationUnit().getNamespaces());
+		getImports().add(import_);
+	}
+	
+	/**
+	 * Adds an import of the given package to this compilation unit.
+	 */
+	addPackageImport() {
+		PackageImport nsImport = #PackageImport;
+		for (String name : packageName.split("\\.")) {
+			nsImport.getNamespaces().add(name);
+		}
+		getImports().add(nsImport);
 	}
 }

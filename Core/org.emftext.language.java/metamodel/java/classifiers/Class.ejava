@@ -103,5 +103,4 @@ eclass Class {
 		}
 		return null;
 	}
-
 }

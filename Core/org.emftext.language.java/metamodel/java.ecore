@@ -82,6 +82,20 @@
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
+      <eOperations name="addImport">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.emftext.language.java.containers.CompilationUnit compilationUnit = getParentByType( org.emftext.language.java.containers.CompilationUnit.class);&#xA;compilationUnit.addImport(nameOfClassToImport);"/>
+          <details key="documentation" value="&#xA; Adds an import of the given class to the compilation unit that contains this classifier.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="nameOfClassToImport" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="addPackageImport">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.emftext.language.java.containers.CompilationUnit compilationUnit = getParentByType( org.emftext.language.java.containers.CompilationUnit.class);&#xA;addPackageImport(packageName);"/>
+          <details key="documentation" value="&#xA; Adds an import of the given package to this compilation unit that contains this classifier.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConcreteClassifier" abstract="true"
         eSuperTypes="#//classifiers/Classifier #//generics/TypeParametrizable #//members/MemberContainer #//members/Member #_Wo2YzNz1Ed2bJ_pQViWxFg #//modifiers/AnnotableAndModifiable">
@@ -462,6 +476,20 @@
           <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Enumeration) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Enumeration) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
           <details key="documentation" value="&#xA; @return the only enumeration contained directly in the compilation unit (if one exists)&#xA;"/>
         </eAnnotations>
+      </eOperations>
+      <eOperations name="addImport">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.emftext.language.java.imports.ClassifierImport import_ = org.emftext.language.java.imports.ImportsFactory.eINSTANCE.createClassifierImport();&#xA;org.emftext.language.java.classifiers.ConcreteClassifier classToImport = getConcreteClassifier(nameOfClassToImport);&#xA;import_.setClassifier(classToImport);&#xA;import_.getNamespaces().addAll(classToImport.getContainingCompilationUnit().getNamespaces());&#xA;getImports().add(import_);"/>
+          <details key="documentation" value="&#xA; Adds an import of the given class to this compilation unit.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="nameOfClassToImport" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="addPackageImport">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="body" value="org.emftext.language.java.imports.PackageImport nsImport = org.emftext.language.java.imports.ImportsFactory.eINSTANCE.createPackageImport();&#xA;for ( java.lang.String name : packageName.split(&quot;\\.&quot;)) {&#xA;&#x9;nsImport.getNamespaces().add(name);&#xA;}&#xA;getImports().add(nsImport);"/>
+          <details key="documentation" value="&#xA; Adds an import of the given package to this compilation unit.&#xA;"/>
+        </eAnnotations>
+        <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="classifiers" lowerBound="1"
           upperBound="-1" eType="#//classifiers/ConcreteClassifier" containment="true"/>

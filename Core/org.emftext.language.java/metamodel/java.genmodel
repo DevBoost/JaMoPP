@@ -63,6 +63,12 @@
         disposableProviderFactory="true" ecorePackage="java.ecore#//classifiers">
       <genClasses image="false" ecoreClass="java.ecore#//classifiers/Classifier">
         <genOperations ecoreOperation="java.ecore#//classifiers/Classifier/getAllSuperClassifiers"/>
+        <genOperations ecoreOperation="java.ecore#//classifiers/Classifier/addImport">
+          <genParameters ecoreParameter="java.ecore#//classifiers/Classifier/addImport/nameOfClassToImport"/>
+        </genOperations>
+        <genOperations ecoreOperation="java.ecore#//classifiers/Classifier/addPackageImport">
+          <genParameters ecoreParameter="java.ecore#//classifiers/Classifier/addPackageImport/packageName"/>
+        </genOperations>
       </genClasses>
       <genClasses image="false" ecoreClass="java.ecore#//classifiers/ConcreteClassifier">
         <genOperations ecoreOperation="java.ecore#//classifiers/ConcreteClassifier/getInnerClassifiers"/>
@@ -193,6 +199,12 @@
         <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedInterface"/>
         <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedAnnotation"/>
         <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/getContainedEnumeration"/>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/addImport">
+          <genParameters ecoreParameter="java.ecore#//containers/CompilationUnit/addImport/nameOfClassToImport"/>
+        </genOperations>
+        <genOperations ecoreOperation="java.ecore#//containers/CompilationUnit/addPackageImport">
+          <genParameters ecoreParameter="java.ecore#//containers/CompilationUnit/addPackageImport/packageName"/>
+        </genOperations>
       </genClasses>
       <genClasses ecoreClass="java.ecore#//containers/Package">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//containers/Package/compilationUnits"/>
