@@ -402,6 +402,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				IJavaTextPrinter printer = getMetaInformation().createPrinter(outputStream, this);
 				IJavaReferenceResolverSwitch referenceResolverSwitch = getReferenceResolverSwitch();
 				printer.setEncoding(getEncoding(options));
+				printer.setOptions(options);
 				referenceResolverSwitch.setOptions(options);
 				EObject root = getContentsInternal().get(0); //only print the single CU or Package
 				if (isLayoutInformationRecordingEnabled()) {
