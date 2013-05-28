@@ -348,6 +348,7 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 	private static org.eclipse.jdt.core.dom.CompilationUnit parseWithJDT(
 			InputStream inputStream) {
 
+		@SuppressWarnings("deprecation")
 		ASTParser jdtParser = ASTParser.newParser(AST.JLS3);
 		char[] charArray = readTextContents(inputStream).toCharArray();
 		jdtParser.setSource(charArray);
