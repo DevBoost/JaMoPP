@@ -169,6 +169,7 @@ eclass AnnotableAndModifiable {
 	}
 
 	isHidden() {
+		Commentable	lContext = context;
 		if (this.eIsProxy()) {
 			return false;
 		}
@@ -177,24 +178,24 @@ eclass AnnotableAndModifiable {
 			return false;
 		}
 		
-		if(context.eIsProxy()) {
-			context = (Commentable) EcoreUtil.resolve(context, this);
+		if(lContext.eIsProxy()) {
+			lContext = (Commentable) EcoreUtil.resolve(lContext, this);
 		}
 		
-		ConcreteClassifier contextClassifier = context.getContainingConcreteClassifier(); 
+		ConcreteClassifier lContextClassifier = lContext.getContainingConcreteClassifier(); 
 		if (!(eContainer() instanceof Commentable)) {
 			return true;
 		}
 		ConcreteClassifier myClassifier = ((Commentable) eContainer()).getParentConcreteClassifier();
 		//special case: self reference to outer instance
-		if(context instanceof Reference) {
-			if (((Reference)context).getPrevious() instanceof SelfReference) {
-				SelfReference selfReference = (SelfReference) ((Reference)context).getPrevious();
+		if(lContext instanceof Reference) {
+			if (((Reference)lContext).getPrevious() instanceof SelfReference) {
+				SelfReference selfReference = (SelfReference) ((Reference)lContext).getPrevious();
 				if (selfReference.getSelf() instanceof Self) {
 					if(selfReference.getPrevious() != null) {
 						Type type = selfReference.getPrevious().getReferencedType();
 						if (type instanceof ConcreteClassifier) {
-							contextClassifier = (ConcreteClassifier) type;
+							lContextClassifier = (ConcreteClassifier) type;
 						}
 					}
 				}
@@ -203,7 +204,7 @@ eclass AnnotableAndModifiable {
 		
 		for(AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {
 			if(modifier instanceof Private) {
-				if (myClassifier.equalsType(0, contextClassifier, 0)) {
+				if (myClassifier.equalsType(0, lContextClassifier, 0)) {
 					return false;
 				}
 				return true;
@@ -214,35 +215,35 @@ eclass AnnotableAndModifiable {
 			if(modifier instanceof Protected) {
 				//package visibility
 				if (getContainingPackageName() != null && 
-						getContainingPackageName().equals(context.getContainingPackageName())) {
+						getContainingPackageName().equals(lContext.getContainingPackageName())) {
 					return false;
 				}
 				//try outer classifiers as well 
-				while(contextClassifier instanceof Classifier) {
-					if (contextClassifier.isSuperType(0, myClassifier, null)) {
+				while(lContextClassifier instanceof Classifier) {
+					if (lContextClassifier.isSuperType(0, myClassifier, null)) {
 						return false;
 					}
 					
-					EObject container = contextClassifier.eContainer();
+					EObject container = lContextClassifier.eContainer();
 					if (container instanceof Commentable) {
-						contextClassifier = ((Commentable) container).getParentConcreteClassifier();
+						lContextClassifier = ((Commentable) container).getParentConcreteClassifier();
 					} else {
-						contextClassifier = null;
+						lContextClassifier = null;
 					}
 					
-					if (contextClassifier != null && !contextClassifier.eIsProxy() && 
-							contextClassifier.isSuperType(0, myClassifier, null)) {
+					if (lContextClassifier != null && !lContextClassifier.eIsProxy() && 
+							lContextClassifier.isSuperType(0, myClassifier, null)) {
 						return false;
 					}
 				}
 				//visibility through anonymous subclass
-				AnonymousClass anonymousClass = context.getContainingAnonymousClass();
+				AnonymousClass anonymousClass = lContext.getContainingAnonymousClass();
 				while (anonymousClass != null) {
-					contextClassifier = anonymousClass.getSuperClassifier();
-					if (contextClassifier == null) {
+					lContextClassifier = anonymousClass.getSuperClassifier();
+					if (lContextClassifier == null) {
 						return true;
 					}
-					if (contextClassifier.isSuperType(0, myClassifier, null)) {
+					if (lContextClassifier.isSuperType(0, myClassifier, null)) {
 						return false;
 					}
 					
@@ -258,7 +259,7 @@ eclass AnnotableAndModifiable {
 		}
 		//package visibility?
 		if (getContainingPackageName() != null && 
-				getContainingPackageName().equals(context.getContainingPackageName())) {
+				getContainingPackageName().equals(lContext.getContainingPackageName())) {
 			return false;
 		}
 

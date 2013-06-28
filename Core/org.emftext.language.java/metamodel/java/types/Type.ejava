@@ -25,23 +25,24 @@ eclass Type {
 	 * @return if both type are equal
 	 */
 	equalsType() {
+		Type lOtherType = otherType;
 		Type _this = this;
 		//comparison for type parameters
 		if (_this instanceof TypeParameter) {
 			TypeParameter typeParameter = (TypeParameter) _this;
 			for (TypeReference referencedType : typeParameter.getExtendTypes()) {
-				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && referencedType.getTarget().equalsType(arrayDimension, otherType, otherArrayDimension)) {
+				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && referencedType.getTarget().equalsType(arrayDimension, lOtherType, otherArrayDimension)) {
 					return true;
 				}
 			}
 			if (typeParameter.getExtendTypes().isEmpty()) {
-				if (getObjectClass().equalsType(arrayDimension, otherType, otherArrayDimension)) {
+				if (getObjectClass().equalsType(arrayDimension, lOtherType, otherArrayDimension)) {
 					return true;
 				}
 			}
 		} 
-		if (otherType instanceof TypeParameter) {
-			TypeParameter typeParameter = (TypeParameter) otherType;
+		if (lOtherType instanceof TypeParameter) {
+			TypeParameter typeParameter = (TypeParameter) lOtherType;
 			for (TypeReference referencedType : typeParameter.getExtendTypes()) {
 				if (referencedType.getTarget() != null && !referencedType.getTarget().eIsProxy() && equalsType(arrayDimension, referencedType.getTarget(), otherArrayDimension)) {
 					return true;
@@ -58,13 +59,13 @@ eclass Type {
 		if (_this instanceof PrimitiveType) {
 			_this = ((PrimitiveType)_this).wrapPrimitiveType();
 		}
-		if (otherType instanceof PrimitiveType) {
-			otherType = ((PrimitiveType) otherType).wrapPrimitiveType();
+		if (lOtherType instanceof PrimitiveType) {
+			lOtherType = ((PrimitiveType) lOtherType).wrapPrimitiveType();
 		}
 		
 		if (arrayDimension == otherArrayDimension &&
-				otherType instanceof Classifier && _this instanceof Classifier &&
-				(otherType.equals(_this))) {	
+				lOtherType instanceof Classifier && _this instanceof Classifier &&
+				(lOtherType.equals(_this))) {	
 			return true;
 		}
 		
@@ -78,14 +79,15 @@ eclass Type {
 	 * @return if the other type is equal to me or a super type of me
 	 */
 	isSuperType() {
+		Type lOtherType = otherType;
 		
-		if(otherType == null) {
+		if(lOtherType == null) {
 			return false;
 		}
 		
 		Type _this = this;
 		
-		if (_this instanceof TemporalCompositeClassifier || otherType instanceof TemporalCompositeClassifier) {
+		if (_this instanceof TemporalCompositeClassifier || lOtherType instanceof TemporalCompositeClassifier) {
 			EList<Type> _thisTypeList = new UniqueEList<Type>();
 			EList<Type> otherTypeList = new UniqueEList<Type>();
 			if (_this instanceof TemporalCompositeClassifier) {
@@ -96,8 +98,8 @@ eclass Type {
 			else {
 				_thisTypeList.add(_this);
 			}
-			if (otherType instanceof TemporalCompositeClassifier) {
-				for(EObject aType : ((TemporalCompositeClassifier)otherType).getSuperTypes()) {
+			if (lOtherType instanceof TemporalCompositeClassifier) {
+				for(EObject aType : ((TemporalCompositeClassifier)lOtherType).getSuperTypes()) {
 					otherTypeList.add((Type)aType);
 				}
 			}
@@ -123,14 +125,14 @@ eclass Type {
 		}
 		
 		//if the other is Object I am a subtype in any case (also array dimensions do not matter)
-		if (otherType.equals(getObjectClass())) {
+		if (lOtherType.equals(getObjectClass())) {
 			return true;
 		}
 		
 		//String, primitives, and arrays are serializable
 		ConcreteClassifier serializableClass = (ConcreteClassifier) EcoreUtil.resolve(
 				getConcreteClassifierProxy("java.io.Serializable"), _this);
-		if (otherType.equals(serializableClass)) {
+		if (lOtherType.equals(serializableClass)) {
 			if (_this.equals(serializableClass)) {
 	 			return true;
 			}
@@ -147,10 +149,10 @@ eclass Type {
 		}
 		
 		//if one of us is a parameter to the best of my knowledge, we might match
-		if(_this instanceof TypeParameter) {
+		if (_this instanceof TypeParameter) {
 			return true;
 		}
-		if(otherType instanceof TypeParameter ) {
+		if (lOtherType instanceof TypeParameter) {
 			return true;
 		}
 		
@@ -193,7 +195,7 @@ eclass Type {
 		
 		//annotations
 		if(_this instanceof Annotation && 
-				(otherType.equals(getAnnotationInterface()) ||
+				(lOtherType.equals(getAnnotationInterface()) ||
 						((ConcreteClassifier)_this).getAllSuperClassifiers(
 							).contains(getAnnotationInterface()))) {
 			return true;
@@ -203,21 +205,21 @@ eclass Type {
 		if (_this instanceof PrimitiveType) {
 			_this = ((PrimitiveType) _this).wrapPrimitiveType();
 		}
-		if (otherType instanceof PrimitiveType) {
-			otherType = ((PrimitiveType) otherType).wrapPrimitiveType();
+		if (lOtherType instanceof PrimitiveType) {
+			lOtherType = ((PrimitiveType) lOtherType).wrapPrimitiveType();
 		}
 		
 		//compare in type hierarchy
-		if (otherType instanceof ConcreteClassifier && _this instanceof ConcreteClassifier &&
-				(otherType.equals(_this) || 
+		if (lOtherType instanceof ConcreteClassifier && _this instanceof ConcreteClassifier &&
+				(lOtherType.equals(_this) || 
 						((ConcreteClassifier)_this).getAllSuperClassifiers(
-								).contains(otherType))) {
+								).contains(lOtherType))) {
 			return true;
 		}
 		
-		if (otherType instanceof ConcreteClassifier && _this instanceof AnonymousClass &&
+		if (lOtherType instanceof ConcreteClassifier && _this instanceof AnonymousClass &&
 				((AnonymousClass)_this).getAllSuperClassifiers(
-						).contains(otherType)) {
+						).contains(lOtherType)) {
 			
 			return true;
 		}
@@ -225,21 +227,21 @@ eclass Type {
 		//everything can be implicitly casted to CharSequence, so I match when the other type is a CharSequence
 		Interface charSequenceClass = getLibInterface("CharSequence");
 		
-		if (otherType instanceof ConcreteClassifier) {
-			if(otherType.equals(charSequenceClass) ||
-					((ConcreteClassifier)otherType).getAllSuperClassifiers(
+		if (lOtherType instanceof ConcreteClassifier) {
+			if(lOtherType.equals(charSequenceClass) ||
+					((ConcreteClassifier)lOtherType).getAllSuperClassifiers(
 							).contains(charSequenceClass)) {
 				return true;
 			}
 		}
 
 		//there are some specifics for primitive types not reflected in the type hierarchy
-		if (otherType instanceof Class) {
-			PrimitiveType primitiveType = ((Class) otherType).unWrapPrimitiveType();
+		if (lOtherType instanceof Class) {
+			PrimitiveType primitiveType = ((Class) lOtherType).unWrapPrimitiveType();
 			if(primitiveType == null) {
 				return false;
 			}
-			otherType = primitiveType;
+			lOtherType = primitiveType;
 		}
 		
 		if (_this instanceof Class) {
@@ -251,7 +253,7 @@ eclass Type {
 		}
 
 		if (_this instanceof Boolean) {
-			if (otherType instanceof Boolean) {
+			if (lOtherType instanceof Boolean) {
 				return true;
 			}
 			else {
@@ -263,13 +265,13 @@ eclass Type {
 				_this instanceof Short ||
 				_this instanceof Long ||
 				_this instanceof Char) {
-			if (otherType instanceof Byte ||
-					otherType instanceof Int ||
-					otherType instanceof Short ||
-					otherType instanceof Long ||
-					otherType instanceof Char ||
-					otherType instanceof Float ||
-					otherType instanceof Double) {
+			if (lOtherType instanceof Byte ||
+					lOtherType instanceof Int ||
+					lOtherType instanceof Short ||
+					lOtherType instanceof Long ||
+					lOtherType instanceof Char ||
+					lOtherType instanceof Float ||
+					lOtherType instanceof Double) {
 				return true;
 			}
 			else {
@@ -278,8 +280,8 @@ eclass Type {
 		}
 		if (_this instanceof Float ||
 				_this instanceof Double) {
-			if (otherType instanceof Float ||
-					otherType instanceof Double) {
+			if (lOtherType instanceof Float ||
+					lOtherType instanceof Double) {
 				return true;
 			}
 			else {
