@@ -8,7 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.emftext.language.java.test.JavaParserTestPlugin
 Require-Bundle: org.eclipse.core.runtime,
- org.junit4,
+ org.junit,
  org.eclipse.jdt.core,
  org.eclipse.text,
  org.emftext.language.java,
