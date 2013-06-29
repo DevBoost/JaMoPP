@@ -10,3 +10,13 @@ git:https://github.com/DevBoost/EMFText.git!Core/License/
 
 // Feedback
 git:https://github.com/DevBoost/Feedback.git!Core/
+
+// JaMoPP
+git:https://github.com/DevBoost/JaMoPP.git!Core/
+git:https://github.com/DevBoost/JaMoPP.git!Deploy/
+git:https://github.com/DevBoost/JaMoPP.git!Doc/
+git:https://github.com/DevBoost/JaMoPP.git!Eclipse-Integration/
+git:https://github.com/DevBoost/JaMoPP.git!Examples/
+git:https://github.com/DevBoost/JaMoPP.git!Features/
+git:https://github.com/DevBoost/JaMoPP.git!Tests/
+git:https://github.com/DevBoost/JaMoPP.git!Utils/
