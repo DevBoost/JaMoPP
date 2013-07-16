@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -51,33 +51,34 @@ import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.IJavaTextPrinter;
 import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
+import org.emftext.language.java.resource.java.mopp.JavaParser;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
 import org.emftext.language.java.resource.java.util.JavaLayoutUtil;
 import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.util.JavaModelCompletion;
 
 /**
- * A resource that uses either the generated 
- * {@link org.emftext.language.java.resource.java.mopp.JavaParser} 
- * or the {@link ClassFileModelLoader} for loading depending on 
- * the file extension of the resource's URI.
+ * A resource that uses either the generated {@link JavaParser} or the
+ * {@link ClassFileModelLoader} for loading depending on the file extension of
+ * the resource's URI.
  */
 public class JavaSourceOrClassFileResource extends JavaResource {
 
+	private JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
+	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
 	}
 
-	private JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
-	
 	protected boolean isClassFile() {
 		if (uri == null) {
 			return false;
 		}
-		//is there a physical source file behind this URI?
+		
+		// Is there a physical source file behind this URI?
 		URI normalizedURI = getURIConverter().normalize(uri);
-
-		if(normalizedURI.fileExtension().equals("class"))  {
+		String fileExtension = normalizedURI.fileExtension();
+		if (fileExtension.equals("class"))  {
 			return true;
 		}
 		return false;
@@ -99,7 +100,9 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 
 	@Override
-	protected void doLoad(java.io.InputStream inputStream, java.util.Map<?,?> options) throws java.io.IOException {
+	protected void doLoad(InputStream inputStream, Map<?, ?> options)
+			throws IOException {
+		
 		if (isClassFile()) {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
@@ -147,11 +150,11 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	@Override
 	protected void doUnload() {
-		if (!getContentsInternal().isEmpty()) {
-			if(getContentsInternal().get(0) instanceof Package) {
-				getContentsInternal().clear();
-			}
-			else {
+		List<EObject> contentsInternal = getContentsInternal();
+		if (!contentsInternal.isEmpty()) {
+			if (contentsInternal.get(0) instanceof Package) {
+				contentsInternal.clear();
+			} else {
 				super.doUnload();
 			}
 		}
@@ -198,15 +201,15 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			if(!id.startsWith(IJavaContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
-				if(result != null && !(result instanceof ConcreteClassifier)) {
+			if (!id.startsWith(IJavaContextDependentURIFragment.INTERNAL_URI_FRAGMENT_PREFIX)) {
+				if (result != null && !(result instanceof ConcreteClassifier)) {
 					//may happen if members of same name exist
-					if(result.eContainingFeature() != null
+					if (result.eContainingFeature() != null
 							&& result.eContainingFeature().equals(MembersPackage.Literals.MEMBER_CONTAINER__MEMBERS)
 							&& result instanceof NamedElement) {
-						String memberName = ((NamedElement)result).getName();
-						for(Member m : ((MemberContainer)result.eContainer()).getMembers()) {
-							if(memberName.equals(m.getName()) && m instanceof ConcreteClassifier) {
+						String memberName = ((NamedElement) result).getName();
+						for (Member m : ((MemberContainer) result.eContainer()).getMembers()) {
+							if (memberName.equals(m.getName()) && m instanceof ConcreteClassifier) {
 								result = m;
 								return result;
 							}
@@ -269,13 +272,13 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		Package thePackage = ContainersFactory.eINSTANCE.createPackage();
 		String packageName = getURI().trimFileExtension().toString().substring(
 				JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP.length());
-		String[] packageNaemParts = packageName.split("\\.");
-		for(int i = 0; i < packageNaemParts.length; i++) {
-			if(i < packageNaemParts.length - 1) {
-				thePackage.getNamespaces().add(packageNaemParts[i]);
+		String[] packageNameParts = packageName.split("\\.");
+		for (int i = 0; i < packageNameParts.length; i++) {
+			if (i < packageNameParts.length - 1) {
+				thePackage.getNamespaces().add(packageNameParts[i]);
 			}
 			else {
-				thePackage.setName(packageNaemParts[i]);
+				thePackage.setName(packageNameParts[i]);
 			}
 		}
 		populatePackage(thePackage);
@@ -287,7 +290,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 		if (!getContentsInternal().isEmpty()) {
 			EObject root = getContentsInternal().get(0);
-			if(root instanceof CompilationUnit) {
+			if (root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) root;
 				setCompilationUnitName(cu);
 			}
@@ -298,7 +301,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 			
 			//could also be a package-info.java without CU
-			if(root instanceof CompilationUnit) {
+			if (root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) root;
 				JavaClasspath.get(this).registerClassifierSource(cu, myURI);
 			} else if (root instanceof Package) {
@@ -313,7 +316,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	protected void setCompilationUnitName(CompilationUnit cu) {
 		String packageName = "";
-		if(!hasJavaClassifierURI()) {
+		if (!hasJavaClassifierURI()) {
 			//physical URIs do not include the package name
 			//so we construct it from the cu's namespaces
 			packageName = JavaUniquePathConstructor.packageName(cu);
@@ -418,7 +421,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 	protected boolean containsMultipleCompilationUnits() {
 		boolean foundOne = false;
-		for(EObject eObject : getContentsInternal()) {
+		for (EObject eObject : getContentsInternal()) {
 			if (eObject instanceof CompilationUnit) {
 				if (foundOne) {
 					return true;
@@ -430,11 +433,9 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 	
 	/**
-	 * This method adds a package declaration (namespaces) to the given compilation unit
-	 * if none is defined and this resource has a logical URI. The segments of the logical
-	 * URI are assumed as package name.
-	 *
-	 * @param cu
+	 * This method adds a package declaration (namespaces) to the given
+	 * compilation unit if none is defined and this resource has a logical URI.
+	 * The segments of the logical URI are assumed as package name.
 	 */
 	protected void addPackageDeclaration(CompilationUnit cu) {
 		if (cu.getNamespaces().isEmpty() && !getURI().isFile() && !getURI().isPlatform()) {
