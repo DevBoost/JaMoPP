@@ -103,10 +103,6 @@ import pkg.NumberLiterals;
  */
 public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
-	public JavaLanguageFeatureTest() throws Exception {
-		super();
-	}
-
 	private static final String JAVA_FILE_EXTENSION = ".java";
 
 	protected static final String TEST_INPUT_FOLDER = "src-input";
