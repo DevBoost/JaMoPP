@@ -97,7 +97,7 @@ import pkg.NumberLiterals;
  * input/ folder of this plug-in</li>
  * <li>declaring a test case in this path of java source relative to the input
  * folder file to the method parseResource(String relativePath)</li>
- * <li>checking the returned CompilationUnit for correctness
+ * <li>checking the returned CompilationUnit for correctness</li>
  * </ul>
  *
  * @author Christian Wende
