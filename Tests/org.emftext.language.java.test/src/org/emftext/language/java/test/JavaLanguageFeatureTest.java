@@ -1866,7 +1866,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@AfterClass
 	public static void doMetaTest() {
-		System.out.println("JavaLanguageFeatureTest.doMetaTest()");
 		try {
 			checkHasMissingParses();
 			checkHasMissingParseReprints();
