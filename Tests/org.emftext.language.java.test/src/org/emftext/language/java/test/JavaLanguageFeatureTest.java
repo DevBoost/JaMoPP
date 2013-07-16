@@ -15,6 +15,11 @@
  ******************************************************************************/
 package org.emftext.language.java.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -77,10 +82,9 @@ import org.emftext.language.java.statements.ExpressionStatement;
 import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
+import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 
 import pkg.EscapedStrings;
 import pkg.NumberLiterals;
@@ -98,9 +102,6 @@ import pkg.NumberLiterals;
  *
  * @author Christian Wende
  */
-// We must use the method sorter to make sure that the meta test method
-// zzzHasMissingParseReprints() and zzzHasMissingParses() are executed last
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	public JavaLanguageFeatureTest() throws Exception {
@@ -178,7 +179,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertNotNull(member.getName() + " is not a double field.", literal);
 		assertType(literal, DecimalDoubleLiteral.class);
 		DecimalDoubleLiteral initLiteral = (DecimalDoubleLiteral) literal;
-		assertEquals(expectedInitValue, initLiteral.getDecimalValue());
+		assertEquals(expectedInitValue, initLiteral.getDecimalValue(), 0.0);
 	}
 
 	private void assertIsHexIntegerField(Member member, int expectedInitValue) {
@@ -352,6 +353,10 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected String getTestInputFolder() {
+		return getTestInputFolderStatic();
+	}
+
+	protected static String getTestInputFolderStatic() {
 		return TEST_INPUT_FOLDER;
 	}
 
@@ -1002,6 +1007,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		parseAndReprint(filename);
 	}
 
+	@Test
 	public void testLegalIdentifiers() throws Exception {
 		String typename = "LegalIdentifiers";
 		String filename = typename + JAVA_FILE_EXTENSION;
@@ -1434,7 +1440,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		parseAndReprint(filename);
 	}
 
-	@SuppressWarnings("null")
 	@Test
 	public void testMultiplications() throws Exception {
 		String typename = "Multiplications";
@@ -1859,16 +1864,30 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		parseAndReprint(filename);
 	}
 
-	@Test
-	public void zzzHasMissingParseReprints() throws Exception {
-		File inputFolder = new File("./" + getTestInputFolder());
-		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
+	@AfterClass
+	public static void doMetaTest() {
+		System.out.println("JavaLanguageFeatureTest.doMetaTest()");
+		try {
+			checkHasMissingParses();
+			checkHasMissingParseReprints();
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	/**
+	 * This is a meta-test which checks naively if all test files were parsed
+	 * and reprinted by test cases in this suite.
+	 */
+	public static void checkHasMissingParseReprints() throws Exception {
+		List<File> allTestFiles = getAllTestFiles();
 		allTestFiles.removeAll(getReprintedResources());
 		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
 			File file = (File) i.next();
-			if (file.toString().contains("/resolving_new/")) {
+			if (file.toString().contains(File.separator + "resolving_new" + File.separator)) {
 				//these files are not covered by this test
 				i.remove();
+				continue;
 			} else {
 				System.out.println("Not parsed and reprinted: " + file);	
 			}
@@ -1879,33 +1898,33 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 				Collections.EMPTY_LIST, allTestFiles);
 	}
 
-
-
 	/**
-	 * This is a meta-test which checks naively if all test files were covered
-	 * by test cases in this suite. WARNING: this test needs to stay at the end
-	 * of the class, to be the last test executed.
-	 *
-	 * @throws BadLocationException
-	 * @throws IOException
-	 * @throws MalformedTreeException
+	 * This is a meta-test which checks naively if all test files were parsed
+	 * by test cases in this suite.
 	 */
-	@Test
-	public void zzzHasMissingParses() throws CoreException,
+	public static void checkHasMissingParses() throws CoreException,
 			MalformedTreeException, IOException, BadLocationException {
-		File inputFolder = new File("." + File.separator
-				+ getTestInputFolder());
-		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
+		
+		List<File> allTestFiles = getAllTestFiles();
 		allTestFiles.removeAll(getParsedResources());
 		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
 			File file = (File) i.next();
-			if (file.toString().contains("/resolving_new/")) {
+			if (file.toString().contains(File.separator + "resolving_new" + File.separator)) {
 				//these files are not covered by this test
 				i.remove();
+				continue;
+			} else {
+				System.out.println("Not parsed: " + file);	
 			}
 		}
 		assertEquals(
 				"All testfiles contained in input folder were covered by a test case.",
 				Collections.EMPTY_LIST, allTestFiles);
+	}
+
+	private static List<File> getAllTestFiles() throws CoreException {
+		File inputFolder = new File("." + File.separator + getTestInputFolderStatic());
+		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
+		return allTestFiles;
 	}
 }

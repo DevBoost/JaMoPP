@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -69,8 +69,14 @@ public class ResolvingTest extends TestCase {
 		File inputFolder = new File(INPUT_FOLDER);
 		// iterate over all folders in the input folder
 		File[] testDirectories = inputFolder.listFiles(new IgnoreSVNFilter());
-		for (File nextDirectory : testDirectories) {
-			suite.addTest(new DirectoryTest(nextDirectory));
+		for (final File nextDirectory : testDirectories) {
+			suite.addTest(new TestCase(nextDirectory.getName()) {
+				
+				@Override
+				public void runTest() throws Throwable {
+					new DirectoryTest(nextDirectory).runTest();
+				}
+			});
 		}
 
 		return suite;
@@ -85,7 +91,7 @@ public class ResolvingTest extends TestCase {
 		private File directory;
 
 		public DirectoryTest(File directory) {
-			super(directory.getName());
+			super();
 			this.directory = directory;
 		}
 

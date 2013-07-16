@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -15,6 +15,10 @@
  ******************************************************************************/
 package org.emftext.language.java.test;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,8 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.BasicEList;
@@ -78,7 +80,7 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
  * Abstract superclass that provides some frequently used assert and helper
  * methods.
  */
-public abstract class AbstractJavaParserTestCase extends TestCase {
+public abstract class AbstractJavaParserTestCase {
 
 	public AbstractJavaParserTestCase() {
 		super();
@@ -86,11 +88,13 @@ public abstract class AbstractJavaParserTestCase extends TestCase {
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
 
+	/*
 	public AbstractJavaParserTestCase(String name) {
 		super(name);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
+	*/
 
 	protected void registerInClassPath(String file) throws Exception {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
