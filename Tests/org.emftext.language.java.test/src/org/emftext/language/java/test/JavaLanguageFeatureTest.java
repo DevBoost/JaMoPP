@@ -90,16 +90,15 @@ import pkg.EscapedStrings;
 import pkg.NumberLiterals;
 
 /**
- * JUnit Test suite to test the EMFText JavaModel Parser. New Tests should
- * by added by
+ * JUnit test suite to test the JaMoPP parser. New tests should by added by:
  * <ul>
- * <li>putting a Java Source file that contains java expressions to parse to the
- * input/ folder of this plug-in</li>
- * <li>declaring a test case in this path of java source relative to the input
+ * <li>putting a Java source file that contains valid Java classes to parse to the
+ * <code>input</code> folder of this plug-in</li>
+ * <li>declaring a test case in this path of Java source relative to the input
  * folder file to the method parseResource(String relativePath)</li>
  * <li>checking the returned CompilationUnit for correctness</li>
  * </ul>
- *
+ * 
  * @author Christian Wende
  */
 public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
