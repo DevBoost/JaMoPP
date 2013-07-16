@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.text.edits.MalformedTreeException;
+import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -77,7 +78,9 @@ import org.emftext.language.java.statements.ForEachLoop;
 import org.emftext.language.java.statements.Statement;
 import org.emftext.language.java.types.TypeReference;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import pkg.EscapedStrings;
 import pkg.NumberLiterals;
@@ -95,6 +98,9 @@ import pkg.NumberLiterals;
  *
  * @author Christian Wende
  */
+// We must use the method sorter to make sure that the meta test method
+// zzzHasMissingParseReprints() and zzzHasMissingParses() are executed last
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	public JavaLanguageFeatureTest() throws Exception {
@@ -356,6 +362,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		// Clear global classpath to make sure that test methods do not rely on
+		// each other
+		JavaClasspath.reset();
 	}
 
 	@Test
@@ -1102,6 +1111,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Test
 	public void testIExtendsMultiple() throws Exception {
+		testEmptyInterface();
+		testIOneMethod();
+		
 		String typename = "IExtendsMultiple";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		Interface interfaze = assertParsesToInterface(typename);
@@ -1407,6 +1419,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Test
 	public void testMultipleImplements() throws Exception {
+		testEmptyInterface();
+		testIOneMethod();
+		
 		String typename = "MultipleImplements";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
@@ -1703,6 +1718,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Test
 	public void testTypeParameters() throws Exception {
+		testIOneMethod();
+		
 		String typename = "TypeParameters";
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
@@ -1843,7 +1860,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	}
 
 	@Test
-	public void testHasMissingParseReprints() throws Exception {
+	public void zzzHasMissingParseReprints() throws Exception {
 		File inputFolder = new File("./" + getTestInputFolder());
 		List<File> allTestFiles = collectAllFilesRecursive(inputFolder, JAVA_FILE_EXTENSION);
 		allTestFiles.removeAll(getReprintedResources());
@@ -1874,7 +1891,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 	 * @throws MalformedTreeException
 	 */
 	@Test
-	public void testHasMissingParses() throws CoreException,
+	public void zzzHasMissingParses() throws CoreException,
 			MalformedTreeException, IOException, BadLocationException {
 		File inputFolder = new File("." + File.separator
 				+ getTestInputFolder());
