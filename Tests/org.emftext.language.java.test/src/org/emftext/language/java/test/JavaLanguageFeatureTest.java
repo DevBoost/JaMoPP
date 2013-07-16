@@ -24,13 +24,12 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -93,7 +92,7 @@ import pkg.NumberLiterals;
  * JUnit test suite to test the JaMoPP parser. New tests should by added by:
  * <ul>
  * <li>putting a Java source file that contains valid Java classes to parse to the
- * <code>input</code> folder of this plug-in</li>
+ * <code>src-input</code> folder of this plug-in</li>
  * <li>declaring a test case in this path of Java source relative to the input
  * folder file to the method parseResource(String relativePath)</li>
  * <li>checking the returned CompilationUnit for correctness</li>
@@ -113,14 +112,14 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected Map<Object, Object> getLoadOptions() {
-		Map<Object, Object> map = new HashMap<Object, Object>();
+		Map<Object, Object> map = new LinkedHashMap<Object, Object>();
 		map.put(IJavaOptions.DISABLE_LOCATION_MAP, Boolean.TRUE);
-		//map.put(IJavaOptions.DISABLE_LAYOUT_INFORMATION_RECORDING, Boolean.TRUE);
 		return map;
 	}
 
 	private void assertParsableAndReprintable(String filename)
 		throws Exception, IOException, BadLocationException {
+		
 		JavaRoot root = parseResource(filename);
 		assertType(root, CompilationUnit.class);
 		CompilationUnit unit = (CompilationUnit) root;
@@ -255,8 +254,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(expected, initLiteralForBoolean.getDecimalValue());
 	}
 
-	private void assertIsNumericField(EList<Member> members, String name,
+	private void assertIsNumericField(List<Member> members, String name,
 			Object expectedValue) {
+		
 		NamedElement field = findElementByName(members, name);
 		assertNotNull(field);
 		assertType(field, Field.class);
@@ -298,8 +298,9 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals("Field " + name, expectedValue, initValue);
 	}
 
-	private void assertIsStringField(EList<Member> members, String name,
+	private void assertIsStringField(List<Member> members, String name,
 			String expectedValue) {
+		
 		NamedElement field = findElementByName(members, name);
 		assertNotNull(field);
 		assertType(field, Field.class);
@@ -1266,7 +1267,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		Interface interfaze = assertParsesToInterface(typename);
 		assertMemberCount(interfaze, 2);
 
-		EList<Member> members = interfaze.getMembers();
+		List<Member> members = interfaze.getMembers();
 		Member member1 = members.get(0);
 		Member member2 = members.get(1);
 		Method method1 = (Method) member1;
@@ -1296,7 +1297,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 27);
 
-		EList<Member> members = clazz.getMembers();
+		List<Member> members = clazz.getMembers();
 		// check the fields and their initialization values
 		assertIsDecimalIntegerField(findElementByName(members, "i1"), 3);
 		assertIsHexIntegerField(members.get(2), 1);
@@ -1427,7 +1428,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		String filename = typename + JAVA_FILE_EXTENSION;
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 0);
-		EList<TypeReference> implementedInterfaces = clazz.getImplements();
+		List<TypeReference> implementedInterfaces = clazz.getImplements();
 		assertEquals(2, implementedInterfaces.size());
 
 		registerInClassPath("ISemicolonOnly" + JAVA_FILE_EXTENSION);
@@ -1442,7 +1443,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		org.emftext.language.java.classifiers.Class clazz = assertParsesToClass(typename);
 		assertMemberCount(clazz, 2);
 
-		EList<Member> members = clazz.getMembers();
+		List<Member> members = clazz.getMembers();
 
 		Field longField = (Field) members.get(1);
 		Expression initValue = longField.getInitialValue();
