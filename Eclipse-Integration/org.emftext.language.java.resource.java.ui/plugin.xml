@@ -72,4 +72,26 @@
 		</specification>
 	</extension>
 	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Java" id="org.emftext.language.java.resource.java.ui.command.category" name="Java">
+		</category>
+		<command categoryId="org.emftext.language.java.resource.java.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.java.resource.java.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.java.resource.java.ui.JavaToggleCommentHandler" commandId="org.emftext.language.java.resource.java.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Java Files" description="Editing Java Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.java.resource.java.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.java.resource.java.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.java.resource.java.EditorScope">
+		</key>
+	</extension>
+	
 </plugin>
