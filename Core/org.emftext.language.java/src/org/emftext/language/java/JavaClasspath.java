@@ -437,7 +437,7 @@ public class JavaClasspath extends AdapterImpl {
 							|| child.getName().endsWith(JavaUniquePathConstructor.JAVA_CLASS_FILE_EXTENSION)) {
 						String classifierName = child.getName().substring(0, child.getName().lastIndexOf('.'));
 						URI uri = URI.createFileURI(child.getAbsolutePath());
-						registerClassifier(packageName, classifierName, uri );
+						registerClassifier(packageName, classifierName, uri);
 					}
 				}
 			}
