@@ -6,6 +6,8 @@
 <booleanAttribute key="IS_REFINING" value="false"/>
 <mapAttribute key="Input">
 <mapEntry key="IN" value="uml"/>
+<mapEntry key="javalang" value="java"/>
+<mapEntry key="javautil" value="java"/>
 </mapAttribute>
 <mapAttribute key="Libs"/>
 <mapAttribute key="Model Handler">
@@ -16,6 +18,8 @@
 <mapEntry key="IN" value="MODELINPUT"/>
 <mapEntry key="OUT" value="MODELOUTPUT"/>
 <mapEntry key="java" value="METAMODELOUTPUT"/>
+<mapEntry key="javalang" value="MODELINPUT"/>
+<mapEntry key="javautil" value="MODELINPUT"/>
 <mapEntry key="uml" value="METAMODELINPUT"/>
 </mapAttribute>
 <mapAttribute key="Options">
@@ -23,12 +27,17 @@
 <mapEntry key="OPTION_CONTENT_TYPE" value="false"/>
 <mapEntry key="OPTION_DERIVED" value="true"/>
 <mapEntry key="allowInterModelReferences" value="true"/>
+<mapEntry key="continueAfterError" value="false"/>
+<mapEntry key="disableAttributeHelperCache" value="false"/>
 <mapEntry key="printExecutionTime" value="false"/>
+<mapEntry key="profile" value="false"/>
+<mapEntry key="showSummary" value="false"/>
 <mapEntry key="step" value="false"/>
-<mapEntry key="supportUML2Stereotypes" value="false"/>
 </mapAttribute>
 <listAttribute key="OrderedInput">
 <listEntry value="IN"/>
+<listEntry value="javautil"/>
+<listEntry value="javalang"/>
 </listAttribute>
 <listAttribute key="OrderedOutput">
 <listEntry value="OUT"/>
@@ -40,6 +49,8 @@
 <mapEntry key="IN" value="/org.emftext.language.java.examples/models/ClassDiagram.uml"/>
 <mapEntry key="OUT" value="/org.emftext.language.java.examples/src-gen.java"/>
 <mapEntry key="java" value="uri:http://www.emftext.org/java"/>
+<mapEntry key="javalang" value="/org.emftext.language.java.examples/lib/java/lang/package-info.java"/>
+<mapEntry key="javautil" value="/org.emftext.language.java.examples/lib/java/util/package-info.java"/>
 <mapEntry key="uml" value="uri:http://www.eclipse.org/uml2/3.0.0/UML"/>
 </mapAttribute>
 <listAttribute key="Superimpose"/>
