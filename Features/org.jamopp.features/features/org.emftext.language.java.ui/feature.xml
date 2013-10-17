@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><feature id="org.emftext.language.java" label="JaMoPP - Java Model Parser and Printer" provider-name="Software Technology Group - TU Dresden" version="1.4.1">
 
-   <description url="http://www.jamopp.org">JaMoPP: Java Model Parser and Printer (EMFText-based Java support for EMF modelling tools).</description>
+   <description url="http://www.jamopp.org">JaMoPP: Java Model Editor (EMFText-based Java support for EMF modelling tools).</description>
 
    <copyright>Copyright (c) 2006-2013 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.</copyright>
 
@@ -19,20 +19,9 @@ Contributors:
  </license>
 
    <requires>
-	 <import feature="org.eclipse.platform"/>
-	 <import feature="org.eclipse.emf"/>
-	 <import feature="org.emftext.commons.antlr3_4_0"/>
-	 <import feature="org.emftext.commons.layout"/>
+	 <import feature="org.emftext.language.java"/>
    </requires>
 
-   <plugin download-size="0" id="org.emftext.language.java" install-size="0" unpack="false" version="0.0.0"/>
-
-   <plugin download-size="0" id="org.emftext.language.java.edit" install-size="0" unpack="false" version="0.0.0"/>
-
-   <plugin download-size="0" id="org.emftext.language.java.resource.java" install-size="0" unpack="false" version="0.0.0"/>
-
-   <plugin download-size="0" id="org.emftext.language.java.resource.bcel" install-size="0" unpack="false" version="0.0.0"/>
-         
-   <plugin download-size="0" id="org.emftext.language.java.resource" install-size="0" unpack="false" version="0.0.0"/>
+   <plugin download-size="0" id="org.emftext.language.java.resource.java.ui" install-size="0" unpack="false" version="0.0.0"/>
          
 </feature>
