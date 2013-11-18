@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<feature id="org.emftext.language.java.ui" label="JaMoPP - Java Model Parser and Printer" provider-name="Software Technology Group - TU Dresden" version="1.4.1">
+<feature id="org.emftext.language.java.ui" label="JaMoPP - Java Model Editor" provider-name="Software Technology Group - TU Dresden" version="1.4.1">
 
 	<description url="http://www.jamopp.org">JaMoPP: Java Model Editor (EMFText-based Java support for EMF modelling tools).</description>
 
