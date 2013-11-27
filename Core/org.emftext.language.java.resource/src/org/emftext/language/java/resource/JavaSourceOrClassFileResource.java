@@ -64,7 +64,7 @@ import org.emftext.language.java.util.JavaModelCompletion;
  */
 public class JavaSourceOrClassFileResource extends JavaResource {
 
-	private JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
+	private final JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
 	
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
@@ -78,17 +78,20 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		// Is there a physical source file behind this URI?
 		URI normalizedURI = getURIConverter().normalize(uri);
 		String fileExtension = normalizedURI.fileExtension();
-		if (fileExtension.equals("class"))  {
+		if ("class".equals(fileExtension))  {
 			return true;
 		}
+		
 		return false;
 	}
 	
 	protected boolean isPackage() {
-		if (getContentsInternal().isEmpty()) {
+		List<EObject> contents = getContentsInternal();
+		if (contents.isEmpty()) {
 			return false;
 		}
-		return getContentsInternal().get(0) instanceof Package;
+		
+		return contents.get(0) instanceof Package;
 	}
 	
 	protected boolean hasJavaClassifierURI() {
@@ -330,25 +333,35 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	}
 
 	protected void populatePackage(Package p) {
-		String fullPackageName = JavaUniquePathConstructor.packageName(p) + "." + p.getName();;
-		for (EObject classifier : JavaClasspath.get(this).getClassifiers(
-				fullPackageName, "*")) {
+		String packageName = JavaUniquePathConstructor.packageName(p);
+		String fullPackageName = packageName + "." + p.getName();
+		JavaClasspath classpath = JavaClasspath.get(this);
+		List<EObject> classifiers = classpath.getClassifiers(
+				fullPackageName, "*");
+		
+		for (EObject classifier : classifiers) {
 
-			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, this.getResourceSet());
-			if (!classifier.eIsProxy()) {
-				CompilationUnit cu = (CompilationUnit)classifier.eContainer();
-				if (cu != null) {
-					p.getCompilationUnits().add(cu);
-				}
+			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, getResourceSet());
+			if (classifier.eIsProxy()) {
+				// Skip proxies
+				continue;
 			}
+
+			CompilationUnit cu = (CompilationUnit)classifier.eContainer();
+			if (cu == null) {
+				continue;
+			}
+			
+			p.getCompilationUnits().add(cu);
 		}
 	}
 
 	@Override
 	protected void doSave(OutputStream outputStream, Map<?, ?> options)
 			throws IOException {
+		
 		if (isClassFile()) {
-			//save not supported
+			// Saving is not supported for class files.
 			return;
 		}
 
@@ -367,7 +380,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 
 					String[] folder = cu.getNamespaces().toArray(
 							new String[cu.getNamespaces().size()]);
-					String   file   = cu.getClassifiers().get(0).getName();
+					String file = cu.getClassifiers().get(0).getName();
 
 					URI normalizedURI = resourceSetForSave.getURIConverter().normalize(getURI());
 
@@ -438,9 +451,11 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	 * The segments of the logical URI are assumed as package name.
 	 */
 	protected void addPackageDeclaration(CompilationUnit cu) {
-		if (cu.getNamespaces().isEmpty() && !getURI().isFile() && !getURI().isPlatform()) {
-			//if there is no package and this is a logical URI, guess the package based on the URI
-			String[] fullName = getURI().lastSegment().split("\\.");
+		URI uri = getURI();
+		if (cu.getNamespaces().isEmpty() && !uri.isFile() && !uri.isPlatform()) {
+			// If there is no package and this is a logical URI, we guess the
+			// package based on the URI.
+			String[] fullName = uri.lastSegment().split("\\.");
 			for (int i = 0; i < fullName.length - 2; i++) { 
 				cu.getNamespaces().add(fullName[i]);
 			}
