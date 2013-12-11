@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.classifiers.Classifier;
@@ -54,13 +55,14 @@ import org.emftext.language.java.util.TemporalFullNameHolder;
 public class ElementReferenceTargetReferenceResolver implements
 	IJavaReferenceResolver<ElementReference, ReferenceableElement> {
 
-	JavaDefaultResolverDelegate<ElementReference, ReferenceableElement> delegate =
+	private JavaDefaultResolverDelegate<ElementReference, ReferenceableElement> delegate =
 		new JavaDefaultResolverDelegate<ElementReference, ReferenceableElement>();
 
-	public java.lang.String deResolve(ReferenceableElement element, ElementReference container, org.eclipse.emf.ecore.EReference reference) {
+	public String deResolve(ReferenceableElement element, ElementReference container, EReference reference) {
 		if (element.eIsProxy()) {
 			return delegate.deResolve(element, container, reference);
 		}
+		
 		if (element instanceof ConcreteClassifier) {
 			ConcreteClassifier concreteClassifier = (ConcreteClassifier) element;
 
@@ -167,9 +169,10 @@ public class ElementReferenceTargetReferenceResolver implements
 		}
 	}
 
-	private EObject searchFromStartingPoint(java.lang.String identifier,
-			ElementReference container,
-			org.eclipse.emf.ecore.EReference reference, EObject startingPoint) {
+	private EObject searchFromStartingPoint(String identifier,
+			ElementReference container, EReference reference,
+			EObject startingPoint) {
+		
 		List<IResolutionTargetDecider> deciderList = new ArrayList<IResolutionTargetDecider>();
 		deciderList.add(new EnumConstantDecider());
 		deciderList.add(new FieldDecider());
