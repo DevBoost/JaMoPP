@@ -49,6 +49,7 @@ OPTIONS {
 	ignoreTypeRestrictionsForPrinting = "true";
 	overrideResourcePostProcessor = "false";
 	overrideGrammarInformationProvider = "false";
+	overrideMetaInformation = "false";
 }
 
 TOKENS {
