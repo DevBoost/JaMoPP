@@ -2,16 +2,17 @@
  * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Software Technology Group - TU Dresden, Germany;
  *   DevBoost GmbH - Berlin, Germany
  *      - initial API and implementation
+ *   Benjamin Klatt - Adaptation for performance improvement
  ******************************************************************************/
 package org.emftext.language.java.resource;
 
@@ -50,6 +51,7 @@ import org.emftext.language.java.resource.java.IJavaInputStreamProcessorProvider
 import org.emftext.language.java.resource.java.IJavaOptions;
 import org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch;
 import org.emftext.language.java.resource.java.IJavaTextPrinter;
+import org.emftext.language.java.resource.java.JavaReferenceResolverSwitchFactory;
 import org.emftext.language.java.resource.java.mopp.JavaInputStreamProcessor;
 import org.emftext.language.java.resource.java.mopp.JavaParser;
 import org.emftext.language.java.resource.java.mopp.JavaResource;
@@ -65,35 +67,46 @@ import org.emftext.language.java.util.JavaModelCompletion;
 public class JavaSourceOrClassFileResource extends JavaResource {
 
 	private final JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
-	
+
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
 	}
+
+    /**
+     * Override the {@link JavaResource} getReferenceResolverSwitch() to make use of the
+     * {@link JavaReferenceResolverSwitchFactory}.<br>
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public IJavaReferenceResolverSwitch getReferenceResolverSwitch() {
+        return JavaReferenceResolverSwitchFactory.getSwitch();
+    }
 
 	protected boolean isClassFile() {
 		if (uri == null) {
 			return false;
 		}
-		
+
 		// Is there a physical source file behind this URI?
 		URI normalizedURI = getURIConverter().normalize(uri);
 		String fileExtension = normalizedURI.fileExtension();
 		if ("class".equals(fileExtension))  {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	protected boolean isPackage() {
 		List<EObject> contents = getContentsInternal();
 		if (contents.isEmpty()) {
 			return false;
 		}
-		
+
 		return contents.get(0) instanceof Package;
 	}
-	
+
 	protected boolean hasJavaClassifierURI() {
 		if (uri == null) {
 			return false;
@@ -105,7 +118,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options)
 			throws IOException {
-		
+
 		if (isClassFile()) {
 			JavaClasspath javaClasspath = JavaClasspath.get(this);
 			ClassFileModelLoader classFileParser = new ClassFileModelLoader(javaClasspath);
@@ -119,11 +132,11 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			}
 			if (!optionsWithUnicodeConverter.containsKey(IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER)) {
 				optionsWithUnicodeConverter.put(
-						IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER, 
+						IJavaOptions.INPUT_STREAM_PREPROCESSOR_PROVIDER,
 						new IJavaInputStreamProcessorProvider() {
-							
+
 							public JavaInputStreamProcessor getInputStreamProcessor(InputStream inputStream) {
-								return new JavaUnicodeConverter(inputStream);	
+								return new JavaUnicodeConverter(inputStream);
 							}
 				});
 			}
@@ -179,13 +192,13 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	@Override
 	public EObject getEObject(String id) {
 		EObject result = null;
-		
+
 		// check whether proxy resolving is turned off
 		Object disableProxyResolvingValue = getResourceSet().getLoadOptions().get(IExtendedJavaOptions.DISABLE_ON_DEMAND_PROXY_RESOLVING);
 		if (Boolean.TRUE.equals(disableProxyResolvingValue)) {
 			return null;
 		}
-		
+
 		if ((isClassFile() || isPackage()) &&
 				id.startsWith("//" + JavaUniquePathConstructor.CLASSIFIERS_ROOT_PATH_PREFIX)) {
 			if (!getContentsInternal().isEmpty()) {
@@ -297,12 +310,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 				CompilationUnit cu = (CompilationUnit) root;
 				setCompilationUnitName(cu);
 			}
-			
+
 			//only for physical URIs
 			if(hasJavaClassifierURI()) {
 				return;
 			}
-			
+
 			//could also be a package-info.java without CU
 			if (root instanceof CompilationUnit) {
 				CompilationUnit cu = (CompilationUnit) root;
@@ -338,7 +351,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		JavaClasspath classpath = JavaClasspath.get(this);
 		List<EObject> classifiers = classpath.getClassifiers(
 				fullPackageName, "*");
-		
+
 		for (EObject classifier : classifiers) {
 
 			classifier = (ConcreteClassifier) EcoreUtil.resolve(classifier, getResourceSet());
@@ -351,7 +364,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			if (cu == null) {
 				continue;
 			}
-			
+
 			p.getCompilationUnits().add(cu);
 		}
 	}
@@ -359,7 +372,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	@Override
 	protected void doSave(OutputStream outputStream, Map<?, ?> options)
 			throws IOException {
-		
+
 		if (isClassFile()) {
 			// Saving is not supported for class files.
 			return;
@@ -444,7 +457,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * This method adds a package declaration (namespaces) to the given
 	 * compilation unit if none is defined and this resource has a logical URI.
@@ -456,7 +469,7 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 			// If there is no package and this is a logical URI, we guess the
 			// package based on the URI.
 			String[] fullName = uri.lastSegment().split("\\.");
-			for (int i = 0; i < fullName.length - 2; i++) { 
+			for (int i = 0; i < fullName.length - 2; i++) {
 				cu.getNamespaces().add(fullName[i]);
 			}
 		}

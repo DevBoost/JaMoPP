@@ -7,6 +7,7 @@
 package org.emftext.language.java.resource.java.mopp;
 
 import org.emftext.language.java.resource.java.IJavaNameProvider;
+import org.emftext.language.java.resource.java.JavaReferenceResolverSwitchFactory;
 
 public class JavaMetaInformation implements org.emftext.language.java.resource.java.IJavaMetaInformation {
 
@@ -42,7 +43,7 @@ public class JavaMetaInformation implements org.emftext.language.java.resource.j
 	}
 
 	public org.emftext.language.java.resource.java.IJavaReferenceResolverSwitch getReferenceResolverSwitch() {
-		return new org.emftext.language.java.resource.java.mopp.JavaReferenceResolverSwitch();
+		return JavaReferenceResolverSwitchFactory.getSwitch();
 	}
 
 	public org.emftext.language.java.resource.java.IJavaTokenResolverFactory getTokenResolverFactory() {
