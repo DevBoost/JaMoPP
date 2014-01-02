@@ -50,6 +50,7 @@ OPTIONS {
 	overrideResourcePostProcessor = "false";
 	overrideGrammarInformationProvider = "false";
 	overrideMetaInformation = "false";
+	overrideParser = "false";
 }
 
 TOKENS {
