@@ -39,6 +39,10 @@ public class JavaResourcePostProcessor implements IJavaResourcePostProcessor {
 		// post-processors.
 	}
 
+	/** Thread safe singleton instance of the factory to create uri fragments. */
+	private static JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement> uriFragmentFactory = new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(
+            JavaReferenceResolverSwitchFactory.getSwitch().getElementReferenceTargetReferenceResolver());
+
 	protected void repairAndComplete(JavaResource resource) {
 		new JavaModelRepairer() {
 			protected void registerContextDependentProxy(
@@ -47,10 +51,9 @@ public class JavaResourcePostProcessor implements IJavaResourcePostProcessor {
 					String id, EObject proxy) {
 				assert !targetReference.isMany();
 
-				JavaReferenceResolverSwitch javaReferenceResolverSwitch = JavaReferenceResolverSwitchFactory.getSwitch();
+
                 ((JavaResource)resource).registerContextDependentProxy(
-						new JavaContextDependentURIFragmentFactory<ElementReference, ReferenceableElement>(
-								javaReferenceResolverSwitch.getElementReferenceTargetReferenceResolver()),
+						uriFragmentFactory,
 						mainIdReference,
 						targetReference,
 						id,
