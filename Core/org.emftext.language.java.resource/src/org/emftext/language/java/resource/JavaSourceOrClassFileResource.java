@@ -66,7 +66,7 @@ import org.emftext.language.java.util.JavaModelCompletion;
  */
 public class JavaSourceOrClassFileResource extends JavaResource {
 
-	private final JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
+	private final static JavaLayoutUtil layoutUtil = new JavaLayoutUtil();
 
 	public JavaSourceOrClassFileResource(URI uri) {
 		super(uri);
