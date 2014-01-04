@@ -2,12 +2,12 @@
  * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Software Technology Group - TU Dresden, Germany;
  *   DevBoost GmbH - Berlin, Germany
@@ -17,6 +17,7 @@ package org.emftext.language.java.resource.java.analysis.decider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -54,6 +55,10 @@ import org.emftext.language.java.util.TemporalFullNameHolder;
  */
 public class ConcreteClassifierDecider extends AbstractDecider {
 
+    private static final String PACKAGE_SEPARATOR = ".";
+
+    private static Pattern classifierSplitPattern = Pattern.compile("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
+
 	protected Resource resource;
 
 	private EList<ConcreteClassifier> innerTypeSuperTypeList = new BasicEList<ConcreteClassifier>();
@@ -85,8 +90,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 		if (container instanceof PackageReference) {
 			PackageReference p = (PackageReference) container;
 			String packageName = packageName(p);
-			resultList.addAll(JavaClasspath.get(resource).getClassifiers(
-					packageName, "*"));
+			resultList.addAll(JavaClasspath.get(resource).getClassifiers(packageName, "*"));
 		}
 
 		if(container instanceof Classifier
@@ -136,9 +140,9 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 		//this is required for classes that contain '$' in their name
 		if(container instanceof CompilationUnit && identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
-			String[] path = identifier.split("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR, -1);
+			String[] path = classifierSplitPattern.split(identifier, -1);
 			EList<EObject> innerClassifiers = new BasicEList<EObject>(resultList);
-			String outerName = null;
+			StringBuilder outerName = null;
 			outer: for(int i = 0; i < path.length; i++) {
 				for(EObject cand : innerClassifiers) {
 					if (cand instanceof ConcreteClassifier) {
@@ -146,12 +150,15 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 						if(path[i].equals(innerClassifier.getName())) {
 							innerClassifiers.clear();
 							if (outerName != null) {
-								outerName = outerName + path[i] + "$"; 
+								outerName.append(path[i]);
+								outerName.append("$");
 							}
 							if (!innerClassifier.eIsProxy()) {
 								if (outerName == null) {
-									outerName = innerClassifier.getContainingCompilationUnit().getNamespacesAsString() + 
-											innerClassifier.getName() + "$"; 
+								    outerName = new StringBuilder();
+								    outerName.append(innerClassifier.getContainingCompilationUnit().getNamespacesAsString());
+								    outerName.append(innerClassifier.getName());
+								    outerName.append("$");
 								}
 								innerClassifiers.addAll(innerClassifier.getInnerClassifiers());
 								for(ConcreteClassifier superClassifier : innerClassifier.getAllSuperClassifiers()) {
@@ -164,46 +171,55 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 								//(without $) is a class. The proxy we have points at the class, but the
 								//class does not exist as such.
 								if (outerName == null) {
-									outerName = ((InternalEObject) innerClassifier).eProxyURI().trimFragment().toString().substring(
-											JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
-									outerName = outerName.subSequence(
-											0, outerName.length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length()) + "$";	
+								    outerName = new StringBuilder();
+								    String classifierURI = ((InternalEObject) innerClassifier).eProxyURI().trimFragment().toString().substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
+									outerName.append(classifierURI.subSequence(0, classifierURI.length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length()));
+									outerName.append("$");
 								}
-								for(EObject innerClassifierProxy : JavaClasspath.get(container).getClassifiers(
-										outerName, "*")) {
-									innerClassifiers.add((ConcreteClassifier) EcoreUtil.resolve(
-											innerClassifierProxy, container));
+								for(EObject innerClassifierProxy : JavaClasspath.get(container).getClassifiers(outerName.toString(), "*")) {
+									innerClassifiers.add((ConcreteClassifier) EcoreUtil.resolve(innerClassifierProxy, container));
 								}
 							}
 							if (i + 1 == path.length - 1) {
 								resultList.addAll(innerClassifiers);
 							}
 							continue outer;
-						}	
+						}
 					}
 				}
 
 			}
 		}
-		
+
 		return resultList;
 	}
 
-	private String packageName(PackageReference p) {
-		String s = "";
-		while (p != null) {
-			s =  p.getName() + "." + s;
-			EObject container = p.eContainer();
-			if (container instanceof PackageReference) {
-				p = (PackageReference) container;
-			} else {
-				p = null;
-			}
-		}
-		return s;
+	/**
+	 * Get the full qualified name of a package.
+	 * @param pckg The package to get the name for.
+	 * @return The full qualified name separated with "."
+	 */
+	private String packageName(PackageReference pckg) {
+		StringBuilder builder = new StringBuilder();
+		packageName(pckg,builder);
+		return builder.toString();
 	}
 
-	private void addImportsAndInnerClasses(EObject container,
+	/**
+	 * Recursively fill the {@link StringBuilder} with the full qualified name.
+	 * Recursively to fill the builder in a performance optimized way.
+	 * @param pckg The package to get the name.
+	 * @param builder The {@link StringBuilder} to fill.
+	 */
+	private void packageName(PackageReference pckg, StringBuilder builder) {
+	    if (pckg.eContainer() instanceof PackageReference) {
+	        packageName((PackageReference) pckg.eContainer(),builder);
+	        builder.append(PACKAGE_SEPARATOR);
+	    }
+	    builder.append(pckg.getName());
+    }
+
+    private void addImportsAndInnerClasses(EObject container,
 			EList<EObject> resultList) {
 		//1) Inner classifiers of superclasses
 		if(container instanceof JavaRoot) {
