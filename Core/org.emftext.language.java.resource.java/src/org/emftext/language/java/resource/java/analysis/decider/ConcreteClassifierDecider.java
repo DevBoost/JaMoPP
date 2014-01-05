@@ -17,7 +17,6 @@ package org.emftext.language.java.resource.java.analysis.decider;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -54,10 +53,6 @@ import org.emftext.language.java.util.TemporalFullNameHolder;
  * A decider that looks for concrete classifiers.
  */
 public class ConcreteClassifierDecider extends AbstractDecider {
-
-    private static final String PACKAGE_SEPARATOR = ".";
-
-    private static Pattern classifierSplitPattern = Pattern.compile("\\" + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 
 	protected Resource resource;
 
@@ -140,7 +135,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 
 		//this is required for classes that contain '$' in their name
 		if(container instanceof CompilationUnit && identifier.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
-			String[] path = classifierSplitPattern.split(identifier, -1);
+			String[] path = JavaUniquePathConstructor.CLASSIFIER_SEPARATOR_REGEX_PATTERN.split(identifier, -1);
 			EList<EObject> innerClassifiers = new BasicEList<EObject>(resultList);
 			StringBuilder outerName = null;
 			outer: for(int i = 0; i < path.length; i++) {
@@ -151,14 +146,14 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 							innerClassifiers.clear();
 							if (outerName != null) {
 								outerName.append(path[i]);
-								outerName.append("$");
+								outerName.append(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 							}
 							if (!innerClassifier.eIsProxy()) {
 								if (outerName == null) {
 								    outerName = new StringBuilder();
 								    outerName.append(innerClassifier.getContainingCompilationUnit().getNamespacesAsString());
 								    outerName.append(innerClassifier.getName());
-								    outerName.append("$");
+								    outerName.append(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 								}
 								innerClassifiers.addAll(innerClassifier.getInnerClassifiers());
 								for(ConcreteClassifier superClassifier : innerClassifier.getAllSuperClassifiers()) {
@@ -174,7 +169,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 								    outerName = new StringBuilder();
 								    String classifierURI = ((InternalEObject) innerClassifier).eProxyURI().trimFragment().toString().substring(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length());
 									outerName.append(classifierURI.subSequence(0, classifierURI.length() - JavaUniquePathConstructor.JAVA_FILE_EXTENSION.length()));
-									outerName.append("$");
+									outerName.append(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 								}
 								for(EObject innerClassifierProxy : JavaClasspath.get(container).getClassifiers(outerName.toString(), "*")) {
 									innerClassifiers.add((ConcreteClassifier) EcoreUtil.resolve(innerClassifierProxy, container));
@@ -214,7 +209,7 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 	private void packageName(PackageReference pckg, StringBuilder builder) {
 	    if (pckg.eContainer() instanceof PackageReference) {
 	        packageName((PackageReference) pckg.eContainer(),builder);
-	        builder.append(PACKAGE_SEPARATOR);
+	        builder.append(JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 	    }
 	    builder.append(pckg.getName());
     }
@@ -280,8 +275,8 @@ public class ConcreteClassifierDecider extends AbstractDecider {
 			}
 			// this is needed because classifiers with '$'-signs in their name are
 			// allowed which interferes with the usage of '$' as separator.
-			if(id.contains("$")) {
-				String mainID = id.substring(id.lastIndexOf("$") + 1);
+			if(id.contains(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
+				String mainID = id.substring(id.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR) + 1);
 				if (mainID.equals(concreteClassifier.getName())) {
 					//set the full id for reprint
 					if(concreteClassifier.eIsProxy()) {
