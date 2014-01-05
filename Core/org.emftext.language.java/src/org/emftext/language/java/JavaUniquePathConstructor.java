@@ -2,12 +2,12 @@
  * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Software Technology Group - TU Dresden, Germany;
  *   DevBoost GmbH - Berlin, Germany
@@ -17,7 +17,6 @@ package org.emftext.language.java;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.emftext.language.java.commons.NamespaceAwareElement;
 
@@ -73,11 +72,18 @@ public class JavaUniquePathConstructor {
 	 * Java's class file extension (.class).
 	 */
 	public static final String JAVA_CLASS_FILE_EXTENSION = ".class";
-	
+
+    /**
+     * Pattern to split for "\\.".<br>
+     * We cache this regular expression because it is used very frequently.
+     */
+    public static final Pattern PACKAGE_SEPARATOR_REGEX_PATTERN = Pattern.compile("\\" + PACKAGE_SEPARATOR);
+
 	/**
+     * Pattern to split for "\\$".<br>
 	 * We cache this regular expression because it is used very frequently.
 	 */
-	private static final Pattern CLASSIFIER_SEPARATOR_REGEX_PATTERN = Pattern.compile("\\" + CLASSIFIER_SEPARATOR);
+	public static final Pattern CLASSIFIER_SEPARATOR_REGEX_PATTERN = Pattern.compile("\\" + CLASSIFIER_SEPARATOR);
 
 	/**
 	 * Constructs an URI from a fully qualified classifier name
@@ -160,25 +166,13 @@ public class JavaUniquePathConstructor {
 	 * @return
 	 */
 	public static String packageName(NamespaceAwareElement nsaElement) {
-		EList<String> packageNameSegements = nsaElement.getNamespaces();
-		String packageName = packageName(packageNameSegements);
-
-		if (packageName == null) {
-			packageName = "";
-		}
-		return packageName;
-	}
-
-	private static String packageName(EList<String> packageNameSegements) {
-		String packageName = null;
-		for(String packageNamePart : packageNameSegements) {
-			if (packageName == null) {
-				packageName = packageNamePart;
-			}
-			else {
-				packageName = packageName + PACKAGE_SEPARATOR + packageNamePart;
-			}
-		}
-		return packageName;
+        StringBuilder nameBuilder = new StringBuilder();
+        for(String packageNamePart : nsaElement.getNamespaces()) {
+            if (nameBuilder.length() > 0) {
+                nameBuilder.append(PACKAGE_SEPARATOR);
+            }
+            nameBuilder.append(packageNamePart);
+        }
+        return nameBuilder.toString();
 	}
 }
