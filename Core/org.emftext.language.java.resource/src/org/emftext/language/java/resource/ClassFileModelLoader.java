@@ -2,12 +2,12 @@
  * Copyright (c) 2006-2012
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   Software Technology Group - TU Dresden, Germany;
  *   DevBoost GmbH - Berlin, Germany
@@ -29,6 +29,7 @@ import org.apache.bcel5_2_0.classfile.Utility;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
+import org.emftext.language.java.JavaUniquePathConstructor;
 import org.emftext.language.java.annotations.AnnotationsFactory;
 import org.emftext.language.java.arrays.ArraysFactory;
 import org.emftext.language.java.classifiers.Annotation;
@@ -86,10 +87,10 @@ public class ClassFileModelLoader {
 			ConcreteClassifier classifier = constructClassifier(myClass);
 			CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 			cu.setName(classFileName);
-			List<String> namespace1 = Arrays.asList(myClass.getClassName().split("\\."));
-			List<String> namespace2 = Arrays.asList(namespace1.get(namespace1.size() - 1).split("\\$"));
+			List<String> namespace1 = Arrays.asList(JavaUniquePathConstructor.PACKAGE_SEPARATOR_REGEX_PATTERN.split(myClass.getClassName()));
+			List<String> namespace2 = Arrays.asList(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR_REGEX_PATTERN.split(namespace1.get(namespace1.size() - 1)));
 			cu.getNamespaces().addAll(namespace1.subList(0, namespace1.size() - 1));
-			if (myClass.getClassName().endsWith("$")) {
+			if (myClass.getClassName().endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 				//empty class name
 				cu.getNamespaces().addAll(namespace2.subList(0, namespace2.size()));
 			}
@@ -124,12 +125,12 @@ public class ClassFileModelLoader {
 		}
 
 		String className = clazz.getClassName();
-		int idx = clazz.getClassName().lastIndexOf("$");
+		int idx = clazz.getClassName().lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 		if (idx >= 0) {
 			className = className.substring(idx + 1);
 		}
 		else {
-			idx = clazz.getClassName().lastIndexOf(".");
+			idx = clazz.getClassName().lastIndexOf(JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 			if (idx >= 0) {
 				className = className.substring(idx + 1);
 			}
@@ -269,7 +270,7 @@ public class ClassFileModelLoader {
         }
 
         List<String> parameterNames = extractParameterNames(method);
-        
+
 		for(int i = 0; i < method.getArgumentTypes().length; i++) {
 			org.apache.bcel5_2_0.generic.Type argType = method.getArgumentTypes()[i];
 			String paramName;
@@ -793,7 +794,7 @@ public class ClassFileModelLoader {
 	}
 
 	protected TypeReference createReferenceToClassifier(String fullClassifierName) {
-		fullClassifierName = fullClassifierName.replaceAll("/", ".");
+		fullClassifierName = fullClassifierName.replaceAll("/", JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 		Classifier classifier = (Classifier) javaClasspath.getClassifier(fullClassifierName);
 		ClassifierReference classifierReference =
 			TypesFactory.eINSTANCE.createClassifierReference();
@@ -809,7 +810,7 @@ public class ClassFileModelLoader {
 		}
 		return arrayDimension;
 	}
-	
+
 	protected List<String> extractParameterNames(final org.apache.bcel5_2_0.classfile.Method method) {
 		final List<String> names = new ArrayList<String>();
 		if (method.getLocalVariableTable() != null) {
