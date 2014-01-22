@@ -352,26 +352,29 @@ eclass TypeParameter {
 								elementReference = (ElementReference) elementReference.getNext();
 							}
 							if (elementReference.getTarget() instanceof TypedElement) {
-								ClassifierReference argumentType = ((TypedElement)elementReference.getTarget()).getTypeReference().getPureClassifierReference();
-								if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
-									for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
-										if(typeArgument instanceof QualifiedTypeArgument) {
-											if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
-												int idx2 = parameterType.getTypeArguments().indexOf(typeArgument);
-												if (argumentType.getTypeArguments().get(idx2) instanceof QualifiedTypeArgument) {
-													resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(idx2)).getTypeReference().getTarget());
-												}
-												else if (argumentType.getTypeArguments().get(idx2) instanceof ExtendsTypeArgument) {
-													for(TypeReference extendedType : ((ExtendsTypeArgument) argumentType.getTypeArguments().get(idx2)).getExtendTypes()) {
-														resultList.add(0, extendedType.getTarget());
+								TypeReference typeRef = ((TypedElement)elementReference.getTarget()).getTypeReference();
+								if (typeRef != null) {
+									ClassifierReference argumentType = typeRef.getPureClassifierReference();
+									if (argumentType != null && parameterType.getTypeArguments().size() == argumentType.getTypeArguments().size()) {
+										for(TypeArgument typeArgument : parameterType.getTypeArguments()) {
+											if(typeArgument instanceof QualifiedTypeArgument) {
+												if(((QualifiedTypeArgument) typeArgument).getTypeReference().getTarget().equals(this)) {
+													int idx2 = parameterType.getTypeArguments().indexOf(typeArgument);
+													if (argumentType.getTypeArguments().get(idx2) instanceof QualifiedTypeArgument) {
+														resultList.add(0, ((QualifiedTypeArgument)argumentType.getTypeArguments().get(idx2)).getTypeReference().getTarget());
+													}
+													else if (argumentType.getTypeArguments().get(idx2) instanceof ExtendsTypeArgument) {
+														for(TypeReference extendedType : ((ExtendsTypeArgument) argumentType.getTypeArguments().get(idx2)).getExtendTypes()) {
+															resultList.add(0, extendedType.getTarget());
+														}
 													}
 												}
 											}
 										}
 									}
-								}
-								if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
-									resultList.add(0,argumentType.getTarget());
+									if (argumentType != null && parameterType.getTarget() instanceof TypeParameter) {
+										resultList.add(0,argumentType.getTarget());
+									}
 								}
 							}
 							if(elementReference.getNext() instanceof ReflectiveClassReference) {
