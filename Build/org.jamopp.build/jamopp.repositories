@@ -20,3 +20,8 @@ git:https://github.com/DevBoost/JaMoPP.git!Examples/
 git:https://github.com/DevBoost/JaMoPP.git!Features/
 git:https://github.com/DevBoost/JaMoPP.git!Tests/
 git:https://github.com/DevBoost/JaMoPP.git!Utils/
+
+// NatSpec Annotations
+http://www.nat-spec.com/update_trunk/de.devboost.natspec.updatesite-complete.zip
+// NatSpec Libraries
+git:https://github.com/DevBoost/NatSpec_Requirements_Library.git!de.devboost.natspec.library.documentation
