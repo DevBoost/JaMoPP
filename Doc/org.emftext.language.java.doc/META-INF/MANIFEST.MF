@@ -13,5 +13,6 @@ Require-Bundle: org.eclipse.emf.ecore,
  org.emftext.language.java,
  org.emftext.language.java.resource,
  org.emftext.language.java.resource.bcel,
- org.emftext.language.java.resource.java
+ org.emftext.language.java.resource.java,
+ de.devboost.natspec.library.documentation
 
