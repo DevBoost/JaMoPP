@@ -1,140 +1,222 @@
- 
-/* start css.sty */
-.aer10-x-x-109{}
-.phvr8t-x-x-400{font-size:363%; font-family: sans-serif;}
-.aer12-{font-size:109%;}
-.aessbx-10x-x-109{font-family: sans-serif; font-weight: bold;}
-.aessbx-10x-x-109{font-family: sans-serif; font-weight: bold;}
-.aessbx-10x-x-109{font-family: sans-serif; font-weight: bold;}
-p.noindent { text-indent: 0em }
-td p.noindent { text-indent: 0em; margin-top:0em; }
-p.nopar { text-indent: 0em; }
-p.indent{ text-indent: 1.5em }
-@media print {div.crosslinks {visibility:hidden;}}
-a img { border-top: 0; border-left: 0; border-right: 0; }
-center { margin-top:1em; margin-bottom:1em; }
-td center { margin-top:0em; margin-bottom:0em; }
-.Canvas { position:relative; }
-img.math{vertical-align:middle;}
-li p.indent { text-indent: 0em }
-li p:first-child{ margin-top:0em; }
-li p:last-child, li div:last-child { margin-bottom:0.5em; }
-li p~ul:last-child, li p~ol:last-child{ margin-bottom:0.5em; }
-.enumerate1 {list-style-type:decimal;}
-.enumerate2 {list-style-type:lower-alpha;}
-.enumerate3 {list-style-type:lower-roman;}
-.enumerate4 {list-style-type:upper-alpha;}
-div.newtheorem { margin-bottom: 2em; margin-top: 2em;}
-.obeylines-h,.obeylines-v {white-space: nowrap; }
-div.obeylines-v p { margin-top:0; margin-bottom:0; }
-.overline{ text-decoration:overline; }
-.overline img{ border-top: 1px solid black; }
-td.displaylines {text-align:center; white-space:nowrap;}
-.centerline {text-align:center;}
-.rightline {text-align:right;}
-div.verbatim {font-family: monospace; white-space: nowrap; text-align:left; clear:both; }
-.fbox {padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
-div.fbox {display:table}
-div.center div.fbox {text-align:center; clear:both; padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
-div.minipage{width:100%;}
-div.center, div.center div.center {text-align: center; margin-left:1em; margin-right:1em;}
-div.center div {text-align: left;}
-div.flushright, div.flushright div.flushright {text-align: right;}
-div.flushright div {text-align: left;}
-div.flushleft {text-align: left;}
-.underline{ text-decoration:underline; }
-.underline img{ border-bottom: 1px solid black; margin-bottom:1pt; }
-.framebox-c, .framebox-l, .framebox-r { padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
-.framebox-c {text-align:center;}
-.framebox-l {text-align:left;}
-.framebox-r {text-align:right;}
-span.thank-mark{ vertical-align: super }
-span.footnote-mark sup.textsuperscript, span.footnote-mark a sup.textsuperscript{ font-size:80%; }
-div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
-table.tabular td p{margin-top:0em;}
-table.tabular {margin-left: auto; margin-right: auto;}
-td p:first-child{ margin-top:0em; }
-td p:last-child{ margin-bottom:0em; }
-div.td00{ margin-left:0pt; margin-right:0pt; }
-div.td01{ margin-left:0pt; margin-right:5pt; }
-div.td10{ margin-left:5pt; margin-right:0pt; }
-div.td11{ margin-left:5pt; margin-right:5pt; }
-table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-td.td00{ padding-left:0pt; padding-right:0pt; }
-td.td01{ padding-left:0pt; padding-right:5pt; }
-td.td10{ padding-left:5pt; padding-right:0pt; }
-td.td11{ padding-left:5pt; padding-right:5pt; }
-table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-.hline hr, .cline hr{ height : 1px; margin:0px; }
-.tabbing-right {text-align:right;}
-span.TEX {letter-spacing: -0.125em; }
-span.TEX span.E{ position:relative;top:0.5ex;left:-0.0417em;}
-a span.TEX span.E {text-decoration: none; }
-span.LATEX span.A{ position:relative; top:-0.5ex; left:-0.4em; font-size:85%;}
-span.LATEX span.TEX{ position:relative; left: -0.4em; }
-div.float, div.figure {margin-left: auto; margin-right: auto;}
-div.float img {text-align:center;}
-div.figure img {text-align:center;}
-.marginpar {width:20%; float:right; text-align:left; margin-left:auto; margin-top:0.5em; font-size:85%; text-decoration:underline;}
-.marginpar p{margin-top:0.4em; margin-bottom:0.4em;}
-table.equation {width:100%;}
-.equation td{text-align:center; }
-td.equation { margin-top:1em; margin-bottom:1em; } 
-td.equation-label { width:5%; text-align:center; }
-td.eqnarray4 { width:5%; white-space: normal; }
-td.eqnarray2 { width:5%; }
-table.eqnarray-star, table.eqnarray {width:100%;}
-div.eqnarray{text-align:center;}
-div.array {text-align:center;}
-div.pmatrix {text-align:center;}
-table.pmatrix {width:100%;}
-span.pmatrix img{vertical-align:middle;}
-div.pmatrix {text-align:center;}
-table.pmatrix {width:100%;}
-span.bar-css {text-decoration:overline;}
-img.cdots{vertical-align:middle;}
-h2.titleHead{text-align:center;}
-div.maketitle{ margin-bottom: 2em; text-align:center; }
-div.author, div.date {text-align:center;}
-div.thanks{text-align:left; margin-left:10%; font-size:85%; font-style:italic; }
-div.author{white-space: nowrap;}
-div.dedication {text-align:center;}
-span.footnote-mark sup.textsuperscript, span.footnote-mark a sup.textsuperscript{ font-size:80%; }
-.partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
-.chapterToc a, .chapterToc, .likechapterToc a, .likechapterToc, .appendixToc a, .appendixToc, .addchapToc a {line-height: 200%; font-weight:bold;}
-p.bibitem { text-indent: -2em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }
-p.bibitem-p { text-indent: 0em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }
-h1.partHead{text-align: center}
-.paragraphHead, .likeparagraphHead { margin-top:2em; font-weight: bold;}
-.subparagraphHead, .likesubparagraphHead { font-weight: bold;}
-.quote {margin-bottom:0.25em; margin-top:0.25em; margin-left:1em; margin-right:1em; text-align:justify;}
-.index-item, .index-subitem, .index-subsubitem {display:block}
-.caption td.id{font-weight: bold; white-space: nowrap; }
-div.cation {text-align:center;}
-.verse{white-space:nowrap; margin-left:2em}
-.quotation {margin-bottom:0.25em; margin-top:0.25em; margin-left:1em; }
-h1.partHead{text-align: center}
-.lstlisting .label{margin-right:0.5em; }
-div.lstlisting{font-family: monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; }
-div.lstinputlisting{ font-family: monospace; white-space: nowrap; }
-.lstinputlisting .label{margin-right:0.5em;}
-.figure img.graphics {margin-left:10%;}
-div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
-table.tabular td p{margin-top:0em;}
-table.tabular {margin-left: auto; margin-right: auto;}
-td p:first-child{ margin-top:0em; }
-td p:last-child{ margin-bottom:0em; }
-div.td00{ margin-left:0pt; margin-right:0pt; }
-div.td01{ margin-left:0pt; margin-right:5pt; }
-div.td10{ margin-left:5pt; margin-right:0pt; }
-div.td11{ margin-left:5pt; margin-right:5pt; }
-table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-td.td00{ padding-left:0pt; padding-right:0pt; }
-td.td01{ padding-left:0pt; padding-right:5pt; }
-td.td10{ padding-left:5pt; padding-right:0pt; }
-td.td11{ padding-left:5pt; padding-right:5pt; }
-table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
-.hline hr, .cline hr{ height : 1px; margin:0px; }
-div.array {text-align:center;}
-/* end css.sty */
+@charset "utf-8";
 
+.outline_section_reference {
+	margin: 10pt;
+}
+
+.outline_subsection_reference {
+	margin: 20pt;
+}
+
+.outline_subsubsection_reference {
+	margin: 30pt;
+}
+
+
+.code {
+	margin: 10pt;
+	border-width:1px;
+  	border-style:solid;
+  	border-color:blue;
+  	padding:8pt;
+  	background-color:white;
+  	color:black;
+  	width:70%;
+  	-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px;
+}
+
+.linenumber {
+	color:blue;
+	width: 2em; 
+	float:left;
+	text-align:right;
+	margin-right:1em;
+}
+
+.codeline {
+	display:block;
+	
+}
+.codeline:hover {
+	background-color:#66ffff;
+}
+
+.natspec_code {
+
+}
+
+.last_modified {
+	display:block;
+	width:80%;
+	text-align:center;
+	font-size:0.7em;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* --- Main --- */
+
+html {
+	overflow-y: scroll;
+	height: 100%;
+}
+
+body {
+	margin:70pt;
+	background: #fafafa;
+	color: #666;
+    font-family: 'Titillium Web', sans-serif;
+	font-weight:200;
+	font-size: 1.2em;
+	line-height:1.6;
+	height: 100%;
+	width: 80%;
+	text-align: justify;
+ }
+
+a {
+	text-decoration: underline;
+	color: #960000;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #F87531;
+}
+
+h1 {
+	margin-left: -20pt;
+	text-align:center;
+	color: #F87531;
+	
+}
+
+h2 {
+	margin-left: -20pt;
+	text-decoration: underline;
+	color: #F87531;
+}
+
+h3 {
+	margin-left: -20pt;
+	text-decoration: underline;
+	color: #F87531;
+}
+
+h4 {
+	margin-left: -20pt;
+	text-decoration: underline;
+	color: #F87531;
+}
+
+
+h5 {
+	font-size:1.2em;
+	margin-left: -20pt;
+	text-decoration: underline;
+}
+
+table {
+	width:80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th {
+	background: #cccccc;
+	border: 2pt solid #cccccc;
+	padding:5pt;
+}
+
+td {
+	border: 2pt solid #cccccc;
+	padding:5pt;
+}
+
+
+li {
+	margin: 0 0 1em 0;
+	list-style-type:square
+}
+
+strong {
+	font-weight: bold;	
+}
+
+.clr {
+	clear: both;
+	font-size: 0;
+	line-height: 0;
+}
+
+.pa {
+	position: absolute;	
+}
+
+.container {
+	margin: 0 auto;
+	min-height: 100%;
+	width: 100%;
+}
+
+.aussen {
+	margin: 0 auto;
+	padding: 0 0 40px 0;
+	width: 100%;
+}
+
+.innen {
+	margin: 0 auto;
+	position: relative;
+	width: 800px;
+}
+
+/* ------ @Font-Face ------ */
+
+@font-face {
+    font-family: 'OpenSans';
+    src: url('font/opensans-light-webfont.eot');
+    src: url('font/opensans-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/opensans-light-webfont.woff') format('woff'),
+         url('font/opensans-light-webfont.ttf') format('truetype'),
+         url('font/opensans-light-webfont.svg#OpenSans') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- Header --- */
+
+.header {
+	height: 122px;
+}
+
+.logo {
+	top: 22px;
+}
+
+.figure_description {
+ 	text-align:center;
+	font-weight:400;
+}
+
+img {
+    display: block;
+	margin-left: auto;
+    margin-right: auto;
+	margin-top:20pt;
+	width:80%;
+	text-align:center;
+}
+
+.todo {
+	font-weight: bold;
+	font-style: italic;
+	color: #960000;
+}
