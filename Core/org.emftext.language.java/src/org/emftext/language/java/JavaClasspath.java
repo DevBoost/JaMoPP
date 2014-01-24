@@ -223,6 +223,13 @@ public class JavaClasspath extends AdapterImpl {
 		}
 	}
 	
+	/**
+	 * Returns the class path for the given {@link ResourceSet}. Make sure to
+	 * set the load options {@link #OPTION_USE_LOCAL_CLASSPATH} and
+	 * {@link #OPTION_REGISTER_STD_LIB} to control whether a global class path
+	 * is used for the resource set and whether the standard library shall be
+	 * registered.
+	 */
 	public static JavaClasspath get(ResourceSet resourceSet) {
 		getInitializers();
 		if (resourceSet == null) {
@@ -238,13 +245,14 @@ public class JavaClasspath extends AdapterImpl {
 			registerStdLibOption = Boolean.valueOf(registerStdLibDefault());
 		}
 
-		if(Boolean.TRUE.equals(localClasspathOption))  {
-			for(Adapter a : resourceSet.eAdapters()) {
-				if (a instanceof JavaClasspath) {
-					JavaClasspath javaClasspath = (JavaClasspath) a;
+		if (Boolean.TRUE.equals(localClasspathOption)) {
+			for (Adapter adapter : resourceSet.eAdapters()) {
+				if (adapter instanceof JavaClasspath) {
+					JavaClasspath javaClasspath = (JavaClasspath) adapter;
 					URIConverter newURIConverter = resourceSet.getURIConverter();
 					if (javaClasspath.uriConverter != newURIConverter) {
-						//the URI converter has been replaced, the URI map needs to be transferred
+						// The URI converter has been replaced, the URI map
+						// needs to be transferred.
 						for (Entry<URI, URI> oldEntry : javaClasspath.uriConverter.getURIMap().entrySet()) {
 							if (oldEntry.getKey().toString().startsWith(
 									JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
@@ -262,7 +270,7 @@ public class JavaClasspath extends AdapterImpl {
 			
 			resourceSet.eAdapters().add(myClasspath);
 
-			if(Boolean.TRUE.equals(registerStdLibOption))  {
+			if (Boolean.TRUE.equals(registerStdLibOption))  {
 				myClasspath.registerStdLib();
 			}
 
@@ -460,9 +468,9 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	/**
-	 * Registers the classifier with the given name and package that is physically
-	 * located at the given URI.
-	 *
+	 * Registers the classifier with the given name and package that is
+	 * physically located at the given URI.
+	 * 
 	 * @param packageName
 	 * @param classifierName
 	 * @param uri
