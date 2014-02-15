@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2013
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -38,9 +38,6 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.emftext.language.java.JavaClasspath;
 import org.emftext.language.java.resource.JaMoPPUtil;
 
-/**
- * A test that loads all EJava files and checks that they do not contain errors.
- */
 public class AppendixGenerator {
 	
 	private final String GENMODEL_GENMODEL_URI = "platform:/plugin/org.eclipse.emf.codegen.ecore/";

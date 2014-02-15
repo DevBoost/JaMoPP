@@ -1,0 +1,39 @@
+Documentation - JaMoPP User Guide
+
+Section - Overview
+
+JaMoPP is a tool... 
+
+Subsection - Java API
+
+Subsection - Model API
+
+EMOF / Ecore
+
+Subsection - XML API
+
+Subsection - Building Java Extensions
+
+
+Section - Setup
+
+Subsection - Setting up Stand-alone Applications
+
+Subsection - Loading and Saving Java Models
+
+Subsection - Integrating into the Eclipse IDE
+
+Subsection - Integrating into Continuous Integration Systems
+
+
+Section - XMI
+
+Subsection - Translating Java Code to XMI/XML
+
+Section - Base API
+
+Section - Utility API
+
+Section - Extended Navigation API
+
+Section - Extended Modification API
