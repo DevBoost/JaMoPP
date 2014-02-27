@@ -469,14 +469,20 @@ public class JavaClasspath extends AdapterImpl {
 
 	/**
 	 * Registers the classifier with the given name and package that is
-	 * physically located at the given URI.
+	 * physically located at the given URI. If there is already a classifier
+	 * registered for the given class name, the old one is replaced with the new
+	 * one.
 	 * 
 	 * @param packageName
+	 *            the name of the package that contains the classifier
 	 * @param classifierName
-	 * @param uri
+	 *            the simple name of the classifier
+	 * @param physicalURI
+	 *            the URI where the classifier can be found (class or source
+	 *            file)
 	 */
-	public void registerClassifier(String packageName, String classifierName, URI uri) {
-		if (classifierName == null || uri == null) {
+	public void registerClassifier(String packageName, String classifierName, URI physicalURI) {
+		if (classifierName == null || physicalURI == null) {
 			return;
 		}
 		if (!packageName.endsWith(".") && !packageName.endsWith("$")) {
@@ -489,13 +495,12 @@ public class JavaClasspath extends AdapterImpl {
 
 		int idx = classifierName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 		if (idx >= 0) {
-			//the classifier name contains a "$"
+			// The classifier name contains a "$"
 			innerName = classifierName.substring(idx + 1);
 			outerName = classifierName.substring(0, idx + 1);
 			if (".".equals(packageName)) {
 				qualifiedName = outerName;
-			}
-			else {
+			} else {
 				qualifiedName = packageName + outerName;
 			}
 		}
@@ -503,29 +508,28 @@ public class JavaClasspath extends AdapterImpl {
 		synchronized (this) {
 			registerPackage(qualifiedName, innerName);
 
-			String fullName = null;
+			final String qualifiedClassifierName;
 			if (".".equals(packageName)) {
-				fullName = classifierName;
-			}
-			else {
-				fullName = packageName + classifierName;
-			}
-
-			URI logicalUri =
-				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
-
-			URI existingMapping = getURIMap().get(logicalUri);
-
-			if (existingMapping != null && !uri.equals(existingMapping)) {
-				//do nothing: silently replace old with new version
+				qualifiedClassifierName = classifierName;
+			} else {
+				qualifiedClassifierName = packageName + classifierName;
 			}
 
-			getURIMap().put(logicalUri, uri);
+			URI logicalURI =
+				JavaUniquePathConstructor.getJavaFileResourceURI(qualifiedClassifierName);
+
+			URI existingMapping = getURIMap().get(logicalURI);
+
+			if (existingMapping != null && !physicalURI.equals(existingMapping)) {
+				// Do nothing: Silently replace old with new version.
+			}
+
+			getURIMap().put(logicalURI, physicalURI);
 
 			String outerPackage = qualifiedName;
-			while(outerPackage.endsWith("$")) {
-				//make sure outer classes are registered;
-				//This is required when class names contain $ symbols
+			while (outerPackage.endsWith("$")) {
+				// Make sure outer classes are registered;
+				// This is required when class names contain $ symbols.
 				outerPackage = outerPackage.substring(0, outerPackage.length() - 1);
 				idx = outerPackage.lastIndexOf("$");
 				if (idx == -1) {
@@ -543,7 +547,7 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
-		for(Member innerCand : ((MemberContainer)classifier).getMembers()) {
+		for (Member innerCand : ((MemberContainer)classifier).getMembers()) {
 			if (innerCand instanceof ConcreteClassifier) {
 				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
 				registerClassifier(packageName, newClassName, uri);
