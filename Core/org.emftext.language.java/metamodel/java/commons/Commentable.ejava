@@ -214,13 +214,7 @@ eclass Commentable {
 	 * @return the Class
 	 */
 	getLibClass() {
-		Class classClass = (Class) getConcreteClassifierProxy(
-				"java.lang." + name);
-		EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classClass, this);
-		if (resolved instanceof Class) {
-			return (Class) resolved;
-		}
-		return null;
+		return JavaClasspath.get(this).getJavaLangClass(this, name);
 	}
 	
 	/**

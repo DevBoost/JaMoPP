@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2013
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ClassifiersFactory;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -181,10 +183,23 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public static final String OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES = "OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES";
 
+	private boolean initialized = false;
+
 	/**
 	 * Singleton instance.
 	 */
 	private static JavaClasspath globalClasspath = null;
+
+	private JavaClasspath(URIConverter uriConverter) {
+		super();
+		this.uriConverter = uriConverter;
+	}
+
+	private JavaClasspath(Resource resource) {
+		super();
+		ResourceSet resourceSet = resource.getResourceSet();
+		this.uriConverter = resourceSet.getURIConverter();
+	}
 
 	public static JavaClasspath get() {
 		getInitializers();
@@ -341,22 +356,12 @@ public class JavaClasspath extends AdapterImpl {
 
 	protected URIConverter uriConverter = null;
 
-	public Map<URI,URI> getURIMap() {
+	public Map<URI, URI> getURIMap() {
 		if (uriConverter == URIConverter.INSTANCE) {
 			return URIConverter.URI_MAP;
 		}
 		return uriConverter.getURIMap();
 	}
-
-	private JavaClasspath(URIConverter uriConverter) {
-		this.uriConverter = uriConverter;
-	}
-
-	private JavaClasspath(Resource resource) {
-		this.uriConverter = resource.getResourceSet().getURIConverter();
-	}
-
-	private boolean initialized = false;
 
 	/**
 	 * Registers all classes of the Java standard library
@@ -496,8 +501,9 @@ public class JavaClasspath extends AdapterImpl {
 		int idx = classifierName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
 		if (idx >= 0) {
 			// The classifier name contains a "$"
-			innerName = classifierName.substring(idx + 1);
-			outerName = classifierName.substring(0, idx + 1);
+			int indexPlusOne = idx + 1;
+			innerName = classifierName.substring(indexPlusOne);
+			outerName = classifierName.substring(0, indexPlusOne);
 			if (".".equals(packageName)) {
 				qualifiedName = outerName;
 			} else {
@@ -535,8 +541,10 @@ public class JavaClasspath extends AdapterImpl {
 				if (idx == -1) {
 					idx = outerPackage.lastIndexOf(".");
 				}
-				String outerClassifier = outerPackage.substring(idx + 1);
-				outerPackage = outerPackage.substring(0, idx + 1);
+				
+				int indexPlusOne = idx + 1;
+				String outerClassifier = outerPackage.substring(indexPlusOne);
+				outerPackage = outerPackage.substring(0, indexPlusOne);
 				if ("".equals(outerPackage)) {
 					outerPackage = ".";
 				}
@@ -629,10 +637,10 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	/**
-	 * Constructs a proxy pointing at the classifier identified by its
-	 * fully qualified name.
-	 *
-	 * @param fullQualifiedName
+	 * Constructs a proxy pointing at the classifier identified by its fully
+	 * qualified name.
+	 * 
+	 * @param fullQualifiedName a qualified class name the proxy shall point to
 	 * @return proxy element
 	 */
 	public EObject getClassifier(String fullQualifiedName) {
@@ -692,6 +700,12 @@ public class JavaClasspath extends AdapterImpl {
 	private EList<EObject> javaLangPackage = null;
 
 	/**
+	 * This cache holds all class from the <code>java.lang</code> package. It
+	 * maps their simple names to the respective Class objects.
+	 */
+	private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
+
+	/**
 	 * Returns a list of proxies for all classes <code>java.lang.*</code>.
 	 *
 	 * @return list of proxies
@@ -716,5 +730,21 @@ public class JavaClasspath extends AdapterImpl {
 		String packageName = clazz.getPackage().getName();
 		String classifierName = clazz.getSimpleName();
 		registerClassifier(packageName, classifierName, classURI);
+	}
+	
+	public Class getJavaLangClass(EObject commentable, String simpleName) {
+		if (!javaLangClassCache.containsKey(simpleName)) {
+			String qualifiedName = "java.lang." + simpleName;
+			Class classifier = (Class) getClassifier(qualifiedName);
+			EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classifier, commentable);
+			Class returnValue = null;
+			if (resolved instanceof Class) {
+				returnValue = (Class) resolved;
+			}
+			javaLangClassCache.put(simpleName, returnValue);
+			return returnValue;
+		}
+		
+		return javaLangClassCache.get(simpleName);
 	}
 }

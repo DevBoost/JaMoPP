@@ -252,7 +252,7 @@
       </eOperations>
       <eOperations name="getLibClass" eType="#//classifiers/Class">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.classifiers.Class classClass = ( org.emftext.language.java.classifiers.Class) getConcreteClassifierProxy(&#xA;&#x9;&#x9;&quot;java.lang.&quot; + name);&#xA;org.eclipse.emf.ecore.EObject resolved = ( org.emftext.language.java.classifiers.ConcreteClassifier) org.eclipse.emf.ecore.util.EcoreUtil.resolve(classClass, this);&#xA;if (resolved instanceof org.emftext.language.java.classifiers.Class) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Class) resolved;&#xA;}&#xA;return null;"/>
+          <details key="body" value="return org.emftext.language.java.JavaClasspath.get(this).getJavaLangClass(this, name);"/>
           <details key="documentation" value="&#xA; Finds the &lt;code>org.emftext.language.java.classifiers.Class&lt;/code>&#xA; representing the class with the given name located in &lt;code>java.lang&lt;/code>.&#xA; &#xA; @param name name of the Class&#xA; @return the Class&#xA;"/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
