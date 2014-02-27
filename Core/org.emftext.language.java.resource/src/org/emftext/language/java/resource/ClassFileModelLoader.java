@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -62,8 +62,8 @@ import org.emftext.language.java.types.TypedElement;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
- * This class constructs a Java EMF-model from a class file using the
- * Byte Code Engineering Library (BCEL).
+ * This class constructs a Java EMF-model from a class file using the Byte Code
+ * Engineering Library (BCEL).
  */
 public class ClassFileModelLoader {
 
@@ -76,6 +76,7 @@ public class ClassFileModelLoader {
 	protected AnnotationsFactory annotationsFactory = AnnotationsFactory.eINSTANCE;
 
 	public ClassFileModelLoader(JavaClasspath javaClasspath) {
+		super();
 		this.javaClasspath = javaClasspath;
 	}
 
@@ -137,7 +138,7 @@ public class ClassFileModelLoader {
 
 		emfClassifier.setName(className);
 
-		for(Attribute a : clazz.getAttributes()){
+		for (Attribute a : clazz.getAttributes()) {
 			String signature = a.toString();
 			if(signature.startsWith("Signature(")) {
 				EList<TypeParameter> tpList = constructTypeParameters(signature);
@@ -146,7 +147,7 @@ public class ClassFileModelLoader {
 		}
 
 		String typeArgumentSig = "";
-		for(Attribute a : clazz.getAttributes()){
+		for (Attribute a : clazz.getAttributes()) {
 			String s = a.toString();
 			s = s.replaceAll("\\[", "");
 			if (s.startsWith("Signature(L")) {
@@ -172,7 +173,7 @@ public class ClassFileModelLoader {
 		}
 
 		//interfaces
-		for(String ifName : clazz.getInterfaceNames()) {
+		for (String ifName : clazz.getInterfaceNames()) {
 			TypeReference typeArg = createReferenceToClassifier(ifName);
 
 			typeArgumentSig = constructTypeArguments(typeArgumentSig, (ClassifierReference)typeArg, null, emfClassifier);
@@ -190,7 +191,7 @@ public class ClassFileModelLoader {
 			}
 		}
 
-		for(org.apache.bcel5_2_0.classfile.Field field : clazz.getFields()) {
+		for (org.apache.bcel5_2_0.classfile.Field field : clazz.getFields()) {
 			if (field.isEnum() && emfClassifier instanceof Enumeration) {
 				((Enumeration)emfClassifier).getConstants().add(constructEnumConstant(field));
 			}
@@ -198,8 +199,9 @@ public class ClassFileModelLoader {
 				emfClassifier.getMembers().add(constructField(field, emfClassifier));
 			}
 		}
-		for(org.apache.bcel5_2_0.classfile.Method method : clazz.getMethods()) {
-			if(!method.isSynthetic()) {
+		
+		for (org.apache.bcel5_2_0.classfile.Method method : clazz.getMethods()) {
+			if (!method.isSynthetic()) {
 				Member emfMember = constructMethod(method, emfClassifier, false);
 				//If the last parameter has an array type it could also be a variable length parameter.
 				//The java compiler compiles variable length arguments down to array arguments.
@@ -218,7 +220,6 @@ public class ClassFileModelLoader {
 					emfClassifier.getMembers().add(emfMember);
 				}
 			}
-
 		}
 
 		constructModifiers(emfClassifier, clazz);
@@ -228,13 +229,11 @@ public class ClassFileModelLoader {
 
 	protected Member constructMethod(org.apache.bcel5_2_0.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVariableLength) {
 		Method emfMethod = null;
-		if(emfClassifier instanceof Annotation) {
+		if (emfClassifier instanceof Annotation) {
 			emfMethod = annotationsFactory.createAnnotationAttribute();
-		}
-		else if(emfClassifier instanceof Interface) {
+		} else if(emfClassifier instanceof Interface) {
 			emfMethod = membersFactory.createInterfaceMethod();
-		}
-		else {
+		} else {
 			emfMethod = membersFactory.createClassMethod();
 		}
 		emfMethod.setName(method.getName());
@@ -242,7 +241,7 @@ public class ClassFileModelLoader {
 		String signature = method.getReturnType().getSignature();
 		String plainSignature = "";
 
-		for(Attribute a : method.getAttributes()){
+		for (Attribute a : method.getAttributes()) {
 			if (a instanceof Signature) {
 				String s = a.toString();
 				// TODO can we replace this with replace("[", "")?
@@ -255,7 +254,7 @@ public class ClassFileModelLoader {
 
 		TypeReference typeRef = createReferenceToType(signature);
 		TypeReference typeParamRef = constructReturnTypeParameterReference(plainSignature, emfMethod, emfClassifier);
-		if(typeParamRef != null) {
+		if (typeParamRef != null) {
 			((TypeParameter)((ClassifierReference)typeParamRef).getTarget()).getExtendTypes().add(typeRef);
 			typeRef = typeParamRef;
 		}
@@ -639,7 +638,7 @@ public class ClassFileModelLoader {
 	protected TypeReference createReferenceToType(String signature) {
 		TypeReference emfTypeReference = null;
 
-		while(signature.startsWith("[")) {
+		while (signature.startsWith("[")) {
 			signature = signature.substring(1);
 		}
 
@@ -803,7 +802,7 @@ public class ClassFileModelLoader {
 
 	protected int getArrayDimension(String signature) {
 		int arrayDimension = 0;
-		while(signature.startsWith("[")) {
+		while (signature.startsWith("[")) {
 			signature = signature.substring(1);
 			arrayDimension++;
 		}
@@ -812,19 +811,20 @@ public class ClassFileModelLoader {
 	
 	protected List<String> extractParameterNames(final org.apache.bcel5_2_0.classfile.Method method) {
 		final List<String> names = new ArrayList<String>();
-		if (method.getLocalVariableTable() != null) {
-			final int start = method.isStatic() ? 0 : 1;
-			final int stop = method.isStatic() ? method.getArgumentTypes().length
-					: method.getArgumentTypes().length + 1;
-			final org.apache.bcel5_2_0.classfile.LocalVariable[] variables = method
-					.getLocalVariableTable().getLocalVariableTable();
-			if (variables != null) {
-				for (int i = start; i < stop && i < variables.length; i++) {
-					names.add(variables[i].getName());
-				}
+		if (method.getLocalVariableTable() == null) {
+			return names;
+		}
+		
+		final int start = method.isStatic() ? 0 : 1;
+		final int stop = method.isStatic() ? method.getArgumentTypes().length
+				: method.getArgumentTypes().length + 1;
+		final org.apache.bcel5_2_0.classfile.LocalVariable[] variables = method
+				.getLocalVariableTable().getLocalVariableTable();
+		if (variables != null) {
+			for (int i = start; i < stop && i < variables.length; i++) {
+				names.add(variables[i].getName());
 			}
 		}
 		return names;
 	}
-
 }
