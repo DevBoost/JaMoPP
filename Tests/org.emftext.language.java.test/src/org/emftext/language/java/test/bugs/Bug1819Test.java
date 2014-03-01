@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -27,6 +27,8 @@ import org.emftext.language.java.containers.ContainersFactory;
 import org.junit.Test;
 
 public class Bug1819Test extends AbstractTestCase {
+	
+	private final static String LINE_BREAK = System.getProperty("line.separator");
 
 	public Bug1819Test() {
 		super();
@@ -49,7 +51,7 @@ public class Bug1819Test extends AbstractTestCase {
 		r.save(os , null);
 		String result = new String(os.toByteArray()).trim();
 	
-		assertEquals("class " + className + " {\n}", result);
+		assertEquals("class " + className + " {" + LINE_BREAK + "}", result);
 	}
 	
 	@Test
@@ -58,19 +60,20 @@ public class Bug1819Test extends AbstractTestCase {
 		String packageName = "a.b.c";
 		
 		ResourceSet rs = createResourceSet();
-		Resource r = rs.createResource(JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className));
+		Resource resource = rs.createResource(JavaUniquePathConstructor.getJavaFileResourceURI(packageName + "." + className));
 		CompilationUnit cu = ContainersFactory.eINSTANCE.createCompilationUnit();
 		org.emftext.language.java.classifiers.Class clazz = ClassifiersFactory.eINSTANCE.createClass();
 		clazz.setName(className);
 		cu.getClassifiers().add(clazz);
 		
-		r.getContents().add(cu);
+		resource.getContents().add(cu);
 		
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		r.save(os , null);
+		resource.save(os , null);
 		String result = new String(os.toByteArray()).trim();
 		
-		assertEquals("package " + packageName + ";\n\n\nclass " + className + " {\n}", result);		
+		assertEquals("package " + packageName + ";" + LINE_BREAK + LINE_BREAK
+				+ LINE_BREAK + "class " + className + " {" + LINE_BREAK + "}",
+				result);
 	}
-
 }
