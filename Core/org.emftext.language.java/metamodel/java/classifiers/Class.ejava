@@ -22,7 +22,7 @@ eclass Class {
 		//collects all superclasses first
 		Class superClass = this;
 		while (superClass != null && !superClass.eIsProxy() && 
-				!superClass.equals(getObjectClass())) {
+				!isJavaLangObject(superClass)) {
 			superClass = superClass.getSuperClass();
 			if (superClass != null) {
 				result.add(superClass);
@@ -43,7 +43,7 @@ eclass Class {
 		//collect all implemented interfaces of super classes
 		superClass = this.getSuperClass();	
 		if (superClass != null && !superClass.eIsProxy() && 
-				!superClass.equals(getObjectClass())) {
+				!isJavaLangObject(superClass)) {
 			result.addAll(superClass.getAllSuperClassifiers());
 		}	
 

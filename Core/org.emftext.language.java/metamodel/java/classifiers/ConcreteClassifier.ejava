@@ -63,12 +63,12 @@ eclass ConcreteClassifier {
 		//for classes declared locally inside methods that are not registered in the class path
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		//can not call ClassifierUtil.getAllMembers, because it will try to call this method!
-		for(Member member : getMembers()) {
+		for (Member member : getMembers()) {
 			if(member instanceof ConcreteClassifier) {
 				result.add((ConcreteClassifier) member);
 			}
 		}
-		for(ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
+		for (ConcreteClassifier superClassifier : getAllSuperClassifiers()) {
 			for(Member member : superClassifier.getMembers()) {
 				if(member instanceof ConcreteClassifier) {
 					result.add((ConcreteClassifier) member);
@@ -81,21 +81,17 @@ eclass ConcreteClassifier {
 	
 	getSuperTypeReferences() {
 		EList<ClassifierReference> typeReferenceList = new UniqueEList<ClassifierReference>();
-		if(this == null) {
-			return typeReferenceList;
-		}
-
 		if (this instanceof Class) {
 			Class javaClass = (Class) this;
 			if (javaClass.getExtends() != null) {
 				ClassifierReference classifierReference = javaClass.getExtends().getPureClassifierReference();
 				typeReferenceList.add(classifierReference);
 				ConcreteClassifier target = (ConcreteClassifier) classifierReference.getTarget();
-				if (!target.equals(getObjectClass())) {
+				if (!isJavaLangObject(target)) {
 					typeReferenceList.addAll(target.getSuperTypeReferences());
 				}
 			}	
-			for(TypeReference interfaceReference : javaClass.getImplements()) {
+			for (TypeReference interfaceReference : javaClass.getImplements()) {
 				ClassifierReference classifierReference = interfaceReference.getPureClassifierReference();
 				typeReferenceList.add(classifierReference);
 				typeReferenceList.addAll(((ConcreteClassifier) classifierReference.getTarget()).getSuperTypeReferences());
@@ -158,5 +154,23 @@ eclass ConcreteClassifier {
 		}
 		qualifiedName.append(getName());
 		return qualifiedName.toString();
+	}
+
+	/* boolean */ isJavaLangObject(/* ConcreteClassifier clazz */) {
+		String name2 = clazz.getName();
+		if (!"Object".equals(name2)) {
+			return false;
+		}
+		EList<String> packageName = clazz.getContainingPackageName();
+		if (packageName.size() != 2) {
+			return false;
+		}
+		if (!("java".equals(packageName.get(0)))) {
+			return false;
+		}
+		if (!("lang".equals(packageName.get(1)))) {
+			return false;
+		}
+		return true;
 	}
 }

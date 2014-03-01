@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -700,12 +699,6 @@ public class JavaClasspath extends AdapterImpl {
 	private EList<EObject> javaLangPackage = null;
 
 	/**
-	 * This cache holds all class from the <code>java.lang</code> package. It
-	 * maps their simple names to the respective Class objects.
-	 */
-	private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
-
-	/**
 	 * Returns a list of proxies for all classes <code>java.lang.*</code>.
 	 *
 	 * @return list of proxies
@@ -732,8 +725,21 @@ public class JavaClasspath extends AdapterImpl {
 		registerClassifier(packageName, classifierName, classURI);
 	}
 	
+	// This cache holds all class from the <code>java.lang</code> package. It
+	// maps their simple names to the respective Class objects.
+	//private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
+
 	public Class getJavaLangClass(EObject commentable, String simpleName) {
-		if (!javaLangClassCache.containsKey(simpleName)) {
+		// This was supposed to optimize performance by reusing Class objects
+		// for types from the 'java.lang' package, but turned out to cause 
+		// trouble because JaMoPP uses equals() to compare these Class objects
+		// at many places. For some unknown reason, these comparisons were
+		// expecting different (i.e., non-reused Class objects). Turning the
+		// cache on led to test failures, which is why we do not use it 
+		// currently. Once it is clarified why equals() is used and why reusing
+		// the Class objects causes trouble, the cache can be turned on again.
+		
+		//if (!javaLangClassCache.containsKey(simpleName)) {
 			String qualifiedName = "java.lang." + simpleName;
 			Class classifier = (Class) getClassifier(qualifiedName);
 			EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classifier, commentable);
@@ -741,10 +747,10 @@ public class JavaClasspath extends AdapterImpl {
 			if (resolved instanceof Class) {
 				returnValue = (Class) resolved;
 			}
-			javaLangClassCache.put(simpleName, returnValue);
+			//javaLangClassCache.put(simpleName, returnValue);
 			return returnValue;
-		}
+		//}
 		
-		return javaLangClassCache.get(simpleName);
+		//return javaLangClassCache.get(simpleName);
 	}
 }

@@ -78,6 +78,9 @@
           <genParameters ecoreParameter="java.ecore#//classifiers/ConcreteClassifier/getAllMembers/context"/>
         </genOperations>
         <genOperations ecoreOperation="java.ecore#//classifiers/ConcreteClassifier/getQualifiedName"/>
+        <genOperations ecoreOperation="java.ecore#//classifiers/ConcreteClassifier/isJavaLangObject">
+          <genParameters ecoreParameter="java.ecore#//classifiers/ConcreteClassifier/isJavaLangObject/clazz"/>
+        </genOperations>
       </genClasses>
       <genClasses image="false" ecoreClass="java.ecore#//classifiers/Implementor">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference java.ecore#//classifiers/Implementor/implements"/>
