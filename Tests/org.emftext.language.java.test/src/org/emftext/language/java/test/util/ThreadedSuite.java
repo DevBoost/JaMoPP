@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import org.junit.Ignore;
+
 import junit.framework.Test;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
@@ -31,9 +33,10 @@ import junit.framework.TestSuite;
  * configurable by the number of threads to be used and the timeout after
  * which threads are interrupted.
  */
+@Ignore("This suite is not supposed to run directly")
 public final class ThreadedSuite extends TestSuite {
 
-	private List<Thread> threads = new ArrayList<Thread>();
+	private final List<Thread> threads = new ArrayList<Thread>();
 	private final int timeout;
 	private final int maxActiveThreads;
 
