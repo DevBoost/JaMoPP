@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2013
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -115,6 +115,7 @@ public class AppendixGenerator {
 	}
 
 	private void registerGenModel(String genModelPath, String nsURI, Class<?> clazz) {
+		@SuppressWarnings("deprecation")
 		final Map<String, URI> packageNsURIToGenModelLocationMap = EcorePlugin.getEPackageNsURIToGenModelLocationMap();
 		String path = clazz.getResource(genModelPath).getFile();
 		path = path.replace("file:/", "archive:file:/");
