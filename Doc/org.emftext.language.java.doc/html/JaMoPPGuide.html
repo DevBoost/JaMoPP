@@ -7,55 +7,43 @@
 </head>
 <body>
 <h1 class="title">JaMoPP User Guide </h1>
-<div class="divFooter">UNCLASSIFIED</div>
-<div class="page-break"></div>
-<h2>Outline</h2><a class="outline_section_reference" href="#1">1 Overview</a></br>
-<a class="outline_subsection_reference" href="#1.1">1.1 Java API</a></br>
-<a class="outline_subsection_reference" href="#1.2">1.2 Model API</a></br>
-<a class="outline_subsection_reference" href="#1.3">1.3 XML API</a></br>
-<a class="outline_subsection_reference" href="#1.4">1.4 Building Java Extensions</a></br>
-<a class="outline_section_reference" href="#2">2 Setup</a></br>
-<a class="outline_subsection_reference" href="#2.1">2.1 Setting up Stand-alone Applications</a></br>
-<a class="outline_subsection_reference" href="#2.2">2.2 Loading and Saving Java Models</a></br>
-<a class="outline_subsection_reference" href="#2.3">2.3 Integrating into the Eclipse IDE</a></br>
-<a class="outline_subsection_reference" href="#2.4">2.4 Integrating into Continuous Integration Systems</a></br>
-<a class="outline_section_reference" href="#3">3 XMI</a></br>
-<a class="outline_subsection_reference" href="#3.1">3.1 Translating Java Code to XMI/XML</a></br>
-<a class="outline_section_reference" href="#4">4 Base API</a></br>
-<a class="outline_section_reference" href="#5">5 Utility API</a></br>
-<a class="outline_section_reference" href="#6">6 Extended Navigation API</a></br>
-<a class="outline_section_reference" href="#7">7 Extended Modification API</a></br>
-
-<div class="page-break"></div>
-
-<div class="page-break"></div>
-<h2 id="1" class="section">1 Overview </h2>
-JaMoPP is a tool... <h3 id="1.1" class="subsection">1.1 Java API </h3>
-<h3 id="1.2" class="subsection">1.2 Model API </h3>
-EMOF / Ecore <h3 id="1.3" class="subsection">1.3 XML API </h3>
-<h3 id="1.4" class="subsection">1.4 Building Java Extensions </h3>
-
-<div class="page-break"></div>
-<h2 id="2" class="section">2 Setup </h2>
-<h3 id="2.1" class="subsection">2.1 Setting up Stand-alone Applications </h3>
-<h3 id="2.2" class="subsection">2.2 Loading and Saving Java Models </h3>
-<h3 id="2.3" class="subsection">2.3 Integrating into the Eclipse IDE </h3>
-<h3 id="2.4" class="subsection">2.4 Integrating into Continuous Integration Systems </h3>
-
-<div class="page-break"></div>
-<h2 id="3" class="section">3 XMI </h2>
-<h3 id="3.1" class="subsection">3.1 Translating Java Code to XMI/XML </h3>
-
-<div class="page-break"></div>
-<h2 id="4" class="section">4 Base API </h2>
-
-<div class="page-break"></div>
-<h2 id="5" class="section">5 Utility API </h2>
-
-<div class="page-break"></div>
-<h2 id="6" class="section">6 Extended Navigation API </h2>
-
-<div class="page-break"></div>
-<h2 id="7" class="section">7 Extended Modification API </h2>
-
-<div class="page-break"></div>
+<div class="divFooter">UNCLASSIFIED</div><h2>Outline</h2><a class="outline_section_reference" href="#1">1 Overview</a><br/>
+<a class="outline_subsection_reference" href="#1.1">1.1 Java API</a><br/>
+<a class="outline_subsection_reference" href="#1.2">1.2 Model API</a><br/>
+<a class="outline_subsection_reference" href="#1.3">1.3 XML API</a><br/>
+<a class="outline_subsection_reference" href="#1.4">1.4 Building Java Extensions</a><br/>
+<a class="outline_section_reference" href="#2">2 Setup</a><br/>
+<a class="outline_subsection_reference" href="#2.1">2.1 Setting up Stand-alone Applications</a><br/>
+<a class="outline_subsection_reference" href="#2.2">2.2 Loading and Saving Java Models</a><br/>
+<a class="outline_subsection_reference" href="#2.3">2.3 Integrating into the Eclipse IDE</a><br/>
+<a class="outline_subsection_reference" href="#2.4">2.4 Integrating into Continuous Integration Systems</a><br/>
+<a class="outline_section_reference" href="#3">3 XMI</a><br/>
+<a class="outline_subsection_reference" href="#3.1">3.1 Translating Java Code to XMI/XML</a><br/>
+<a class="outline_section_reference" href="#4">4 Base API</a><br/>
+<a class="outline_section_reference" href="#5">5 Utility API</a><br/>
+<a class="outline_section_reference" href="#6">6 Extended Navigation API</a><br/>
+<a class="outline_section_reference" href="#7">7 Extended Modification API</a><br/>
+<div style="page-break-after:always"></div><div style="page-break-after:always"></div><h2 id="1" class="section">1 Overview</h2>
+JaMoPP is a tool... <h3 id="1.1" class="subsection">1.1 Java API</h3>
+<h3 id="1.2" class="subsection">1.2 Model API</h3>
+EMOF / Ecore <p>
+&lt;strong&gt;PackageReference &lt;/strong&gt;Model elements of type 'PackageReference' are used as target elements for references that point to packages. For example, consider the following code: <tt>new com.ClassOrPackage.ClassOrInnerClass();</tt>&nbsp;While parsing the code, it is not known whether 'ClassOrPackage' is a class or a package. Therefore, the parser creates an element of type 'ElementReference' for each of the parts of the fully qualified name. <p>
+While resolving references, the information whether such an element is a class or a package is available. If it turns out that that elements are packages (because there is a class 'ClassOrInnerClass' within package 'com.ClassOrPackage' on the class path) the reference 'target' of 'ElementReference' must point to a 'PackageReference'. In this case, 'PackageReferences' are created on demand and they are stored in the root of the respective resource. <p>
+Note that there is no model element 'Package' because Java package do not correspond to resource (i.e, files). </p>
+</p>
+</p>
+<h3 id="1.3" class="subsection">1.3 XML API</h3>
+<h3 id="1.4" class="subsection">1.4 Building Java Extensions</h3>
+<div style="page-break-after:always"></div><h2 id="2" class="section">2 Setup</h2>
+<h3 id="2.1" class="subsection">2.1 Setting up Stand-alone Applications</h3>
+<h3 id="2.2" class="subsection">2.2 Loading and Saving Java Models</h3>
+<h3 id="2.3" class="subsection">2.3 Integrating into the Eclipse IDE</h3>
+<h3 id="2.4" class="subsection">2.4 Integrating into Continuous Integration Systems</h3>
+<div style="page-break-after:always"></div><h2 id="3" class="section">3 XMI</h2>
+<h3 id="3.1" class="subsection">3.1 Translating Java Code to XMI/XML</h3>
+<div style="page-break-after:always"></div><h2 id="4" class="section">4 Base API</h2>
+<div style="page-break-after:always"></div><h2 id="5" class="section">5 Utility API</h2>
+<div style="page-break-after:always"></div><h2 id="6" class="section">6 Extended Navigation API</h2>
+<div style="page-break-after:always"></div><h2 id="7" class="section">7 Extended Modification API</h2>
+<div style="page-break-after:always"></div></body>
+</html>

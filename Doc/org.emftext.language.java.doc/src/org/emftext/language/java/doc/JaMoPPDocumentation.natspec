@@ -10,6 +10,30 @@ Subsection - Model API
 
 EMOF / Ecore
 
+Paragraph PackageReference
+
+Model elements of type 'PackageReference' are used as target elements for
+references that point to packages. For example, consider the following code:
+
+Code new com.ClassOrPackage.ClassOrInnerClass();
+
+While parsing the code, it is not known whether 'ClassOrPackage' is a class or
+a package. Therefore, the parser creates an element of type 'ElementReference' 
+for each of the parts of the fully qualified name.
+
+Paragraph
+While resolving references, the information whether such an element is a class 
+or a package is available. If it turns out that that elements are packages 
+(because there is a class 'ClassOrInnerClass' within package 
+'com.ClassOrPackage' on the class path) the reference 'target' of 
+'ElementReference' must point to a 'PackageReference'. In this case, 
+'PackageReferences' are created on demand and they are stored in the root of the 
+respective resource. 
+
+Paragraph
+Note that there is no model element 'Package' because Java package do not 
+correspond to resource (i.e, files).
+
 Subsection - XML API
 
 Subsection - Building Java Extensions
