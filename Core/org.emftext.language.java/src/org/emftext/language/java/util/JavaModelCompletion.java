@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -27,6 +27,7 @@ import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.expressions.Expression;
 import org.emftext.language.java.expressions.PrimaryExpression;
 import org.emftext.language.java.members.EmptyMember;
@@ -40,18 +41,21 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
- * Utility class that enhances and simplifies a Java model based on
- * Java language specifics.
+ * Utility class that enhances and simplifies a Java model based on Java
+ * language specifics.
  */
 public class JavaModelCompletion {
 
 	/**
-	 * Main method to perform the completion for the given resource.
-	 *
+	 * Main method to perform the completion and expression simplification for
+	 * the given resource.
+	 * 
 	 * @param resource
+	 *            the resource to complete and simplify
 	 */
 	public static void complete(Resource resource) {
-		for(Iterator<EObject> contentIterator = resource.getAllContents(); contentIterator.hasNext(); ) {
+		Iterator<EObject> contentIterator = resource.getAllContents();
+		while (contentIterator.hasNext()) {
 			EObject element = contentIterator.next();
 			if (element instanceof Class) {
 				addDefaultSuperClass((Class) element);
@@ -76,9 +80,11 @@ public class JavaModelCompletion {
 	}
 
 	/**
-	 * Adds <code>java.lang.Object</code> as default super class if non is specified.
-	 *
+	 * Adds <code>java.lang.Object</code> as default super class to the given
+	 * class if the class does not explicitly extend another class.
+	 * 
 	 * @param javaClass
+	 *            the class to complete
 	 */
 	public static void addDefaultSuperClass(Class javaClass) {
 		if (javaClass.getExtends() == null && javaClass.getDefaultExtends() == null) {
@@ -90,10 +96,11 @@ public class JavaModelCompletion {
 	}
 
 	/**
-	 * Adds <code>java.lang.Object</code> as a default super interface to an interface
-	 * that implements no other interface.
-	 *
-	 * @param javaClass
+	 * Adds <code>java.lang.Object</code> as default super interface to the
+	 * given interface if that interface implements no other interface.
+	 * 
+	 * @param javaInterface
+	 *            the interface to complete
 	 */
 	public static void addDefaultSuperInterface(Interface javaInterface) {
 		if (javaInterface.getExtends().isEmpty() && javaInterface.getDefaultExtends().isEmpty()) {
@@ -104,6 +111,12 @@ public class JavaModelCompletion {
 		}
 	}
 
+	/**
+	 * Adds the additional method <code>value()</code> to the given annotation.
+	 * 
+	 * @param annotation
+	 *            the annotation to complete
+	 */
 	public static void addMissingAnnotationMembers(Annotation annotation) {
 		String valueMethodName = "value";
 		Method valueMethod = annotation.getContainedMethod(valueMethodName);
@@ -118,14 +131,15 @@ public class JavaModelCompletion {
 	}
 
 	/**
-	 * Adds the additional methods <code>value()</code> and <code>calueOf()</code>
-	 * to the given enumeration.
-	 *
-	 * @param enumeration the enumeration to complete
+	 * Adds the additional methods <code>value()</code> and
+	 * <code>valueOf()</code> to the given enumeration.
+	 * 
+	 * @param enumeration
+	 *            the enumeration to complete
 	 */
 	public static void addMissingEnumerationMembers(Enumeration enumeration) {
 
-		//add the values
+		// Add the values() method
 		String valuesMethodName = "values";
 		Method valuesMethod = enumeration.getContainedMethod(valuesMethodName);
 
@@ -139,7 +153,7 @@ public class JavaModelCompletion {
 			enumeration.getDefaultMembers().add(valuesMethod);
 		}
 
-		//add the value of method
+		// Add the valueOf() method
 		String valueOfMethodName = "valueOf";
 		Method valueOfMethod = enumeration.getContainedMethod(valueOfMethodName);
 
@@ -162,6 +176,15 @@ public class JavaModelCompletion {
 		}
 	}
 
+	/**
+	 * Sets the name of the given {@link EmptyMember} to MemberX where X is the
+	 * index of the given member in its {@link MemberContainer}. This is
+	 * required to obtain a valid Java model (name is a mandatory attribute of
+	 * {@link NamedElement}).
+	 * 
+	 * @param emptyMember
+	 *            the member to set the name for
+	 */
 	public static void setEmptyMemberName(EmptyMember emptyMember) {
 		if (emptyMember.getName() != null) {
 			return;
@@ -175,10 +198,21 @@ public class JavaModelCompletion {
 		emptyMember.setName(name);
 	}
 
+	/**
+	 * Sets the name of the given {@link Block} to MemberX where X is the index
+	 * of the given member in its {@link MemberContainer}. If the {@link Block}
+	 * is not contained in a {@link MemberContainer} its name is set to 'Block'.
+	 * This is required to obtain a valid Java model (name is a mandatory
+	 * attribute of {@link NamedElement}).
+	 * 
+	 * @param block
+	 *            the block to set the name for
+	 */
 	public static void setBlockName(Block block) {
 		if (block.getName() != null) {
 			return;
 		}
+		
 		EObject container = block.eContainer();
 		if (container instanceof MemberContainer) {
 			int idx = ((MemberContainer) container).getMembers().indexOf(block);
@@ -190,9 +224,9 @@ public class JavaModelCompletion {
 	}
 
 	/**
-	 * Simplifies all expression in the given resource by removing empty containers
-	 * in all expression trees.
-	 *
+	 * Simplifies all expression in the given resource by removing empty
+	 * containers in all expression trees.
+	 * 
 	 * @param resource
 	 */
 	public static void simplifyExpressions(Resource resource) {
@@ -200,7 +234,7 @@ public class JavaModelCompletion {
 	}
 
 	private static void simplifyDown(EList<EObject> parentList) {
-		for(EObject child : new BasicEList<EObject>(parentList)) {
+		for (EObject child : new BasicEList<EObject>(parentList)) {
 			EObject singleContained = getSingleContained(child);
 			EObject next = singleContained;
 			while (next != null) {
@@ -243,5 +277,4 @@ public class JavaModelCompletion {
 
 		return singleContained;
 	}
-
 }
