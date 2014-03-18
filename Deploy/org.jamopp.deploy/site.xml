@@ -15,6 +15,9 @@
 		<category name="JaMoPP"/>
 	</feature>
 	
+	<feature url="features/org.emftext.language.java.test_0.0.0.v0.jar" id="org.emftext.language.java.test" version="0.0.0.v0">
+	</feature>
+	
 	<category-def name="JaMoPP" label="JaMoPP (Java Model Parser and Printer)">
 		<description>JaMoPP: Java Model Parser and Printer (EMFText-based Java support for EMF modelling tools).</description>
 	</category-def>
