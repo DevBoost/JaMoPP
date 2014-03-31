@@ -22,7 +22,7 @@ git:https://github.com/DevBoost/JaMoPP.git!Tests/
 git:https://github.com/DevBoost/JaMoPP.git!Utils/
 
 // NatSpec Annotations
-dynamicfile:http://www.nat-spec.com/update_trunk/de.devboost.natspec.updatesite-complete.zip
+dynamicfile:http://www.devboost.de/natspec/annotations/update_trunk/de.devboost.natspec.annotations.updatesite-complete.zip
 // NatSpec Libraries
 git:https://github.com/DevBoost/NatSpec_Requirements_Library.git!de.devboost.natspec.library.documentation
 
