@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -27,12 +27,12 @@ import org.emftext.language.java.commons.NamedElement;
 import org.emftext.language.java.resource.java.analysis.decider.IResolutionTargetDecider;
 
 /**
- * This class can be used to traverse a model tree after parsing for reference resolving. It follows
- * scoping rules common to textual languages.
+ * This class can be used to traverse a model tree after parsing for reference
+ * resolving. It follows scoping rules common to textual languages.
  * <p>
- * It starts at the point of the reference, walking <i>up</i> the tree but visiting, for each step up,
- * the children of the new parent. On each visited element it applies a set of deciders with which
- * it is initialized.
+ * It starts at the point of the reference, walking <i>up</i> the tree but
+ * visiting, for each step up, the children of the new parent. On each visited
+ * element it applies a set of deciders with which it is initialized.
  */
 public class ScopedTreeWalker {
 
