@@ -1482,14 +1482,14 @@
         abstract="true" eSuperTypes="#_Wo2ZO9z1Ed2bJ_pQViWxFg #_Wo2ZPdz1Ed2bJ_pQViWxFg">
       <eOperations name="getAllMembers" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.classifiers.Class javaClass = wrapPrimitiveType();&#x9;&#xA;return javaClass.getAllMembers(context);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.getAllMembers((org.emftext.language.java.types.PrimitiveType) this, (org.emftext.language.java.commons.Commentable) context);"/>
           <details key="documentation" value="&#xA; @param context to check protected visibility&#xA; @return all members (including super type members)&#xA;"/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
       </eOperations>
       <eOperations name="wrapPrimitiveType" eType="#//classifiers/Class">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.classifiers.Class javaClass = null;&#xA;&#xA;if (this instanceof org.emftext.language.java.types.Boolean) {&#xA;&#x9;javaClass = getLibClass(&quot;Boolean&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Byte) {&#xA;&#x9;javaClass = getLibClass(&quot;Byte&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Char) {&#xA;&#x9;javaClass = getLibClass(&quot;Character&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Double) {&#xA;&#x9;javaClass = getLibClass(&quot;Double&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Float) {&#xA;&#x9;javaClass = getLibClass(&quot;Float&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Int) {&#xA;&#x9;javaClass = getLibClass(&quot;Integer&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Long) {&#xA;&#x9;javaClass = getLibClass(&quot;Long&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Short) {&#xA;&#x9;javaClass = getLibClass(&quot;Short&quot;);&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.Void) {&#xA;&#x9;javaClass = getLibClass(&quot;Void&quot;);&#xA;}&#xA;return javaClass;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.wrapPrimitiveType((org.emftext.language.java.types.PrimitiveType) this);"/>
           <details key="documentation" value="&#xA; @return primitive type as a class representation&#xA;"/>
         </eAnnotations>
       </eOperations>

@@ -27,6 +27,7 @@ public class PrimitiveTypeExtension {
 	 * @return all members (including super type members)
 	 */
 	public static EList<Member> getAllMembers(PrimitiveType me, Commentable context) {
+		// TODO Call wrapPrimitiveType() directly
 		org.emftext.language.java.classifiers.Class javaClass = me.wrapPrimitiveType();
 		return javaClass.getAllMembers(context);
 	}
