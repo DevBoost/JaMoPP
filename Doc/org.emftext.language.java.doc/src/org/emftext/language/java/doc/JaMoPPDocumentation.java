@@ -66,7 +66,7 @@ public class JaMoPPDocumentation {
 		// for each of the parts of the fully qualified name.
 		de.devboost.natspec.library.documentation.Line line_for_each_of_the_parts_of_the_fully_qualified_name_ = documentationSupport.createPlainContents(java.util.Arrays.asList(new String[] {"for", "each", "of", "the", "parts", "of", "the", "fully", "qualified", "name."}), paragraph_PackageReference);
 		// Paragraph
-		de.devboost.natspec.library.documentation.Paragraph paragraph_ = documentationSupport.createParagraphWithHeading(java.util.Arrays.asList(new java.lang.String[] {}), paragraph_PackageReference);
+		de.devboost.natspec.library.documentation.Paragraph paragraph_ = documentationSupport.createParagraphWithHeading(java.util.Arrays.asList(new java.lang.String[] {}), subsection_Model_API);
 		// While resolving references, the information whether such an element is a class
 		de.devboost.natspec.library.documentation.Line line_While_resolving_references__the_information_whether_such_an_element_is_a_class = documentationSupport.createPlainContents(java.util.Arrays.asList(new String[] {"While", "resolving", "references,", "the", "information", "whether", "such", "an", "element", "is", "a", "class"}), paragraph_);
 		// or a package is available. If it turns out that that elements are packages
@@ -82,7 +82,7 @@ public class JaMoPPDocumentation {
 		// respective resource.
 		de.devboost.natspec.library.documentation.Line line_respective_resource_ = documentationSupport.createPlainContents(java.util.Arrays.asList(new String[] {"respective", "resource."}), paragraph_);
 		// Paragraph
-		de.devboost.natspec.library.documentation.Paragraph paragraph_0 = documentationSupport.createParagraphWithHeading(java.util.Arrays.asList(new java.lang.String[] {}), paragraph_);
+		de.devboost.natspec.library.documentation.Paragraph paragraph_0 = documentationSupport.createParagraphWithHeading(java.util.Arrays.asList(new java.lang.String[] {}), subsection_Model_API);
 		// Note that there is no model element 'Package' because Java package do not
 		de.devboost.natspec.library.documentation.Line line_Note_that_there_is_no_model_element__Package__because_Java_package_do_not = documentationSupport.createPlainContents(java.util.Arrays.asList(new String[] {"Note", "that", "there", "is", "no", "model", "element", "'Package'", "because", "Java", "package", "do", "not"}), paragraph_0);
 		// correspond to resource (i.e, files).

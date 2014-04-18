@@ -27,11 +27,11 @@
 JaMoPP is a tool... <h3 id="1.1" class="subsection">1.1 Java API</h3>
 <h3 id="1.2" class="subsection">1.2 Model API</h3>
 EMOF / Ecore <p>
-&lt;strong&gt;PackageReference &lt;/strong&gt;Model elements of type 'PackageReference' are used as target elements for references that point to packages. For example, consider the following code: <tt>new com.ClassOrPackage.ClassOrInnerClass();</tt>&nbsp;While parsing the code, it is not known whether 'ClassOrPackage' is a class or a package. Therefore, the parser creates an element of type 'ElementReference' for each of the parts of the fully qualified name. <p>
-While resolving references, the information whether such an element is a class or a package is available. If it turns out that that elements are packages (because there is a class 'ClassOrInnerClass' within package 'com.ClassOrPackage' on the class path) the reference 'target' of 'ElementReference' must point to a 'PackageReference'. In this case, 'PackageReferences' are created on demand and they are stored in the root of the respective resource. <p>
+<strong>PackageReference </strong>Model elements of type 'PackageReference' are used as target elements for references that point to packages. For example, consider the following code: <tt>new com.ClassOrPackage.ClassOrInnerClass();</tt>&nbsp;While parsing the code, it is not known whether 'ClassOrPackage' is a class or a package. Therefore, the parser creates an element of type 'ElementReference' for each of the parts of the fully qualified name. </p>
+<p>
+While resolving references, the information whether such an element is a class or a package is available. If it turns out that that elements are packages (because there is a class 'ClassOrInnerClass' within package 'com.ClassOrPackage' on the class path) the reference 'target' of 'ElementReference' must point to a 'PackageReference'. In this case, 'PackageReferences' are created on demand and they are stored in the root of the respective resource. </p>
+<p>
 Note that there is no model element 'Package' because Java package do not correspond to resource (i.e, files). </p>
-</p>
-</p>
 <h3 id="1.3" class="subsection">1.3 XML API</h3>
 <h3 id="1.4" class="subsection">1.4 Building Java Extensions</h3>
 <div style="page-break-after:always"></div><h2 id="2" class="section">2 Setup</h2>
