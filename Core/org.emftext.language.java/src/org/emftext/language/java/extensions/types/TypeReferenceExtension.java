@@ -20,6 +20,7 @@ import org.emftext.language.java.classifiers.Classifier;
 import org.emftext.language.java.generics.TypeParameter;
 import org.emftext.language.java.references.ElementReference;
 import org.emftext.language.java.references.MethodCall;
+import org.emftext.language.java.references.Reference;
 import org.emftext.language.java.references.ReferenceableElement;
 import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.NamespaceClassifierReference;
@@ -76,7 +77,7 @@ public class TypeReferenceExtension {
 	 * 
 	 * @return the referenced type
 	 */
-	public static Type getBoundTarget(TypeReference me, MethodCall reference) {
+	public static Type getBoundTarget(TypeReference me, Reference reference) {
 		Type type = null;
 		if (me instanceof ClassifierReference || 
 				me instanceof NamespaceClassifierReference) {

@@ -1456,7 +1456,7 @@
       </eOperations>
       <eOperations name="getBoundTarget" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return org.emftext.language.java.extensions.types.TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.references.MethodCall) reference);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.references.Reference) reference);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="reference" eType="#//references/Reference"/>

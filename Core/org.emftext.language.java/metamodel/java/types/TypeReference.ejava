@@ -23,8 +23,8 @@ eclass TypeReference {
 		TypeReferenceExtension.setTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.classifiers.Classifier) type);
 	}
 	
-	getBoundTarget() {	
-		return TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.references.MethodCall) reference);
+	getBoundTarget() {
+		return TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.references.Reference) reference);
 	}
 	
 	getPureClassifierReference() {
