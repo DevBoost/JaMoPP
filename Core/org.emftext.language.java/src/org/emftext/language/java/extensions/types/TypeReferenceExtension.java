@@ -33,9 +33,9 @@ public class TypeReferenceExtension {
 	/**
 	 * Returns the type referenced by this <code>TypeReference</code>
 	 * considering all concrete subclasses of <code>TypeReference</code> used
-	 * by the Java metamodel. 
+	 * by the Java metamodel.
 	 * 
-	 * @return the type
+	 * @return the referenced type
 	 */
 	public static Type getTarget(TypeReference me) {
 		return me.getBoundTarget(null);
@@ -43,9 +43,8 @@ public class TypeReferenceExtension {
 	
 	/**
 	 * Sets the type targeted by this type reference
-	 * @param type 
 	 * 
-	 * @param type the type
+	 * @param type the new type to set as target
 	 */
 	public static void setTarget(TypeReference me, Classifier type) {
 		if (type == null) {
@@ -69,12 +68,13 @@ public class TypeReferenceExtension {
 	
 	/**
 	 * Returns the type referenced by this <code>TypeReference</code>
-	 * considering all concrete subclasses of <code>TypeReference</code> used
-	 * by the Java metamodel. If type parameters are bound in the given reference,
+	 * considering all concrete subclasses of <code>TypeReference</code> used by
+	 * the Java metamodel. If type parameters are bound in the given reference,
 	 * the bound type will be returned instead of the parameter.
-	 * @param reference 
 	 * 
-	 * @return the type
+	 * @param reference
+	 * 
+	 * @return the referenced type
 	 */
 	public static Type getBoundTarget(TypeReference me, MethodCall reference) {
 		Type type = null;
@@ -121,8 +121,8 @@ public class TypeReferenceExtension {
 	}
 	
 	/**
-	 * Extracts the (possibly nested) classifier reference (if any) 
-	 * from this type references.
+	 * Extracts the (possibly nested) classifier reference (if any) from this
+	 * type references.
 	 * 
 	 * @return
 	 */
@@ -131,6 +131,7 @@ public class TypeReferenceExtension {
 		if (me instanceof ClassifierReference) {
 			classifierReference = (ClassifierReference) me;
 		}
+		
 		if (me instanceof NamespaceClassifierReference) {
 			NamespaceClassifierReference nsClassifierReference = (NamespaceClassifierReference) me;
 			if (!nsClassifierReference.getClassifierReferences().isEmpty()) {

@@ -1443,28 +1443,28 @@
         abstract="true" eSuperTypes="#//commons/Commentable">
       <eOperations name="getTarget" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return getBoundTarget(null);"/>
-          <details key="documentation" value="&#xA; Returns the type referenced by this &lt;code>TypeReference&lt;/code>&#xA; considering all concrete subclasses of &lt;code>TypeReference&lt;/code> used&#xA; by the Java metamodel. &#xA; &#xA; @return the type&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, null);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="setTarget">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (type == null) {&#xA;&#x9;return;&#xA;}&#xA;&#xA;if (type.eIsProxy()) {&#xA;&#x9;return;&#xA;}&#xA;&#xA;if (this instanceof org.emftext.language.java.types.NamespaceClassifierReference) {&#xA;&#x9;org.emftext.language.java.types.NamespaceClassifierReference nsClassifierReference = ( org.emftext.language.java.types.NamespaceClassifierReference) this;&#xA;&#x9;nsClassifierReference.getClassifierReferences().clear();&#xA;&#x9;nsClassifierReference.getNamespaces().clear();&#xA;&#x9;nsClassifierReference.getNamespaces().addAll(type.getContainingContainerName());&#xA;&#x9;org.emftext.language.java.types.ClassifierReference classifierRef = org.emftext.language.java.types.TypesFactory.eINSTANCE.createClassifierReference();&#xA;&#x9;classifierRef.setTarget(type);&#xA;&#x9;nsClassifierReference.getClassifierReferences().add(classifierRef);&#x9;&#x9;&#x9;&#xA;}"/>
-          <details key="documentation" value="&#xA; Sets the type targeted by this type reference&#xA; &#xA; @param type the type&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.types.TypeReferenceExtension.setTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.classifiers.Classifier) type);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="type" eType="#//classifiers/Classifier"/>
       </eOperations>
       <eOperations name="getBoundTarget" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.types.Type type = null;&#xA;if (this instanceof org.emftext.language.java.types.ClassifierReference || &#xA;&#x9;&#x9;this instanceof org.emftext.language.java.types.NamespaceClassifierReference) {&#xA;&#x9;org.emftext.language.java.types.ClassifierReference classifierRef = getPureClassifierReference();&#xA;&#x9;if (classifierRef != null) {&#xA;&#x9;&#x9;type = classifierRef.getTarget();&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;if (reference instanceof org.emftext.language.java.references.MethodCall) {&#xA;&#x9;&#x9;org.emftext.language.java.references.MethodCall potentialCloneCall = ( org.emftext.language.java.references.MethodCall) reference;&#xA;&#x9;&#x9;//clone returns the type of the cloned in the case of arrays&#xA;&#x9;&#x9;org.emftext.language.java.references.ReferenceableElement potentialCloneCallTarget = potentialCloneCall.getTarget();&#xA;&#x9;&#x9;if (potentialCloneCallTarget != null &amp;&amp; &#xA;&#x9;&#x9;&#x9;&#x9;!potentialCloneCallTarget.eIsProxy() &amp;&amp; &#xA;&#x9;&#x9;&#x9;&#x9;&quot;clone&quot;.equals(potentialCloneCallTarget.getName()))  {&#xA;&#x9;&#x9;&#x9;if (potentialCloneCall.getPrevious() instanceof org.emftext.language.java.references.ElementReference) {&#xA;&#x9;&#x9;&#x9;&#x9;org.emftext.language.java.references.ElementReference prevRef = ( org.emftext.language.java.references.ElementReference) potentialCloneCall.getPrevious();&#xA;&#x9;&#x9;&#x9;&#x9;if (prevRef.getTarget() instanceof org.emftext.language.java.arrays.ArrayTypeable &amp;&amp; &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(( org.emftext.language.java.arrays.ArrayTypeable)prevRef.getTarget()).getArrayDimension() > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;type = prevRef.getReferencedType();&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;else if(this instanceof org.emftext.language.java.types.PrimitiveType) {&#xA;&#x9;return ( org.emftext.language.java.types.PrimitiveType) this;&#xA;}&#xA;&#xA;//resolve parameter to real type&#xA;if (type instanceof org.emftext.language.java.generics.TypeParameter) {&#xA;&#x9;type = (( org.emftext.language.java.generics.TypeParameter) type).getBoundType(this, reference);&#xA;}&#xA;&#xA;if (type != null &amp;&amp; type.eIsProxy()) {&#xA;&#x9;//this may happen, when e.g. a super type is resolved. It is ok.&#xA;&#x9;return null;&#xA;}&#xA;&#xA;return type;"/>
-          <details key="documentation" value="&#xA; Returns the type referenced by this &lt;code>TypeReference&lt;/code>&#xA; considering all concrete subclasses of &lt;code>TypeReference&lt;/code> used&#xA; by the Java metamodel. If type parameters are bound in the given reference,&#xA; the bound type will be returned instead of the parameter.&#xA; &#xA; @return the type&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.TypeReferenceExtension.getBoundTarget((org.emftext.language.java.types.TypeReference) this, (org.emftext.language.java.references.MethodCall) reference);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="reference" eType="#//references/Reference"/>
       </eOperations>
       <eOperations name="getPureClassifierReference" eType="#//types/ClassifierReference">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.types.ClassifierReference classifierReference = null;&#xA;if (this instanceof org.emftext.language.java.types.ClassifierReference) {&#xA;&#x9;classifierReference = ( org.emftext.language.java.types.ClassifierReference) this;&#xA;}&#xA;if (this instanceof org.emftext.language.java.types.NamespaceClassifierReference) {&#xA;&#x9;org.emftext.language.java.types.NamespaceClassifierReference nsClassifierReference = ( org.emftext.language.java.types.NamespaceClassifierReference) this;&#xA;&#x9;if (!nsClassifierReference.getClassifierReferences().isEmpty()) {&#xA;&#x9;&#x9;int lastIndex = nsClassifierReference.getClassifierReferences().size() - 1;&#xA;&#x9;&#x9;classifierReference = nsClassifierReference.getClassifierReferences().get(lastIndex);&#xA;&#x9;}&#xA;}&#xA;return classifierReference;"/>
-          <details key="documentation" value="&#xA; Extracts the (possibly nested) classifier reference (if any) &#xA; from this type references.&#xA; &#xA; @return&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.types.TypeReferenceExtension.getPureClassifierReference((org.emftext.language.java.types.TypeReference) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>
