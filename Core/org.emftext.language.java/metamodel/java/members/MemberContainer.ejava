@@ -12,143 +12,44 @@ import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 
 /**
- * A utility class that provides methods that belong to class 
- * MemberContainer, but can not go there, because MemberContainer 
- * is generated.
+ * A utility class that provides methods that belong to class MemberContainer, 
+ * but can not go there, because MemberContainer is generated.
  */
 eclass MemberContainer {
 
 	getMethods() {
-		EList<Method> methodList = new BasicEList<Method>();
-
-		for (Member member : getMembers()) {
-			if (member instanceof Method) {
-				methodList.add((Method) member);
-			}
-		}	
-		return ECollections.unmodifiableEList(methodList);
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getMethods((org.emftext.language.java.members.MemberContainer) this);
 	}
 	
 	getFields() {
-		EList<Field> fieldList = new BasicEList<Field>();
-
-		for (Member member : getMembers()) {
-			if (member instanceof Field) {
-				fieldList.add((Field) member);
-			}
-		}	
-		return ECollections.unmodifiableEList(fieldList);
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getFields((org.emftext.language.java.members.MemberContainer) this);
 	}
 	
 	getConstructors() {
-		EList<Constructor> constructorList = new BasicEList<Constructor>();
-
-		for (Member member : getMembers()) {
-			if (member instanceof Constructor) {
-				constructorList.add((Constructor) member);
-			}
-		}	
-		return ECollections.unmodifiableEList(constructorList);
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getConstructors((org.emftext.language.java.members.MemberContainer) this);
 	}
 	
 	getMembersByName() {
-		EList<Member> matchingMembers = new BasicEList<Member>();
-
-		for (Member member : getMembers()) {
-			if (name.equals(member.getName())) {
-				matchingMembers.add(member);
-			}
-		}	
-		return ECollections.unmodifiableEList(matchingMembers);
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getMembersByName((org.emftext.language.java.members.MemberContainer) this, name);
 	}
 	
 	removeMethods() {
-		EList<Method> methodsToRemove = new BasicEList<Method>();
-
-		for (Member member : getMembers()) {
-			if (member instanceof Method) {
-				if (name.equals(member.getName())) {
-					methodsToRemove.add((Method) member);
-				}
-			}
-		}
-		getMembers().removeAll(methodsToRemove);
+		org.emftext.language.java.extensions.members.MemberContainerExtension.removeMethods((org.emftext.language.java.members.MemberContainer) this, name);
 	}
 	
-	/**
-	 * @param name
-	 * @return classifier with the given name defined in this member container
-	 */
 	getContainedClassifier() {
-		for(Member member : getMembers()) {
-			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
-				return (ConcreteClassifier) member;
-			}
- 		}
-		for(Member member : getDefaultMembers()) {
-			if (member instanceof ConcreteClassifier && name.equals(member.getName())) {
-				return (ConcreteClassifier) member;
-			}
- 		}
-		return null;
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedClassifier((org.emftext.language.java.members.MemberContainer) this, name);
 	}
 	
-	/**
-	 * @param name
-	 * @return field with the given name defined in this member container
-	 */
 	getContainedField() {
-		for(Member member : getMembers()) {
-			if (member instanceof Field && name.equals(member.getName())) {
-				return (Field) member;
-			}
- 		}
-		for(Member member : getDefaultMembers()) {
-			if (member instanceof Field && name.equals(member.getName())) {
-				return (Field) member;
-			}
- 		}
-		return null;
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedField((org.emftext.language.java.members.MemberContainer) this, name);
 	}
 
-	/**
-	 * @param name
-	 * @return method with the given name defined in this member container;
-	 *         null, if there is no such method 
-	 *         or if there are multiple methods with the same name
-	 */
 	getContainedMethod() {
-		Method found = null;
-		for(Member member : getMembers()) {
-			if (member instanceof Method && name.equals(member.getName())) {
-				if(found != null) {
-					return null;
-				}
-				else {
-					found = (Method) member;
-				}
-			}
- 		}
- 		for(Member member : getDefaultMembers()) {
-			if (member instanceof Method && name.equals(member.getName())) {
-				if(found != null) {
-					return null;
-				}
-				else {
-					found = (Method) member;
-				}
-			}
- 		}
-		return found;
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedMethod((org.emftext.language.java.members.MemberContainer) this, name);
 	}
 	
 	createField() {
-		Field field = #Field;
-		field.setName(name);
-		ClassifierReference typeRef = #ClassifierReference;
-		typeRef.setTarget(getConcreteClassifier(qualifiedTypeName));
-		field.setTypeReference(typeRef);
-		getMembers().add(field);
-		return field;
+		return org.emftext.language.java.extensions.members.MemberContainerExtension.createField((org.emftext.language.java.members.MemberContainer) this, name, qualifiedTypeName);
 	}
 }

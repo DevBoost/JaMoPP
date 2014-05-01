@@ -920,48 +920,48 @@
     <eClassifiers xsi:type="ecore:EClass" name="MemberContainer" abstract="true" eSuperTypes="#//commons/Commentable">
       <eOperations name="getContainedClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.classifiers.ConcreteClassifier &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;return ( org.emftext.language.java.classifiers.ConcreteClassifier) member;&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;for( org.emftext.language.java.members.Member member : getDefaultMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.classifiers.ConcreteClassifier &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;return ( org.emftext.language.java.classifiers.ConcreteClassifier) member;&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @param name&#xA; @return classifier with the given name defined in this member container&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedClassifier((org.emftext.language.java.members.MemberContainer) this, name);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getContainedField" eType="#//members/Field">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Field &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;return ( org.emftext.language.java.members.Field) member;&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;for( org.emftext.language.java.members.Member member : getDefaultMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Field &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;return ( org.emftext.language.java.members.Field) member;&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @param name&#xA; @return field with the given name defined in this member container&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedField((org.emftext.language.java.members.MemberContainer) this, name);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getContainedMethod" eType="#//members/Method">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.members.Method found = null;&#xA;for( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Method &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;if(found != null) {&#xA;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;found = ( org.emftext.language.java.members.Method) member;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA; &#x9;&#x9;for( org.emftext.language.java.members.Member member : getDefaultMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Method &amp;&amp; name.equals(member.getName())) {&#xA;&#x9;&#x9;if(found != null) {&#xA;&#x9;&#x9;&#x9;return null;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;found = ( org.emftext.language.java.members.Method) member;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;return found;"/>
-          <details key="documentation" value="&#xA; @param name&#xA; @return method with the given name defined in this member container;&#xA;         null, if there is no such method &#xA;         or if there are multiple methods with the same name&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getContainedMethod((org.emftext.language.java.members.MemberContainer) this, name);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getMethods" upperBound="-1" eType="#//members/Method">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Method> methodList = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.members.Method>();&#xA;&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Method) {&#xA;&#x9;&#x9;methodList.add(( org.emftext.language.java.members.Method) member);&#xA;&#x9;}&#xA;}&#x9;&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(methodList);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getMethods((org.emftext.language.java.members.MemberContainer) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="removeMethods">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Method> methodsToRemove = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.members.Method>();&#xA;&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Method) {&#xA;&#x9;&#x9;if (name.equals(member.getName())) {&#xA;&#x9;&#x9;&#x9;methodsToRemove.add(( org.emftext.language.java.members.Method) member);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;getMembers().removeAll(methodsToRemove);"/>
+          <details key="body" value="org.emftext.language.java.extensions.members.MemberContainerExtension.removeMethods((org.emftext.language.java.members.MemberContainer) this, name);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getMembersByName" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Member> matchingMembers = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.members.Member>();&#xA;&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (name.equals(member.getName())) {&#xA;&#x9;&#x9;matchingMembers.add(member);&#xA;&#x9;}&#xA;}&#x9;&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(matchingMembers);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getMembersByName((org.emftext.language.java.members.MemberContainer) this, name);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="createField" eType="#//members/Field">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.members.Field field = org.emftext.language.java.members.MembersFactory.eINSTANCE.createField();&#xA;field.setName(name);&#xA;org.emftext.language.java.types.ClassifierReference typeRef = org.emftext.language.java.types.TypesFactory.eINSTANCE.createClassifierReference();&#xA;typeRef.setTarget(getConcreteClassifier(qualifiedTypeName));&#xA;field.setTypeReference(typeRef);&#xA;getMembers().add(field);&#xA;return field;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.createField((org.emftext.language.java.members.MemberContainer) this, name, qualifiedTypeName);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -969,13 +969,13 @@
       </eOperations>
       <eOperations name="getFields" upperBound="-1" eType="#//members/Field">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Field> fieldList = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.members.Field>();&#xA;&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Field) {&#xA;&#x9;&#x9;fieldList.add(( org.emftext.language.java.members.Field) member);&#xA;&#x9;}&#xA;}&#x9;&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(fieldList);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getFields((org.emftext.language.java.members.MemberContainer) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getConstructors" upperBound="-1" eType="#//members/Constructor">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Constructor> constructorList = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.members.Constructor>();&#xA;&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if (member instanceof org.emftext.language.java.members.Constructor) {&#xA;&#x9;&#x9;constructorList.add(( org.emftext.language.java.members.Constructor) member);&#xA;&#x9;}&#xA;}&#x9;&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(constructorList);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.MemberContainerExtension.getConstructors((org.emftext.language.java.members.MemberContainer) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
