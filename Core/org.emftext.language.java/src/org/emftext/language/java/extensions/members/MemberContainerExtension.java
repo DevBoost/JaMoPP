@@ -29,9 +29,8 @@ import org.emftext.language.java.types.ClassifierReference;
 import org.emftext.language.java.types.TypesFactory;
 
 /**
- * A utility class that provides methods that belong to class 
- * MemberContainer, but can not go there, because MemberContainer 
- * is generated.
+ * A utility class that provides methods that belong to class MemberContainer,
+ * but can not go there, because MemberContainer is generated.
  */
 public class MemberContainerExtension {
 
@@ -131,8 +130,8 @@ public class MemberContainerExtension {
 	}
 
 	/**
-	 * @param name 
-	 * @param name
+	 * @param name the method name to search for
+	 * 
 	 * @return method with the given name defined in this member container;
 	 *         null, if there is no such method 
 	 *         or if there are multiple methods with the same name
