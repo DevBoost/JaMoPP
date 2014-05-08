@@ -12,49 +12,14 @@ import java.types.Type;
 eclass Variable {
 
 	getArrayDimension() {
-		long size = this.getArrayDimensionsBefore().size() + this.getArrayDimensionsAfter().size();
-		if (this instanceof VariableLengthParameter) {
-			size++;
-		}
-		return size;
+		return org.emftext.language.java.extensions.variables.VariableExtension.getArrayDimension((org.emftext.language.java.variables.Variable) this);
 	}
 	
-	/**
-	 * Creates a statement that calls the method with the given name on this
-	 * variable. If the variable's type does not offer such a method, null is
-	 * returned.
-	 */
 	createMethodCallStatement() {
-		
-		ExpressionStatement callStatement = #ExpressionStatement;
-		callStatement.setExpression(createMethodCall(methodName, arguments));
-		return callStatement;
+		return org.emftext.language.java.extensions.variables.VariableExtension.createMethodCallStatement((org.emftext.language.java.variables.Variable) this, methodName, arguments);
 	}
 
-	/**
-	 * Creates an expression that calls the method with the given name on this
-	 * variable. If the variable's type does not offer such a method, null is
-	 * returned.
-	 */
 	createMethodCall() {
-		
-		IdentifierReference thisRef = #IdentifierReference;
-		thisRef.setTarget(this);
-		MethodCall methodCall = #MethodCall;
-		Type thisType = getTypeReference().getTarget();
-		if (thisType instanceof MemberContainer) {
-			MemberContainer castedType = (MemberContainer) thisType;
-			Method method = castedType.getContainedMethod(methodName);
-			if (method == null) {
-				return null;
-			}
-			methodCall.setTarget(method);
-			// add arguments
-			methodCall.getArguments().addAll(arguments);
-			thisRef.setNext(methodCall);
-			return thisRef;
-		} else {
-			return null;
-		}
+		return org.emftext.language.java.extensions.variables.VariableExtension.createMethodCall((org.emftext.language.java.variables.Variable) this, methodName, arguments);
 	}
 }
