@@ -1,7 +1,0 @@
-epackage java.arrays;
-
-import java.parameters.VariableLengthParameter;
-
-eclass ArrayTypeable {
-
-}
