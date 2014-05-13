@@ -15,19 +15,33 @@
  ******************************************************************************/
 package org.emftext.language.java.extensions.statements;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
+
 import org.emftext.language.java.statements.StatementListContainer;
 import org.emftext.language.java.variables.LocalVariable;
 
 public class StatementListContainerExtension {
 
+	/**
+	 * Returns the first local variable in the given
+	 * {@link StatementListContainer} with the specified name.
+	 * 
+	 * @param me
+	 *            the {@link StatementListContainer} to search in
+	 * @param name
+	 *            the name of the variable to search for
+	 * @return a local variable with the given name or <code>null</code> if no
+	 *         such variable was found
+	 */
 	public static LocalVariable getLocalVariable(StatementListContainer me, String name) {
-		EList<LocalVariable> localVariables = me.getChildrenByType(LocalVariable.class);
+		List<LocalVariable> localVariables = me.getChildrenByType(LocalVariable.class);
 		for (LocalVariable localVariable : localVariables) {
 			if (localVariable.getName().equals(name)) {
 				return localVariable;
 			}
 		}
+		
+		// Found no matching variable
 		return null;
 	}
 }
