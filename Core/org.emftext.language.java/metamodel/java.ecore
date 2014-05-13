@@ -1293,7 +1293,7 @@
         eSuperTypes="#//commons/Commentable">
       <eOperations name="getLocalVariable" lowerBound="1" eType="#//variables/LocalVariable">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.variables.LocalVariable> localVariables = getChildrenByType( org.emftext.language.java.variables.LocalVariable.class);&#xA;for ( org.emftext.language.java.variables.LocalVariable localVariable : localVariables) {&#xA;&#x9;if (localVariable.getName().equals(name)) {&#xA;&#x9;&#x9;return localVariable;&#xA;&#x9;}&#xA;}&#xA;return null;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.statements.StatementListContainerExtension.getLocalVariable((org.emftext.language.java.statements.StatementListContainer) this, name);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -1411,7 +1411,7 @@
       <eOperations name="equalsType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="return org.emftext.language.java.extensions.types.TypeExtension.equalsType((org.emftext.language.java.types.Type) this, arrayDimension, (org.emftext.language.java.types.Type) otherType, otherArrayDimension);"/>
-          <details key="documentation" value="&#xA; @param arrayDimension&#xA; @param otherType&#xA; @param otherArrayDimension&#xA; @return if both type are equal&#xA;"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="arrayDimension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
         <eParameters name="otherType" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg"/>
@@ -1420,7 +1420,7 @@
       <eOperations name="isSuperType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="return org.emftext.language.java.extensions.types.TypeExtension.isSuperType((org.emftext.language.java.types.Type) this, arrayDimension, (org.emftext.language.java.types.Type) otherType, (org.emftext.language.java.arrays.ArrayTypeable) otherArrayType);"/>
-          <details key="documentation" value="&#xA; @param arrayDimension&#xA; @param otherType&#xA; @param otherArrayType&#xA; @return if the other type is equal to me or a super type of me&#xA;"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="arrayDimension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
         <eParameters name="otherType" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg"/>
@@ -1428,7 +1428,7 @@
       </eOperations>
       <eOperations name="getAllMembers" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="//method has to be specified in subclasses&#xA;throw new java.lang.UnsupportedOperationException();"/>
+          <details key="body" value="// method has to be specified in subclasses&#xA;throw new java.lang.UnsupportedOperationException();"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
@@ -1483,14 +1483,14 @@
       <eOperations name="getAllMembers" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.getAllMembers((org.emftext.language.java.types.PrimitiveType) this, (org.emftext.language.java.commons.Commentable) context);"/>
-          <details key="documentation" value="&#xA; @param context to check protected visibility&#xA; @return all members (including super type members)&#xA;"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
       </eOperations>
       <eOperations name="wrapPrimitiveType" eType="#//classifiers/Class">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="body" value="return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.wrapPrimitiveType((org.emftext.language.java.types.PrimitiveType) this);"/>
-          <details key="documentation" value="&#xA; @return primitive type as a class representation&#xA;"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>

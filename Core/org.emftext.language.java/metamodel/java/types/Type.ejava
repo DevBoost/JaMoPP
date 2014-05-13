@@ -19,28 +19,16 @@ import org.emftext.language.java.extensions.types.TypeExtension;
 
 eclass Type {
 	
-	/**
-	 * @param arrayDimension
-	 * @param otherType
-	 * @param otherArrayDimension
-	 * @return if both type are equal
-	 */
 	equalsType() {
 		return TypeExtension.equalsType((org.emftext.language.java.types.Type) this, arrayDimension, (org.emftext.language.java.types.Type) otherType, otherArrayDimension);
 	}
 
-	/**
-	 * @param arrayDimension
-	 * @param otherType
-	 * @param otherArrayType
-	 * @return if the other type is equal to me or a super type of me
-	 */
 	isSuperType() {
 		return TypeExtension.isSuperType((org.emftext.language.java.types.Type) this, arrayDimension, (org.emftext.language.java.types.Type) otherType, (org.emftext.language.java.arrays.ArrayTypeable) otherArrayType);
 	}
 	
 	getAllMembers() {
-		//method has to be specified in subclasses
+		// method has to be specified in subclasses
 		throw new UnsupportedOperationException();
 	}
 }

@@ -8,17 +8,10 @@ import java.members.Member;
 
 eclass PrimitiveType {
 
-	/**
-	 * @param context to check protected visibility
-	 * @return all members (including super type members)
-	 */
 	getAllMembers() {
 		return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.getAllMembers((org.emftext.language.java.types.PrimitiveType) this, (org.emftext.language.java.commons.Commentable) context);
 	}
 	
-	/**
-	 * @return primitive type as a class representation
-	 */
 	wrapPrimitiveType() {
 		return org.emftext.language.java.extensions.types.PrimitiveTypeExtension.wrapPrimitiveType((org.emftext.language.java.types.PrimitiveType) this);
 	}
