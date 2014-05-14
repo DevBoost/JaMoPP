@@ -17,6 +17,7 @@ package org.emftext.language.java.extensions.containers;
 
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.Annotation;
+import org.emftext.language.java.classifiers.Class;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.classifiers.Interface;
@@ -29,13 +30,18 @@ import org.emftext.language.java.util.UniqueEList;
 public class CompilationUnitExtension {
 	
 	/**
-	 * @param name name of the contained Classifier
-	 * @return the Classifier
+	 * Returns the first {@link ConcreteClassifier} that is contained in this
+	 * {@link CompilationUnit} and which has the given name.
+	 * 
+	 * @param name
+	 *            the name of the classifier to search for
+	 * @return the classifier if one is found, otherwise <code>null</code>
 	 */
 	public static ConcreteClassifier getContainedClassifier(CompilationUnit me, String name) {
 		if (name == null) {
 			return null;
 		}
+		
 		for (ConcreteClassifier candidate : me.getClassifiers()) {
 			if (name.equals(candidate.getName())) {
 				return candidate;
@@ -62,7 +68,13 @@ public class CompilationUnitExtension {
 	}
 	
 	/**
-	 * @return the only class contained directly in the compilation unit (if one exists)
+	 * Returns the class that is directly contained in the compilation unit (if
+	 * exactly one exists). If the {@link CompilationUnit} contains multiple
+	 * classifiers or if the contained classifier is not a {@link Class},
+	 * <code>null</code> is returned.
+	 * 
+	 * @return the class directly contained in the compilation unit (if there is
+	 *         exactly one contained classifier that is of type {@link Class})
 	 */
 	public static org.emftext.language.java.classifiers.Class getContainedClass(CompilationUnit me) {
 		if (me.getClassifiers().size() != 1) {
@@ -75,7 +87,14 @@ public class CompilationUnitExtension {
 	}
 	
 	/**
-	 * @return the only interface contained directly in the compilation unit (if one exists)
+	 * Returns the interface that is directly contained in the compilation unit
+	 * (if exactly one exists). If the {@link CompilationUnit} contains multiple
+	 * classifiers or if the contained classifier is not an {@link Interface},
+	 * <code>null</code> is returned.
+	 * 
+	 * @return the interface directly contained in the compilation unit (if
+	 *         there is exactly one contained classifier that is of type
+	 *         {@link Interface})
 	 */
 	public static Interface getContainedInterface(CompilationUnit me) {
 		if (me.getClassifiers().size() != 1) {
@@ -88,7 +107,14 @@ public class CompilationUnitExtension {
 	}
 
 	/**
-	 * @return the only annotation contained directly in the compilation unit (if one exists)
+	 * Returns the annotation that is directly contained in the compilation unit
+	 * (if exactly one exists). If the {@link CompilationUnit} contains multiple
+	 * classifiers or if the contained classifier is not an {@link Annotation},
+	 * <code>null</code> is returned.
+	 * 
+	 * @return the annotation directly contained in the compilation unit (if
+	 *         there is exactly one contained classifier that is of type
+	 *         {@link Annotation})
 	 */
 	public static Annotation getContainedAnnotation(CompilationUnit me) {
 		if (me.getClassifiers().size() != 1) {
@@ -101,7 +127,14 @@ public class CompilationUnitExtension {
 	}
 	
 	/**
-	 * @return the only enumeration contained directly in the compilation unit (if one exists)
+	 * Returns the enumeration that is directly contained in the compilation
+	 * unit (if exactly one exists). If the {@link CompilationUnit} contains
+	 * multiple classifiers or if the contained classifier is not an
+	 * {@link Enumeration}, <code>null</code> is returned.
+	 * 
+	 * @return the enumeration directly contained in the compilation unit (if
+	 *         there is exactly one contained classifier that is of type
+	 *         {@link Enumeration})
 	 */
 	public static Enumeration getContainedEnumeration(CompilationUnit me) {
 		if (me.getClassifiers().size() != 1) {
