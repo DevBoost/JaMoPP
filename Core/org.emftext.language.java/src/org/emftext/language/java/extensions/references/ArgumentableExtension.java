@@ -24,13 +24,15 @@ import org.emftext.language.java.types.Type;
 public class ArgumentableExtension {
 	
 	/**
-	 * @return list of types of my arguments
+	 * Returns a list containing the types of the given {@link Argumentable}.
+	 * 
+	 * @return list of types of 'me'
 	 */
 	public static EList<Type> getArgumentTypes(Argumentable me) {
 		EList<Type> resultList = new BasicEList<Type>();
 
-		for (Expression exp : me.getArguments()) {
-			Type type = exp.getType();
+		for (Expression argument : me.getArguments()) {
+			Type type = argument.getType();
 			resultList.add(type);
 		}
 		return resultList;

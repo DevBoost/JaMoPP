@@ -15,7 +15,6 @@
  ******************************************************************************/
 package org.emftext.language.java.extensions.references;
 
-import org.eclipse.emf.ecore.EObject;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.Enumeration;
 import org.emftext.language.java.expressions.NestedExpression;
@@ -37,7 +36,7 @@ import org.emftext.language.java.variables.AdditionalLocalVariable;
 
 public class ReferenceExtension {
 
-	public static EObject getPrevious(Reference me) {
+	public static Reference getPrevious(Reference me) {
 		if (me.eContainer() instanceof Reference) { 
 			Reference container = (Reference) me.eContainer(); 
 			if (me.equals(container.getNext())) {
@@ -48,9 +47,9 @@ public class ReferenceExtension {
 	}
 	
 	/**
-	 * Determines the <code>Type</code> of the reference. That is,
-	 * either the type to which the reference points directly, or the
-	 * type of the element to which the reference points.
+	 * Determines the {@link Type} of the reference. That is, either the type to
+	 * which the reference points directly, or the type of the element to which
+	 * the reference points.
 	 * 
 	 * @return the determined type
 	 */
@@ -61,12 +60,12 @@ public class ReferenceExtension {
 
 		Type type = null;
 
-		//referenced element point to a type
+		// Referenced element points to a type
 		if (me instanceof TypedElement) {
 			TypeReference typeRef = ((TypedElement) me).getTypeReference();
 			type = typeRef.getBoundTarget(me);
 		}
-		//element points to this or super
+		// Element points to this or super
 		else if (me instanceof SelfReference) {
 			Type thisClass = null;
 			if (me.getPrevious() != null) {
@@ -82,7 +81,7 @@ public class ReferenceExtension {
 				}
 			}
 			
-			//find super class if "self" is "super"
+			// Find super class if "self" is "super"
 			if (((SelfReference) me).getSelf() instanceof Super) {
 				if (thisClass instanceof org.emftext.language.java.classifiers.Class) {
 					return ((org.emftext.language.java.classifiers.Class) thisClass).getSuperClass();
@@ -94,11 +93,11 @@ public class ReferenceExtension {
 			
 			return thisClass;
 		}
-		//element points to the object's class object
+		// Element points to the object's class object
 		else if (me instanceof ReflectiveClassReference) {
 			return me.getClassClass();
 		}
-		//referenced element points to an element with a type
+		// Referenced element points to an element with a type
 		else if (me instanceof ElementReference) {
 			ReferenceableElement target = 
 				(ReferenceableElement) ((ElementReference) me).getTarget();
@@ -106,11 +105,11 @@ public class ReferenceExtension {
 				type = null;
 			}
 			
-			//Navigate through AdditionalLocalVariable or Field
-			if(target instanceof AdditionalLocalVariable) {
+			// Navigate through AdditionalLocalVariable or Field
+			if (target instanceof AdditionalLocalVariable) {
 				target = (ReferenceableElement) target.eContainer();
 			}
-			if(target instanceof AdditionalField) {
+			if (target instanceof AdditionalField) {
 				target = (ReferenceableElement) target.eContainer();
 			}
 			if (target instanceof TypedElement) {
@@ -122,7 +121,7 @@ public class ReferenceExtension {
 			else if (target instanceof Type /*e.g. Annotation*/ ) {
 				return (Type) target;
 			}
-			else if(target instanceof EnumConstant) {
+			else if (target instanceof EnumConstant) {
 				type = (Enumeration)target.eContainer();
 			}	
 		}

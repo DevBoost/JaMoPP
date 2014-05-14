@@ -8,17 +8,7 @@ import java.types.Type;
 
 eclass Argumentable {
 	
-	/**
-	 * @return list of types of my arguments
-	 */
 	getArgumentTypes() {
-		EList<Type> resultList = new BasicEList<Type>();
-
-		for(Expression exp : getArguments()) {
-			Type type = exp.getType();
-			resultList.add(type);
-		}
-		return resultList;
+		return org.emftext.language.java.extensions.references.ArgumentableExtension.getArgumentTypes((org.emftext.language.java.references.Argumentable) this);
 	}
-
 }
