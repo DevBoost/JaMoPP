@@ -15,6 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.java.extensions.containers;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.Annotation;
 import org.emftext.language.java.classifiers.Class;
@@ -77,11 +79,14 @@ public class CompilationUnitExtension {
 	 *         exactly one contained classifier that is of type {@link Class})
 	 */
 	public static org.emftext.language.java.classifiers.Class getContainedClass(CompilationUnit me) {
-		if (me.getClassifiers().size() != 1) {
+		List<ConcreteClassifier> classifiers = me.getClassifiers();
+		if (classifiers.size() != 1) {
 			return null;
 		}
-		if (me.getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Class) {
-			return (org.emftext.language.java.classifiers.Class) me.getClassifiers().get(0);
+		
+		ConcreteClassifier first = classifiers.get(0);
+		if (first instanceof org.emftext.language.java.classifiers.Class) {
+			return (org.emftext.language.java.classifiers.Class) first;
 		}
 		return null;
 	}
@@ -97,11 +102,14 @@ public class CompilationUnitExtension {
 	 *         {@link Interface})
 	 */
 	public static Interface getContainedInterface(CompilationUnit me) {
-		if (me.getClassifiers().size() != 1) {
+		List<ConcreteClassifier> classifiers = me.getClassifiers();
+		if (classifiers.size() != 1) {
 			return null;
 		}
-		if (me.getClassifiers().get(0) instanceof Interface) {
-			return (Interface) me.getClassifiers().get(0);
+		
+		ConcreteClassifier first = classifiers.get(0);
+		if (first instanceof Interface) {
+			return (Interface) first;
 		}
 		return null;
 	}
@@ -117,11 +125,14 @@ public class CompilationUnitExtension {
 	 *         {@link Annotation})
 	 */
 	public static Annotation getContainedAnnotation(CompilationUnit me) {
-		if (me.getClassifiers().size() != 1) {
+		List<ConcreteClassifier> classifiers = me.getClassifiers();
+		if (classifiers.size() != 1) {
 			return null;
 		}
-		if (me.getClassifiers().get(0) instanceof Annotation) {
-			return (Annotation) me.getClassifiers().get(0);
+		
+		ConcreteClassifier first = classifiers.get(0);
+		if (first instanceof Annotation) {
+			return (Annotation) first;
 		}
 		return null;
 	}
@@ -137,11 +148,14 @@ public class CompilationUnitExtension {
 	 *         {@link Enumeration})
 	 */
 	public static Enumeration getContainedEnumeration(CompilationUnit me) {
-		if (me.getClassifiers().size() != 1) {
+		List<ConcreteClassifier> classifiers = me.getClassifiers();
+		if (classifiers.size() != 1) {
 			return null;
 		}
-		if (me.getClassifiers().get(0) instanceof Enumeration) {
-			return (Enumeration) me.getClassifiers().get(0);
+		
+		ConcreteClassifier first = classifiers.get(0);
+		if (first instanceof Enumeration) {
+			return (Enumeration) first;
 		}
 		return null;
 	}
