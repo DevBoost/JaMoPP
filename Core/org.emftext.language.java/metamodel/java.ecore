@@ -1046,21 +1046,21 @@
         eSuperTypes="#//commons/Commentable">
       <eOperations name="isHidden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.commons.Commentable&#x9;lContext = context;&#xA;if (this.eIsProxy()) {&#xA;&#x9;return false;&#xA;}&#xA;//all members of an interface are public by default&#xA;if (this.eContainer() instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;return false;&#xA;}&#xA;&#xA;if(lContext.eIsProxy()) {&#xA;&#x9;lContext = ( org.emftext.language.java.commons.Commentable) org.eclipse.emf.ecore.util.EcoreUtil.resolve(lContext, this);&#xA;}&#xA;&#xA;org.emftext.language.java.classifiers.ConcreteClassifier lContextClassifier = lContext.getContainingConcreteClassifier(); &#xA;if (!(eContainer() instanceof org.emftext.language.java.commons.Commentable)) {&#xA;&#x9;return true;&#xA;}&#xA;org.emftext.language.java.classifiers.ConcreteClassifier myClassifier = (( org.emftext.language.java.commons.Commentable) eContainer()).getParentConcreteClassifier();&#xA;//special case: self reference to outer instance&#xA;if(lContext instanceof org.emftext.language.java.references.Reference) {&#xA;&#x9;if ((( org.emftext.language.java.references.Reference)lContext).getPrevious() instanceof org.emftext.language.java.references.SelfReference) {&#xA;&#x9;&#x9;org.emftext.language.java.references.SelfReference selfReference = ( org.emftext.language.java.references.SelfReference) (( org.emftext.language.java.references.Reference)lContext).getPrevious();&#xA;&#x9;&#x9;if (selfReference.getSelf() instanceof org.emftext.language.java.literals.Self) {&#xA;&#x9;&#x9;&#x9;if(selfReference.getPrevious() != null) {&#xA;&#x9;&#x9;&#x9;&#x9;org.emftext.language.java.types.Type type = selfReference.getPrevious().getReferencedType();&#xA;&#x9;&#x9;&#x9;&#x9;if (type instanceof org.emftext.language.java.classifiers.ConcreteClassifier) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;lContextClassifier = ( org.emftext.language.java.classifiers.ConcreteClassifier) type;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;for( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {&#xA;&#x9;if(modifier instanceof org.emftext.language.java.modifiers.Private) {&#xA;&#x9;&#x9;if (myClassifier.equalsType(0, lContextClassifier,0)) {&#xA;&#x9;&#x9;&#x9;return false;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;&#x9;if(modifier instanceof org.emftext.language.java.modifiers.Public) {&#xA;&#x9;&#x9;return false;&#xA;&#x9;}&#xA;&#x9;if(modifier instanceof org.emftext.language.java.modifiers.Protected) {&#xA;&#x9;&#x9;//package visibility&#xA;&#x9;&#x9;if (getContainingPackageName() != null &amp;&amp; &#xA;&#x9;&#x9;&#x9;&#x9;getContainingPackageName().equals(lContext.getContainingPackageName())) {&#xA;&#x9;&#x9;&#x9;return false;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;//try outer classifiers as well &#xA;&#x9;&#x9;while(lContextClassifier instanceof org.emftext.language.java.classifiers.Classifier) {&#xA;&#x9;&#x9;&#x9;if (lContextClassifier.isSuperType(0, myClassifier, null)) {&#xA;&#x9;&#x9;&#x9;&#x9;return false;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;org.eclipse.emf.ecore.EObject container = lContextClassifier.eContainer();&#xA;&#x9;&#x9;&#x9;if (container instanceof org.emftext.language.java.commons.Commentable) {&#xA;&#x9;&#x9;&#x9;&#x9;lContextClassifier = (( org.emftext.language.java.commons.Commentable) container).getParentConcreteClassifier();&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;lContextClassifier = null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;if (lContextClassifier != null &amp;&amp; !lContextClassifier.eIsProxy() &amp;&amp; &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;lContextClassifier.isSuperType(0, myClassifier, null)) {&#xA;&#x9;&#x9;&#x9;&#x9;return false;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;//visibility through anonymous subclass&#xA;&#x9;&#x9;org.emftext.language.java.classifiers.AnonymousClass anonymousClass = lContext.getContainingAnonymousClass();&#xA;&#x9;&#x9;while (anonymousClass != null) {&#xA;&#x9;&#x9;&#x9;lContextClassifier = anonymousClass.getSuperClassifier();&#xA;&#x9;&#x9;&#x9;if (lContextClassifier == null) {&#xA;&#x9;&#x9;&#x9;&#x9;return true;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;if (lContextClassifier.isSuperType(0, myClassifier, null)) {&#xA;&#x9;&#x9;&#x9;&#x9;return false;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;org.eclipse.emf.ecore.EObject container = anonymousClass.eContainer();&#xA;&#x9;&#x9;&#x9;if (container instanceof org.emftext.language.java.commons.Commentable) {&#xA;&#x9;&#x9;&#x9;&#x9;anonymousClass = (( org.emftext.language.java.commons.Commentable) container).getContainingAnonymousClass();&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;anonymousClass = null;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;}&#xA;//package visibility?&#xA;if (getContainingPackageName() != null &amp;&amp; &#xA;&#x9;&#x9;getContainingPackageName().equals(lContext.getContainingPackageName())) {&#xA;&#x9;return false;&#xA;}&#xA;&#xA;return true;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isHidden((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, (org.emftext.language.java.commons.Commentable) context);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
       </eOperations>
       <eOperations name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="//all members of an interface are static by default&#xA;if (this.eContainer() instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;return true;&#xA;}&#xA;&#xA;for( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {&#xA;&#x9;if(modifier instanceof org.emftext.language.java.modifiers.Static) {&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;}&#xA;return false;"/>
-          <details key="documentation" value="&#xA; Returns true if this element is static (either by an explicit modifier &lt;code>static&lt;/code>&#xA; or because this element is part of an interface).&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isStatic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="removeModifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.util.List&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();&#xA;java.util.List&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> modifiersToRemove = new java.util.ArrayList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier>();&#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : modifiers) {&#xA;&#x9;if (modifierType.isInstance(modifier)) {&#xA;&#x9;&#x9;modifiersToRemove.add(modifier);&#xA;&#x9;}&#xA;}&#xA;modifiers.removeAll(modifiersToRemove);"/>
-          <details key="documentation" value="&#xA; Removes the given type of modifier from this element.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.removeModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, modifierType);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="modifierType">
           <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
@@ -1070,38 +1070,38 @@
       </eOperations>
       <eOperations name="makePublic">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (isPublic()) {&#xA;&#x9;return;&#xA;}&#xA;removeModifier( org.emftext.language.java.modifiers.Private.class);&#xA;removeModifier( org.emftext.language.java.modifiers.Protected.class);&#xA;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPublic());"/>
-          <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>public&lt;/code>.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makePublic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="makePrivate">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (isPrivate()) {&#xA;&#x9;return;&#xA;}&#xA;removeModifier( org.emftext.language.java.modifiers.Public.class);&#xA;removeModifier( org.emftext.language.java.modifiers.Protected.class);&#xA;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createPrivate());"/>
-          <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>private&lt;/code>.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makePrivate((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="makeProtected">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (isProtected()) {&#xA;&#x9;return;&#xA;}&#xA;removeModifier( org.emftext.language.java.modifiers.Private.class);&#xA;removeModifier( org.emftext.language.java.modifiers.Public.class);&#xA;getAnnotationsAndModifiers().add( org.emftext.language.java.modifiers.ModifiersFactory.eINSTANCE.createProtected());"/>
-          <details key="documentation" value="&#xA; Sets the visibility of this element to &lt;code>protected&lt;/code>.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makeProtected((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getModifiers" upperBound="-1" eType="#_Wo2Ys9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.Modifier> modifiers = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.modifiers.Modifier>(); &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier next : elements) {&#xA;&#x9;if (next instanceof org.emftext.language.java.modifiers.Modifier) {&#xA;&#x9;&#x9;modifiers.add(( org.emftext.language.java.modifiers.Modifier) next);&#xA;&#x9;}&#xA;}&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(modifiers);"/>
-          <details key="documentation" value="&#xA; Returns an unmodifiable list of the modifiers that apply to this element.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.getModifiers((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="removeAllModifiers">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.util.List&lt; org.emftext.language.java.modifiers.Modifier> modifiers = getModifiers();&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xA;elements.removeAll(modifiers);"/>
-          <details key="documentation" value="&#xA; Removes all modifiers from this element.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.removeAllModifiers((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="hasModifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.util.List&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();&#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier modifier : modifiers) {&#xA;&#x9;if (type.isInstance(modifier)) {&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA;}&#xA;return false;"/>
-          <details key="documentation" value="&#xA; Checks whether this element has an modifier of the given type.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.hasModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, type);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="type">
           <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
@@ -1111,33 +1111,33 @@
       </eOperations>
       <eOperations name="isPublic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return hasModifier( org.emftext.language.java.modifiers.Public.class);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isPublic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="isPrivate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return hasModifier( org.emftext.language.java.modifiers.Private.class);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isPrivate((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="isProtected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return hasModifier( org.emftext.language.java.modifiers.Protected.class);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isProtected((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="addModifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="getAnnotationsAndModifiers().add(newModifier);"/>
-          <details key="documentation" value="&#xA; Adds the given type of modifier to this element. This method does not&#xA; check for duplicate modifiers!&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.addModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, (org.emftext.language.java.modifiers.Modifier) newModifier);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="newModifier" lowerBound="1" eType="#_Wo2Ys9z1Ed2bJ_pQViWxFg"/>
       </eOperations>
       <eOperations name="getAnnotationInstances" upperBound="-1" eType="#_Wosms9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.modifiers.AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.annotations.AnnotationInstance> annotations = new org.eclipse.emf.common.util.BasicEList&lt; org.emftext.language.java.annotations.AnnotationInstance>(); &#xA;for ( org.emftext.language.java.modifiers.AnnotationInstanceOrModifier next : elements) {&#xA;&#x9;if (next instanceof org.emftext.language.java.annotations.AnnotationInstance) {&#xA;&#x9;&#x9;annotations.add(( org.emftext.language.java.annotations.AnnotationInstance) next);&#xA;&#x9;}&#xA;}&#xA;return org.eclipse.emf.common.util.ECollections.unmodifiableEList(annotations);"/>
-          <details key="documentation" value="&#xA; Returns an unmodifiable list of the annotations that apply to this element.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.getAnnotationInstances((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="annotationsAndModifiers"

@@ -30,240 +30,59 @@ import org.eclipse.emf.common.util.ECollections;
 
 eclass AnnotableAndModifiable {
 
-	/**
-	 * Sets the visibility of this element to <code>private</code>.
-	 */
 	makePrivate() {
-		if (isPrivate()) {
-			return;
-		}
-		removeModifier(Public.class);
-		removeModifier(Protected.class);
-		getAnnotationsAndModifiers().add(#Private);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makePrivate((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Sets the visibility of this element to <code>public</code>.
-	 */
 	makePublic() {
-		if (isPublic()) {
-			return;
-		}
-		removeModifier(Private.class);
-		removeModifier(Protected.class);
-		getAnnotationsAndModifiers().add(#Public);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makePublic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Sets the visibility of this element to <code>protected</code>.
-	 */
 	makeProtected() {
-		if (isProtected()) {
-			return;
-		}
-		removeModifier(Private.class);
-		removeModifier(Public.class);
-		getAnnotationsAndModifiers().add(#Protected);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.makeProtected((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Removes all modifiers from this element.
-	 */
 	removeAllModifiers() {
-		List<Modifier> modifiers = getModifiers();
-		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
-		elements.removeAll(modifiers);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.removeAllModifiers((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Returns an unmodifiable list of the modifiers that apply to this element.
-	 */
 	getModifiers() {
-		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
-		EList<Modifier> modifiers = new BasicEList<Modifier>(); 
-		for (AnnotationInstanceOrModifier next : elements) {
-			if (next instanceof Modifier) {
-				modifiers.add((Modifier) next);
-			}
-		}
-		return ECollections.unmodifiableEList(modifiers);
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.getModifiers((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Returns an unmodifiable list of the annotations that apply to this element.
-	 */
 	getAnnotationInstances() {
-		EList<AnnotationInstanceOrModifier> elements = getAnnotationsAndModifiers();
-		EList<AnnotationInstance> annotations = new BasicEList<AnnotationInstance>(); 
-		for (AnnotationInstanceOrModifier next : elements) {
-			if (next instanceof AnnotationInstance) {
-				annotations.add((AnnotationInstance) next);
-			}
-		}
-		return ECollections.unmodifiableEList(annotations);
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.getAnnotationInstances((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Adds the given type of modifier to this element. This method does not
-	 * check for duplicate modifiers!
-	 */
 	addModifier() {
-		getAnnotationsAndModifiers().add(newModifier);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.addModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, (org.emftext.language.java.modifiers.Modifier) newModifier);
 	}
 
-	/**
-	 * Removes the given type of modifier from this element.
-	 */
 	removeModifier() {
-		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
-		List<AnnotationInstanceOrModifier> modifiersToRemove = new ArrayList<AnnotationInstanceOrModifier>();
-		for (AnnotationInstanceOrModifier modifier : modifiers) {
-			if (modifierType.isInstance(modifier)) {
-				modifiersToRemove.add(modifier);
-			}
-		}
-		modifiers.removeAll(modifiersToRemove);
+		org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.removeModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, modifierType);
 	}
 	
 	isPublic() {
-		return hasModifier(Public.class);
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isPublic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
 	isPrivate() {
-		return hasModifier(Private.class);
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isPrivate((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
 	isProtected() {
-		return hasModifier(Protected.class);
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isProtected((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 	
-	/**
-	 * Checks whether this element has an modifier of the given type.
-	 */
 	hasModifier() {
-		List<AnnotationInstanceOrModifier> modifiers = getAnnotationsAndModifiers();
-		for (AnnotationInstanceOrModifier modifier : modifiers) {
-			if (type.isInstance(modifier)) {
-				return true;
-			}
-		}
-		return false;
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.hasModifier((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, type);
 	}
 	
-	/**
-	 * Returns true if this element is static (either by an explicit modifier <code>static</code>
-	 * or because this element is part of an interface).
-	 */
 	isStatic() {
-		//all members of an interface are static by default
-		if (this.eContainer() instanceof Interface) {
-			return true;
-		}
-		
-		for(AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {
-			if(modifier instanceof Static) {
-				return true;
-			}
-		}
-		return false;
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isStatic((org.emftext.language.java.modifiers.AnnotableAndModifiable) this);
 	}
 
 	isHidden() {
-		Commentable	lContext = context;
-		if (this.eIsProxy()) {
-			return false;
-		}
-		//all members of an interface are public by default
-		if (this.eContainer() instanceof Interface) {
-			return false;
-		}
-		
-		if(lContext.eIsProxy()) {
-			lContext = (Commentable) EcoreUtil.resolve(lContext, this);
-		}
-		
-		ConcreteClassifier lContextClassifier = lContext.getContainingConcreteClassifier(); 
-		if (!(eContainer() instanceof Commentable)) {
-			return true;
-		}
-		ConcreteClassifier myClassifier = ((Commentable) eContainer()).getParentConcreteClassifier();
-		//special case: self reference to outer instance
-		if(lContext instanceof Reference) {
-			if (((Reference)lContext).getPrevious() instanceof SelfReference) {
-				SelfReference selfReference = (SelfReference) ((Reference)lContext).getPrevious();
-				if (selfReference.getSelf() instanceof Self) {
-					if(selfReference.getPrevious() != null) {
-						Type type = selfReference.getPrevious().getReferencedType();
-						if (type instanceof ConcreteClassifier) {
-							lContextClassifier = (ConcreteClassifier) type;
-						}
-					}
-				}
-			}
-		}
-		
-		for(AnnotationInstanceOrModifier modifier : this.getAnnotationsAndModifiers()) {
-			if(modifier instanceof Private) {
-				if (myClassifier.equalsType(0, lContextClassifier, 0)) {
-					return false;
-				}
-				return true;
-			}
-			if(modifier instanceof Public) {
-				return false;
-			}
-			if(modifier instanceof Protected) {
-				//package visibility
-				if (getContainingPackageName() != null && 
-						getContainingPackageName().equals(lContext.getContainingPackageName())) {
-					return false;
-				}
-				//try outer classifiers as well 
-				while(lContextClassifier instanceof Classifier) {
-					if (lContextClassifier.isSuperType(0, myClassifier, null)) {
-						return false;
-					}
-					
-					EObject container = lContextClassifier.eContainer();
-					if (container instanceof Commentable) {
-						lContextClassifier = ((Commentable) container).getParentConcreteClassifier();
-					} else {
-						lContextClassifier = null;
-					}
-					
-					if (lContextClassifier != null && !lContextClassifier.eIsProxy() && 
-							lContextClassifier.isSuperType(0, myClassifier, null)) {
-						return false;
-					}
-				}
-				//visibility through anonymous subclass
-				AnonymousClass anonymousClass = lContext.getContainingAnonymousClass();
-				while (anonymousClass != null) {
-					lContextClassifier = anonymousClass.getSuperClassifier();
-					if (lContextClassifier == null) {
-						return true;
-					}
-					if (lContextClassifier.isSuperType(0, myClassifier, null)) {
-						return false;
-					}
-					
-					EObject container = anonymousClass.eContainer();
-					if (container instanceof Commentable) {
-						anonymousClass = ((Commentable) container).getContainingAnonymousClass();
-					} else {
-						anonymousClass = null;
-					}
-				}
-				return true;
-			}
-		}
-		//package visibility?
-		if (getContainingPackageName() != null && 
-				getContainingPackageName().equals(lContext.getContainingPackageName())) {
-			return false;
-		}
-
-		return true;
+		return org.emftext.language.java.extensions.modifiers.AnnotableAndModifiableExtension.isHidden((org.emftext.language.java.modifiers.AnnotableAndModifiable) this, (org.emftext.language.java.commons.Commentable) context);
 	}
 }
-

@@ -120,7 +120,8 @@ public class AnnotableAndModifiableExtension {
 	/**
 	 * Adds the given type of modifier to this element. This method does not
 	 * check for duplicate modifiers!
-	 * @param newModifier 
+	 * 
+	 * @param newModifier the modifier to add
 	 */
 	public static void addModifier(AnnotableAndModifiable me, Modifier newModifier) {
 		me.getAnnotationsAndModifiers().add(newModifier);
@@ -128,7 +129,8 @@ public class AnnotableAndModifiableExtension {
 
 	/**
 	 * Removes the given type of modifier from this element.
-	 * @param modifierType 
+	 * 
+	 * @param modifierType
 	 */
 	public static void removeModifier(AnnotableAndModifiable me, Class<?> modifierType) {
 		List<AnnotationInstanceOrModifier> modifiers = me.getAnnotationsAndModifiers();
@@ -168,8 +170,9 @@ public class AnnotableAndModifiableExtension {
 	}
 	
 	/**
-	 * Returns true if this element is static (either by an explicit modifier <code>static</code>
-	 * or because this element is part of an interface).
+	 * Returns <code>true</code> if this element is static (either by an
+	 * explicit modifier <code>static</code> or because this element is part of
+	 * an interface).
 	 */
 	public static boolean isStatic(AnnotableAndModifiable me) {
 		//all members of an interface are static by default
