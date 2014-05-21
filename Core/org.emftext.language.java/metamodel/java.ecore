@@ -776,21 +776,21 @@
     <eClassifiers xsi:type="ecore:EClass" name="Import" abstract="true" eSuperTypes="#//commons/NamespaceAwareElement">
       <eOperations name="getImportedClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.lang.String containerName = getNamespacesAsString();&#xA;if (containerName == null) {&#xA;&#x9;return null;&#xA;}&#xA;&#xA;java.lang.String fullQualifiedName = containerName + name;&#xA;return getConcreteClassifierProxy(fullQualifiedName);"/>
-          <details key="documentation" value="&#xA; Returns the classifier with the given name &#xA; located in the namespace defined by the import.&#xA; &#xA; @param name the name of the classifier&#xA; @return imported classifier (proxy)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.imports.ImportExtension.getImportedClassifier((org.emftext.language.java.imports.Import) this, name);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getImportedClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.lang.String containerName = getNamespacesAsString();&#xA;if (containerName == null) {&#xA;&#x9;return org.eclipse.emf.common.util.ECollections.emptyEList();&#xA;}&#xA;&#xA;return getConcreteClassifierProxies(containerName, &quot;*&quot;);"/>
-          <details key="documentation" value="&#xA; Returns a list of imported classifiers assuming the import's namespace&#xA; identifies a package.&#xA; &#xA; @param _this &#xA; @return imported classifier (proxy)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.imports.ImportExtension.getImportedClassifiers((org.emftext.language.java.imports.Import) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getImportedMembers" upperBound="-1" eType="#//commons/NamedElement">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.classifiers.ConcreteClassifier concreteClassifier = getClassifierAtNamespaces();&#xA;&#xA;if(concreteClassifier == null || concreteClassifier.eIsProxy()) {&#xA;&#x9;return org.eclipse.emf.common.util.ECollections.emptyEList();&#xA;}&#xA;&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.commons.NamedElement> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.commons.NamedElement>();&#xA;result.addAll(concreteClassifier.getAllMembers(this));&#xA;if (concreteClassifier instanceof org.emftext.language.java.classifiers.Enumeration) {&#xA;&#x9;result.addAll((( org.emftext.language.java.classifiers.Enumeration)concreteClassifier).getConstants());&#xA;}&#xA;&#xA;return result;"/>
-          <details key="documentation" value="&#xA; Returns all imported members assuming the import's namespace&#xA; identifies a classifier.&#xA; &#xA; @param _this &#xA; @return list of imported classifiers (proxies)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.imports.ImportExtension.getImportedMembers((org.emftext.language.java.imports.Import) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>
@@ -798,7 +798,7 @@
         eSuperTypes="#//commons/Commentable">
       <eOperations name="getDefaultImports" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;for( org.eclipse.emf.ecore.EObject classifier : org.emftext.language.java.JavaClasspath.get(this).getDefaultImports()) {&#xA;&#x9;result.add(( org.emftext.language.java.classifiers.ConcreteClassifier)classifier);&#xA;}&#xA;return result;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.imports.ImportingElementExtension.getDefaultImports((org.emftext.language.java.imports.ImportingElement) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
@@ -842,8 +842,8 @@
         abstract="true" eSuperTypes="#//expressions/PrimaryExpression">
       <eOperations name="getOneType" eType="#_Wo2ZO9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="//Overrides implementation in Expression&#xA;org.emftext.language.java.classifiers.Class javaClass = null;&#xA;&#xA;if (this instanceof org.emftext.language.java.literals.NullLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Void&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.BooleanLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Boolean&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.DoubleLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Double&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.FloatLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Float&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.IntegerLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Integer&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.LongLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Long&quot;);&#xA;}&#xA;else if (this instanceof org.emftext.language.java.literals.CharacterLiteral) {&#xA;&#x9;javaClass = getLibClass(&quot;Character&quot;);&#xA;}&#xA;&#xA;return javaClass;"/>
-          <details key="documentation" value="&#xA; @return type of the literal&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.literals.LiteralExtension.getOneType((org.emftext.language.java.literals.Literal) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="alternative" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
       </eOperations>
@@ -987,7 +987,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="AdditionalField" eSuperTypes="#//references/ReferenceableElement #//arrays/ArrayTypeable #//instantiations/Initializable">
       <eOperations name="getArrayDimension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="long size = this.getArrayDimensionsBefore().size() + this.getArrayDimensionsAfter().size();&#xA;return size;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.members.AdditionalFieldExtension.getArrayDimension((org.emftext.language.java.members.AdditionalField) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>

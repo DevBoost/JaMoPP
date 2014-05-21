@@ -26,8 +26,9 @@ public class ImportingElementExtension {
 
 	public static EList<ConcreteClassifier> getDefaultImports(ImportingElement me) {
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
-		for (EObject classifier : JavaClasspath.get(me).getDefaultImports()) {
-			result.add((ConcreteClassifier)classifier);
+		JavaClasspath javaClasspath = JavaClasspath.get(me);
+		for (EObject classifier : javaClasspath.getDefaultImports()) {
+			result.add((ConcreteClassifier) classifier);
 		}
 		return result;
 	}

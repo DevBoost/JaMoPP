@@ -5,8 +5,6 @@ import java.parameters.VariableLengthParameter;
 eclass AdditionalField {
 
 	getArrayDimension() {
-		long size = this.getArrayDimensionsBefore().size() + this.getArrayDimensionsAfter().size();
-		return size;
+		return org.emftext.language.java.extensions.members.AdditionalFieldExtension.getArrayDimension((org.emftext.language.java.members.AdditionalField) this);
 	}
-	
 }

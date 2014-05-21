@@ -11,61 +11,15 @@ import java.commons.NamedElement;
 
 eclass Import {
 
-	/**
-	 * Returns the classifier with the given name 
-	 * located in the namespace defined by the import.
-	 * 
-	 * @param name the name of the classifier
-	 * @return imported classifier (proxy)
-	 */
 	getImportedClassifier() {
-		String containerName = getNamespacesAsString();
-		if (containerName == null) {
-			return null;
-		}
-		
-		String fullQualifiedName = containerName + name;
-		return getConcreteClassifierProxy(fullQualifiedName);
+		return org.emftext.language.java.extensions.imports.ImportExtension.getImportedClassifier((org.emftext.language.java.imports.Import) this, name);
 	}
 
-	
-	/**
-	 * Returns all imported members assuming the import's namespace
-	 * identifies a classifier.
-	 * 
-	 * @param _this 
-	 * @return list of imported classifiers (proxies)
-	 */
 	getImportedMembers() {
-		ConcreteClassifier concreteClassifier = getClassifierAtNamespaces();
-		
-		if(concreteClassifier == null || concreteClassifier.eIsProxy()) {
-			return ECollections.emptyEList();
-		}
-		
-		EList<NamedElement> result = new UniqueEList<NamedElement>();
-		result.addAll(concreteClassifier.getAllMembers(this));
-		if (concreteClassifier instanceof Enumeration) {
-			result.addAll(((Enumeration)concreteClassifier).getConstants());
-		}
-		
-		return result;
+		return org.emftext.language.java.extensions.imports.ImportExtension.getImportedMembers((org.emftext.language.java.imports.Import) this);
 	}
 	
-	/**
-	 * Returns a list of imported classifiers assuming the import's namespace
-	 * identifies a package.
-	 * 
-	 * @param _this 
-	 * @return imported classifier (proxy)
-	 */
 	getImportedClassifiers() {
-		String containerName = getNamespacesAsString();
-		if (containerName == null) {
-			return ECollections.emptyEList();
-		}
-		
-		return getConcreteClassifierProxies(containerName, "*");
+		return org.emftext.language.java.extensions.imports.ImportExtension.getImportedClassifiers((org.emftext.language.java.imports.Import) this);
 	}
-
 }

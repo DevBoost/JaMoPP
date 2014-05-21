@@ -51,14 +51,15 @@ public class ImportExtension {
 	public static EList<NamedElement> getImportedMembers(Import me) {
 		ConcreteClassifier concreteClassifier = me.getClassifierAtNamespaces();
 		
-		if(concreteClassifier == null || concreteClassifier.eIsProxy()) {
+		if (concreteClassifier == null || concreteClassifier.eIsProxy()) {
 			return ECollections.emptyEList();
 		}
 		
 		EList<NamedElement> result = new UniqueEList<NamedElement>();
 		result.addAll(concreteClassifier.getAllMembers(me));
 		if (concreteClassifier instanceof Enumeration) {
-			result.addAll(((Enumeration)concreteClassifier).getConstants());
+			Enumeration enumeration = (Enumeration) concreteClassifier;
+			result.addAll(enumeration.getConstants());
 		}
 		
 		return result;
