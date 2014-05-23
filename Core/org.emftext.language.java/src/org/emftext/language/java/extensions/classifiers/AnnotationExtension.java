@@ -23,6 +23,7 @@ import org.emftext.language.java.util.UniqueEList;
 public class AnnotationExtension {
 	
 	public static EList<ConcreteClassifier> getAllSuperClassifiers(Annotation me) {
+		// TODO Use ECollections.singletonEList() instead?
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		result.add(me.getAnnotationInterface());
 		return result;
