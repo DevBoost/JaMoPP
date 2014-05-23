@@ -53,8 +53,8 @@ import org.emftext.language.java.variables.LocalVariable;
 public class ExpressionExtension {
 
 	/**
-	 * Returns the type of the expression considering all concrete
-	 * subtypes of Expression.
+	 * Returns the type of the expression considering all concrete subtypes of
+	 * the Expression.
 	 * 
 	 * @return type of expression
 	 */
@@ -102,7 +102,7 @@ public class ExpressionExtension {
 				me instanceof RelationExpression ||
 				me instanceof ConditionalOrExpression ||
 				me instanceof ConditionalAndExpression ||
-				me instanceof InstanceOfExpression ) {
+				me instanceof InstanceOfExpression) {
 			type = me.getLibClass("Boolean");
 		}
 		else if (me instanceof AdditiveExpression ||
@@ -110,7 +110,7 @@ public class ExpressionExtension {
 				me instanceof InclusiveOrExpression ||
 				me instanceof ExclusiveOrExpression ||
 				me instanceof AndExpression ||
-				me instanceof ShiftExpression ) {
+				me instanceof ShiftExpression) {
 			
 			if (me instanceof AdditiveExpression) {
 				AdditiveExpression additiveExpression = (AdditiveExpression) me;
