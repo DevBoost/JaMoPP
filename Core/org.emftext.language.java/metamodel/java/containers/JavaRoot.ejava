@@ -7,18 +7,8 @@ import org.emftext.language.java.util.UniqueEList;
 
 eclass JavaRoot {
 	
-	/**
-	 * @return all classes in the same package imports
-	 */
 	getClassifiersInSamePackage() {
-		EList<ConcreteClassifier> defaultImportList = new UniqueEList<ConcreteClassifier>();
-		
-		String packageName = getNamespacesAsString();
-		
-		defaultImportList.addAll(getConcreteClassifierProxies(
-				packageName, "*"));
-
-		return defaultImportList;
+		return org.emftext.language.java.extensions.containers.JavaRootExtension.getClassifiersInSamePackage((org.emftext.language.java.containers.JavaRoot) this);
 	}
-
 }
+

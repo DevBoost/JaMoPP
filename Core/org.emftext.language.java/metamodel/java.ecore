@@ -447,60 +447,60 @@
     <eClassifiers xsi:type="ecore:EClass" name="JavaRoot" abstract="true" eSuperTypes="#//commons/NamedElement #//commons/NamespaceAwareElement #//imports/ImportingElement">
       <eOperations name="getClassifiersInSamePackage" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> defaultImportList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;java.lang.String packageName = getNamespacesAsString();&#xA;&#xA;defaultImportList.addAll(getConcreteClassifierProxies(&#xA;&#x9;&#x9;packageName, &quot;*&quot;));&#xA;&#xA;return defaultImportList;"/>
-          <details key="documentation" value="&#xA; @return all classes in the same package imports&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.JavaRootExtension.getClassifiersInSamePackage((org.emftext.language.java.containers.JavaRoot) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CompilationUnit" eSuperTypes="#//containers/JavaRoot">
       <eOperations name="getContainedClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (name == null) {&#xA;&#x9;return null;&#xA;}&#xA;for( org.emftext.language.java.classifiers.ConcreteClassifier candidate : getClassifiers()) {&#xA;&#x9;if(name.equals(candidate.getName())) {&#xA;&#x9;&#x9;return candidate;&#xA;&#x9;}&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @param name name of the contained Classifier&#xA; @return the Classifier&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getContainedClassifier((org.emftext.language.java.containers.CompilationUnit) this, name);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="getClassifiersInSamePackage" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> defaultImportList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;java.lang.String packageName = getNamespacesAsString();&#xA;&#xA;//locally defined in this container&#xA;defaultImportList.addAll(getClassifiers());&#xA;&#xA;defaultImportList.addAll(getConcreteClassifierProxies(&#xA;&#x9;&#x9;packageName, &quot;*&quot;));&#xA;&#xA;return defaultImportList;"/>
-          <details key="documentation" value="&#xA; @return all classes in the same package imports&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getClassifiersInSamePackage((org.emftext.language.java.containers.CompilationUnit) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getContainedClass" eType="#//classifiers/Class">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Class) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Class) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @return the only class contained directly in the compilation unit (if one exists)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getContainedClass((org.emftext.language.java.containers.CompilationUnit) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getContainedInterface" eType="#//classifiers/Interface">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Interface) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @return the only interface contained directly in the compilation unit (if one exists)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getContainedInterface((org.emftext.language.java.containers.CompilationUnit) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getContainedAnnotation" eType="#//classifiers/Annotation">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Annotation) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Annotation) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @return the only annotation contained directly in the compilation unit (if one exists)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getContainedAnnotation((org.emftext.language.java.containers.CompilationUnit) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getContainedEnumeration" eType="#//classifiers/Enumeration">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (getClassifiers().size() != 1) {&#xA;&#x9;return null;&#xA;}&#xA;if (getClassifiers().get(0) instanceof org.emftext.language.java.classifiers.Enumeration) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Enumeration) getClassifiers().get(0);&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @return the only enumeration contained directly in the compilation unit (if one exists)&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.CompilationUnitExtension.getContainedEnumeration((org.emftext.language.java.containers.CompilationUnit) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="addImport">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.imports.ClassifierImport import_ = org.emftext.language.java.imports.ImportsFactory.eINSTANCE.createClassifierImport();&#xA;org.emftext.language.java.classifiers.ConcreteClassifier classToImport = getConcreteClassifier(nameOfClassToImport);&#xA;import_.setClassifier(classToImport);&#xA;import_.getNamespaces().addAll(classToImport.getContainingCompilationUnit().getNamespaces());&#xA;getImports().add(import_);"/>
-          <details key="documentation" value="&#xA; Adds an import of the given class to this compilation unit.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.containers.CompilationUnitExtension.addImport((org.emftext.language.java.containers.CompilationUnit) this, nameOfClassToImport);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="nameOfClassToImport" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="addPackageImport">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.imports.PackageImport nsImport = org.emftext.language.java.imports.ImportsFactory.eINSTANCE.createPackageImport();&#xA;for ( java.lang.String name : packageName.split(&quot;\\.&quot;)) {&#xA;&#x9;nsImport.getNamespaces().add(name);&#xA;}&#xA;getImports().add(nsImport);"/>
-          <details key="documentation" value="&#xA; Adds an import of the given package to this compilation unit.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.containers.CompilationUnitExtension.addPackageImport((org.emftext.language.java.containers.CompilationUnit) this, packageName);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
@@ -510,14 +510,14 @@
     <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//containers/JavaRoot #//annotations/Annotable">
       <eOperations name="getNamespacesAsString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.lang.String packageName = &quot;&quot;; &#xA;for( java.util.Iterator&lt; java.lang.String> it = getNamespaces().iterator(); it.hasNext(); ) {&#xA;&#x9;java.lang.String namespaceFragment = it.next();&#xA;&#x9;packageName = packageName + namespaceFragment + org.emftext.language.java.JavaUniquePathConstructor.PACKAGE_SEPARATOR;&#xA;}&#xA;return packageName;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.PackageExtension.getNamespacesAsString((org.emftext.language.java.containers.Package) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getClassifiersInSamePackage" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> defaultImportList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;java.lang.String packageName = getNamespacesAsString();&#xA;&#xA;defaultImportList.addAll(getConcreteClassifierProxies(&#xA;&#x9;&#x9;packageName + getName(), &quot;*&quot;));&#xA;&#xA;return defaultImportList;"/>
-          <details key="documentation" value="&#xA; @return all classes in the same package&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.containers.PackageExtension.getClassifiersInSamePackage((org.emftext.language.java.containers.Package) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
