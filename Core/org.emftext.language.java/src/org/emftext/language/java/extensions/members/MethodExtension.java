@@ -29,7 +29,7 @@ import org.emftext.language.java.types.TypeReference;
 public class MethodExtension {
 	
 	/**
-	 * Decides if the given method matches the given call. 
+	 * Returns <code>true</code> if the given method matches the given call.
 	 * 
 	 * @param methodCall
 	 * @return
@@ -39,8 +39,9 @@ public class MethodExtension {
 	}
 
 	/**
-	 * Only returns true if the given Method is a better match for the given
-	 * calls than the otherMethod given.
+	 * Returns <code>true</code> if the given {@link Method} <code>me</code> is
+	 * a better match for the given method call than {@link Method}
+	 * <code>otherMethod</code>.
 	 * 
 	 * @param otherMethod
 	 * @param methodCall
