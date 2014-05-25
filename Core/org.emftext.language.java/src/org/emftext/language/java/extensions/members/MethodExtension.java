@@ -130,24 +130,19 @@ public class MethodExtension {
 					return false;
 				}
 				
-				if (parameterType != null && argumentType != null) {
-					if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
-						if (needsPerfectMatch) {
-							parametersMatch = parametersMatch
-								&& argumentType.equalsType(argument.getArrayDimension(),
-										parameterType, parameter.getArrayDimension());
-						}
-						else {
-							parametersMatch = parametersMatch 
-								&& argumentType.isSuperType(argument.getArrayDimension(),
-										parameterType, parameter);
-						}
+				if (!parameterType.eIsProxy() || !argumentType.eIsProxy()) {
+					long argumentArrayDimension = argument.getArrayDimension();
+					if (needsPerfectMatch) {
+						long parameterArrayDimension = parameter.getArrayDimension();
+						parametersMatch = parametersMatch
+							&& argumentType.equalsType(argumentArrayDimension,
+									parameterType, parameterArrayDimension);
+					} else {
+						parametersMatch = parametersMatch 
+							&& argumentType.isSuperType(argumentArrayDimension,
+									parameterType, parameter);
 					}
-					else {
-						return false;
-					}
-				}
-				else {
+				} else {
 					return false;
 				}
 			}
