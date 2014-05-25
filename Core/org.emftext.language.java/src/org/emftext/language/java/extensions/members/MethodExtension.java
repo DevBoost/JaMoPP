@@ -55,7 +55,7 @@ public class MethodExtension {
 		
 		if (otherMethod.isMethodForCall(methodCall, true)) {
 			if (me.isMethodForCall(methodCall, true)) {
-				//we both match perfectly; lets compare our return types
+				// We both match perfectly; lets compare our return types
 				Type target = me.getTypeReference().getTarget();
 				if (target instanceof ConcreteClassifier) {
 					if (((ConcreteClassifier) target).getAllSuperClassifiers().contains(
@@ -113,10 +113,10 @@ public class MethodExtension {
 					parameterList.remove(lastParameter);
 					parameterTypeList.remove(parameterTypeList.size() - 1);
 				}
-				
 			}
 		}
 		
+		// TODO Perform early exit instead
 		if (parameterList.size() == argumentTypeList.size()) { 
 			boolean parametersMatch = true;
 			for (int i = 0; i < argumentTypeList.size(); i++) {
@@ -145,6 +145,10 @@ public class MethodExtension {
 				} else {
 					return false;
 				}
+				
+				// TODO Return if parametersMatch is 'false'? There is not need
+				// to check the other parameters because once parametersMatch is
+				// 'false' it wont become true anymore.
 			}
 			return parametersMatch; 
 		}
