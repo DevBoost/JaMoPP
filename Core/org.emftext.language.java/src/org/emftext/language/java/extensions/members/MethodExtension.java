@@ -24,6 +24,7 @@ import org.emftext.language.java.parameters.Parameter;
 import org.emftext.language.java.parameters.VariableLengthParameter;
 import org.emftext.language.java.references.MethodCall;
 import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReference;
 
 public class MethodExtension {
 	
@@ -38,17 +39,20 @@ public class MethodExtension {
 	}
 
 	/**
-	 * Only returns true if the given Method is a better match for the given calls than the
-	 * otherMethod given.
+	 * Only returns true if the given Method is a better match for the given
+	 * calls than the otherMethod given.
 	 * 
 	 * @param otherMethod
 	 * @param methodCall
 	 * @return
 	 */
-	public static boolean isBetterMethodForCall(Method me, Method otherMethod, MethodCall methodCall) {
+	public static boolean isBetterMethodForCall(Method me, Method otherMethod,
+			MethodCall methodCall) {
+		
 		if (!me.isMethodForCall(methodCall, false)) {
 			return false;
 		}
+		
 		if (otherMethod.isMethodForCall(methodCall, true)) {
 			if (me.isMethodForCall(methodCall, true)) {
 				//we both match perfectly; lets compare our return types
@@ -61,9 +65,11 @@ public class MethodExtension {
 					}
 				}
 			}
+			
 			//the other already matches perfectly; I am not better
 			return false;
 		}
+		
 		if (!otherMethod.isMethodForCall(methodCall, false)) {
 			//I match, but the other does not
 			return true;
@@ -73,29 +79,37 @@ public class MethodExtension {
 		return me.isMethodForCall(methodCall, true);
 	}
 
-	public static boolean isMethodForCall(Method me, MethodCall methodCall, boolean needsPerfectMatch) {
+	public static boolean isMethodForCall(Method me, MethodCall methodCall,
+			boolean needsPerfectMatch) {
+		
 		EList<Type> argumentTypeList = methodCall.getArgumentTypes();
 		EList<Parameter> parameterList = new BasicEList<Parameter>(me.getParameters());
 		
 		EList<Type> parameterTypeList = new BasicEList<Type>();
-		for(Parameter parameter : parameterList)  {
-			//determine types before messing with the parameters
-			parameterTypeList.add(
-					parameter.getTypeReference().getBoundTarget(methodCall));
+		for (Parameter parameter : parameterList)  {
+			// Determine types before messing with the parameters
+			TypeReference typeReference = parameter.getTypeReference();
+			Type boundTarget = typeReference.getBoundTarget(methodCall);
+			parameterTypeList.add(boundTarget);
 		}
 
 		if (!parameterList.isEmpty()) {
 			Parameter lastParameter = parameterList.get(parameterList.size() - 1);
-			Type lastParameterType  = parameterTypeList.get(parameterTypeList.size() - 1);;
+			Type lastParameterType  = parameterTypeList.get(parameterTypeList.size() - 1);
 			if (lastParameter instanceof VariableLengthParameter) {
-				//in case of variable length add/remove some parameters
-				while(parameterList.size() < argumentTypeList.size()) {
-					if (needsPerfectMatch) return false;
+				// In case of variable length add/remove some parameters
+				while (parameterList.size() < argumentTypeList.size()) {
+					if (needsPerfectMatch) {
+						return false;
+					}
 					parameterList.add(lastParameter);
 					parameterTypeList.add(lastParameterType);
 				}
-				if(parameterList.size() > argumentTypeList.size()) {
-					if (needsPerfectMatch) return false;
+				
+				if (parameterList.size() > argumentTypeList.size()) {
+					if (needsPerfectMatch) {
+						return false;
+					}
 					parameterList.remove(lastParameter);
 					parameterTypeList.remove(parameterTypeList.size() - 1);
 				}
@@ -106,11 +120,11 @@ public class MethodExtension {
 		if (parameterList.size() == argumentTypeList.size()) { 
 			boolean parametersMatch = true;
 			for (int i = 0; i < argumentTypeList.size(); i++) {
-				Parameter  parameter = parameterList.get(i);
+				Parameter parameter = parameterList.get(i);
 				Expression argument = methodCall.getArguments().get(i);
 
 				Type parameterType = parameterTypeList.get(i);
-				Type argumentType  = argumentTypeList.get(i);
+				Type argumentType = argumentTypeList.get(i);
 				
 				if (argumentType == null || parameterType == null) {
 					return false;
@@ -138,12 +152,15 @@ public class MethodExtension {
 				}
 			}
 			return parametersMatch; 
-		} 
+		}
+		
 		return false;		
 	}
 
 	public static long getArrayDimension(Method me) {
-		long size = me.getArrayDimensionsBefore().size() + me.getArrayDimensionsAfter().size();
+		int sizeBefore = me.getArrayDimensionsBefore().size();
+		int sizeAfter = me.getArrayDimensionsAfter().size();
+		long size = sizeBefore + sizeAfter;
 		if (me instanceof VariableLengthParameter) {
 			size++;
 		}
