@@ -106,10 +106,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	protected static final String TEST_INPUT_FOLDER = "src-input";
 
-	// a list of files that are excluded from the reprint test, because
-	// they contain optional tokens which are lost after parsing them
-	private static final String[] FILES_EXCLUDED_FROM_REPRINT_TEST = new String[] {};
-
 	@Override
 	protected Map<Object, Object> getLoadOptions() {
 		Map<Object, Object> map = new LinkedHashMap<Object, Object>();
@@ -339,11 +335,6 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	@Override
 	protected boolean isExcludedFromReprintTest(String filename) {
-		for (String file : FILES_EXCLUDED_FROM_REPRINT_TEST) {
-			if (file.equals(filename)) {
-				return true;
-			}
-		}
 		return false;
 	}
 
