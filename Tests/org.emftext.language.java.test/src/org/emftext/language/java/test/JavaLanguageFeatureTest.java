@@ -349,7 +349,8 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 
 	/**
 	 * This method is executed before every single test and initializes fields
-	 * typically needed by the test cases
+	 * typically needed by the test cases.
+	 * 
 	 * @throws Exception
 	 */
 	@Before
