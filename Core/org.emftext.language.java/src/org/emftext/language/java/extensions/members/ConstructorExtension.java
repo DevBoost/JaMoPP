@@ -30,6 +30,9 @@ import org.emftext.language.java.types.TypeReference;
 /**
  * Extension providing utility methods for the the Constructor meta model class.
  */
+// FIXME Most of this code seems to be identical with code from class 
+// MethodExtension. We must figure out a way to share this code for both Methods
+// and Constructors.
 public class ConstructorExtension {
 
     /**
