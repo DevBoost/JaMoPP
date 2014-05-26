@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2006-2013
+ * Copyright (c) 2006-2014
  * Software Technology Group, Dresden University of Technology
  * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
  * 
@@ -1879,7 +1879,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		allTestFiles.removeAll(getReprintedResources());
 		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
 			File file = (File) i.next();
-			if (file.toString().contains(File.separator + "resolving_new" + File.separator)) {
+			if (isExcluded(file)) {
 				//these files are not covered by this test
 				i.remove();
 				continue;
@@ -1904,7 +1904,7 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		allTestFiles.removeAll(getParsedResources());
 		for (Iterator<File> i = allTestFiles.iterator(); i.hasNext();) {
 			File file = (File) i.next();
-			if (file.toString().contains(File.separator + "resolving_new" + File.separator)) {
+			if (isExcluded(file)) {
 				//these files are not covered by this test
 				i.remove();
 				continue;
@@ -1915,6 +1915,17 @@ public class JavaLanguageFeatureTest extends AbstractJavaParserTestCase {
 		assertEquals(
 				"All testfiles contained in input folder were covered by a test case.",
 				Collections.EMPTY_LIST, allTestFiles);
+	}
+
+	private static boolean isExcluded(File file) {
+		if (file.toString().contains(File.separator + "resolving_new" + File.separator)) {
+			return true;
+		}
+		if ("JavaUtilEnumerationImport.java".equals(file.getName())) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	private static List<File> getAllTestFiles() throws CoreException {
