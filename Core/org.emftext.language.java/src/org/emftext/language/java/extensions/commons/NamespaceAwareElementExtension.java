@@ -26,38 +26,39 @@ import org.emftext.language.java.commons.NamespaceAwareElement;
 public class NamespaceAwareElementExtension {
 
 	/**
-	 * Converts the namespaces array of the given namespace aware element into
-	 * a String representation using package (.) and class ($) delimiters. The method
-	 * uses the classpath to determine for each element of the namespace if it 
-	 * identifies a package or a class.
+	 * Converts the namespaces array of the given namespace aware element into a
+	 * String representation using package (.) and class ($) delimiters. The
+	 * method uses the classpath to determine for each element of the namespace
+	 * if it identifies a package or a class.
 	 * 
 	 * @param naElement
 	 * @return single string representation of namespace
 	 */
 	public static String getNamespacesAsString(NamespaceAwareElement me) {
-		String containerName = ""; 
-		for (Iterator<String> it = me.getNamespaces().iterator(); it.hasNext(); ) {
+		
+		JavaClasspath javaClasspath = JavaClasspath.get(me);
+		String containerName = "";
+		
+		Iterator<String> it = me.getNamespaces().iterator();
+		while (it.hasNext()) {
 			String namespaceFragment = it.next();
-			//does it point at a classifier or a package as container?
+			// Does it point at a classifier or a package as container?
 			String assumedPackageName    = containerName + namespaceFragment + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
 			String assumedClassifierName = containerName + namespaceFragment + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;
 			
 			if (it.hasNext()) {
-				if (JavaClasspath.get(me).existsPackage(assumedClassifierName)) {
+				if (javaClasspath.existsPackage(assumedClassifierName)) {
 					containerName = assumedClassifierName;
-				}
-				else {
-					//assume package
+				} else {
+					// Assume package
 					containerName = assumedPackageName;
 				}
-			}
-			else {
-				if (JavaClasspath.get(me).existsPackage(assumedPackageName)) {
-					//a package is always available as key
+			} else {
+				if (javaClasspath.existsPackage(assumedPackageName)) {
+					// A package is always available as key
 					containerName = assumedPackageName;
-				}
-				else {
-					//assume classifier that is not key, but value in the map
+				} else {
+					// Assume classifier that is not key, but value in the map
 					containerName = assumedClassifierName;
 				}
 			}
@@ -67,20 +68,22 @@ public class NamespaceAwareElementExtension {
 	}
 	
 	/**
-	 * Assuming the namespace
-	 * identifies a classifier, that classifier is returned.
+	 * Assuming the namespace identifies a classifier, that classifier is
+	 * returned.
 	 * 
 	 * @return classifier at namespace
 	 */
 	public static ConcreteClassifier getClassifierAtNamespaces(NamespaceAwareElement me) {
+		
 		String fullQualifiedName = me.getNamespacesAsString();
 		if (fullQualifiedName == null || fullQualifiedName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)) {
 			return null;
 		}
-		//cut the trailing separator
-		fullQualifiedName = fullQualifiedName.substring(0,fullQualifiedName.length() - 1);
 		
-		return (ConcreteClassifier) EcoreUtil.resolve(
-				me.getConcreteClassifierProxy(fullQualifiedName), me);
+		// Cut the trailing separator
+		fullQualifiedName = fullQualifiedName.substring(0, fullQualifiedName.length() - 1);
+		
+		ConcreteClassifier proxy = me.getConcreteClassifierProxy(fullQualifiedName);
+		return (ConcreteClassifier) EcoreUtil.resolve(proxy, me);
 	}
 }
