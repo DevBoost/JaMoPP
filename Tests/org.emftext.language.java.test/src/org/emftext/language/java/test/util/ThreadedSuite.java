@@ -30,8 +30,8 @@ import junit.framework.TestSuite;
 
 /**
  * A custom TestSuite that can be used to run tests in parallel. It is
- * configurable by the number of threads to be used and the timeout after
- * which threads are interrupted.
+ * configurable by the number of threads to be used and the timeout after which
+ * threads are interrupted.
  */
 @Ignore("This suite is not supposed to run directly")
 public final class ThreadedSuite extends TestSuite {
