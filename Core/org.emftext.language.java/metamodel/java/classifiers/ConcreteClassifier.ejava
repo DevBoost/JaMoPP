@@ -23,6 +23,6 @@ eclass ConcreteClassifier {
 	}
 
 	/* boolean */ isJavaLangObject(/* ConcreteClassifier clazz */) {
-		return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.isJavaLangObject((org.emftext.language.java.classifiers.ConcreteClassifier) this);
+		return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.isJavaLangObject((org.emftext.language.java.classifiers.ConcreteClassifier) clazz);
 	}
 }

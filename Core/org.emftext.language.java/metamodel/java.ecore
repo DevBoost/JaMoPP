@@ -132,7 +132,7 @@
       </eOperations>
       <eOperations name="isJavaLangObject" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.isJavaLangObject((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.isJavaLangObject((org.emftext.language.java.classifiers.ConcreteClassifier) clazz);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="clazz" lowerBound="1" eType="#//classifiers/ConcreteClassifier"/>
