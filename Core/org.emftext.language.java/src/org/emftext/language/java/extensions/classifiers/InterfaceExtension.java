@@ -15,43 +15,54 @@
  ******************************************************************************/
 package org.emftext.language.java.extensions.classifiers;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
 import org.emftext.language.java.classifiers.Interface;
+import org.emftext.language.java.types.Type;
 import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.UniqueEList;
 
 public class InterfaceExtension {
 	
 	/**
-	 * @return all interfaces extended by this interface. The type is 
-	 * ConcreteClassifier, because java.lang.Object is also extended although
-	 * it is a Class.
+	 * Returns all interfaces extended by this interface. The type of the
+	 * objects in the returned list is {@link ConcreteClassifier}, because
+	 * <code>java.lang.Object</code> is also extended although it is a Class.
 	 */
 	public static EList<ConcreteClassifier> getAllSuperClassifiers(Interface me) {
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		
-		for (TypeReference typeArg : me.getExtends()) {
-			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
-			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
-			if (superInterface != null) {
-				result.add(superInterface);
-				if (superInterface instanceof Interface) {
-					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
-				}
-			}
-		}
+		EList<TypeReference> explicitExtends = me.getExtends();
+		getAllSuperClassifiers(explicitExtends, result);
 		
-		for (TypeReference typeArg : me.getDefaultExtends()) {
-			//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface
-			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
-			if (superInterface != null) {
-				result.add(superInterface);
-				if (superInterface instanceof Interface) {
-					result.addAll(((Interface)superInterface).getAllSuperClassifiers());
-				}
+		EList<TypeReference> defaultExtends = me.getDefaultExtends();
+		getAllSuperClassifiers(defaultExtends, result);
+		
+		return result;
+	}
+
+	private static void getAllSuperClassifiers(
+			List<TypeReference> typeReferences, List<ConcreteClassifier> result) {
+		
+		for (TypeReference typeReference : typeReferences) {
+			getAllSuperClassifiers(typeReference, result);
+		}
+	}
+
+	private static void getAllSuperClassifiers(TypeReference typeReference,
+			List<ConcreteClassifier> result) {
+		
+		// Use ConcreteClassifier instead of Interface because
+		// java.lang.Object can also act as implemented interface
+		Type target = typeReference.getTarget();
+		ConcreteClassifier superInterface = (ConcreteClassifier) target;
+		if (superInterface != null) {
+			result.add(superInterface);
+			if (superInterface instanceof Interface) {
+				result.addAll(((Interface) superInterface).getAllSuperClassifiers());
 			}
 		}
-		return result;
 	}
 }

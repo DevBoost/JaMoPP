@@ -16,6 +16,7 @@
 package org.emftext.language.java.extensions.classifiers;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.emftext.language.java.classifiers.AnonymousClass;
 import org.emftext.language.java.classifiers.ConcreteClassifier;
@@ -25,6 +26,8 @@ import org.emftext.language.java.instantiations.NewConstructorCall;
 import org.emftext.language.java.members.EnumConstant;
 import org.emftext.language.java.members.Member;
 import org.emftext.language.java.modifiers.AnnotableAndModifiable;
+import org.emftext.language.java.types.Type;
+import org.emftext.language.java.types.TypeReference;
 import org.emftext.language.java.util.UniqueEList;
 
 public class AnonymousClassExtension {
@@ -39,28 +42,30 @@ public class AnonymousClassExtension {
 		memberList.addAll(me.getDefaultMembers());
 		
 		NewConstructorCall ncCall = null;
-		if (me.eContainer() instanceof NewConstructorCall) {
-			ncCall = (NewConstructorCall) me.eContainer();
+		EObject eContainer = me.eContainer();
+		if (eContainer instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) eContainer;
 		}
+		
 		if (ncCall == null) {
 			return memberList;
-		}
-		else {
-			ConcreteClassifier classifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
+		} else {
+			TypeReference typeReference = ncCall.getTypeReference();
+			Type target = typeReference.getTarget();
+			ConcreteClassifier classifier = (ConcreteClassifier) target;
 			if (classifier != null) {
 				EList<Member> superMemberList = classifier.getAllMembers(context);
-				for(Member superMember : superMemberList) {
-					//exclude private members
-					if(superMember instanceof AnnotableAndModifiable) {					
+				for (Member superMember : superMemberList) {
+					// Exclude private members
+					if (superMember instanceof AnnotableAndModifiable) {					
 						if (superMember.eIsProxy()) {
 							superMember = (Member) EcoreUtil.resolve(superMember, me);
 						}
 						AnnotableAndModifiable modifiable = (AnnotableAndModifiable) superMember;
-						if(!modifiable.isHidden(context)) {
+						if (!modifiable.isHidden(context)) {
 							memberList.add(superMember);
 						}
-					}
-					else {
+					} else {
 						memberList.add(superMember);
 					}
 				}
@@ -80,8 +85,7 @@ public class AnonymousClassExtension {
 		if (superClassifier != null) {
 			superClassifierList.add(superClassifier);
 			superClassifierList.addAll(superClassifier.getAllSuperClassifiers());
-		}
-		else {
+		} else {
 			superClassifierList.add(me.getObjectClass());
 		}
 		return superClassifierList;
@@ -92,14 +96,16 @@ public class AnonymousClassExtension {
 	 */
 	public static ConcreteClassifier getSuperClassifier(AnonymousClass me) {
 		NewConstructorCall ncCall = null;
-		if (me.eContainer() instanceof NewConstructorCall) {
-			ncCall = (NewConstructorCall) me.eContainer();
-			ConcreteClassifier superClassifier = (ConcreteClassifier) ncCall.getTypeReference().getTarget();
+		EObject eContainer = me.eContainer();
+		if (eContainer instanceof NewConstructorCall) {
+			ncCall = (NewConstructorCall) eContainer;
+			TypeReference typeReference = ncCall.getTypeReference();
+			Type target = typeReference.getTarget();
+			ConcreteClassifier superClassifier = (ConcreteClassifier) target;
 			return superClassifier;
-		}
-		else if (me.eContainer() instanceof EnumConstant) {
-			if (me.eContainer().eContainer() instanceof Enumeration) {
-				return (Enumeration) me.eContainer().eContainer();
+		} else if (eContainer instanceof EnumConstant) {
+			if (eContainer.eContainer() instanceof Enumeration) {
+				return (Enumeration) eContainer.eContainer();
 			}
 		}
 		return null;

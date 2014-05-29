@@ -31,12 +31,12 @@ public class EnumerationExtension {
 	public static EList<ConcreteClassifier> getAllSuperClassifiers(Enumeration me) {
 		EList<ConcreteClassifier> result = new UniqueEList<ConcreteClassifier>();
 		
-		//enumerations inherit from java.lang.Enum
+		// Enumerations inherit from java.lang.Enum
 		org.emftext.language.java.classifiers.Class enumClass = me.getLibClass("Enum");
 		result.add(enumClass);
 		result.addAll(enumClass.getAllSuperClassifiers());
 		
-		//collect all implemented interfaces
+		// Collect all implemented interfaces
 		for (TypeReference typeArg : me.getImplements()) {
 			ConcreteClassifier superInterface = (ConcreteClassifier) typeArg.getTarget();
 			if (superInterface != null) {

@@ -78,21 +78,21 @@
     <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#_Wo2ZO9z1Ed2bJ_pQViWxFg #//references/ReferenceableElement">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="//method has to be specified in subclasses&#xA;throw new java.lang.UnsupportedOperationException();"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ClassifierExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.Classifier) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="addImport">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.containers.CompilationUnit compilationUnit = getParentByType( org.emftext.language.java.containers.CompilationUnit.class);&#xA;compilationUnit.addImport(nameOfClassToImport);"/>
-          <details key="documentation" value="&#xA; Adds an import of the given class to the compilation unit that contains this classifier.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.classifiers.ClassifierExtension.addImport((org.emftext.language.java.classifiers.Classifier) this, nameOfClassToImport);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="nameOfClassToImport" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="addPackageImport">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.containers.CompilationUnit compilationUnit = getParentByType( org.emftext.language.java.containers.CompilationUnit.class);&#xA;addPackageImport(packageName);"/>
-          <details key="documentation" value="&#xA; Adds an import of the given package to this compilation unit that contains this classifier.&#xA;"/>
+          <details key="body" value="org.emftext.language.java.extensions.classifiers.ClassifierExtension.addPackageImport((org.emftext.language.java.classifiers.Classifier) this, packageName);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="packageName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
@@ -101,38 +101,38 @@
         eSuperTypes="#//classifiers/Classifier #//generics/TypeParametrizable #//members/MemberContainer #//members/Member #_Wo2YzNz1Ed2bJ_pQViWxFg #//modifiers/AnnotableAndModifiable">
       <eOperations name="getInnerClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (this.eIsProxy()) {&#xA;&#x9; java.lang.String uriString = (( org.eclipse.emf.ecore.InternalEObject)this).eProxyURI().trimFragment().toString();&#xA;&#x9; java.lang.String fullName = uriString.substring( org.emftext.language.java.JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP.length(), &#xA;&#x9;&#x9;&#x9; uriString.length() - &quot;.java&quot;.length()) + &quot;$&quot;;&#xA;&#x9; return getConcreteClassifierProxies(fullName, &quot;*&quot;);&#xA;}&#xA;else {&#xA;&#x9;java.lang.String suffix = &quot;&quot;;&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier containingClass = this;&#xA;&#x9;while (containingClass.eContainer() instanceof org.emftext.language.java.classifiers.ConcreteClassifier) {&#xA;&#x9;&#x9;containingClass = ( org.emftext.language.java.classifiers.ConcreteClassifier) containingClass.eContainer();&#xA;&#x9;&#x9;suffix = containingClass.getName() + org.emftext.language.java.JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + suffix;&#xA;&#x9;}&#xA;&#x9;if (containingClass.eContainer() instanceof org.emftext.language.java.containers.CompilationUnit) {&#xA;&#x9;&#x9;org.emftext.language.java.containers.CompilationUnit compilationUnit = ( org.emftext.language.java.containers.CompilationUnit) containingClass.eContainer();&#xA;&#x9;    java.lang.String fullName = compilationUnit.getNamespacesAsString() + suffix + &#xA;&#x9;    &#x9;getName() + org.emftext.language.java.JavaUniquePathConstructor.CLASSIFIER_SEPARATOR;&#xA;&#x9;    return getConcreteClassifierProxies(fullName, &quot;*&quot;);&#xA;&#x9;}&#xA;}&#xA;&#xA;//for classes declared locally inside methods that are not registered in the class path&#xA;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;//can not call ClassifierUtil.getAllMembers, because it will try to call this method!&#xA;for ( org.emftext.language.java.members.Member member : getMembers()) {&#xA;&#x9;if(member instanceof org.emftext.language.java.classifiers.ConcreteClassifier) {&#xA;&#x9;&#x9;result.add(( org.emftext.language.java.classifiers.ConcreteClassifier) member);&#xA;&#x9;}&#xA;}&#xA;for ( org.emftext.language.java.classifiers.ConcreteClassifier superClassifier : getAllSuperClassifiers()) {&#xA;&#x9;for( org.emftext.language.java.members.Member member : superClassifier.getMembers()) {&#xA;&#x9;&#x9;if(member instanceof org.emftext.language.java.classifiers.ConcreteClassifier) {&#xA;&#x9;&#x9;&#x9;result.add(( org.emftext.language.java.classifiers.ConcreteClassifier) member);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return result;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.getInnerClassifiers((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getAllInnerClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> innerClassifierList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;innerClassifierList.addAll(getInnerClassifiers());&#xA;&#xA;for ( org.emftext.language.java.classifiers.ConcreteClassifier superClassifier : getAllSuperClassifiers()) {&#xA;&#x9;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> superInnerList = superClassifier&#xA;&#x9;&#x9;&#x9;.getInnerClassifiers();&#xA;&#xA;&#x9;for ( org.emftext.language.java.classifiers.ConcreteClassifier superInner : superInnerList) {&#xA;&#x9;&#x9;if (superInner.eIsProxy()) {&#xA;&#x9;&#x9;&#x9;superInner = ( org.emftext.language.java.classifiers.ConcreteClassifier) org.eclipse.emf.ecore.util.EcoreUtil.resolve(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;superInner, this);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (!superInner.isHidden(this)) {&#xA;&#x9;&#x9;&#x9;innerClassifierList.add(superInner);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#x9;&#xA;return innerClassifierList;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.getAllInnerClassifiers((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getSuperTypeReferences" upperBound="-1" eType="#//types/ClassifierReference">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.types.ClassifierReference> typeReferenceList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.types.ClassifierReference>();&#xA;if (this instanceof org.emftext.language.java.classifiers.Class) {&#xA;&#x9;org.emftext.language.java.classifiers.Class javaClass = ( org.emftext.language.java.classifiers.Class) this;&#xA;&#x9;if (javaClass.getExtends() != null) {&#xA;&#x9;&#x9;org.emftext.language.java.types.ClassifierReference classifierReference = javaClass.getExtends().getPureClassifierReference();&#xA;&#x9;&#x9;typeReferenceList.add(classifierReference);&#xA;&#x9;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier target = ( org.emftext.language.java.classifiers.ConcreteClassifier) classifierReference.getTarget();&#xA;&#x9;&#x9;if (!isJavaLangObject(target)) {&#xA;&#x9;&#x9;&#x9;typeReferenceList.addAll(target.getSuperTypeReferences());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#x9;&#xA;&#x9;for ( org.emftext.language.java.types.TypeReference interfaceReference : javaClass.getImplements()) {&#xA;&#x9;&#x9;org.emftext.language.java.types.ClassifierReference classifierReference = interfaceReference.getPureClassifierReference();&#xA;&#x9;&#x9;typeReferenceList.add(classifierReference);&#xA;&#x9;&#x9;typeReferenceList.addAll((( org.emftext.language.java.classifiers.ConcreteClassifier) classifierReference.getTarget()).getSuperTypeReferences());&#xA;&#x9;}&#xA;} else if (this instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;org.emftext.language.java.classifiers.Interface javaInterface = ( org.emftext.language.java.classifiers.Interface) this;&#xA;&#x9;for( org.emftext.language.java.types.TypeReference interfaceReference : javaInterface.getExtends()) {&#xA;&#x9;&#x9;org.emftext.language.java.types.ClassifierReference classifierReference = interfaceReference.getPureClassifierReference();&#xA;&#x9;&#x9;typeReferenceList.add(classifierReference);&#xA;&#x9;&#x9;typeReferenceList.addAll((( org.emftext.language.java.classifiers.ConcreteClassifier) classifierReference.getTarget()).getSuperTypeReferences());&#xA;&#x9;}&#xA;}&#xA;return typeReferenceList;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.getSuperTypeReferences((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getAllMembers" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Member> memberList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.members.Member>();&#xA;&#xA;org.emftext.language.java.classifiers.ConcreteClassifier concreteClassifier = ( org.emftext.language.java.classifiers.ConcreteClassifier) this;&#xA;memberList.addAll(concreteClassifier.getMembers());&#xA;memberList.addAll(concreteClassifier.getDefaultMembers());&#xA;//because inner classes are found in separate class files&#xA;memberList.addAll(concreteClassifier.getAllInnerClassifiers());&#xA;&#xA;for ( org.emftext.language.java.classifiers.ConcreteClassifier superClassifier : getAllSuperClassifiers()) {&#xA;&#x9;for( org.emftext.language.java.members.Member member : superClassifier.getMembers()) {&#xA;&#x9;&#x9;if(member instanceof org.emftext.language.java.modifiers.AnnotableAndModifiable) {&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;org.emftext.language.java.modifiers.AnnotableAndModifiable modifiable = ( org.emftext.language.java.modifiers.AnnotableAndModifiable) member;&#xA;&#xA;&#x9;&#x9;&#x9;if(!modifiable.isHidden(context)) {&#xA;&#x9;&#x9;&#x9;&#x9;memberList.add(member);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;memberList.add(member);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;memberList.addAll(superClassifier.getDefaultMembers());&#xA;}&#xA;return memberList;"/>
-          <details key="documentation" value="&#xA; Returns all members of the given classifier including inner classes and &#xA; all members of super types (extended classes and implemented interfaces).&#xA; &#xA; @param context to check protected visibility&#xA; @return member list&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.getAllMembers((org.emftext.language.java.classifiers.ConcreteClassifier) this, (org.emftext.language.java.commons.Commentable) context);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
       </eOperations>
       <eOperations name="getQualifiedName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.lang.StringBuilder qualifiedName = new java.lang.StringBuilder();&#xA;java.util.List&lt; java.lang.String> packageParts = getContainingPackageName();&#xA;for ( java.lang.String packagePart : packageParts) {&#xA;&#x9;qualifiedName.append(packagePart);&#xA;&#x9;qualifiedName.append(&quot;.&quot;);&#xA;}&#xA;qualifiedName.append(getName());&#xA;return qualifiedName.toString();"/>
-          <details key="documentation" value="&#xA; Returns the qualified name of this concrete classifier.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.getQualifiedName((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="isJavaLangObject" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="java.lang.String name2 = clazz.getName();&#xA;if (!&quot;Object&quot;.equals(name2)) {&#xA;&#x9;return false;&#xA;}&#xA;org.eclipse.emf.common.util.EList&lt; java.lang.String> packageName = clazz.getContainingPackageName();&#xA;if (packageName.size() != 2) {&#xA;&#x9;return false;&#xA;}&#xA;if (!(&quot;java&quot;.equals(packageName.get(0)))) {&#xA;&#x9;return false;&#xA;}&#xA;if (!(&quot;lang&quot;.equals(packageName.get(1)))) {&#xA;&#x9;return false;&#xA;}&#xA;return true;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ConcreteClassifierExtension.isJavaLangObject((org.emftext.language.java.classifiers.ConcreteClassifier) this);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="clazz" lowerBound="1" eType="#//classifiers/ConcreteClassifier"/>
@@ -145,20 +145,20 @@
     <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//classifiers/ConcreteClassifier #//classifiers/Implementor">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = &#xA;&#x9;new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#x9;&#x9;&#x9;&#xA;//collects all superclasses first&#xA;org.emftext.language.java.classifiers.Class superClass = this;&#xA;while (superClass != null &amp;&amp; !superClass.eIsProxy() &amp;&amp; &#xA;&#x9;&#x9;!isJavaLangObject(superClass)) {&#xA;&#x9;superClass = superClass.getSuperClass();&#xA;&#x9;if (superClass != null) {&#xA;&#x9;&#x9;result.add(superClass);&#xA;&#x9;}&#xA;}&#xA;&#xA;//collect all implemented interfaces&#xA;for ( org.emftext.language.java.types.TypeReference typeArg : this.getImplements()) {&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier superInterface = ( org.emftext.language.java.classifiers.ConcreteClassifier) typeArg.getTarget();&#xA;&#x9;if (superInterface != null) {&#xA;&#x9;&#x9;result.add(superInterface);&#xA;&#x9;&#x9;if (superInterface instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;&#x9;&#x9;result.addAll((( org.emftext.language.java.classifiers.Interface)superInterface).getAllSuperClassifiers());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;//collect all implemented interfaces of super classes&#xA;superClass = this.getSuperClass();&#x9;&#xA;if (superClass != null &amp;&amp; !superClass.eIsProxy() &amp;&amp; &#xA;&#x9;&#x9;!isJavaLangObject(superClass)) {&#xA;&#x9;result.addAll(superClass.getAllSuperClassifiers());&#xA;}&#x9;&#xA;&#xA;return result;"/>
-          <details key="documentation" value="&#xA; Recursively collects all super types (extended classes and implemented interfaces)&#xA; of the given class.&#xA; &#xA; @param classifierList the list for the result&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ClassExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.Class) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getSuperClass" eType="#//classifiers/Class">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.types.TypeReference superClassReference = this.getExtends();&#xA;if (superClassReference == null) {&#xA;&#x9;superClassReference = this.getDefaultExtends();&#xA;}&#xA;if (superClassReference == null) {&#xA;&#x9;return null;&#xA;}&#xA;org.emftext.language.java.types.Type result = superClassReference.getTarget();&#xA;if (result instanceof org.emftext.language.java.classifiers.Class) {&#xA;&#x9;return ( org.emftext.language.java.classifiers.Class) result;&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @param this&#xA; @return the direct super class&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ClassExtension.getSuperClass((org.emftext.language.java.classifiers.Class) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="unWrapPrimitiveType" eType="#_Wo2ZR9z1Ed2bJ_pQViWxFg">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="if (getLibClass(&quot;Boolean&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createBoolean();&#xA;}&#xA;if (getLibClass(&quot;Byte&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createByte();&#xA;}&#xA;if (getLibClass(&quot;Character&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createChar();&#xA;}&#xA;if (getLibClass(&quot;Float&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createFloat();&#xA;}&#xA;if (getLibClass(&quot;Double&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createDouble();&#xA;}&#xA;if (getLibClass(&quot;Integer&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createInt();&#xA;}&#xA;if (getLibClass(&quot;Long&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createLong();&#xA;}&#xA;if (getLibClass(&quot;Short&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createShort();&#xA;}&#xA;if (getLibClass(&quot;Void&quot;).equals(this)) {&#xA;&#x9;return org.emftext.language.java.types.TypesFactory.eINSTANCE.createVoid();&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @param this&#xA; @return primitive type, if the class can be wrapped&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.ClassExtension.unWrapPrimitiveType((org.emftext.language.java.classifiers.Class) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#_Wo2ZPdz1Ed2bJ_pQViWxFg"
@@ -169,8 +169,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="#//classifiers/ConcreteClassifier">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;for ( org.emftext.language.java.types.TypeReference typeArg : this.getExtends()) {&#xA;&#x9;//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier superInterface = ( org.emftext.language.java.classifiers.ConcreteClassifier) typeArg.getTarget();&#xA;&#x9;if (superInterface != null) {&#xA;&#x9;&#x9;result.add(superInterface);&#xA;&#x9;&#x9;if (superInterface instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;&#x9;&#x9;result.addAll((( org.emftext.language.java.classifiers.Interface)superInterface).getAllSuperClassifiers());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;for ( org.emftext.language.java.types.TypeReference typeArg : this.getDefaultExtends()) {&#xA;&#x9;//use ConcreteClassifier instead of Interface because java.lang.Object can also act as implemented interface&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier superInterface = ( org.emftext.language.java.classifiers.ConcreteClassifier) typeArg.getTarget();&#xA;&#x9;if (superInterface != null) {&#xA;&#x9;&#x9;result.add(superInterface);&#xA;&#x9;&#x9;if (superInterface instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;&#x9;&#x9;result.addAll((( org.emftext.language.java.classifiers.Interface)superInterface).getAllSuperClassifiers());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;return result;"/>
-          <details key="documentation" value="&#xA; @return all interfaces extended by this interface. The type is &#xA; ConcreteClassifier, because java.lang.Object is also extended although&#xA; it is a Class.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.InterfaceExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.Interface) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
@@ -181,13 +181,13 @@
     <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//classifiers/ConcreteClassifier #//classifiers/Implementor">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;//enumerations inherit from java.lang.Enum&#xA;org.emftext.language.java.classifiers.Class enumClass = getLibClass(&quot;Enum&quot;);&#xA;result.add(enumClass);&#xA;result.addAll(enumClass.getAllSuperClassifiers());&#xA;&#xA;//collect all implemented interfaces&#xA;for ( org.emftext.language.java.types.TypeReference typeArg : this.getImplements()) {&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier superInterface = ( org.emftext.language.java.classifiers.ConcreteClassifier) typeArg.getTarget();&#xA;&#x9;if (superInterface != null) {&#xA;&#x9;&#x9;result.add(superInterface);&#xA;&#x9;&#x9;if (superInterface instanceof org.emftext.language.java.classifiers.Interface) {&#xA;&#x9;&#x9;&#x9;result.addAll((( org.emftext.language.java.classifiers.Interface)superInterface).getAllSuperClassifiers());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return result;"/>
-          <details key="documentation" value="&#xA; @return all interfaces extended by this enumeration.&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.EnumerationExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.Enumeration) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getContainedConstant" eType="#//members/EnumConstant">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="for( org.emftext.language.java.members.EnumConstant constant : getConstants()) {&#xA;&#x9;if (name.equals(constant.getName())) {&#xA;&#x9;&#x9;return constant;&#xA;&#x9;}&#xA; &#x9;&#x9;}&#xA;return null;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.EnumerationExtension.getContainedConstant((org.emftext.language.java.classifiers.Enumeration) this, name);"/>
           <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -198,28 +198,28 @@
     <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="#//classifiers/ConcreteClassifier">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> result = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;result.add(getAnnotationInterface());&#xA;return result;"/>
-          <details key="documentation" value="&#xA; @return &lt;code>java.lang.annotation.Annotation&lt;/code> &#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.AnnotationExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.Annotation) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AnonymousClass" eSuperTypes="#_Wo2ZO9z1Ed2bJ_pQViWxFg #//members/MemberContainer">
       <eOperations name="getAllSuperClassifiers" upperBound="-1" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.classifiers.ConcreteClassifier> superClassifierList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.classifiers.ConcreteClassifier>();&#xA;&#xA;org.emftext.language.java.classifiers.ConcreteClassifier superClassifier = getSuperClassifier();&#xA;&#xA;if (superClassifier != null) {&#xA;&#x9;superClassifierList.add(superClassifier);&#xA;&#x9;superClassifierList.addAll(superClassifier.getAllSuperClassifiers());&#xA;}&#xA;else {&#xA;&#x9;superClassifierList.add(getObjectClass());&#xA;}&#xA;return superClassifierList;"/>
-          <details key="documentation" value="&#xA; @return a view on all super classifiers&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.AnonymousClassExtension.getAllSuperClassifiers((org.emftext.language.java.classifiers.AnonymousClass) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getSuperClassifier" eType="#//classifiers/ConcreteClassifier">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.emftext.language.java.instantiations.NewConstructorCall ncCall = null;&#xA;if (this.eContainer() instanceof org.emftext.language.java.instantiations.NewConstructorCall) {&#xA;&#x9;ncCall = ( org.emftext.language.java.instantiations.NewConstructorCall) this.eContainer();&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier superClassifier = ( org.emftext.language.java.classifiers.ConcreteClassifier) ncCall.getTypeReference().getTarget();&#xA;&#x9;return superClassifier;&#xA;}&#xA;else if (this.eContainer() instanceof org.emftext.language.java.members.EnumConstant) {&#xA;&#x9;if (this.eContainer().eContainer() instanceof org.emftext.language.java.classifiers.Enumeration) {&#xA;&#x9;&#x9;return ( org.emftext.language.java.classifiers.Enumeration) this.eContainer().eContainer();&#xA;&#x9;}&#xA;}&#xA;return null;"/>
-          <details key="documentation" value="&#xA; @return the direct super classifier&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.AnonymousClassExtension.getSuperClassifier((org.emftext.language.java.classifiers.AnonymousClass) this);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
       </eOperations>
       <eOperations name="getAllMembers" upperBound="-1" eType="#//members/Member">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="body" value="org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Member> memberList = new org.emftext.language.java.util.UniqueEList&lt; org.emftext.language.java.members.Member>();&#xA;memberList.addAll(this.getMembers());&#xA;memberList.addAll(this.getDefaultMembers());&#xA;&#xA;org.emftext.language.java.instantiations.NewConstructorCall ncCall = null;&#xA;if (this.eContainer() instanceof org.emftext.language.java.instantiations.NewConstructorCall) {&#xA;&#x9;ncCall = ( org.emftext.language.java.instantiations.NewConstructorCall) this.eContainer();;&#xA;}&#xA;if (ncCall == null) {&#xA;&#x9;return memberList;&#xA;}&#xA;else {&#xA;&#x9;org.emftext.language.java.classifiers.ConcreteClassifier classifier = ( org.emftext.language.java.classifiers.ConcreteClassifier) ncCall.getTypeReference().getTarget();&#xA;&#x9;if (classifier != null) {&#xA;&#x9;&#x9;org.eclipse.emf.common.util.EList&lt; org.emftext.language.java.members.Member> superMemberList = classifier.getAllMembers(context);&#xA;&#x9;&#x9;for( org.emftext.language.java.members.Member superMember : superMemberList) {&#xA;&#x9;&#x9;&#x9;//exclude private members&#xA;&#x9;&#x9;&#x9;if(superMember instanceof org.emftext.language.java.modifiers.AnnotableAndModifiable) {&#x9;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;if (superMember.eIsProxy()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;superMember = ( org.emftext.language.java.members.Member) org.eclipse.emf.ecore.util.EcoreUtil.resolve(superMember, this);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;org.emftext.language.java.modifiers.AnnotableAndModifiable modifiable = ( org.emftext.language.java.modifiers.AnnotableAndModifiable) superMember;&#xA;&#x9;&#x9;&#x9;&#x9;if(!modifiable.isHidden(context)) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;memberList.add(superMember);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;else {&#xA;&#x9;&#x9;&#x9;&#x9;memberList.add(superMember);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return memberList;&#xA;}"/>
-          <details key="documentation" value="&#xA; @param context to check protected visibility&#xA; @return a view on all members including super classifiers' members&#xA;"/>
+          <details key="body" value="return org.emftext.language.java.extensions.classifiers.AnonymousClassExtension.getAllMembers((org.emftext.language.java.classifiers.AnonymousClass) this, (org.emftext.language.java.commons.Commentable) context);"/>
+          <details key="documentation" value=""/>
         </eAnnotations>
         <eParameters name="context" eType="#//commons/Commentable"/>
       </eOperations>
