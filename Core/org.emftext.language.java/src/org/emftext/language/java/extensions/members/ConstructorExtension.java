@@ -52,8 +52,7 @@ public class ConstructorExtension {
      * @return True only if the new {@link Constructor} <code>co</code> is better than the other
      *         one.
      */
-    public static boolean isBetterConstructorForCall(Constructor co, Constructor other,
-            NewConstructorCall call) {
+    public static boolean isBetterConstructorForCall(Constructor co, Constructor other, NewConstructorCall call) {
 
         if (isConstructorForCall(other, call, true)) {
             return false;
@@ -68,6 +67,15 @@ public class ConstructorExtension {
 
     /**
      * Check if a constructor element is valid for a constructor call.
+     *
+     * Note, this method has been originally copied from the MethodExtension class as the behavior
+     * is nearly the same, but Constructor and Method have no common super type. The only difference
+     * in the implementation is the check of the return type. Constructors must return the exact
+     * type of the classifier they are member of. General methods can have an arbitrary return type.
+     * The latter is checked by the MethodExtension class as part of the "weak match" check in the
+     * isBetterMethodForCall check. For the constructor, the return type is a hard criteria and thus
+     * checked as part of the general
+     * {@link #isConstructorForCall(Constructor, NewConstructorCall, boolean)}.
      *
      * @param co
      *            The constructor to check.
