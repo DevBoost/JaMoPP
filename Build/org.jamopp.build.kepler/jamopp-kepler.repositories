@@ -1,7 +1,5 @@
+// Common JaMoPP Repositories
 git:https://github.com/DevBoost/JaMoPP.git!Build/org.jamopp.build
-
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
-git:https://github.com/DevBoost/BuildBoost.git!Extensions/Maven/
 
 // Eclipse Platform
 get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.3.1-201309111000/eclipse-platform-4.3.1-win32-x86_64.zip
