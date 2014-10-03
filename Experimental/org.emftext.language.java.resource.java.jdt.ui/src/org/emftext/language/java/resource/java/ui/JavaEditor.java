@@ -78,6 +78,7 @@ public class JavaEditor extends CompilationUnitEditor implements IEditingDomainP
 	private org.emftext.language.java.resource.java.IJavaTextResource resource;
 	private org.emftext.language.java.resource.java.ui.JavaPropertySheetPage propertySheetPage;
 	private EditingDomain editingDomain;
+	private JavaOutlinePage outlinePage;
 	
 	/**
 	 * A custom document listener that triggers background parsing if needed.
@@ -95,6 +96,7 @@ public class JavaEditor extends CompilationUnitEditor implements IEditingDomainP
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class required) {
 		if (IContentOutlinePage.class.equals(required)) {
 			return createOutlinePage();
+//			return createEMFTextOutlinePage();
 		} else 
 			if (required.equals(IPropertySheetPage.class)) {
 			return getPropertySheetPage();
@@ -102,6 +104,16 @@ public class JavaEditor extends CompilationUnitEditor implements IEditingDomainP
 		return super.getAdapter(required);
 	}
 	
+	private JavaOutlinePage createEMFTextOutlinePage() {
+		if (outlinePage == null) {
+			outlinePage = new JavaOutlinePage(this);
+			// Connect highlighting class and outline page for event notification
+			outlinePage.addSelectionChangedListener(highlighting);
+			highlighting.addSelectionChangedListener(outlinePage);
+		}
+		return outlinePage;
+	}
+
 	public void createPartControl(Composite parent) {
 		super.createPartControl(parent);
 //		
