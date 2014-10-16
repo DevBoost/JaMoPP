@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+	<extension point="org.emftext.access.syntax.ui">
+		<metaInformationProvider class="org.emftext.language.java.resource.java.ui.JavaUIMetaInformation" id="org.emftext.language.java.resource.java.ui.JavaUIMetaInformation">
+		</metaInformationProvider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor class="org.emftext.language.java.resource.java.ui.JavaEditor" contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor" extensions="java" icon="icons/editor_icon.gif" id="org.emftext.language.java.resource.java.ui.JavaEditor" name="EMFText java Editor">
+			<contentTypeBinding contentTypeId="org.emftext.language.java.resource.java">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+	
+	<extension point="org.eclipse.core.runtime.preferences">
+		<initializer class="org.emftext.language.java.resource.java.ui.JavaPreferenceInitializer">
+		</initializer>
+	</extension>
+	
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Java Text Editor" id="org.emftext.language.java.resource.java.ui.JavaPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaPreferencePage" category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+		</page>
+		<page name="Syntax Coloring" id="org.emftext.language.java.resource.java.ui.JavaSyntaxColoringPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaSyntaxColoringPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
+		</page>
+		<page name="Brackets" id="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
+		</page>
+		<page name="Content Assist" id="org.emftext.language.java.resource.java.ui.JavaContentAssistPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaContentAssistPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
+		</page>
+	</extension>
+	
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.emftext.runtime.ui.EMFTextFileCategory" name="EMFText File">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextFileCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java.resource.java.ui.JavaNewFileWizard" id="org.emftext.language.java.resource.java.ui.JavaNewFileWizard" name="EMFText .java file">
+		</wizard>
+		<category id="org.emftext.runtime.ui.EMFTextProjectCategory" name="EMFText Project">
+		</category>
+		<wizard category="org.emftext.runtime.ui.EMFTextProjectCategory" icon="/icons/default_new_icon.gif" class="org.emftext.language.java.resource.java.ui.JavaNewProjectWizard" id="org.emftext.language.java.resource.java.ui.JavaNewProjectWizard" name="EMFText java project" project="true">
+		</wizard>
+	</extension>
+	
+	<extension point="org.eclipse.ui.ide.markerResolution">
+		<markerResolutionGenerator class="org.emftext.language.java.resource.java.ui.JavaMarkerResolutionGenerator" markerType="org.emftext.language.java.resource.java.problem">
+		</markerResolutionGenerator>
+	</extension>
+	
+	<extension point="org.eclipse.core.filebuffers.annotationModelCreation">
+		<factory class="org.emftext.language.java.resource.java.ui.JavaAnnotationModelFactory" extensions="java">
+		</factory>
+	</extension>
+	
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type id="org.emftext.language.java.resource.java" name=".java File" base-type="org.eclipse.core.runtime.text" file-extensions="java">
+		</content-type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.documentProviders">
+		<provider class="org.eclipse.ui.editors.text.TextFileDocumentProvider" extensions="java" id="org.emftext.language.java.resource.java.ui.provider">
+		</provider>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.annotationTypes">
+		<type name="org.emftext.language.java.resource.java.ui.occurences">
+		</type>
+		<type name="org.emftext.language.java.resource.java.ui.occurences.declaration" super="org.emftext.language.java.resource.java.ui.occurences">
+		</type>
+	</extension>
+	
+	<extension point="org.eclipse.ui.editors.markerAnnotationSpecification">
+		<specification annotationType="org.emftext.language.java.resource.java.ui.occurences" label="Occurrences (in .java files)" icon="/icons/occurrence_icon.gif" textPreferenceKey="java.occurrenceIndication" textPreferenceValue="false" highlightPreferenceKey="java.occurrenceHighlighting" highlightPreferenceValue="true" contributesToHeader="false" overviewRulerPreferenceKey="java.occurrenceIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="java.occurrenceIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="java.occurrenceIndicationColor" colorPreferenceValue="212,212,212" presentationLayer="4" showInNextPrevDropdownToolbarActionKey="java.showOccurrenceInNextPrevDropdownToolbarAction" showInNextPrevDropdownToolbarAction="true" isGoToNextNavigationTargetKey="java.isOccurrenceGoToNextNavigationTarget" isGoToNextNavigationTarget="false" isGoToPreviousNavigationTargetKey="java.isOccurrenceGoToPreviousNavigationTarget" isGoToPreviousNavigationTarget="false" textStylePreferenceKey="java.occurrenceTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+		<specification annotationType="org.emftext.language.java.resource.java.ui.occurences.declaration" label="Declarations (in .java files)" textPreferenceKey="java.declarationIndication" textPreferenceValue="false" highlightPreferenceKey="java.declarationHighlighting" highlightPreferenceValue="true" overviewRulerPreferenceKey="java.declarationIndicationInOverviewRuler" overviewRulerPreferenceValue="true" verticalRulerPreferenceKey="java.declarationIndicationInVerticalRuler" verticalRulerPreferenceValue="false" colorPreferenceKey="java.declarationIndicationColor" colorPreferenceValue="240,216,168" presentationLayer="4" textStylePreferenceKey="java.declarationTextStyle" textStylePreferenceValue="NONE">
+		</specification>
+	</extension>
+	
+	<extension point="org.eclipse.ui.commands">
+		<category description="All commands belonging to Java" id="org.emftext.language.java.resource.java.ui.command.category" name="Java">
+		</category>
+		<command categoryId="org.emftext.language.java.resource.java.ui.command.category" description="Toggle comment of the selected lines" id="org.emftext.language.java.resource.java.ui.command.togglecomment" name="Toggle Comment">
+		</command>
+	</extension>
+	
+	<extension point="org.eclipse.ui.handlers">
+		<handler class="org.emftext.language.java.resource.java.ui.JavaToggleCommentHandler" commandId="org.emftext.language.java.resource.java.ui.command.togglecomment">
+		</handler>
+	</extension>
+	
+	<extension point="org.eclipse.ui.contexts">
+		<context name="Editing Java Files" description="Editing Java Files Context" parentId="org.eclipse.ui.textEditorScope" id="org.emftext.language.java.resource.java.EditorScope">
+		</context>
+	</extension>
+	
+	<extension point="org.eclipse.ui.bindings">
+		<key sequence="M1+7" commandId="org.emftext.language.java.resource.java.ui.command.togglecomment" schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" contextId="org.emftext.language.java.resource.java.EditorScope">
+		</key>
+	</extension>
+	
+</plugin>
