@@ -25,6 +25,8 @@
 		</page>
 		<page name="Brackets" id="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaBracketPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
 		</page>
+		<page name="Content Assist" id="org.emftext.language.java.resource.java.ui.JavaContentAssistPreferencePage" class="org.emftext.language.java.resource.java.ui.JavaContentAssistPreferencePage" category="org.emftext.language.java.resource.java.ui.JavaPreferencePage">
+		</page>
 	</extension>
 	
 	<extension point="org.eclipse.ui.newWizards">
