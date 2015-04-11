@@ -138,11 +138,12 @@ public class JavaSourceOrClassFileResource extends JavaResource {
 	public void load(Map<?, ?> options) throws IOException {
     	URIConverter uriConverter = getURIConverter();
     	URI normalizedURI = uriConverter.normalize(uri);
-		if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
+		String normalizedURIString = normalizedURI.toString();
+		if (normalizedURIString.startsWith(JavaUniquePathConstructor.JAVA_PACKAGE_PATHMAP)) {
 			if (!isLoaded) {
 				loadPackageFromClasspath();
 			}
-		} else if (normalizedURI.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
+		} else if (normalizedURIString.startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
 			//classes should have a physical resource
 			//System.out.println("[JaMoPP] Warning: " + uri.lastSegment() + " not registered in class path");
 		} else {
