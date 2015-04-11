@@ -222,18 +222,17 @@ public class JavaClasspath extends AdapterImpl {
 
 	public static JavaClasspath get(Resource resource) {
 		getInitializers();
-		if(resource == null) {
+		if (resource == null) {
 			return get();
 		} else {
-			JavaClasspath myClasspath = get(resource.getResourceSet());
-			if (!myClasspath.initialized) {
-				//set to true before calling initializers, 
-				//since the initializers most likely call this
-				//method again to obtain the classpath.
-				myClasspath.initialized = true;
+			ResourceSet resourceSet = resource.getResourceSet();
+			JavaClasspath resourceSetClasspath = get(resourceSet);
+			if (!resourceSetClasspath.initialized) {
+				// Set to true before calling initializers, since the initializers most likely call this method again to obtain the class path
+				resourceSetClasspath.initialized = true;
 				initialize(resource);	
 			}
-			return myClasspath;
+			return resourceSetClasspath;
 		}
 	}
 	
