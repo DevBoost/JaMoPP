@@ -81,13 +81,16 @@ import org.emftext.language.java.types.NamespaceClassifierReference;
  */
 public abstract class AbstractJavaParserTestCase {
 
+	protected static final String TEST_OUTPUT_FOLDER = "output";
+
 	public AbstractJavaParserTestCase() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
 
 	protected void registerInClassPath(String file) throws Exception {
-		File inputFolder = new File("." + File.separator + getTestInputFolder());
+		String inputFolderPath = "." + File.separator + getTestInputFolder();
+		File inputFolder = new File(inputFolderPath);
 		File inputFile = new File(file);
 
 		CompilationUnit cu = (CompilationUnit) parseResource(inputFile.getPath());
@@ -96,25 +99,22 @@ public abstract class AbstractJavaParserTestCase {
 		JavaClasspath.get(cu).registerClassifierSource(cu, URI.createFileURI(inputFile.getAbsolutePath().toString()));
 	}
 
-	protected static final String TEST_OUTPUT_FOLDER = "output";
-
 	/**
 	 * All test files that were parsed by the method parseResource(String relativePath).
 	 */
 	private static List<File> parsedResources = new ArrayList<File>();
 	private static List<File> reprintedResources = new ArrayList<File>();
 
-	protected JavaRoot parseResource(String filename,
-			String inputFolderName) throws Exception {
+	protected JavaRoot parseResource(String filename, String inputFolderName) throws Exception {
 		File inputFolder = new File("./" + inputFolderName);
 		File file = new File(inputFolder, filename);
-		assertTrue("File " + file + " should exist.", file.exists());
+		assertTrue("File " + file + " must exist.", file.exists());
+		
 		addParsedResource(file);
 		return loadResource(file.getAbsolutePath());
 	}
 
-	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
-			throws Exception {
+	protected JavaRoot parseResource(ZipFile file, ZipEntry entry) throws Exception {
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName()));
 	}
 
@@ -126,14 +126,15 @@ public abstract class AbstractJavaParserTestCase {
 	protected JavaRoot loadResource(URI uri) throws Exception {
 		JavaResource resource = (JavaResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
+		
 		assertNoErrors(uri.toString(), resource);
 		assertNoWarnings(uri.toString(), resource);
-		assertEquals("The resource should have one content element.", 1,
-				resource.getContents().size());
-		EObject content = resource.getContents().get(0);
-		assertTrue("File '" + uri.toString()
-				+ "' was parsed to CompilationUnit.",
-				content instanceof JavaRoot);
+		
+		EList<EObject> contents = resource.getContents();
+		assertEquals("The resource must have one content element.", 1, contents.size());
+		
+		EObject content = contents.get(0);
+		assertTrue("File '" + uri.toString() + "' was parsed to CompilationUnit.", content instanceof JavaRoot);
 		JavaRoot root = (JavaRoot) content;
 		return root;
 	}
@@ -161,36 +162,31 @@ public abstract class AbstractJavaParserTestCase {
 		return map;
 	}
 
-	private static void assertNoErrors(String fileIdentifier,
-			JavaResource resource) {
-		EList<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
+	private static void assertNoErrors(String fileIdentifier, JavaResource resource) {
+		List<Diagnostic> errors = new BasicEList<Diagnostic>(resource.getErrors());
 		printErrors(fileIdentifier, errors);
-		assertTrue("The resource should be parsed without errors.", errors
-				.size() == 0);
+		assertTrue("The resource should be parsed without errors.", errors.isEmpty());
 	}
 
-	private static void assertNoWarnings(String fileIdentifier,
-			JavaResource resource) {
-		EList<Diagnostic> warnings = resource.getWarnings();
+	private static void assertNoWarnings(String fileIdentifier, JavaResource resource) {
+		List<Diagnostic> warnings = resource.getWarnings();
 		printWarnings(fileIdentifier, warnings);
-		assertTrue("The resource should be parsed without warnings.", warnings
-				.size() == 0);
+		assertTrue("The resource should be parsed without warnings.", warnings.isEmpty());
 	}
 
-	protected static void printErrors(String filename, EList<Diagnostic> errors) {
+	protected static void printErrors(String filename, List<Diagnostic> errors) {
 		printDiagnostics(filename, errors, "Errors");
 	}
 
-	protected static void printWarnings(String filename,
-			EList<Diagnostic> warnings) {
+	protected static void printWarnings(String filename, List<Diagnostic> warnings) {
 		printDiagnostics(filename, warnings, "Warnings");
 	}
 
-	private static void printDiagnostics(String filename,
-			EList<Diagnostic> errors, String diagnosticType) {
+	private static void printDiagnostics(String filename, List<Diagnostic> errors, String diagnosticType) {
 		if (errors.size() == 0) {
 			return;
 		}
+		
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(diagnosticType + " while parsing resource '" + filename
 				+ "':\n");
@@ -209,11 +205,11 @@ public abstract class AbstractJavaParserTestCase {
 		System.out.println(buffer.toString());
 	}
 
-	protected void parseAndReprint(ZipFile file, ZipEntry entry,
-			String outputFolderName, String libFolderName) throws Exception {
+	protected void parseAndReprint(ZipFile file, ZipEntry entry, String outputFolderName, String libFolderName)
+			throws Exception {
+		
 		String entryName = entry.getName();
-		String outputFileName = "./" + outputFolderName + File.separator
-				+ entryName;
+		String outputFileName = "./" + outputFolderName + File.separator + entryName;
 		File outputFile = prepareOutputFile(outputFileName);
 		URI archiveURI = URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName());
 
@@ -240,32 +236,27 @@ public abstract class AbstractJavaParserTestCase {
 		resource.setURI(URI.createFileURI(outputFile.getAbsolutePath()));
 		resource.save(null);
 
-		assertTrue("File " + outputFile.getAbsolutePath() + " exists.",
-				outputFile.exists());
-
-		compareTextContents(file.getInputStream(entry),
-					new FileInputStream(outputFile));
-
+		assertTrue("File " + outputFile.getAbsolutePath() + " must exist.", outputFile.exists());
+		compareTextContents(file.getInputStream(entry), new FileInputStream(outputFile));
 	}
 
 	protected boolean prefixUsedInZipFile() {
 		return false;
 	}
 
-	protected static void registerLibs(String libdir, JavaClasspath cp, String prefix) throws IOException, CoreException  {
-		File libFolder = new File("." + File.separator
-				+ libdir);
+	public static void registerLibs(String libdir, JavaClasspath classpath, String prefix) throws IOException, CoreException  {
+		File libFolder = new File("." + File.separator + libdir);
 		List<File> allLibFiles = collectAllFilesRecursive(libFolder, "jar");
-
-		for(File lib : allLibFiles) {
-			cp.registerClassifierJar(URI.createFileURI(lib.getAbsolutePath()), prefix);
+		for (File libFile : allLibFiles) {
+			String libPath = libFile.getAbsolutePath();
+			URI libURI = URI.createFileURI(libPath);
+			classpath.registerClassifierJar(libURI, prefix);
 		}
 	}
 
-	protected void parseAndReprint(String filename, String inputFolderName,
-			String outputFolderName) throws Exception,
-			IOException, BadLocationException {
-		File file = new File("." + File.separator + inputFolderName + File.separator + filename);
+	protected void parseAndReprint(String filename, String inputFolderName, String outputFolderName) throws Exception {
+		String path = "." + File.separator + inputFolderName + File.separator + filename;
+		File file = new File(path);
 		parseAndReprint(file, inputFolderName, outputFolderName);
 	}
 

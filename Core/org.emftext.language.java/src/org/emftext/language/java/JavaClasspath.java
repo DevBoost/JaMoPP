@@ -190,12 +190,10 @@ public class JavaClasspath extends AdapterImpl {
 	private static JavaClasspath globalClasspath = null;
 
 	private JavaClasspath(URIConverter uriConverter) {
-		super();
 		this.uriConverter = uriConverter;
 	}
 
 	private JavaClasspath(Resource resource) {
-		super();
 		ResourceSet resourceSet = resource.getResourceSet();
 		this.uriConverter = resourceSet.getURIConverter();
 	}
@@ -244,21 +242,16 @@ public class JavaClasspath extends AdapterImpl {
 	 * registered.
 	 */
 	public static JavaClasspath get(ResourceSet resourceSet) {
-		getInitializers();
+		return get(resourceSet, getInitializers());
+	}
+	
+	public static JavaClasspath get(ResourceSet resourceSet, Set<Initializer> initalizers) {
 		if (resourceSet == null) {
 			return get();
 		}
 
-		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
-		Object registerStdLibOption = resourceSet.getLoadOptions().get(OPTION_REGISTER_STD_LIB);
-		if (localClasspathOption == null) {
-			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault());
-		}		
-		if (registerStdLibOption == null) {
-			registerStdLibOption = Boolean.valueOf(registerStdLibDefault());
-		}
-
-		if (Boolean.TRUE.equals(localClasspathOption)) {
+		boolean useLocalClasspath = useLocalClasspath(resourceSet, initalizers);
+		if (useLocalClasspath) {
 			for (Adapter adapter : resourceSet.eAdapters()) {
 				if (adapter instanceof JavaClasspath) {
 					JavaClasspath javaClasspath = (JavaClasspath) adapter;
@@ -289,7 +282,8 @@ public class JavaClasspath extends AdapterImpl {
 			// ... and attached to the resource set
 			resourceSet.eAdapters().add(newClasspath);
 
-			if (Boolean.TRUE.equals(registerStdLibOption))  {
+			boolean registerStdLib = registerStdLib(resourceSet, initalizers);
+			if (registerStdLib)  {
 				newClasspath.registerStdLib();
 			}
 
@@ -298,23 +292,49 @@ public class JavaClasspath extends AdapterImpl {
 
 		return get();
 	}
+
+	private static boolean registerStdLib(ResourceSet resourceSet, Set<Initializer> initalizers) {
+		Object registerStdLibOption = resourceSet.getLoadOptions().get(OPTION_REGISTER_STD_LIB);
+		if (registerStdLibOption == null) {
+			registerStdLibOption = Boolean.valueOf(registerStdLibDefault(initalizers));
+		}
+		boolean registerStdLib = Boolean.TRUE.equals(registerStdLibOption);
+		return registerStdLib;
+	}
+
+	private static boolean useLocalClasspath(ResourceSet resourceSet, Set<Initializer> initalizers) {
+		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
+		if (localClasspathOption == null) {
+			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault(initalizers));
+		}		
+		boolean useLocalClasspath = Boolean.TRUE.equals(localClasspathOption);
+		return useLocalClasspath;
+	}
 	
 	public static void reset() {
 		globalClasspath = null;
 	}
 
 	protected static boolean useLocalClasspathDefault() {
+		return useLocalClasspathDefault(getInitializers());
+	}
+
+	protected static boolean useLocalClasspathDefault(Set<Initializer> initializers) {
 		boolean useLocalClasspathDefault = false;
-		for (Initializer initializer : getInitializers()) {
+		for (Initializer initializer : initializers) {
 			//if one initializer requires a local classpath, a local classpath is used by default
 			useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
 		}
 		return useLocalClasspathDefault;
 	}
-	
+
 	protected static boolean registerStdLibDefault() {
+		return registerStdLibDefault(getInitializers());
+	}
+
+	protected static boolean registerStdLibDefault(Set<Initializer> initializers) {
 		boolean registerStdLibDefault = true;
-		for (Initializer initializer : getInitializers()) {
+		for (Initializer initializer : initializers) {
 			//if one initializer does not require the std. lib, we assume it provides one
 			registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
 		}
