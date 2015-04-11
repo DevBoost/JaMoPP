@@ -1,7 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2006-2012
+ * Copyright (c) 2006-2015
  * Software Technology Group, Dresden University of Technology
- * DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026
+ * DevBoost GmbH, Dresden, Amtsgericht Dresden, HRB 34001
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,7 +10,7 @@
  * 
  * Contributors:
  *   Software Technology Group - TU Dresden, Germany;
- *   DevBoost GmbH - Berlin, Germany
+ *   DevBoost GmbH - Dresden, Germany
  *      - initial API and implementation
  ******************************************************************************/
 package org.emftext.language.java.test.bugs;
@@ -26,17 +26,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.emftext.language.java.resource.java.IJavaOptions;
-import org.emftext.sdk.EMFTextSDKPlugin;
+import org.junit.Ignore;
 
 public class Bug1834Test extends AbstractTestCase {
 
 	private static final String NL = System.getProperty("line.separator");
 
+	@Ignore("This test is deactivated because the respective feature is not implemented yet")
 	public void testDefaultMethodPrinting() throws IOException {
-		
-		if (EMFTextSDKPlugin.VERSION.compareTo("1.4.1") <= 0) {
-			return;
-		}
 		
 		ResourceSet rs = createResourceSet();
 		Resource resource = rs.createResource(URI.createURI("Test.java"));

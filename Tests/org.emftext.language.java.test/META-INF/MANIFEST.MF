@@ -18,7 +18,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.emftext.commons.antlr3_4_0,
  org.eclipse.emf.ecore.xmi,
  org.eclipse.core.resources,
- org.eclipse.jface.text,
- org.emftext.sdk
+ org.eclipse.jface.text
 Export-Package: org.emftext.language.java.test,
  org.emftext.language.java.test.util
