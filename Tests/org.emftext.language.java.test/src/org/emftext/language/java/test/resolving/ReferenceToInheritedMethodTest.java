@@ -15,11 +15,8 @@
  ******************************************************************************/
 package org.emftext.language.java.test.resolving;
 
-import java.io.IOException;
-
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.jface.text.BadLocationException;
 import org.junit.Test;
 
 /**
@@ -33,7 +30,7 @@ public class ReferenceToInheritedMethodTest extends AbstractResolverTestCase {
 		testReferencing("ReferenceToInheritedMethod");
 	}
 
-	protected void testReferencing(String typename) throws IOException, BadLocationException {
+	protected void testReferencing(String typename) throws Exception {
 		String filename =  typename + ".java";
 		parseAndReprint(filename);
 	}

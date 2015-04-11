@@ -77,24 +77,14 @@ import org.emftext.language.java.resource.java.util.JavaUnicodeConverter;
 import org.emftext.language.java.types.NamespaceClassifierReference;
 
 /**
- * Abstract superclass that provides some frequently used assert and helper
- * methods.
+ * Abstract superclass that provides some frequently used assert and helper methods.
  */
 public abstract class AbstractJavaParserTestCase {
 
 	public AbstractJavaParserTestCase() {
-		super();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"java", new JavaSourceOrClassFileResourceFactoryImpl());
 	}
-
-	/*
-	public AbstractJavaParserTestCase(String name) {
-		super(name);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"java", new JavaSourceOrClassFileResourceFactoryImpl());
-	}
-	*/
 
 	protected void registerInClassPath(String file) throws Exception {
 		File inputFolder = new File("." + File.separator + getTestInputFolder());
@@ -109,14 +99,13 @@ public abstract class AbstractJavaParserTestCase {
 	protected static final String TEST_OUTPUT_FOLDER = "output";
 
 	/**
-	 * All test files that were parsed by the method parseResource(String
-	 * relativePath)
+	 * All test files that were parsed by the method parseResource(String relativePath).
 	 */
 	private static List<File> parsedResources = new ArrayList<File>();
 	private static List<File> reprintedResources = new ArrayList<File>();
 
 	protected JavaRoot parseResource(String filename,
-			String inputFolderName) throws IOException {
+			String inputFolderName) throws Exception {
 		File inputFolder = new File("./" + inputFolderName);
 		File file = new File(inputFolder, filename);
 		assertTrue("File " + file + " should exist.", file.exists());
@@ -125,17 +114,16 @@ public abstract class AbstractJavaParserTestCase {
 	}
 
 	protected JavaRoot parseResource(ZipFile file, ZipEntry entry)
-			throws IOException {
+			throws Exception {
 		return loadResource(URI.createURI("archive:file:///" + new File(".").getAbsoluteFile().toURI().getRawPath() + file.getName().replaceAll("\\\\", "/") + "!/" + entry.getName()));
 	}
 
-	protected JavaRoot loadResource(
-			String filePath) throws IOException {
-		return loadResource(URI.createFileURI(filePath));
+	protected JavaRoot loadResource(String filePath) throws Exception {
+		URI uri = URI.createFileURI(filePath);
+		return loadResource(uri);
 	}
 
-	protected JavaRoot loadResource(
-			URI uri) throws IOException {
+	protected JavaRoot loadResource(URI uri) throws Exception {
 		JavaResource resource = (JavaResource) getResourceSet().createResource(uri);
 		resource.load(getLoadOptions());
 		assertNoErrors(uri.toString(), resource);
@@ -275,15 +263,14 @@ public abstract class AbstractJavaParserTestCase {
 	}
 
 	protected void parseAndReprint(String filename, String inputFolderName,
-			String outputFolderName) throws MalformedTreeException,
+			String outputFolderName) throws Exception,
 			IOException, BadLocationException {
 		File file = new File("." + File.separator + inputFolderName + File.separator + filename);
 		parseAndReprint(file, inputFolderName, outputFolderName);
 	}
 
 	protected void parseAndReprint(File file, String inputFolderName,
-			String outputFolderName) throws MalformedTreeException,
-			IOException, BadLocationException {
+			String outputFolderName) throws Exception {
 		File inputFile = file;
 		assertTrue("File " + inputFile.getAbsolutePath() + " exists.",
 				inputFile.exists());
@@ -627,14 +614,11 @@ public abstract class AbstractJavaParserTestCase {
 		return parseResource(filename, getTestInputFolder());
 	}
 
-	protected void parseAndReprint(String filename)
-			throws MalformedTreeException, IOException, BadLocationException {
-		parseAndReprint(filename, getTestInputFolder(),
-				TEST_OUTPUT_FOLDER);
+	protected void parseAndReprint(String filename) throws Exception {
+		parseAndReprint(filename, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 
-	protected void parseAndReprint(File file) throws MalformedTreeException,
-			IOException, BadLocationException {
+	protected void parseAndReprint(File file) throws Exception {
 		parseAndReprint(file, getTestInputFolder(), TEST_OUTPUT_FOLDER);
 	}
 	
@@ -679,37 +663,15 @@ public abstract class AbstractJavaParserTestCase {
 		assertResolveAllProxies(element.eResource());
 	}
 
-	/*protected void assertResolveAllProxies() {
-		boolean failure = false;
-		for(URI uri : new ArrayList<URI>(JavaClasspath.INSTANCE.URI_MAP.keySet())) {
-			if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP)) {
-				//do not load all default classfiles
-				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "java")) {
-					continue;
-				}
-				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "com.sun")) {
-					continue;
-				}
-				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "sun")) {
-					continue;
-				}
-				if (uri.toString().startsWith(JavaUniquePathConstructor.JAVA_CLASSIFIER_PATHMAP + "org.omg")) {
-					continue;
-				}
-
-				Resource r = getResourceSet().getResource(uri, true);
-				assertNotNull("The resource '" + uri + "' should exist",r);
-				failure = assertResolveAllProxies(r) || failure;
-
-			}
-		}
-		assertFalse("There are unresolved proxies", failure);
-	}*/
-
-	protected ResourceSet getResourceSet() {
+	protected ResourceSet getResourceSet() throws Exception {
 		ResourceSet rs = new ResourceSetImpl();
+		setUpClasspath(rs);
 		rs.getLoadOptions().putAll(getLoadOptions());
 		return rs;
+	}
+
+	protected void setUpClasspath(ResourceSet resourceSet) throws Exception {
+		// Sub class can override this method
 	}
 
 	protected boolean assertResolveAllProxies(Resource resource) {

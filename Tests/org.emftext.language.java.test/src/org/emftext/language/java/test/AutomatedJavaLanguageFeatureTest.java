@@ -103,7 +103,7 @@ public class AutomatedJavaLanguageFeatureTest extends AbstractJavaParserTestCase
 	private ResourceSet sharedTestResourceSet = null;
 	
 	@Override
-	protected ResourceSet getResourceSet() {
+	protected ResourceSet getResourceSet() throws Exception {
 		if (sharedTestResourceSet == null) {
 			sharedTestResourceSet = super.getResourceSet();
 		}
