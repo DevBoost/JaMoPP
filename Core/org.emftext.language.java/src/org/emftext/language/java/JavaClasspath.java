@@ -98,25 +98,28 @@ public class JavaClasspath extends AdapterImpl {
 	private static class InitializerExtensionPointReader {
 
 		private static void read() {
-			if (Platform.isRunning()) {
-				IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-				IConfigurationElement configurationElements[] = extensionRegistry
-						.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
-				for (IConfigurationElement element : configurationElements) {
-					try {
-						String type = element.getAttribute("class");
-						if (type == null) {
-							continue;
-						}
-						Initializer initializer = (Initializer) element.createExecutableExtension("class");
-						initializers.add(initializer);
-					} catch (CoreException ce) {
-						String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
-						ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
-						IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0,
-								"Error instantiating Java classpath initializer", ce);
-						log.log(status);
+			if (!Platform.isRunning()) {
+				return;
+			}
+
+			IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
+			IConfigurationElement configurationElements[] = extensionRegistry
+					.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
+			for (IConfigurationElement element : configurationElements) {
+				try {
+					String type = element.getAttribute("class");
+					if (type == null) {
+						continue;
 					}
+					
+					Initializer initializer = (Initializer) element.createExecutableExtension("class");
+					initializers.add(initializer);
+				} catch (CoreException ce) {
+					String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
+					ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
+					IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0,
+							"Error instantiating Java classpath initializer", ce);
+					log.log(status);
 				}
 			}
 		}
