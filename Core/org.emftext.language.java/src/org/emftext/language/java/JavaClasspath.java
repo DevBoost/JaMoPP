@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -335,22 +335,24 @@ public class JavaClasspath extends AdapterImpl {
 	protected static boolean registerStdLibDefault(Set<Initializer> initializers) {
 		boolean registerStdLibDefault = true;
 		for (Initializer initializer : initializers) {
-			//if one initializer does not require the std. lib, we assume it provides one
+			// if one initializer does not require the std. lib, we assume it provides one
 			registerStdLibDefault = registerStdLibDefault && initializer.requiresStdLib();
 		}
 		return registerStdLibDefault;
 	}
 	
-	protected Map<String, List<String>> packageClassifierMap =
-		new HashMap<String, List<String>>();
+	// FIXME It might be better to use a set of strings here instead of a list of string to increase lookup speed
+	protected Map<String, List<String>> packageClassifierMap = new LinkedHashMap<String, List<String>>();
 
 	protected void registerPackage(String packageName, String className) {
-		if (!packageClassifierMap.containsKey(packageName)) {
-			packageClassifierMap.put(packageName, new UniqueEList<String>());
+		List<String> classesInPackage = packageClassifierMap.get(packageName);
+		if (classesInPackage == null) {
+			classesInPackage = new UniqueEList<String>();
+			packageClassifierMap.put(packageName, classesInPackage);
 		}
 		
-		if (!packageClassifierMap.get(packageName).contains(className)) {
-			packageClassifierMap.get(packageName).add(className);
+		if (!classesInPackage.contains(className)) {
+			classesInPackage.add(className);
 		}
 	}
 
@@ -440,7 +442,7 @@ public class JavaClasspath extends AdapterImpl {
 				String uri = "archive:" + jarURI.toString() + "!/" + entryName;
 
 				String fullName = entryName.substring(prefix.length());
-				fullName = fullName.replaceAll("/", ".");
+				fullName = fullName.replace("/", ".");
 
 				String packageName = "";
 				String className = "";
