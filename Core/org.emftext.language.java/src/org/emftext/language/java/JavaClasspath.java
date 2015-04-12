@@ -54,63 +54,54 @@ import org.emftext.language.java.members.Member;
 import org.emftext.language.java.members.MemberContainer;
 
 /**
- * This class is responsible for managing and retrieving Java resources to
- * establish inter-model references between different Java classes represented
- * as EMF-models.
+ * This class is responsible for managing and retrieving Java resources to establish inter-model references between
+ * different Java classes represented as EMF-models.
  */
 public class JavaClasspath extends AdapterImpl {
-	
+
 	/**
-	 * Initializers can be registered to initialize each newly created classpath.
-	 * An initializer may be used to connect JaMoPP with other Java tooling 
-	 * (e.g., the Eclipse JDT IDE) by reading the classpath from the other tool.
+	 * Initializers can be registered to initialize each newly created classpath. An initializer may be used to connect
+	 * JaMoPP with other Java tooling (e.g., the Eclipse JDT IDE) by reading the classpath from the other tool.
 	 * <p>
-	 * Initializers can be registered at the classpath via 
-	 * {@link JavaClasspath#getInitializers()}.
-	 * Inside Eclipse, the extension point
-	 * <i>org.emftext.language.java.java_classpath_initializer</i>
-	 * may also be used for this.
+	 * Initializers can be registered at the classpath via {@link JavaClasspath#getInitializers()}. Inside Eclipse, the
+	 * extension point <i>org.emftext.language.java.java_classpath_initializer</i> may also be used for this.
 	 */
 	public static interface Initializer {
-		
+
 		/**
-		 * Initializes the classpath. It is called as soon as the
-		 * first resource of the resource set with which the classpath 
-		 * is associated accesses the classpath.
+		 * Initializes the classpath. It is called as soon as the first resource of the resource set with which the
+		 * classpath is associated accesses the classpath.
 		 * 
-		 * @param resource One resource of the associated resource set
-		 * 	               that gives context for initializing the classpath
-		 *                 (e.g., the URI of the resource can be analyzed). 
+		 * @param resource
+		 *            One resource of the associated resource set that gives context for initializing the classpath
+		 *            (e.g., the URI of the resource can be analyzed).
 		 */
 		void initialize(Resource resource);
-		
+
 		/**
-		 * @return Should be <code>true</code>, if the classpath depends on the resource that
-		 *         is passed to the {@link Initializer#initialize(Resource)} method.
-		 *         If one of the registered initializers returns <code>true</code>, it
-		 *         enforces the usage an individual classpath for each resource set.
-		 *         The {@link JavaClasspath#OPTION_USE_LOCAL_CLASSPATH} option can still be
-		 *         used to override this.
+		 * @return Should be <code>true</code>, if the classpath depends on the resource that is passed to the
+		 *         {@link Initializer#initialize(Resource)} method. If one of the registered initializers returns
+		 *         <code>true</code>, it enforces the usage an individual classpath for each resource set. The
+		 *         {@link JavaClasspath#OPTION_USE_LOCAL_CLASSPATH} option can still be used to override this.
 		 */
 		boolean requiresLocalClasspath();
-		
+
 		/**
-		 * @return <code>false</code>, if the standard lib is provided by the initializer itself 
-		 *         and should therefore not be registered based on the currently running JVM.
-		 *         If only one of the registered initializers returns <code>false</code>, 
-		 *         the JVM's standard lib is not registered.
-		 *         The {@link JavaClasspath#OPTION_REGISTER_STD_LIB} option can still be
-		 *         used to override this.
+		 * @return <code>false</code>, if the standard lib is provided by the initializer itself and should therefore
+		 *         not be registered based on the currently running JVM. If only one of the registered initializers
+		 *         returns <code>false</code>, the JVM's standard lib is not registered. The
+		 *         {@link JavaClasspath#OPTION_REGISTER_STD_LIB} option can still be used to override this.
 		 */
 		boolean requiresStdLib();
 	}
-	
+
 	private static class InitializerExtensionPointReader {
-		
+
 		private static void read() {
 			if (Platform.isRunning()) {
 				IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-				IConfigurationElement configurationElements[] = extensionRegistry.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
+				IConfigurationElement configurationElements[] = extensionRegistry
+						.getConfigurationElementsFor(EP_JAVA_CLASSPATH_INITIALIZER);
 				for (IConfigurationElement element : configurationElements) {
 					try {
 						String type = element.getAttribute("class");
@@ -122,18 +113,19 @@ public class JavaClasspath extends AdapterImpl {
 					} catch (CoreException ce) {
 						String contributingPluginID = element.getDeclaringExtension().getContributor().getName();
 						ILog log = Platform.getLog(Platform.getBundle(contributingPluginID));
-						IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0, "Error instantiating Java classpath initializer", ce);
+						IStatus status = new Status(IStatus.ERROR, contributingPluginID, 0,
+								"Error instantiating Java classpath initializer", ce);
 						log.log(status);
 					}
 				}
-			}		
+			}
 		}
 	}
 
 	public static final String EP_JAVA_CLASSPATH_INITIALIZER = "org.emftext.language.java.java_classpath_initializer";
-	
+
 	private static Set<Initializer> initializers = null;
-	
+
 	public static Set<Initializer> getInitializers() {
 		if (initializers == null) {
 			initializers = new LinkedHashSet<Initializer>();
@@ -141,7 +133,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		return initializers;
 	}
-	
+
 	private static void readInitializersExtensionPoint() {
 		try {
 			java.lang.Class.forName("org.eclipse.core.runtime.Platform");
@@ -151,7 +143,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		InitializerExtensionPointReader.read();
 	}
-	
+
 	private static void initialize(Resource resource) {
 		for (Initializer initializer : getInitializers()) {
 			initializer.initialize(resource);
@@ -159,26 +151,24 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	/**
-	 * If this option is set to true in a resource set, each classifier loaded is registered
-	 * in the URI map of the resource set's <code>URIConverter</code>.
+	 * If this option is set to true in a resource set, each classifier loaded is registered in the URI map of the
+	 * resource set's <code>URIConverter</code>.
 	 * <p>
-	 * If the option is set to false (default), each classifier loaded is registered
-	 * in the global <code>URIConverter.URI_MAP</code>.
+	 * If the option is set to false (default), each classifier loaded is registered in the global
+	 * <code>URIConverter.URI_MAP</code>.
 	 */
 	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
-	
+
 	/**
-	 * If this option is set to true (default) in a resource set, the Java standard library
-	 * (i.e., rt.jar or classes.jar) is registered automatically based on
-	 * <code>System.getProperty("sun.boot.class.path")</code>.
+	 * If this option is set to true (default) in a resource set, the Java standard library (i.e., rt.jar or
+	 * classes.jar) is registered automatically based on <code>System.getProperty("sun.boot.class.path")</code>.
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
-		
+
 	/**
-	 * If this option is set to true in a resource set, all names in a Java resource will 
-	 * be printed as full-qualified names when the resource is saved. If this option is
-	 * used, imports do not need to be updated when Java resources are modified.
-	 * This option is set to false by default.
+	 * If this option is set to true in a resource set, all names in a Java resource will be printed as full-qualified
+	 * names when the resource is saved. If this option is used, imports do not need to be updated when Java resources
+	 * are modified. This option is set to false by default.
 	 */
 	public static final String OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES = "OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES";
 
@@ -226,25 +216,24 @@ public class JavaClasspath extends AdapterImpl {
 			ResourceSet resourceSet = resource.getResourceSet();
 			JavaClasspath resourceSetClasspath = get(resourceSet);
 			if (!resourceSetClasspath.initialized) {
-				// Set to true before calling initializers, since the initializers most likely call this method again to obtain the class path
+				// Set to true before calling initializers, since the initializers most likely call this method again to
+				// obtain the class path
 				resourceSetClasspath.initialized = true;
-				initialize(resource);	
+				initialize(resource);
 			}
 			return resourceSetClasspath;
 		}
 	}
-	
+
 	/**
-	 * Returns the class path for the given {@link ResourceSet}. Make sure to
-	 * set the load options {@link #OPTION_USE_LOCAL_CLASSPATH} and
-	 * {@link #OPTION_REGISTER_STD_LIB} to control whether a global class path
-	 * is used for the resource set and whether the standard library shall be
-	 * registered.
+	 * Returns the class path for the given {@link ResourceSet}. Make sure to set the load options
+	 * {@link #OPTION_USE_LOCAL_CLASSPATH} and {@link #OPTION_REGISTER_STD_LIB} to control whether a global class path
+	 * is used for the resource set and whether the standard library shall be registered.
 	 */
 	public static JavaClasspath get(ResourceSet resourceSet) {
 		return get(resourceSet, getInitializers());
 	}
-	
+
 	public static JavaClasspath get(ResourceSet resourceSet, Set<Initializer> initalizers) {
 		if (resourceSet == null) {
 			return get();
@@ -269,21 +258,21 @@ public class JavaClasspath extends AdapterImpl {
 								newUriMap.put(oldKey, oldValue);
 							}
 						}
-						
+
 						javaClasspath.uriConverter = newURIConverter;
 					}
-					
+
 					return javaClasspath;
 				}
 			}
-			
+
 			// If no class path was found, a new one (local class path) is created ...
 			JavaClasspath newClasspath = new JavaClasspath(resourceSet.getURIConverter());
 			// ... and attached to the resource set
 			resourceSet.eAdapters().add(newClasspath);
 
 			boolean registerStdLib = registerStdLib(resourceSet, initalizers);
-			if (registerStdLib)  {
+			if (registerStdLib) {
 				newClasspath.registerStdLib();
 			}
 
@@ -306,11 +295,11 @@ public class JavaClasspath extends AdapterImpl {
 		Object localClasspathOption = resourceSet.getLoadOptions().get(OPTION_USE_LOCAL_CLASSPATH);
 		if (localClasspathOption == null) {
 			localClasspathOption = Boolean.valueOf(useLocalClasspathDefault(initalizers));
-		}		
+		}
 		boolean useLocalClasspath = Boolean.TRUE.equals(localClasspathOption);
 		return useLocalClasspath;
 	}
-	
+
 	public static void reset() {
 		globalClasspath = null;
 	}
@@ -322,7 +311,7 @@ public class JavaClasspath extends AdapterImpl {
 	protected static boolean useLocalClasspathDefault(Set<Initializer> initializers) {
 		boolean useLocalClasspathDefault = false;
 		for (Initializer initializer : initializers) {
-			//if one initializer requires a local classpath, a local classpath is used by default
+			// if one initializer requires a local classpath, a local classpath is used by default
 			useLocalClasspathDefault = useLocalClasspathDefault || initializer.requiresLocalClasspath();
 		}
 		return useLocalClasspathDefault;
@@ -340,7 +329,7 @@ public class JavaClasspath extends AdapterImpl {
 		}
 		return registerStdLibDefault;
 	}
-	
+
 	// FIXME It might be better to use a set of strings here instead of a list of string to increase lookup speed
 	protected Map<String, List<String>> packageClassifierMap = new LinkedHashMap<String, List<String>>();
 
@@ -350,7 +339,7 @@ public class JavaClasspath extends AdapterImpl {
 			classesInPackage = new UniqueEList<String>();
 			packageClassifierMap.put(packageName, classesInPackage);
 		}
-		
+
 		if (!classesInPackage.contains(className)) {
 			classesInPackage.add(className);
 		}
@@ -367,7 +356,7 @@ public class JavaClasspath extends AdapterImpl {
 		if (packageClassifierMap.containsKey(packageName)) {
 			content.addAll(packageClassifierMap.get(packageName));
 		}
-		
+
 		// Delegate to global map
 		Map<String, List<String>> globalPackageClassifierMap = get().packageClassifierMap;
 		if (globalPackageClassifierMap.containsKey(packageName)) {
@@ -380,7 +369,7 @@ public class JavaClasspath extends AdapterImpl {
 		if (packageClassifierMap.containsKey(packageName)) {
 			return true;
 		}
-		
+
 		// Delegate to global map
 		Map<String, List<String>> globalPackageClassifierMap = get().packageClassifierMap;
 		return globalPackageClassifierMap.containsKey(packageName);
@@ -418,7 +407,8 @@ public class JavaClasspath extends AdapterImpl {
 	/**
 	 * Registers all class files contained in the jar file located at the given URI.
 	 *
-	 * @param jarURI the URI of JAR file to get class files from
+	 * @param jarURI
+	 *            the URI of JAR file to get class files from
 	 */
 	public void registerClassifierJar(URI jarURI) {
 		registerClassifierJar(jarURI, "");
@@ -432,7 +422,7 @@ public class JavaClasspath extends AdapterImpl {
 			System.out.println("Error in opening zip file: " + jarURI.toFileString());
 			return;
 		}
-		
+
 		Enumeration<? extends ZipEntry> entries = zipFile.entries();
 		while (entries.hasMoreElements()) {
 			ZipEntry entry = entries.nextElement();
@@ -451,7 +441,7 @@ public class JavaClasspath extends AdapterImpl {
 				idx = fullName.substring(0, idx).lastIndexOf(".");
 				if (idx >= 0) {
 					packageName = fullName.substring(0, idx);
-					className   = fullName.substring(idx + 1, fullName.lastIndexOf("."));
+					className = fullName.substring(idx + 1, fullName.lastIndexOf("."));
 				} else {
 					className = fullName.substring(0, fullName.lastIndexOf("."));
 				}
@@ -464,19 +454,19 @@ public class JavaClasspath extends AdapterImpl {
 		if (!folderURI.isFile()) {
 			return;
 		}
-		
+
 		File sourceFolder = new File(folderURI.toFileString());
 		if (sourceFolder.exists()) {
-			internalRegisterSourceOrClassFileFolder(sourceFolder, "");			
+			internalRegisterSourceOrClassFileFolder(sourceFolder, "");
 		}
 	}
-	
+
 	private void internalRegisterSourceOrClassFileFolder(File folder, String packageName) {
 		for (File child : folder.listFiles()) {
-			if (!child.getName().startsWith(".")) { //no hidden files
+			if (!child.getName().startsWith(".")) { // no hidden files
 				if (child.isDirectory()) {
-					internalRegisterSourceOrClassFileFolder(child, 
-							packageName + child.getName() + JavaUniquePathConstructor.PACKAGE_SEPARATOR);
+					internalRegisterSourceOrClassFileFolder(child, packageName + child.getName()
+							+ JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 				} else {
 					if (child.getName().endsWith(JavaUniquePathConstructor.JAVA_FILE_EXTENSION)
 							|| child.getName().endsWith(JavaUniquePathConstructor.JAVA_CLASS_FILE_EXTENSION)) {
@@ -496,27 +486,22 @@ public class JavaClasspath extends AdapterImpl {
 	 */
 	public void registerClassifierSource(CompilationUnit compilationUnit, URI uri) {
 		String packageName = JavaUniquePathConstructor.packageName(compilationUnit);
-		for(ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
-			registerClassifier(
-					packageName, classifier.getName(), uri);
-			registerInnerClassifiers(
-					classifier, packageName, classifier.getName(), uri);
+		for (ConcreteClassifier classifier : compilationUnit.getClassifiers()) {
+			registerClassifier(packageName, classifier.getName(), uri);
+			registerInnerClassifiers(classifier, packageName, classifier.getName(), uri);
 		}
 	}
 
 	/**
-	 * Registers the classifier with the given name and package that is
-	 * physically located at the given URI. If there is already a classifier
-	 * registered for the given class name, the old one is replaced with the new
-	 * one.
+	 * Registers the classifier with the given name and package that is physically located at the given URI. If there is
+	 * already a classifier registered for the given class name, the old one is replaced with the new one.
 	 * 
 	 * @param packageName
 	 *            the name of the package that contains the classifier
 	 * @param classifierName
 	 *            the simple name of the classifier
 	 * @param physicalURI
-	 *            the URI where the classifier can be found (class or source
-	 *            file)
+	 *            the URI where the classifier can be found (class or source file)
 	 */
 	public void registerClassifier(String packageName, String classifierName, URI physicalURI) {
 		if (classifierName == null || physicalURI == null) {
@@ -553,8 +538,7 @@ public class JavaClasspath extends AdapterImpl {
 				qualifiedClassifierName = packageName + classifierName;
 			}
 
-			URI logicalURI =
-				JavaUniquePathConstructor.getJavaFileResourceURI(qualifiedClassifierName);
+			URI logicalURI = JavaUniquePathConstructor.getJavaFileResourceURI(qualifiedClassifierName);
 
 			URI existingMapping = getURIMap().get(logicalURI);
 
@@ -573,7 +557,7 @@ public class JavaClasspath extends AdapterImpl {
 				if (idx == -1) {
 					idx = outerPackage.lastIndexOf(".");
 				}
-				
+
 				int indexPlusOne = idx + 1;
 				String outerClassifier = outerPackage.substring(indexPlusOne);
 				outerPackage = outerPackage.substring(0, indexPlusOne);
@@ -587,18 +571,17 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	private void registerInnerClassifiers(ConcreteClassifier classifier, String packageName, String className, URI uri) {
-		for (Member innerCand : ((MemberContainer)classifier).getMembers()) {
+		for (Member innerCand : ((MemberContainer) classifier).getMembers()) {
 			if (innerCand instanceof ConcreteClassifier) {
 				String newClassName = className + JavaUniquePathConstructor.CLASSIFIER_SEPARATOR + innerCand.getName();
 				registerClassifier(packageName, newClassName, uri);
-				registerInnerClassifiers((ConcreteClassifier)innerCand, packageName, newClassName, uri);
+				registerInnerClassifiers((ConcreteClassifier) innerCand, packageName, newClassName, uri);
 			}
 		}
 	}
 
 	/**
-	 * Removes the classifier identified by its package and name from the
-	 * class path.
+	 * Removes the classifier identified by its package and name from the class path.
 	 *
 	 * @param packageName
 	 * @param classifierName
@@ -622,8 +605,7 @@ public class JavaClasspath extends AdapterImpl {
 			outerName = classifierName.substring(0, idx + 1);
 			if (".".equals(packageName)) {
 				qualifiedName = outerName;
-			}
-			else {
+			} else {
 				qualifiedName = packageName + outerName;
 			}
 		}
@@ -634,13 +616,11 @@ public class JavaClasspath extends AdapterImpl {
 			String fullName = null;
 			if (".".equals(packageName)) {
 				fullName = classifierName;
-			}
-			else {
+			} else {
 				fullName = packageName + classifierName;
 			}
 
-			URI logicalUri =
-				JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
+			URI logicalUri = JavaUniquePathConstructor.getJavaFileResourceURI(fullName);
 
 			getURIMap().remove(logicalUri);
 		}
@@ -648,48 +628,47 @@ public class JavaClasspath extends AdapterImpl {
 
 	public boolean isRegistered(String fullQualifiedName) {
 		int idx = fullQualifiedName.lastIndexOf(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR);
-		if(idx == -1) {
+		if (idx == -1) {
 			idx = fullQualifiedName.lastIndexOf(JavaUniquePathConstructor.PACKAGE_SEPARATOR);
 		}
-		if(idx == -1) {
+		if (idx == -1) {
 			idx = -1;
 		}
 		String containerName = fullQualifiedName.substring(0, idx + 1);
 		String classifierName = fullQualifiedName.substring(idx + 1);
 		List<String> containerContent = getPackageContents(containerName);
-		if(containerContent == null) {
+		if (containerContent == null) {
 			return false;
 		}
 		return containerContent.contains(classifierName);
 	}
 
-	//This method is only for testing purpose!
+	// This method is only for testing purpose!
 	public Map<String, List<String>> getPackageClassifierMap() {
 		return packageClassifierMap;
 	}
 
 	/**
-	 * Constructs a proxy pointing at the classifier identified by its fully
-	 * qualified name.
+	 * Constructs a proxy pointing at the classifier identified by its fully qualified name.
 	 * 
-	 * @param fullQualifiedName a qualified class name the proxy shall point to
+	 * @param fullQualifiedName
+	 *            a qualified class name the proxy shall point to
 	 * @return proxy element
 	 */
 	public EObject getClassifier(String fullQualifiedName) {
 		InternalEObject classifierProxy = (InternalEObject) ClassifiersFactory.eINSTANCE.createClass();
 		URI proxyURI = JavaUniquePathConstructor.getClassifierURI(fullQualifiedName);
 		classifierProxy.eSetProxyURI(proxyURI);
-		//set also the name to reason about it without resolving the proxy
-		((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+		// set also the name to reason about it without resolving the proxy
+		((Class) classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 		return classifierProxy;
 	}
 
 	/**
-	 * Constructs a list of proxies that point at all classifiers
-	 * of the given package present in the class path.
+	 * Constructs a list of proxies that point at all classifiers of the given package present in the class path.
 	 * <p>
-	 * Each proxy will have the <code>name</code> attribute set correctly such
-	 * that name comparison can be done without resolving the proxy.
+	 * Each proxy will have the <code>name</code> attribute set correctly such that name comparison can be done without
+	 * resolving the proxy.
 	 *
 	 * @param packageName
 	 * @return list of proxies
@@ -701,13 +680,13 @@ public class JavaClasspath extends AdapterImpl {
 			classifierQuery = classifierQuery.substring(idx + 1);
 		}
 
-		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR) &&
-				!packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
+		if (!packageName.endsWith(JavaUniquePathConstructor.PACKAGE_SEPARATOR)
+				&& !packageName.endsWith(JavaUniquePathConstructor.CLASSIFIER_SEPARATOR)) {
 			packageName = packageName + JavaUniquePathConstructor.PACKAGE_SEPARATOR;
 		}
 
 		EList<EObject> resultList = new UniqueEList<EObject>();
-		
+
 		synchronized (this) {
 			for (String classifierName : getPackageContents(packageName)) {
 				if (classifierQuery.equals("*") || classifierQuery.equals(classifierName)) {
@@ -715,13 +694,12 @@ public class JavaClasspath extends AdapterImpl {
 					String fullQualifiedName = null;
 					if ("".equals(packageName) || ".".equals(packageName)) {
 						fullQualifiedName = classifierName;
-					}
-					else {
+					} else {
 						fullQualifiedName = packageName + classifierName;
 					}
 					classifierProxy.eSetProxyURI(JavaUniquePathConstructor.getClassifierURI(fullQualifiedName));
-					//set also the name to reason about it without resolving the proxy
-					((Class)classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
+					// set also the name to reason about it without resolving the proxy
+					((Class) classifierProxy).setName(JavaUniquePathConstructor.getSimpleClassName(fullQualifiedName));
 					resultList.add(classifierProxy);
 				}
 			}
@@ -739,7 +717,7 @@ public class JavaClasspath extends AdapterImpl {
 	public EList<EObject> getDefaultImports() {
 		EList<EObject> resultList = new UniqueEList<EObject>();
 
-		//java.lang package
+		// java.lang package
 		if (javaLangPackage == null) {
 			javaLangPackage = new UniqueEList<EObject>();
 			javaLangPackage.addAll(getClassifiers("java.lang.", "*"));
@@ -757,33 +735,33 @@ public class JavaClasspath extends AdapterImpl {
 		String classifierName = clazz.getSimpleName();
 		registerClassifier(packageName, classifierName, classURI);
 	}
-	
+
 	// This cache holds all class from the <code>java.lang</code> package. It
 	// maps their simple names to the respective Class objects.
-	//private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
+	// private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
 
 	public Class getJavaLangClass(EObject commentable, String simpleName) {
 		// This was supposed to optimize performance by reusing Class objects
-		// for types from the 'java.lang' package, but turned out to cause 
+		// for types from the 'java.lang' package, but turned out to cause
 		// trouble because JaMoPP uses equals() to compare these Class objects
 		// at many places. For some unknown reason, these comparisons were
 		// expecting different (i.e., non-reused Class objects). Turning the
-		// cache on led to test failures, which is why we do not use it 
+		// cache on led to test failures, which is why we do not use it
 		// currently. Once it is clarified why equals() is used and why reusing
 		// the Class objects causes trouble, the cache can be turned on again.
-		
-		//if (!javaLangClassCache.containsKey(simpleName)) {
-			String qualifiedName = "java.lang." + simpleName;
-			Class classifier = (Class) getClassifier(qualifiedName);
-			EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classifier, commentable);
-			Class returnValue = null;
-			if (resolved instanceof Class) {
-				returnValue = (Class) resolved;
-			}
-			//javaLangClassCache.put(simpleName, returnValue);
-			return returnValue;
-		//}
-		
-		//return javaLangClassCache.get(simpleName);
+
+		// if (!javaLangClassCache.containsKey(simpleName)) {
+		String qualifiedName = "java.lang." + simpleName;
+		Class classifier = (Class) getClassifier(qualifiedName);
+		EObject resolved = (ConcreteClassifier) EcoreUtil.resolve(classifier, commentable);
+		Class returnValue = null;
+		if (resolved instanceof Class) {
+			returnValue = (Class) resolved;
+		}
+		// javaLangClassCache.put(simpleName, returnValue);
+		return returnValue;
+		// }
+
+		// return javaLangClassCache.get(simpleName);
 	}
 }
