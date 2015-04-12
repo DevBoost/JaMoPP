@@ -744,14 +744,12 @@ public class JavaClasspath extends AdapterImpl {
 	// private Map<String, Class> javaLangClassCache = new LinkedHashMap<String, Class>();
 
 	public Class getJavaLangClass(EObject commentable, String simpleName) {
-		// This was supposed to optimize performance by reusing Class objects
-		// for types from the 'java.lang' package, but turned out to cause
-		// trouble because JaMoPP uses equals() to compare these Class objects
-		// at many places. For some unknown reason, these comparisons were
-		// expecting different (i.e., non-reused Class objects). Turning the
-		// cache on led to test failures, which is why we do not use it
-		// currently. Once it is clarified why equals() is used and why reusing
-		// the Class objects causes trouble, the cache can be turned on again.
+		// This was supposed to optimize performance by reusing Class objects for types from the 'java.lang' package,
+		// but it turned out to cause trouble because JaMoPP uses equals() to compare these Class objects at many
+		// places. For some unknown reason, these comparisons were expecting different (i.e., non-reused( Class objects.
+		//
+		// Turning the cache on led to test failures, which is why we do not use it currently. Once it is clarified why
+		// equals() is used and why reusing the Class objects causes trouble, the cache can be turned on again.
 
 		// if (!javaLangClassCache.containsKey(simpleName)) {
 		String qualifiedName = "java.lang." + simpleName;
