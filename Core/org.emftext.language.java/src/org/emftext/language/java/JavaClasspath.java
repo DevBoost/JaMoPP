@@ -154,24 +154,24 @@ public class JavaClasspath extends AdapterImpl {
 	}
 
 	/**
-	 * If this option is set to true in a resource set, each classifier loaded is registered in the URI map of the
-	 * resource set's <code>URIConverter</code>.
+	 * If this option is set to <code>true</code> in a resource set, each classifier loaded is registered in the URI map
+	 * of the resource set's <code>URIConverter</code>.
 	 * <p>
-	 * If the option is set to false (default), each classifier loaded is registered in the global
-	 * <code>URIConverter.URI_MAP</code>.
+	 * If the option is set to <code>false</code> (default) or not set at all, each classifier loaded is registered in
+	 * the global <code>URIConverter.URI_MAP</code>.
 	 */
 	public static final String OPTION_USE_LOCAL_CLASSPATH = "OPTION_USE_LOCAL_CLASSPATH";
 
 	/**
-	 * If this option is set to true (default) in a resource set, the Java standard library (i.e., rt.jar or
-	 * classes.jar) is registered automatically based on <code>System.getProperty("sun.boot.class.path")</code>.
+	 * If this option is set to <code>true</code> (default) in a resource set, the Java standard library (i.e., rt.jar
+	 * or classes.jar) is registered automatically based on <code>System.getProperty("sun.boot.class.path")</code>.
 	 */
 	public static final String OPTION_REGISTER_STD_LIB = "OPTION_REGISTER_STD_LIB";
 
 	/**
-	 * If this option is set to true in a resource set, all names in a Java resource will be printed as full-qualified
-	 * names when the resource is saved. If this option is used, imports do not need to be updated when Java resources
-	 * are modified. This option is set to false by default.
+	 * If this option is set to <code>true</code> in a resource set, all names in a Java resource will be printed as
+	 * full-qualified names when the resource is saved. If this option is used, imports do not need to be updated when
+	 * Java resources are modified. This option is set to <code>false</code> by default.
 	 */
 	public static final String OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES = "OPTION_ALWAYS_USE_FULLY_QUALIFIED_NAMES";
 
