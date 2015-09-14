@@ -24,7 +24,7 @@ import de.devboost.natspec.library.documentation.DocumentationSupport;
 
 public class _NatSpecTemplate {
 	
-	protected DocumentationSupport documentationSupport = new DocumentationSupport(getClass());
+	protected DocumentationSupport documentationSupport = new DocumentationSupport();
 	
 	public static void main(String[] args) throws Exception {
 		_NatSpecTemplate template = new _NatSpecTemplate();
