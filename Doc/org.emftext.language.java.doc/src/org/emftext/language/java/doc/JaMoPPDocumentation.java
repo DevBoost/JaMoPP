@@ -24,7 +24,7 @@ import de.devboost.natspec.library.documentation.DocumentationSupport;
 
 public class JaMoPPDocumentation {
 	
-	protected DocumentationSupport documentationSupport = new DocumentationSupport(getClass());
+	protected DocumentationSupport documentationSupport = new DocumentationSupport();
 	
 	public static void main(String[] args) throws Exception {
 		JaMoPPDocumentation template = new JaMoPPDocumentation();
