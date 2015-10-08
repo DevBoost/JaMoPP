@@ -2,13 +2,13 @@
 
    <description url="http://www.jamopp.org">JaMoPP: Java Model Parser and Printer (EMFText-based Java support for EMF modelling tools). This feature enables JaMoPP to use the classpath configured in an Eclipse Java project.</description>
 
-   <copyright>Copyright (c) 2006-2013 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.</copyright>
+   <copyright>Copyright (c) 2006-2013 Software Technology Group, Dresden University of Technology, Germany; DevBoost GmbH, Dresden, Amtsgericht Dresden, HRB 34001.</copyright>
 
    <license>Eclipse Public License v1.0
 
 Copyright (c) 2006-2013
 Software Technology Group, Dresden University of Technology
-DevBoost GmbH, Berlin, Amtsgericht Charlottenburg, HRB 140026.
+DevBoost GmbH, Dresden, Amtsgericht Dresden, HRB 34001.
 
 All rights reserved. This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html
 
