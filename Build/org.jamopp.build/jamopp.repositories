@@ -3,7 +3,7 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/EMFText/
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/JUnit/
 
 // EMFText
-dynamicfile:http://www.emftext.org/update_trunk/org.emftext.deploy-complete.zip
+dynamicfile:http://update.emftext.org/trunk/org.emftext.deploy-complete.zip
 
 // EMFText License Header Project
 git:https://github.com/DevBoost/EMFText.git!Core/License/
