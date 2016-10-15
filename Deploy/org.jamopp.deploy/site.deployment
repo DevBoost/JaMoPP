@@ -1,6 +1,6 @@
 site/snapshot = false
 
 site/vendor = DevBoost GmbH
-site/uploadPath = update.jamopp.org:/home/jenkins/jamopp/trunk
+site/uploadPath = update.jamopp.org:/home/jenkins/public/jamopp/trunk
 site/usernameProperty = DEVBOOST_UPLOAD_USER
 site/passwordProperty = DEVBOOST_UPLOAD_PASS
