@@ -2,15 +2,15 @@
 git:https://github.com/DevBoost/JaMoPP.git!Build/org.jamopp.build
 
 // Eclipse Platform
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.3.1-201309111000/eclipse-platform-4.3.1-win32-x86_64.zip
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.3.1-201309111000/eclipse-4.3.1-delta-pack.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.3.1-201309111000/eclipse-platform-4.3.1-win32-x86_64.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.3.1-201309111000/eclipse-4.3.1-delta-pack.zip
 // JDT
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.3.1-201309111000/org.eclipse.jdt-4.3.1.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.3.1-201309111000/org.eclipse.jdt-4.3.1.zip
 // EMF
-get:http://devboost.de/eclipse-mirror/modeling/emf/emf/downloads/drops/2.9.1/S201309020605/emf-xsd-SDK-2.9.1RC2.zip
+get:http://eclipse.devboost.de/modeling/emf/emf/downloads/drops/2.9.1/S201309020605/emf-xsd-SDK-2.9.1RC2.zip
 
 // EMF Validation (core plugin and feature)
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.7.0.201306111341.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201306111341.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201306111341.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.7.0.201306111341.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201306111341.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201306111341.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.7.0/R201306111341/emf-validation-runtime-1.7.0.zip!eclipse/features/org.eclipse.emf.validation_1.7.0.201306111341/feature.xml
