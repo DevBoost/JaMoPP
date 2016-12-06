@@ -22,10 +22,10 @@ git:https://github.com/DevBoost/JaMoPP.git!Tests/
 git:https://github.com/DevBoost/JaMoPP.git!Utils/
 
 // NatSpec Annotations
-dynamicfile:http://www.devboost.de/natspec/annotations/update_trunk/de.devboost.natspec.annotations.updatesite-complete.zip
+dynamicfile:https://jetpack-updates.devboost.de/public/natspec_annotations/update_trunk/de.devboost.natspec.annotations.updatesite-complete.zip
 // NatSpec Libraries
 git:https://github.com/DevBoost/NatSpec_Requirements_Library.git!de.devboost.natspec.library.documentation
 
 // Orbit (required by NatSpec Documentation Library)
-get:http://devboost.de/eclipse-mirror/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.io_2.0.1.v201105210651.jar
-get:http://devboost.de/eclipse-mirror/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
+get:http://eclipse.devboost.de/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.io_2.0.1.v201105210651.jar
+get:http://eclipse.devboost.de/tools/orbit/downloads/drops/R20130827064939/repository/plugins/org.apache.commons.lang_2.6.0.v201205030909.jar
