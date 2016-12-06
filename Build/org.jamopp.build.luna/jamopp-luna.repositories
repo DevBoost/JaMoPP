@@ -4,18 +4,18 @@ git:https://github.com/DevBoost/BuildBoost.git!Extensions/UpdateSite/
 git:https://github.com/DevBoost/BuildBoost.git!Extensions/Maven/
 
 // Eclipse Platform
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.4-201406061215/eclipse-platform-4.4-win32-x86_64.zip
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.4-201406061215/eclipse-4.4-delta-pack.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.4-201406061215/eclipse-platform-4.4-win32-x86_64.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.4-201406061215/eclipse-4.4-delta-pack.zip
 // JDT
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.4-201406061215/org.eclipse.jdt-4.4.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.4-201406061215/org.eclipse.jdt-4.4.zip
 // PDE
-get:http://devboost.de/eclipse-mirror/downloads/drops4/R-4.4-201406061215/org.eclipse.pde-4.4.zip
+get:http://eclipse.devboost.de/downloads/drops4/R-4.4-201406061215/org.eclipse.pde-4.4.zip
 
 // EMF
-get:http://devboost.de/eclipse-mirror/modeling/emf/emf/downloads/drops/2.10.0/R201405190339/emf-xsd-SDK-2.10.0.zip
+get:http://eclipse.devboost.de/modeling/emf/emf/downloads/drops/2.10.0/R201405190339/emf-xsd-SDK-2.10.0.zip
 
 // EMF Validation (core plugin and feature)
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.8.0.201405281429.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201405281429.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201405281429.jar
-get:http://devboost.de/eclipse-mirror/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/features/org.eclipse.emf.validation_1.8.0.201405281429/feature.xml
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation_1.8.0.201405281429.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui_1.7.0.201405281429.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/plugins/org.eclipse.emf.validation.ui.ide_1.3.0.201405281429.jar
+get:http://eclipse.devboost.de/modeling/emf/validation/downloads/drops/1.8.0/R201405281429/emf-validation-runtime-1.8.0.zip!eclipse/features/org.eclipse.emf.validation_1.8.0.201405281429/feature.xml
