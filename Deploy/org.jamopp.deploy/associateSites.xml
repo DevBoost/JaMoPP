@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <associateSites>
-	<associateSite label="Kepler"
-		url="http://download.eclipse.org/releases/kepler"/>
-	<associateSite label="The Eclipse Project Updates"
-		url="http://download.eclipse.org/eclipse/updates/4.3"/>
+	<associateSite label="Neon"
+		url="http://download.eclipse.org/releases/neon"/>
 	<associateSite label="EMFText"
-		url="http://www.emftext.org/update_trunk"/>
+		url="http://update.emftext.org/trunk"/>
 	<associateSite label="DevBoost Open-Source Feedback"
-		url="http://www.devboost.de/eclipse-feedback/update_trunk"/>	
+		url="https://jetpack-updates.devboost.de/public/eclipse-feedback/update_trunk"/>
 </associateSites>
