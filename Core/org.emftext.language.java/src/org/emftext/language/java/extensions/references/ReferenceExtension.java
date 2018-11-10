@@ -105,7 +105,6 @@ public class ReferenceExtension {
 			if (target == null) {
 				return null;
 			}
-				return null;
 			if (target.eIsProxy()) {
 				type = null;
 			}
