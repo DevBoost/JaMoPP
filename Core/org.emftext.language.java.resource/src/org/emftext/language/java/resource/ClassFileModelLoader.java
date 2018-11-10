@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.bcel.classfile.Attribute;
-import org.apache.bcel.classfile.ClassParser;
-import org.apache.bcel.classfile.JavaClass;
-import org.apache.bcel.classfile.Signature;
-import org.apache.bcel.classfile.Utility;
+import org.apache.bcel6_2_0.classfile.Attribute;
+import org.apache.bcel6_2_0.classfile.ClassParser;
+import org.apache.bcel6_2_0.classfile.JavaClass;
+import org.apache.bcel6_2_0.classfile.Signature;
+import org.apache.bcel6_2_0.classfile.Utility;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.emftext.language.java.JavaClasspath;
@@ -191,7 +191,7 @@ public class ClassFileModelLoader {
 			}
 		}
 
-		for (org.apache.bcel.classfile.Field field : clazz.getFields()) {
+		for (org.apache.bcel6_2_0.classfile.Field field : clazz.getFields()) {
 			if (field.isEnum() && emfClassifier instanceof Enumeration) {
 				((Enumeration)emfClassifier).getConstants().add(constructEnumConstant(field));
 			}
@@ -200,7 +200,7 @@ public class ClassFileModelLoader {
 			}
 		}
 		
-		for (org.apache.bcel.classfile.Method method : clazz.getMethods()) {
+		for (org.apache.bcel6_2_0.classfile.Method method : clazz.getMethods()) {
 			if (!method.isSynthetic()) {
 				Member emfMember = constructMethod(method, emfClassifier, false);
 				//If the last parameter has an array type it could also be a variable length parameter.
@@ -227,7 +227,7 @@ public class ClassFileModelLoader {
 		return emfClassifier;
 	}
 
-	protected Member constructMethod(org.apache.bcel.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVariableLength) {
+	protected Member constructMethod(org.apache.bcel6_2_0.classfile.Method method, ConcreteClassifier emfClassifier, boolean withVariableLength) {
 		Method emfMethod = null;
 		if (emfClassifier instanceof Annotation) {
 			emfMethod = annotationsFactory.createAnnotationAttribute();
@@ -270,7 +270,7 @@ public class ClassFileModelLoader {
         List<String> parameterNames = extractParameterNames(method);
         
 		for(int i = 0; i < method.getArgumentTypes().length; i++) {
-			org.apache.bcel.generic.Type argType = method.getArgumentTypes()[i];
+			org.apache.bcel6_2_0.generic.Type argType = method.getArgumentTypes()[i];
 			String paramName;
 			if (parameterNames.size() > i) {
 				paramName = parameterNames.get(i);
@@ -332,7 +332,7 @@ public class ClassFileModelLoader {
 		return (Member) emfMethod;
 	}
 
-	protected Parameter constructParameter(org.apache.bcel.generic.Type attrType, String paramName) {
+	protected Parameter constructParameter(org.apache.bcel6_2_0.generic.Type attrType, String paramName) {
 		Parameter emfParameter = parametersFactory.createOrdinaryParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
@@ -348,7 +348,7 @@ public class ClassFileModelLoader {
 		return emfParameter;
 	}
 
-	protected Parameter constructVariableLengthParameter(org.apache.bcel.generic.Type attrType, String paramName) {
+	protected Parameter constructVariableLengthParameter(org.apache.bcel6_2_0.generic.Type attrType, String paramName) {
 		Parameter emfParameter = parametersFactory.createVariableLengthParameter();
 		String signature = attrType.getSignature();
 		TypeReference emfTypeReference = createReferenceToType(signature);
@@ -364,7 +364,7 @@ public class ClassFileModelLoader {
 		return emfParameter;
 	}
 
-	protected Field constructField(org.apache.bcel.classfile.Field field, ConcreteClassifier emfClassifier) {
+	protected Field constructField(org.apache.bcel6_2_0.classfile.Field field, ConcreteClassifier emfClassifier) {
 		Field emfField = membersFactory.createField();
 		emfField.setName(field.getName());
 		String signature = field.getType().getSignature();
@@ -403,7 +403,7 @@ public class ClassFileModelLoader {
 		return emfField;
 	}
 
-	protected void constructModifiers(AnnotableAndModifiable emfMember, org.apache.bcel.classfile.AccessFlags member) {
+	protected void constructModifiers(AnnotableAndModifiable emfMember, org.apache.bcel6_2_0.classfile.AccessFlags member) {
 		ModifiersFactory f = ModifiersFactory.eINSTANCE;
 		if (member.isAbstract()) {
 			emfMember.getAnnotationsAndModifiers().add(f.createAbstract());
@@ -447,7 +447,7 @@ public class ClassFileModelLoader {
 	}
 
 	protected EnumConstant constructEnumConstant(
-			org.apache.bcel.classfile.Field field) {
+			org.apache.bcel6_2_0.classfile.Field field) {
 
 		EnumConstant enumConstant = membersFactory.createEnumConstant();
 		enumConstant.setName(field.getName());
@@ -809,7 +809,7 @@ public class ClassFileModelLoader {
 		return arrayDimension;
 	}
 	
-	protected List<String> extractParameterNames(final org.apache.bcel.classfile.Method method) {
+	protected List<String> extractParameterNames(final org.apache.bcel6_2_0.classfile.Method method) {
 		final List<String> names = new ArrayList<String>();
 		if (method.getLocalVariableTable() == null) {
 			return names;
@@ -818,7 +818,7 @@ public class ClassFileModelLoader {
 		final int start = method.isStatic() ? 0 : 1;
 		final int stop = method.isStatic() ? method.getArgumentTypes().length
 				: method.getArgumentTypes().length + 1;
-		final org.apache.bcel.classfile.LocalVariable[] variables = method
+		final org.apache.bcel6_2_0.classfile.LocalVariable[] variables = method
 				.getLocalVariableTable().getLocalVariableTable();
 		if (variables != null) {
 			for (int i = start; i < stop && i < variables.length; i++) {
