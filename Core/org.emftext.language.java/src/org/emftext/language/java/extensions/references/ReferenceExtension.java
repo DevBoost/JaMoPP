@@ -101,6 +101,10 @@ public class ReferenceExtension {
 		else if (me instanceof ElementReference) {
 			ReferenceableElement target = 
 				(ReferenceableElement) ((ElementReference) me).getTarget();
+			
+			if (target == null) {
+				return null;
+			}
 			if (target.eIsProxy()) {
 				type = null;
 			}
