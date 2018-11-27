@@ -4,7 +4,7 @@ Bundle-Name: Bcel
 Bundle-SymbolicName: org.emftext.language.java.resource.bcel
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.apache.bcel,
- org.apache.bcel.classfile,
- org.apache.bcel.generic,
- org.apache.bcel.util
+Export-Package: org.apache.bcel6_2_0,
+ org.apache.bcel6_2_0.classfile,
+ org.apache.bcel6_2_0.generic,
+ org.apache.bcel6_2_0.util
