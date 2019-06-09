@@ -6,6 +6,7 @@ JaMoPP can parse Java source and byte code into EMF-based models and vice versa.
 
 * In Eclipse, after installing JaMoPP, you can load Java files (`.java` and `.class` files) with any [EMF-based](https://www.eclipse.org/modeling/emf/) tool similar to how you load other EMF models.
 * For stand-alone usage, use the code in [JaMoPPC.java](https://github.com/DevBoost/JaMoPP/blob/master/Utils/org.emftext.language.java.jamoppc/src/org/emftext/language/java/jamoppc/JaMoPPC.java) as a starting point.
+* A detailed overview of JaMoPP is provided in [this report](Doc/org.emftext.language.java.doc/publications/2009_JaMoPP_The_Java_Model_Parser_and_Printer.pdf).
 
 # Download/Installation
 
