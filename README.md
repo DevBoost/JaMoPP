@@ -1,5 +1,3 @@
-![JaMoPP Logo](Doc/org.emftext.language.java.doc/html/figures/JaMoPPLogo.png)
-
 JaMoPP can parse Java source and byte code into EMF-based models and vice versa. It preserves source formatting and can be used for code analysis and refactoring.
 
 # Getting Started
