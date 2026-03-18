@@ -82,12 +82,16 @@ public class JavaModelCompletion {
 	/**
 	 * Adds <code>java.lang.Object</code> as default super class to the given
 	 * class if the class does not explicitly extend another class.
+	 * <code>java.lang.Object</code> itself is excluded since it has no super
+	 * class, and setting it would cause an infinite loop when transitively
+	 * traversing {@code getSuperClass()}.
 	 * 
 	 * @param javaClass
 	 *            the class to complete
 	 */
 	public static void addDefaultSuperClass(Class javaClass) {
-		if (javaClass.getExtends() == null && javaClass.getDefaultExtends() == null) {
+		if (javaClass.getExtends() == null && javaClass.getDefaultExtends() == null
+				&& !javaClass.isJavaLangObject(javaClass)) {
 			Class objectClass = javaClass.getObjectClass();
 			ClassifierReference classifierReference = TypesFactory.eINSTANCE.createClassifierReference();
 			classifierReference.setTarget(objectClass);
